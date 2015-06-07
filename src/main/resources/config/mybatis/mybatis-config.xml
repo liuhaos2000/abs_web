@@ -10,10 +10,10 @@
 		<setting name="lazyLoadingEnabled" value="false" />
 		<setting name="mapUnderscoreToCamelCase" value="true" /> 
 	</settings>
-	
+	<!--  -->
 	<plugins>
-		<plugin interceptor="cn.iszt.ms.common.mybatis.MybatisPaginationInterceptor">
-		    <property name="dialectClass" value="cn.iszt.ms.common.mybatis.OracleDialect"/>
+		<plugin interceptor="org.buzheng.demo.esm.common.mybatis.MybatisPaginationInterceptor">
+		    <property name="dialectClass" value="org.buzheng.demo.esm.common.mybatis.MySQLDialect"/>
 		</plugin>
 	</plugins>
 

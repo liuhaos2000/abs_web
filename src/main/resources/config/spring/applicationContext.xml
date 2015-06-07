@@ -34,7 +34,7 @@
 	</mvc:annotation-driven>
 	
 	<mvc:interceptors>
-		<bean class="cn.iszt.ms.web.interceptor.SessionInterceptor" />
+		<bean class="org.buzheng.demo.esm.web.interceptor.SessionInterceptor" />
 	</mvc:interceptors>
 	
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
