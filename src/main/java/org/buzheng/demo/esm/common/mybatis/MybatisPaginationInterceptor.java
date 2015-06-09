@@ -29,7 +29,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 
 /**
  * 分页插件，采用spring-data-common中的 Pageable 和 Page 对象作为输入和输出。
@@ -60,10 +63,10 @@ public class MybatisPaginationInterceptor implements Interceptor {
         final Object[] queryArgs = inv.getArgs();
 		
         // 查找方法参数中的 分页请求对象
-        Pageable pageRequest = this.findPageableObject(queryArgs[PARAMETER_INDEX]);
+        PageInfo pageInfo = this.findPageableObject(queryArgs[PARAMETER_INDEX]);
         
 		// 如果需要分页
-		if(pageRequest != null) {
+		if(pageInfo != null) {
 			
 	        final MappedStatement ms = (MappedStatement)queryArgs[MAPPED_STATEMENT_INDEX];
 	        final Object parameter = queryArgs[PARAMETER_INDEX];
@@ -81,9 +84,12 @@ public class MybatisPaginationInterceptor implements Interceptor {
 	        // 1. 搞定分页 记录总数			
 			int total = this.queryTotal(sql, ms, boundSql);
 			
+			// 1.1.SORT
+            String orderString = pageInfo.getOrderByString();
+            sql = sql + " order by " + orderString + " ";
 			// 2. 搞定limit 查询
 			// 2.1 获取分页SQL，并完成参数准备
-			String limitSql = dialect.getLimitString(sql, pageRequest.getOffset(), pageRequest.getPageSize());			
+			String limitSql = dialect.getLimitString(sql, pageInfo.getOffset(), pageInfo.getPageSize());			
 			
 			queryArgs[ROWBOUNDS_INDEX] = new RowBounds(RowBounds.NO_ROW_OFFSET,RowBounds.NO_ROW_LIMIT);
 			queryArgs[MAPPED_STATEMENT_INDEX] = copyFromNewSql(ms, boundSql, limitSql);
@@ -92,7 +98,7 @@ public class MybatisPaginationInterceptor implements Interceptor {
 			Object ret = inv.proceed();
 			
 			// 3. 组成分页对象
-			Page<?> pi = new PageImpl<Object>((List) ret, pageRequest, total);	
+			Page<?> pi = new PageImpl<Object>((List) ret, new PageRequest(1,1), total);	
 			
 			// 4. MyBatis 需要返回一个List对象，这里只是满足MyBatis而作的临时包装
 			List<Page<?>> tmp = new ArrayList<Page<?>>(1);
@@ -109,14 +115,14 @@ public class MybatisPaginationInterceptor implements Interceptor {
 	 * @param params Mapper接口方法中的参数对象
 	 * @return
 	 */
-	private Pageable findPageableObject(Object params) {
+	private PageInfo findPageableObject(Object params) {
 		
 		if (params == null) {
 			return null;
 		}
 				
-		if(Pageable.class.isAssignableFrom(params.getClass())) {
-			return (Pageable) params;					
+		if(PageInfo.class.isAssignableFrom(params.getClass())) {
+			return (PageInfo) params;					
 		}
 		
 		else if (params instanceof ParamMap) {
@@ -124,8 +130,8 @@ public class MybatisPaginationInterceptor implements Interceptor {
 			for (Map.Entry<String, Object> entry : paramMap.entrySet()) {
 				Object paramValue = entry.getValue();
 				
-				if(Pageable.class.isAssignableFrom(paramValue.getClass())) {
-					return (Pageable) paramValue;
+				if(PageInfo.class.isAssignableFrom(paramValue.getClass())) {
+					return (PageInfo) paramValue;
 				}  
 			}
 		}

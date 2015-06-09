@@ -53,7 +53,7 @@
 	
 	<select id="findPage" resultType="SysUser">
 	    <include refid="findSql" />
-	    ORDER BY u.add_time
+	    
 	</select>
 	
 	<select id="findPageByParams" resultType="SysUser">
@@ -65,7 +65,7 @@
 	        </if>
 	    </where>
 	    
-	    ORDER BY u.add_time
+	    
 	</select>
 	
 	<select id="countByUsername" resultType="int">

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.App;
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.dao.SysUserDao;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.buzheng.demo.esm.service.SysUserService;
@@ -110,15 +111,15 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Page<SysUser> findPage(Pageable pageRequest) {
+	public Page<SysUser> findPage(PageInfo pageInfo) {
 		
-		return this.sysUserDao.findPage(pageRequest);
+		return this.sysUserDao.findPage(pageInfo);
 	}
 
 	@Override
-	public Page<SysUser> findPage(Map<String, Object> params, Pageable pageRequest) {
+	public Page<SysUser> findPage(Map<String, Object> params, PageInfo pageInfo) {
 		
-		return this.sysUserDao.findPageByParams(params, pageRequest);
+		return this.sysUserDao.findPageByParams(params, pageInfo);
 	}
 
 	

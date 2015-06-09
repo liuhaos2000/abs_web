@@ -3,6 +3,7 @@ package org.buzheng.demo.esm.service;
 import java.util.List;
 import java.util.Map;
 
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,9 +31,9 @@ public interface SysUserService {
 	
 	List<SysUser> findAll();
 	
-	Page<SysUser> findPage(Pageable pageRequest);
+	Page<SysUser> findPage(PageInfo pageInfo);
 	
-	Page<SysUser> findPage(Map<String, Object> params, Pageable pageRequest);
+	Page<SysUser> findPage(Map<String, Object> params, PageInfo pageInfo);
 	
 	void updatePassword(String userId, String newPassword);
 	

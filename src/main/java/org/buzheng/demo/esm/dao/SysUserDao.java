@@ -3,6 +3,7 @@ package org.buzheng.demo.esm.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +20,9 @@ public interface SysUserDao {
 	
 	List<SysUser> findAll();
 	
-	Page<SysUser> findPage(Pageable pageRequest);
+	Page<SysUser> findPage(PageInfo pageInfo);
 	
-	Page<SysUser> findPageByParams(Map<String, Object> params, Pageable pageRequest);
+	Page<SysUser> findPageByParams(Map<String, Object> params, PageInfo pageInfo);
 	
 	int countByUsername(String username);
 	

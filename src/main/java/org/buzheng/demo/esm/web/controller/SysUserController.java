@@ -7,13 +7,17 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.App;
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.buzheng.demo.esm.service.SysUserService;
 import org.buzheng.demo.esm.util.AppHelper;
 import org.buzheng.demo.esm.web.util.Result;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +47,13 @@ public class SysUserController extends BaseController {
 			@ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
 		
 		pageNo = pageNo > 0 ? pageNo - 1 : pageNo;
-		Pageable pageRequest = new PageRequest(pageNo, pageSize);
+		PageInfo pageInfo = new PageInfo(pageNo,pageSize,"USERNAME DESC");
 		
+		
+		Order order = new Order("USERNAME DESC");
+		Sort sort = new Sort(order);
+		Pageable pageRequest = new PageRequest(pageNo, pageSize,sort);
+
 		Page<SysUser> page = null;
 		
 		if (user == null) {
@@ -53,11 +62,11 @@ public class SysUserController extends BaseController {
 		
 		// 超级管理员才能查全部用户，其他只能查自己机构内部的用户
 		if (App.SUPER_ROLE_ID.equals(user.getRoleId())) {
-			page = this.sysUserService.findPage(pageRequest);
+			page = this.sysUserService.findPage(pageInfo);
 		} else {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("groupId", user.getGroupId());
-			page = this.sysUserService.findPage(params, pageRequest);
+			page = this.sysUserService.findPage(params, pageInfo);
 		}
 		
 		Map<String, Object> data = new HashMap<String, Object>();
