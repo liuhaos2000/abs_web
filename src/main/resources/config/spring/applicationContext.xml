@@ -23,7 +23,7 @@
 	
 	<!-- Configures the @Controller programming model -->
 	<!--mvc:annotation-driven / -->
-
+    <!-- 返回JSON -->
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">
 			<bean
@@ -33,15 +33,35 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<!-- 拦截器,session check -->
 	<mvc:interceptors>
 		<bean class="org.buzheng.demo.esm.web.interceptor.SessionInterceptor" />
 	</mvc:interceptors>
 	
+	<!-- JSP地址 -->
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
+    <!-- 验证框架S -->
+    <!-- 默认的注解映射的支持 -->  
+    <mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+    
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+        <!--不设置则默认为classpath下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    <bean id="validatemessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <property name="basename" value="/WEB-INF/messages"/>  
+        <property name="fileEncodings" value="utf-8"/>  
+        <property name="cacheSeconds" value="120"/>  
+    </bean>
+    <!-- 验证框架E -->
+    
+    
 	<import resource="applicationContext-*.xml" />
 </beans>

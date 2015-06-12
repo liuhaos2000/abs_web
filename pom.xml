@@ -110,6 +110,19 @@
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
 	</dependency>
+	<!-- 验证框架START -->
+	<dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>4.3.1.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.5.6</version>
+    </dependency>
+	<!-- 验证框架END -->
+	
 	</dependencies>
 
 	<build>
