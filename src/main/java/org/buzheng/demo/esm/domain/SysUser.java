@@ -2,6 +2,8 @@ package org.buzheng.demo.esm.domain;
 
 import java.sql.Date;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  * 系统用户
  * @author Adam
@@ -15,6 +17,8 @@ public class SysUser {
 	
 	private String password;
 	
+	
+	@Length(min = 5, max = 200, message = "{user.username.required}")
 	private String name;
 	
 	private String roleId;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.buzheng.demo.esm.App;
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
@@ -19,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,10 +88,20 @@ public class SysUserController extends BaseController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Result update(SysUser user) {
-		this.sysUserService.update(user);
-		return new Result();
-	}
+    public Result update(@Valid SysUser user, BindingResult result) {
+        // StandardValidationContext
+        if(result.hasErrors()) {
+            List<FieldError> errors = result.getFieldErrors();
+            for(FieldError err : errors) {
+                System.out.println("ObjectName:" + err.getObjectName() + "\tFieldName:" + err.getField()
+                        + "\tFieldValue:" + err.getRejectedValue() + "\tMessage:" + err.getDefaultMessage() + "\tCode:"
+                        +err.getCode());
+            }
+        }
+        
+        this.sysUserService.update(user);
+        return new Result();
+    }
 	
 	@RequestMapping("/delete")
 	@ResponseBody
