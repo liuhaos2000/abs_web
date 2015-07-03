@@ -56,11 +56,13 @@ $(function(){
 		rownumbers: true,
 		pagination: true,
 		pageSize: 20,
+	    sortName:'typeCode',
+	    sortOrder:'asc',
 		fit: true,
 		fitColumns: true,
 		columns: [[
-			{title:'类型ID', field:'typeCode'},
-			{title:'类型名称', field:'typeName', width:100},
+			{title:'类型ID', field:'typeCode',sortable:true},
+			{title:'类型名称', field:'typeName',sortable:true, width:100},
 			{title:'版本号', field:'verNum',hidden:true}
 			
 		]]

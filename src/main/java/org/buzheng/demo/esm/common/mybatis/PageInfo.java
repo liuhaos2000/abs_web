@@ -11,6 +11,12 @@ public class PageInfo {
         this.pageNumber = pageNumber;
         this.orderByString = orderByString;
     }
+    public PageInfo(int pageNumber, int pageSize, String sort,String order) {
+        this.pageSize = pageSize;
+        this.pageNumber = pageNumber;
+        
+        this.orderByString = sortFormat(sort) + " " + order;
+    }
     public int getOffset() {
         return pageSize * pageNumber;
     }
@@ -59,4 +65,23 @@ public class PageInfo {
         this.orderByString = orderByString;
     }
 
+    /**
+     * 大写字母前插入空格
+     * @param sort
+     * @return
+     */
+    private String sortFormat(String sort) {
+
+        String result="";
+        
+        for (int i = 0; i < sort.length(); i++) {
+            char c = sort.charAt(i);
+            if (!Character.isLowerCase(c)) {
+                result = result + "_" + c;
+            } else {
+                result = result + c;
+            }
+        }
+        return result.toUpperCase();
+    }
 }

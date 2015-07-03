@@ -43,15 +43,17 @@ public class SysTypeController extends BaseController {
 	public Map<String, Object> page(
 			@RequestParam(value="page", defaultValue="1") int pageNo, 
 			@RequestParam(value="rows", defaultValue="20") int pageSize,
+            @RequestParam(value="sort") String sort, 
+            @RequestParam(value="order") String order,		
 			@ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
 		
 		pageNo = pageNo > 0 ? pageNo - 1 : pageNo;
-		PageInfo pageInfo = new PageInfo(pageNo,pageSize,"TYPE_CODE ASC");
+		PageInfo pageInfo = new PageInfo(pageNo,pageSize,sort,order);
 		
 		
-		Order order = new Order("TYPE_CODE ASC");
-		Sort sort = new Sort(order);
-		Pageable pageRequest = new PageRequest(pageNo, pageSize,sort);
+		//Order order = new Order("TYPE_CODE ASC");
+		//Sort sort = new Sort(order);
+		//Pageable pageRequest = new PageRequest(pageNo, pageSize,sort);
 
 		Page<SysType> page = null;
 		
