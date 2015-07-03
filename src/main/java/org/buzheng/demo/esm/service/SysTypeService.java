@@ -5,18 +5,22 @@ import java.util.Map;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysType;
+import org.buzheng.demo.esm.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.lh.abs.web.util.exception.DataExistsException;
 
 public interface SysTypeService {
 	
 	/**
 	 * 保存用户
 	 * @param user
+	 * @param user 
 	 * @throws UserExistsException 用户名存在
 	 * @throws IllegalArgumentException
 	 */
-	void save(SysType user) throws DataExistsException;
+	void save(SysType type, SysUser user) throws DataExistsException;
 	
 	/**
 	 * 保存用户

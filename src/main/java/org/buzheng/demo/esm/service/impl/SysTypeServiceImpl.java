@@ -1,4 +1,4 @@
-package org.buzheng.demo.esm.impl;
+package org.buzheng.demo.esm.service.impl;
 
 
 import java.util.Date;
@@ -10,10 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.dao.SysTypeDao;
 import org.buzheng.demo.esm.domain.SysType;
-import org.buzheng.demo.esm.service.DataExistsException;
+import org.buzheng.demo.esm.domain.SysUser;
 import org.buzheng.demo.esm.service.SysTypeService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import com.lh.abs.web.util.exception.DataExistsException;
 
 @Service
 public class SysTypeServiceImpl implements SysTypeService {
@@ -22,7 +24,7 @@ public class SysTypeServiceImpl implements SysTypeService {
 	private SysTypeDao sysTypeDao;
 
     @Override
-    public void save(SysType type) throws DataExistsException {
+    public void save(SysType type,SysUser user) throws DataExistsException {
         
         if (type == null) {
             return;
@@ -38,7 +40,10 @@ public class SysTypeServiceImpl implements SysTypeService {
         Date date = new Date();
         type.setDeleteFlg("0");
         type.setVerNum(0);
+        type.setcUser(user.getUserId());
         type.setcDate(date);
+        type.setuUser(user.getUserId());
+        type.setuDate(date);
         this.sysTypeDao.insert(type);
         
     }

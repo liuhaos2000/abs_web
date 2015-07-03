@@ -8,6 +8,8 @@ import org.buzheng.demo.esm.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.lh.abs.web.util.exception.UserExistsException;
+
 public interface SysUserService {
 	
 	/**

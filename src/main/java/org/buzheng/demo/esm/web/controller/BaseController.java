@@ -2,8 +2,6 @@ package org.buzheng.demo.esm.web.controller;
 
 import javax.annotation.Resource;
 
-import org.buzheng.demo.esm.service.DataExistsException;
-import org.buzheng.demo.esm.service.UserExistsException;
 import org.buzheng.demo.esm.web.util.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.lh.abs.web.util.exception.BusinessException;
+import com.lh.abs.web.util.exception.DataExistsException;
+import com.lh.abs.web.util.exception.UserExistsException;
 
 public class BaseController {
 	
@@ -33,6 +35,9 @@ public class BaseController {
 		else if (e instanceof DataExistsException) {
 			msg = e.getMessage();
 		}
+	    else if (e instanceof BusinessException) {
+	            msg = e.getMessage();
+	    }
 		else {
 			logger.error("系统出错", e);
 			msg = "system.error";

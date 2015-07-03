@@ -1,13 +1,13 @@
-package org.buzheng.demo.esm.service;
+package com.lh.abs.web.util.exception;
 
-public class BusinessExistsException extends Exception {
+public class BusinessException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5938178916897833968L;
 
-	public BusinessExistsException() {
+	public BusinessException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -18,17 +18,17 @@ public class BusinessExistsException extends Exception {
 //		// TODO Auto-generated constructor stub
 //	}
 
-	public BusinessExistsException(String message, Throwable cause) {
+	public BusinessException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessExistsException(String message) {
+	public BusinessException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessExistsException(Throwable cause) {
+	public BusinessException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}

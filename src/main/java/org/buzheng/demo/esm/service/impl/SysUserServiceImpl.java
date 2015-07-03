@@ -1,4 +1,4 @@
-package org.buzheng.demo.esm.impl;
+package org.buzheng.demo.esm.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -10,11 +10,12 @@ import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.dao.SysUserDao;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.buzheng.demo.esm.service.SysUserService;
-import org.buzheng.demo.esm.service.UserExistsException;
 import org.buzheng.demo.esm.util.AppHelper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.lh.abs.web.util.exception.UserExistsException;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {

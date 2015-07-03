@@ -1,4 +1,4 @@
-package org.buzheng.demo.esm.impl;
+package org.buzheng.demo.esm.service.impl;
 
 import java.util.List;
 
@@ -6,9 +6,10 @@ import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.dao.SysGroupDao;
 import org.buzheng.demo.esm.domain.SysGroup;
-import org.buzheng.demo.esm.service.DataExistsException;
 import org.buzheng.demo.esm.service.SysGroupService;
 import org.springframework.stereotype.Service;
+
+import com.lh.abs.web.util.exception.DataExistsException;
 
 @Service
 public class SysGroupServiceImpl implements SysGroupService {

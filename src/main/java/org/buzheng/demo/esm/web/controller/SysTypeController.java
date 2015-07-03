@@ -11,7 +11,6 @@ import org.buzheng.demo.esm.App;
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysType;
 import org.buzheng.demo.esm.domain.SysUser;
-import org.buzheng.demo.esm.service.DataExistsException;
 import org.buzheng.demo.esm.service.SysTypeService;
 import org.buzheng.demo.esm.service.SysUserService;
 import org.buzheng.demo.esm.util.AppHelper;
@@ -73,23 +72,14 @@ public class SysTypeController extends BaseController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public Result add(SysType type) throws Exception {
-		this.sysTypeService.save(type);
+	public Result add(SysType type,@ModelAttribute(App.USER_SESSION_KEY) SysUser user) throws Exception {
+		this.sysTypeService.save(type,user);
 		return new Result();
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
     public Result update(@Valid SysType type, BindingResult result) throws Exception {
-        // StandardValidationContext
-        if(result.hasErrors()) {
-            List<FieldError> errors = result.getFieldErrors();
-            for(FieldError err : errors) {
-                System.out.println("ObjectName:" + err.getObjectName() + "\tFieldName:" + err.getField()
-                        + "\tFieldValue:" + err.getRejectedValue() + "\tMessage:" + err.getDefaultMessage() + "\tCode:"
-                        +err.getCode());
-            }
-        }
         
         this.sysTypeService.update(type);
         return new Result();

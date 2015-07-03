@@ -1,4 +1,4 @@
-package org.buzheng.demo.esm.service;
+package com.lh.abs.web.util.exception;
 
 public class UserExistsException extends Exception {
 
