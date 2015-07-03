@@ -112,7 +112,6 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public Page<SysUser> findPage(PageInfo pageInfo) {
-		
 		return this.sysUserDao.findPage(pageInfo);
 	}
 

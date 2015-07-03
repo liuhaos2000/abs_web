@@ -14,7 +14,7 @@
 	
 	<!-- Application Message Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="/WEB-INF/messages" />
+		<property name="basename" value="classpath:messages" />
 		<property name="cacheSeconds" value="3000" />
 	</bean>
 	
@@ -56,7 +56,7 @@
     </bean>
     <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
     <bean id="validatemessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
-        <property name="basename" value="classpath:ValidationMessages.properties"/>  
+        <property name="basename" value="classpath:ValidationMessages"/>  
         <property name="fileEncodings" value="utf-8"/>  
         <property name="cacheSeconds" value="120"/>  
     </bean>

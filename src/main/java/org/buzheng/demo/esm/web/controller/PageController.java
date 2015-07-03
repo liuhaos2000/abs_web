@@ -37,4 +37,9 @@ public class PageController {
 		return "system/password";
 	}
 	
+	// 修改密码页面
+    @RequestMapping("/type")
+    public String sysType() {
+        return "system/type";
+    }
 }
