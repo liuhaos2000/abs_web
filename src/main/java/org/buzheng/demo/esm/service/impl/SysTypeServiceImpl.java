@@ -15,7 +15,7 @@ import org.buzheng.demo.esm.service.SysTypeService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.lh.abs.web.util.exception.DataExistsException;
+import com.abs.util.exception.DataExistsException;
 
 @Service
 public class SysTypeServiceImpl implements SysTypeService {

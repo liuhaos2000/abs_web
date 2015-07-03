@@ -15,7 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.lh.abs.web.util.exception.UserExistsException;
+import com.abs.util.exception.UserExistsException;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {

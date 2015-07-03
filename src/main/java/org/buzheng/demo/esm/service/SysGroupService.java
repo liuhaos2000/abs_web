@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.buzheng.demo.esm.domain.SysGroup;
 
-import com.lh.abs.web.util.exception.DataExistsException;
+import com.abs.util.exception.DataExistsException;
 
 public interface SysGroupService {
 	

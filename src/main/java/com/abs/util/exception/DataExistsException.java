@@ -1,4 +1,4 @@
-package com.lh.abs.web.util.exception;
+package com.abs.util.exception;
 
 public class DataExistsException extends Exception {
 

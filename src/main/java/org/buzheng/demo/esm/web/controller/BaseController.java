@@ -10,9 +10,9 @@ import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lh.abs.web.util.exception.BusinessException;
-import com.lh.abs.web.util.exception.DataExistsException;
-import com.lh.abs.web.util.exception.UserExistsException;
+import com.abs.util.exception.BusinessException;
+import com.abs.util.exception.DataExistsException;
+import com.abs.util.exception.UserExistsException;
 
 public class BaseController {
 	

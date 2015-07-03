@@ -9,7 +9,7 @@ import org.buzheng.demo.esm.domain.SysGroup;
 import org.buzheng.demo.esm.service.SysGroupService;
 import org.springframework.stereotype.Service;
 
-import com.lh.abs.web.util.exception.DataExistsException;
+import com.abs.util.exception.DataExistsException;
 
 @Service
 public class SysGroupServiceImpl implements SysGroupService {
