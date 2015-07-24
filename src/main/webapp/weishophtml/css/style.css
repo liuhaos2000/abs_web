@@ -29,6 +29,7 @@ img{
 }
 .top .top_logo .navbar-text{
 	width:100%;
+	font-family:'SimHei',sans-serif;
 }
 .top .top_logo .navbar-text img{
 	margin:0 auto;
@@ -1187,7 +1188,7 @@ img{
 	position:relative;
 	top:0px;
 }
-/* 商品列表页面 		margin-right:10px;*/
+/* 商品列表页面*/
 .item_list .row{
 	margin-left:0;
 	margin-right:0;
@@ -1262,4 +1263,22 @@ img{
 	color:#989898;
 	font-size:0.8em;
 		text-align:left;
+}
+
+/* 商品列表页面*/
+.itme_detail_top{
+
+    background-color: #f4fcd4;
+    box-shadow: #87b9d4 0px 0px 10px 0px;
+
+}
+.a-btn{
+	margin: 10px 10px 10px 10px ;
+	width:100%;
+
+}
+.b-btn{
+	margin: 10px 10px 10px 10px ;
+		width:100%;
+
 }
