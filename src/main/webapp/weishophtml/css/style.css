@@ -294,6 +294,7 @@ img{
 	padding-left:0;
 	padding-right:0;
 	margin-top:0px;
+	border-top: 1px solid #5d5cad;
 }
 .pic_show .item img{
 	margin:0 auto;
@@ -1267,18 +1268,57 @@ img{
 
 /* 商品列表页面*/
 .itme_detail_top{
-
-    background-color: #f4fcd4;
-    box-shadow: #87b9d4 0px 0px 10px 0px;
-
+    background-color: #e3e3e3;
+    box-shadow: #87b9d4 0px 0px 8px 0px;
 }
 .a-btn{
-	margin: 10px 10px 10px 10px ;
-	width:100%;
+	margin: 10px 0px 10px 10px ;
+	width:90%;
 
 }
 .b-btn{
-	margin: 10px 10px 10px 10px ;
-		width:100%;
+	margin: 10px 10px 10px 0px ;
+	width:90%;
+}
+.my-badge{
+	position:absolute;
+	top:22%;
+	left:50%
 
+}
+.badge-important{background-color:#b94a48;}
+.detail-name{
+	padding:5px 0px 0px 10px;
+	border-top: 2px solid #5d5cad;
+	border-bottom: 1px solid #5d5cad;
+}
+.detail-name .detail-name-p{
+	font-family:'SimHei',sans-serif;
+	color:#000000;
+	font-size:1.5em;
+}
+.detail-price{
+	padding:5px 0px 10px 10px;
+	border-bottom: 1px solid #5d5cad;
+}
+.detail-price .detail-price-p{
+	font-family:'SimHei',sans-serif;
+	color:#ff4444;
+	font-size:1.3em;
+}
+.img-pinglun{
+	display: inline;
+	width: 50px;
+	height: 50px;
+}
+.my-media-left{
+	vertical-align:baseline  !important;
+}
+.text-edit img{
+	width: 100%;
+	height: 100%;
+}
+.head-text{
+	padding-top:10px;
+	font-size:1em;
 }
