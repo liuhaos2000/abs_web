@@ -7,11 +7,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/media.css">
-
+	<link rel="stylesheet" href="skins/square/red.css" >
 </head>
 <body>
 
@@ -32,7 +30,9 @@
 	    <div class="container-fluid ">
 			<div class="row cart-item-row">
 				<div class="col-md-2 col-sm-2 col-xs-2 cart-item-col cart-item-checkbox">
-                   <div class="cart-item-checkbox-sub"><input type="checkbox"></div>
+                   <div class="cart-item-checkbox-sub">
+						<input type="checkbox">
+					</div>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">
 					<img class="cart-img" src="img/15901_60.png" alt="">
@@ -86,6 +86,9 @@
 				</div>
 			</div>
 		</div>
+					
+				
+					
 	</div>
 
 	<footer class="tool_foot">
@@ -103,20 +106,15 @@
 	
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
+<script src="js/icheck.min.js"></script>
 <script type="text/javascript">
             $(document).ready(function() {
-			    // 轮播
-                $("#owl-demo1").owlCarousel({
-                    items: 1,
-                    loop: true,
-                    margin: 10,
-                    smartSpeed: 450,
-                    autoplay: true,
-                    autoplayTimeout: 4000,
-                });
-
-							
+				//选择框
+				$('input').iCheck({
+					checkboxClass: 'icheckbox_square-red',
+					radioClass: 'iradio_square-red',
+					increaseArea: '20%' // optional
+				});			
 				//设置高度			
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-$("footer").height()-2);

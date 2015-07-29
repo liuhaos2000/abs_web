@@ -5,7 +5,7 @@ a{
 	outline:none;
 }
 input {
-	-webkit-appearance:none; /*去除iphone默认input样式*/
+	/*-webkit-appearance:none; 去除iphone默认input样式*/
 }
 
 img{
