@@ -29,7 +29,7 @@
 	<div id="main_div">
 	    <div class="container-fluid ">
 			<div class="row cart-item-row">
-				<div class="col-md-2 col-sm-2 col-xs-2 cart-item-col cart-item-checkbox">
+				<div class="col-md-2 col-sm-2 col-xs-2  cart-item-checkbox">
                    <div class="cart-item-checkbox-sub">
 						<input type="checkbox">
 					</div>
@@ -47,8 +47,7 @@
 						<span class="btn-clipboard">x</span>
 				</div>
 			</div>
-		</div>
-	    <div class="container-fluid ">
+
 			<div class="row cart-item-row">
 				<div class="col-md-2 col-sm-2 col-xs-2 cart-item-col cart-item-checkbox">
                    <div class="cart-item-checkbox-sub"><input type="checkbox"></div>
@@ -66,8 +65,7 @@
 						<span class="btn-clipboard">x</span>
 				</div>
 			</div>
-		</div>
-		<div class="container-fluid ">
+
 			<div class="row cart-item-row">
 				<div class="col-md-2 col-sm-2 col-xs-2 cart-item-col cart-item-checkbox">
                    <div class="cart-item-checkbox-sub"><input type="checkbox"></div>
@@ -98,7 +96,7 @@
 					<p class="foot-text">总价：210元</p>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-					<button class="btn btn-success a-btn" type="button">结 算</button>
+					<button id="jiesuan" class="btn btn-success a-btn" type="button">结 算</button>
 				</div>
 			</div>
 		</div>
@@ -119,8 +117,12 @@
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-$("footer").height()-2);
 			    	$("#main_div").css({"overflow":"auto"});
+					
 			    });
-							
+				//
+				$("#jiesuan").click(function(){
+					location.href ="order_submit.html";
+				});						
             });
         </script>
 </body>
