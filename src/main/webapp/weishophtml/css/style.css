@@ -1449,5 +1449,58 @@ padding-right:25px !important;
 	margin-right:0px !important;
 }
 .btn-mini{padding:0 6px;font-size:10.5px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
-/**/
-
+/*地址*/
+.adderss_name{
+	font-family:'SimHei',sans-serif;
+	color:#000000;
+	font-size:1em;
+	margin-bottom:0px !important;
+	margin-right:15px !important;
+}
+/*我的订单*/
+.order-group{
+	margin:0px 5px 0px 5px;
+}
+.order-num{
+	border: 1px solid #e5e5e5;
+	margin-top:5px;
+	border-radius: 12px 12px 0px 0px;
+	background-color:white;
+}
+.order-title{
+	border: 1px solid #e5e5e5;
+	background-color:white;
+}
+.order-total{
+	border: 1px solid #e5e5e5;
+	margin-bottom:5px;
+	border-radius: 0px 0px 12px 12px;
+	background-color:white;
+}
+.order-num-position{
+	margin:3px 3px 3px 0px !important;
+}
+.order-num-bt{
+	float:right;
+}
+.order-img1{
+	width:50px;
+	height:50px;
+}
+.btn-deletl{
+    position:absolute;
+    top:0px;
+    right:0px;
+    z-index:10;
+    display:block;
+    padding:4px 10px;
+    font-size:10px;
+    color:#767676;
+    cursor:pointer;
+    background-color:#fff;
+    border-left:1px solid #e1e1e8;
+    border-radius:0 12px 0 0
+}
+.maindiv{
+	background-color:#EEEEEE;
+}
