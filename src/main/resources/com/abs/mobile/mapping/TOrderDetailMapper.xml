@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TOrderDetail" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="area_id" property="areaId" jdbcType="INTEGER" />
+    <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
+    <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
+    <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
+    <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
+    <result column="shuliang" property="shuliang" jdbcType="INTEGER" />
+    <result column="price_type" property="priceType" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="CHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, item_id, area_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, 
+    price_type, price, status, del_flg, c_date, c_user, u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_detail
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and item_id = #{itemId,jdbcType=INTEGER}
+      and area_id = #{areaId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
+    delete from t_order_detail
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and item_id = #{itemId,jdbcType=INTEGER}
+      and area_id = #{areaId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TOrderDetail" >
+    insert into t_order_detail (order_id, item_id, area_id, 
+      item_guige, item_yanse, guige_text, 
+      yanse_text, shuliang, price_type, 
+      price, status, del_flg, 
+      c_date, c_user, u_date, 
+      u_user)
+    values (#{orderId,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, 
+      #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, #{guigeText,jdbcType=VARCHAR}, 
+      #{yanseText,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, #{priceType,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=CHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TOrderDetail" >
+    insert into t_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="itemGuige != null" >
+        item_guige,
+      </if>
+      <if test="itemYanse != null" >
+        item_yanse,
+      </if>
+      <if test="guigeText != null" >
+        guige_text,
+      </if>
+      <if test="yanseText != null" >
+        yanse_text,
+      </if>
+      <if test="shuliang != null" >
+        shuliang,
+      </if>
+      <if test="priceType != null" >
+        price_type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="itemGuige != null" >
+        #{itemGuige,jdbcType=INTEGER},
+      </if>
+      <if test="itemYanse != null" >
+        #{itemYanse,jdbcType=INTEGER},
+      </if>
+      <if test="guigeText != null" >
+        #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null" >
+        #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null" >
+        #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="priceType != null" >
+        #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=CHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TOrderDetail" >
+    update t_order_detail
+    <set >
+      <if test="guigeText != null" >
+        guige_text = #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null" >
+        yanse_text = #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null" >
+        shuliang = #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="priceType != null" >
+        price_type = #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=CHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=CHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and item_id = #{itemId,jdbcType=INTEGER}
+      and area_id = #{areaId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetail" >
+    update t_order_detail
+    set guige_text = #{guigeText,jdbcType=VARCHAR},
+      yanse_text = #{yanseText,jdbcType=VARCHAR},
+      shuliang = #{shuliang,jdbcType=INTEGER},
+      price_type = #{priceType,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=CHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=CHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and item_id = #{itemId,jdbcType=INTEGER}
+      and area_id = #{areaId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+</mapper>

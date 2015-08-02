@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TOrder" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="totle_price" property="totlePrice" jdbcType="DECIMAL" />
+    <result column="wuliu_yunfei" property="wuliuYunfei" jdbcType="DECIMAL" />
+    <result column="zhekou_type" property="zhekouType" jdbcType="VARCHAR" />
+    <result column="yhq_code" property="yhqCode" jdbcType="INTEGER" />
+    <result column="jifen_dixiao" property="jifenDixiao" jdbcType="DECIMAL" />
+    <result column="shiji_price" property="shijiPrice" jdbcType="DECIMAL" />
+    <result column="wuliu_id" property="wuliuId" jdbcType="INTEGER" />
+    <result column="wuliu_code" property="wuliuCode" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="CHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, order_date, status, open_id, address_id, totle_price, wuliu_yunfei, zhekou_type, 
+    yhq_code, jifen_dixiao, shiji_price, wuliu_id, wuliu_code, del_flg, c_date, c_user, 
+    u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TOrder" >
+    insert into t_order (order_id, order_date, status, 
+      open_id, address_id, totle_price, 
+      wuliu_yunfei, zhekou_type, yhq_code, 
+      jifen_dixiao, shiji_price, wuliu_id, 
+      wuliu_code, del_flg, c_date, 
+      c_user, u_date, u_user)
+    values (#{orderId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=VARCHAR}, #{addressId,jdbcType=INTEGER}, #{totlePrice,jdbcType=DECIMAL}, 
+      #{wuliuYunfei,jdbcType=DECIMAL}, #{zhekouType,jdbcType=VARCHAR}, #{yhqCode,jdbcType=INTEGER}, 
+      #{jifenDixiao,jdbcType=DECIMAL}, #{shijiPrice,jdbcType=DECIMAL}, #{wuliuId,jdbcType=INTEGER}, 
+      #{wuliuCode,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=CHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TOrder" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="totlePrice != null" >
+        totle_price,
+      </if>
+      <if test="wuliuYunfei != null" >
+        wuliu_yunfei,
+      </if>
+      <if test="zhekouType != null" >
+        zhekou_type,
+      </if>
+      <if test="yhqCode != null" >
+        yhq_code,
+      </if>
+      <if test="jifenDixiao != null" >
+        jifen_dixiao,
+      </if>
+      <if test="shijiPrice != null" >
+        shiji_price,
+      </if>
+      <if test="wuliuId != null" >
+        wuliu_id,
+      </if>
+      <if test="wuliuCode != null" >
+        wuliu_code,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="totlePrice != null" >
+        #{totlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wuliuYunfei != null" >
+        #{wuliuYunfei,jdbcType=DECIMAL},
+      </if>
+      <if test="zhekouType != null" >
+        #{zhekouType,jdbcType=VARCHAR},
+      </if>
+      <if test="yhqCode != null" >
+        #{yhqCode,jdbcType=INTEGER},
+      </if>
+      <if test="jifenDixiao != null" >
+        #{jifenDixiao,jdbcType=DECIMAL},
+      </if>
+      <if test="shijiPrice != null" >
+        #{shijiPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wuliuId != null" >
+        #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="wuliuCode != null" >
+        #{wuliuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=CHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TOrder" >
+    update t_order
+    <set >
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="totlePrice != null" >
+        totle_price = #{totlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wuliuYunfei != null" >
+        wuliu_yunfei = #{wuliuYunfei,jdbcType=DECIMAL},
+      </if>
+      <if test="zhekouType != null" >
+        zhekou_type = #{zhekouType,jdbcType=VARCHAR},
+      </if>
+      <if test="yhqCode != null" >
+        yhq_code = #{yhqCode,jdbcType=INTEGER},
+      </if>
+      <if test="jifenDixiao != null" >
+        jifen_dixiao = #{jifenDixiao,jdbcType=DECIMAL},
+      </if>
+      <if test="shijiPrice != null" >
+        shiji_price = #{shijiPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wuliuId != null" >
+        wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="wuliuCode != null" >
+        wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=CHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=CHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TOrder" >
+    update t_order
+    set order_date = #{orderDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=INTEGER},
+      totle_price = #{totlePrice,jdbcType=DECIMAL},
+      wuliu_yunfei = #{wuliuYunfei,jdbcType=DECIMAL},
+      zhekou_type = #{zhekouType,jdbcType=VARCHAR},
+      yhq_code = #{yhqCode,jdbcType=INTEGER},
+      jifen_dixiao = #{jifenDixiao,jdbcType=DECIMAL},
+      shiji_price = #{shijiPrice,jdbcType=DECIMAL},
+      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=CHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=CHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>
