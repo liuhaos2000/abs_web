@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mobile/page")
 public class MobilePageController {
 	
-	// 用户管理页面
-	@RequestMapping("/mainpage")
-	public String sysUser() {
-		return "mobile/mainpage";
+	// index
+	@RequestMapping("/index")
+	public String toIndex() {
+		return "mobile/index";
 	}
-	
+    // home
+    @RequestMapping("/home")
+    public String toHome() {
+        return "mobile/home";
+    }
 
 }

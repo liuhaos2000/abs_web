@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@RequestMapping("/mainpage")
+@RequestMapping("/homepage")
 @SessionAttributes(App.USER_SESSION_KEY)
-public class MainPageController extends BaseController {
+public class HomePageController extends BaseController {
 	
 	@Resource
 	private SysUserService sysUserService;
