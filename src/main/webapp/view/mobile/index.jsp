@@ -34,6 +34,31 @@
 
 			</div>
 		</div>
+		<!-- 探出窗口 -->
+        <div class="popupshadow"></div>
+        <div class="popup">
+            <img src="<%=request.getContextPath() %>/resources/images/popup_icon.png">
+            <ul>
+                <li>
+                    <a href="item_list.html">主力店铺</a>
+                </li>
+                <li>
+                    <a href="item_list.html">女装</a>
+                </li>
+                <li>
+                    <a href="item_list.html">男装</a>
+                </li>
+                <li>
+                    <a href="item_list.html">鞋/包</a>
+                </li>
+                <li>
+                    <a href="item_list.html">餐饮</a>
+                </li>
+                <li>
+                    <a href="item_list.html">钟表/珠宝/饰品</a>
+                </li>
+            </ul>
+        </div>
 	</header>
 
 	<div id="main_div">
@@ -79,7 +104,18 @@
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
                 			 '/app/mobile/page/home'); 
                  }); 
-
+                 $("#type-bt").click(function(){
+                     $('#main_div').load('<%=request.getContextPath() %>' +
+                             '/app/mobile/page/type'); 
+                 }); 
+                 $("#huiyuan-bt").click(function(){
+                     $('#main_div').load('<%=request.getContextPath() %>' +
+                             '/app/mobile/page/huiyuan'); 
+                 }); 
+                 $("#cart-bt").click(function(){
+                	 window.location.href='<%=request.getContextPath() %>'+
+                	         '/app/mobile/page/cart'; 
+                 }); 
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-52);
 			    	$("#main_div").css({"overflow":"auto"});

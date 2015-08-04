@@ -17,5 +17,19 @@ public class MobilePageController {
     public String toHome() {
         return "mobile/home";
     }
-
+    // type
+    @RequestMapping("/type")
+    public String toType() {
+        return "mobile/type";
+    }
+    // cart
+    @RequestMapping("/cart")
+    public String toCart() {
+        return "mobile/cart";
+    }
+    // huiyuan
+    @RequestMapping("/huiyuan")
+    public String toHuiyuan() {
+        return "mobile/huiyuan";
+    }
 }

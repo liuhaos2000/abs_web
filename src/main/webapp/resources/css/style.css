@@ -186,7 +186,7 @@ img{
 	z-index:-99;
 	left:0;
 }
-.top .popup{
+.popup{
 	background:rgba(101,101,101,0.9);
 	position:fixed;
 	top:0;
@@ -195,17 +195,17 @@ img{
 	height:100%;
 	z-index:999;
 }
-.top .popup img{
+.popup img{
 	margin:20px 20px 5px;
 }
-.top .popup ul{
+.popup ul{
 	list-style-type:none;
 	padding-left:0;
 }
-.top .popup ul li{
+.popup ul li{
 	text-align:center;
 }
-.top .popup ul li a{
+.popup ul li a{
 	outline:none;
 	font-size:16px;
 	font-family:'SimHei',sans-serif;
@@ -215,15 +215,15 @@ img{
 	padding-top:10px;
 	padding-bottom:10px;
 }
-.top .popup ul li a:hover{
+.popup ul li a:hover{
 	color:#ff7272;
 }
-.top .popup.p2{
+.popup.p2{
 	left:-50%;
 	width:50%;
 	height:100%;
 }
-.top .popup.p2 ul{
+.popup.p2 ul{
 	margin-top:34px;
 }
 .popupshadow{
@@ -761,7 +761,7 @@ img{
 
 /* 会员信息页面 */
 .huiyuan{
-	background:url(../images/head_bg.png) no-repeat;
+	background:url(../../resources/images/head_bg.png) no-repeat;
 	background-size:100% 100%;
 }
 .huiyuan .huiyuan_xinxi{
@@ -824,7 +824,7 @@ img{
 	background:#f7f7f7;
 	padding-left:0;
 	padding-right:0;
-	padding-bottom:200px;
+	padding-bottom:0px;
 }
 .huiyuan_main .panel{
 	margin-bottom:4px;
