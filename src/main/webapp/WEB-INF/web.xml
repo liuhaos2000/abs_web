@@ -14,7 +14,11 @@
     <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
     <url-pattern>/app/*</url-pattern>
   </servlet-mapping>
-  
+  <listener>    
+        <listener-class>    
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>    
+  </listener>
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

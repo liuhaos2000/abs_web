@@ -34,11 +34,11 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
-	<!-- 拦截器,session check 
+	<!-- 拦截器,session check -->
 	<mvc:interceptors>
 		<bean class="org.buzheng.demo.esm.web.interceptor.SessionInterceptor" />
 	</mvc:interceptors>
-	-->
+	
 	
 	<!-- JSP地址 -->
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->

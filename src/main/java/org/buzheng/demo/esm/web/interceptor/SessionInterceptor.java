@@ -1,15 +1,16 @@
 package org.buzheng.demo.esm.web.interceptor;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.buzheng.demo.esm.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.abs.mobile.domain.TUser;
+import com.abs.util.commom.AbsConst;
 
 public class SessionInterceptor implements HandlerInterceptor {
 
@@ -24,24 +25,20 @@ public class SessionInterceptor implements HandlerInterceptor {
 		
 		uri = uri.replaceFirst(request.getContextPath(), "");
 
-		if (! uri.startsWith("/app/page/")) {
+		if (! uri.startsWith("/app/mobile/page/")) {
 			return true;
 		}
 
-		if (request.getSession().getAttribute(App.USER_SESSION_KEY) == null) {
+		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
 			// 未登录
-			PrintWriter out = response.getWriter();
-			StringBuilder builder = new StringBuilder();
-			builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");
-			builder.append("window.top.location.href=\"");
-			builder.append(request.getContextPath());
-			builder.append("/\";</script>");
-			out.print(builder.toString());
-			out.close();
-			return false;
-		} else {
-			return true;
+		    HttpSession session = request.getSession();
+		    
+		    session.setAttribute(AbsConst.LOGIN_USER, new TUser());
+
 		}
+		
+		return true;
+		
 	}
 
 	@Override
