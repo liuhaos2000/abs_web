@@ -6,9 +6,9 @@ public class AbsConst {
     // LoginUser Session KEY
     public static final String LOGIN_USER = "LOGIN_USER";
     
+    public static String access_token = "";
     
-    
-    public static final String TOKEN = "iclik";
+    public static final String TOKEN = "abs_web_ruihegouwu";
 
     // public static final String APPID = "wx5d3a57699afdcf6d";
     //

@@ -50,53 +50,33 @@ public class MenuManager {
 	private static Menu getMenu() {
 
         ViewButton btn11 = new ViewButton();
-        btn11.setName("新房搜索");
+        btn11.setName("进入店铺");
         btn11.setType("view");
-        btn11.setUrl("http://m.soufun.com/xf/jn.html");
+        btn11.setUrl("http://qbctest.wicp.net/abs_web");
         
         ViewButton btn12 = new ViewButton();
-        btn12.setName("精彩资讯");
+        btn12.setName("商品分类");
         btn12.setType("view");
-        btn12.setUrl("http://xw.qq.com/m/house/");
+        btn12.setUrl("http://163.com");
         
         CommonButton btn21 = new CommonButton();
-        btn21.setName("菜单");
+        btn21.setName("进入店铺");
         btn21.setType("click");
         btn21.setKey("21");
-
-
-		ViewButton btn31 = new ViewButton();
-		btn31.setName("报名看房");
-		btn31.setType("view");
-		btn31.setUrl(WeixinConst.SEVERPATH + "k1/k10101.do");
-		
-		ViewButton btn32 = new ViewButton();
-		btn32.setName("看房有礼");
-		btn32.setType("view");
-		btn32.setUrl(WeixinConst.SEVERPATH + "k2/k20101.do");
-		
-		ViewButton btn33 = new ViewButton();
-		btn33.setName("在线团购");
-		btn33.setType("view");
-		btn33.setUrl(WeixinConst.SEVERPATH + "k3/k30101.do");
-		
-		ViewButton btn34 = new ViewButton();
-		btn34.setName("动态播报");
-		btn34.setType("view");
-		btn34.setUrl(WeixinConst.SEVERPATH + "k4/k40101.do");
-		
-
+        
+        ViewButton btn22 = new ViewButton();
+        btn22.setName("进入店铺");
+        btn22.setType("view");
+        btn22.setUrl("http://qbctest.wicp.net/abs_web");
+        
 		ComplexButton mainBtn1 = new ComplexButton();
-		mainBtn1.setName("新房");
+		mainBtn1.setName("微信小店");
 		mainBtn1.setSub_button(new Button[] { btn11,btn12 });
 
 		ComplexButton mainBtn2 = new ComplexButton();
-		mainBtn2.setName("买房赚钱");
-		mainBtn2.setSub_button(new Button[] { btn21 });
+		mainBtn2.setName("我的小店");
+		mainBtn2.setSub_button(new Button[] { btn22 });
 
-		ComplexButton mainBtn3 = new ComplexButton();
-		mainBtn3.setName("看房团");
-		mainBtn3.setSub_button(new Button[] { btn21 });
 
 		/**
 		 * 这是公众号xiaoqrobot目前的菜单结构，每个一级菜单都有二级菜单项<br>

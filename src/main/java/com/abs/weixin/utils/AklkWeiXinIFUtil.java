@@ -107,10 +107,7 @@ public class AklkWeiXinIFUtil {
 				accessToken.setExpiresIn(jsonObject.getInt("expires_in"));
 			} catch (JSONException e) {
 				accessToken = null;
-				// 获取token失败
-//				log.error("获取token失败 errcode:{} errmsg:{}",
-//						jsonObject.getInt("errcode"),
-//						jsonObject.getString("errmsg"));
+				System.err.println("ACCESSTOKEN取得失败");
 			}
 		}
 		return accessToken;
@@ -143,9 +140,9 @@ public class AklkWeiXinIFUtil {
 			URL url = new URL(requestUrl);
 			HttpsURLConnection httpUrlConn = (HttpsURLConnection) url
 					.openConnection();
-			//httpUrlConn.setSSLSocketFactory(ssf);
+			httpUrlConn.setSSLSocketFactory(ssf);
 
-			//httpUrlConn.setDoOutput(true);
+			httpUrlConn.setDoOutput(true);
 			httpUrlConn.setDoInput(true);
 			httpUrlConn.setUseCaches(false);
 			// 设置请求方式（GET/POST）

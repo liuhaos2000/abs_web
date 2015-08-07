@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class SignUtil {
 	// ��ӿ�������Ϣ�е�TokenҪһ��
-	private static String token = "iclik";
+	private static String token = "abs_web_ruihegouwu";
 
 	/**
 	 * ��֤ǩ��

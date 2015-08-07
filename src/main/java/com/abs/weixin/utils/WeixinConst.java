@@ -1,9 +1,5 @@
 package com.abs.weixin.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-
 /**
  * 常量定义
  * 
@@ -12,17 +8,17 @@ import java.util.Arrays;
  */
 public class WeixinConst {
 
-	public static final String TOKEN = "iclik";
+	public static final String TOKEN = "abs_web_ruihegouwu";
 
 //	public static final String APPID = "wx5d3a57699afdcf6d";
 //
 //	public static final String APPSECRET = "8bc912a5409d71ac82932ca82e95aad6";
 //	public static final String severPath = "http://mfbtest.duapp.com/";
-	   public static final String APPID = "wx9c7713176c68cf82";
+	   public static final String APPID = "wx9e5e703df0bcd7c7";
 
-	    public static final String APPSECRET = "954f1660478f3909d3e49294508a9203";
+	    public static final String APPSECRET = "562cbd9ff4298c150b78da63e34a2d89";
 	    
-	    public static final String SEVERPATH = "http://maifangbang.duapp.com/";
+	    public static final String SEVERPATH = "http://qbctest.wicp.net/";
 
 	public static String AUTHORIZE_URL = 
 			"https://open.weixin.qq.com/connect/oauth2/authorize?"
