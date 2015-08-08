@@ -1,23 +1,16 @@
-package com.abs.mobile.controller.mainpage;
+package com.abs.mobile.controller;
 
-import javax.annotation.Resource;
-
-import org.buzheng.demo.esm.service.SysGroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.abs.mobile.domain.TUser;
-import com.abs.mobile.service.SessionService;
 
 @Controller
 @RequestMapping("/mobile/page")
 public class MobilePageController {
-    @Resource
-    private SessionService sessionService;
+
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
-	    TUser tUser =sessionService.getLoginUser();
+
 		return "mobile/index";
 	}
     // home

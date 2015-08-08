@@ -22,7 +22,7 @@
     area_id, del_flg, c_date, c_user, u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_user
     where open_id = #{openId,jdbcType=VARCHAR}

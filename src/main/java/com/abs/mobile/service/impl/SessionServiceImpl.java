@@ -23,6 +23,9 @@ public class SessionServiceImpl implements SessionService {
         return user;
     }
 
-
-
+	@Override
+	public void setLoginUser(TUser user) {
+		HttpSession session =request.getSession();
+		session.setAttribute(AbsConst.LOGIN_USER, user);
+	}
 }

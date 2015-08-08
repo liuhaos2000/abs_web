@@ -1,4 +1,4 @@
-package com.abs.mobile.controller.mainpage;
+package com.abs.mobile.controller;
 
 import java.util.HashMap;
 import java.util.List;

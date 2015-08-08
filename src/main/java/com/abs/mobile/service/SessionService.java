@@ -10,10 +10,11 @@ import com.abs.util.exception.DataExistsException;
 public interface SessionService {
 	
 	/**
-	 * 更新
-	 * @param group
-	 * @throws IllegalArgumentException
+	 * 获取Session中的User
 	 */
 	public TUser getLoginUser();
-	
+	/**
+	 * 设置Session中的User
+	 */
+	public void setLoginUser(TUser user);
 }
