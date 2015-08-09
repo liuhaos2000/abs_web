@@ -7,17 +7,33 @@ public class TItem {
 
     private String name;
 
+    private String manufacturer;
+
+    private String owner;
+
     private Integer type;
 
-    private Integer morenGuige;
-
-    private Integer morenYanse;
-
-    private String guigeText;
-
-    private String yanseText;
-
     private Integer prentItemId;
+
+    private String parm;
+
+    private String xiangouFlg;
+
+    private Integer xiangouShuliang;
+
+    private String baoyouFlg;
+
+    private Integer wuliuId;
+
+    private String fapiaoFlg;
+
+    private String fapiaoTitle;
+
+    private String shouhouFlg;
+
+    private String shouhouMiaoshu;
+
+    private String shangjiaFlg;
 
     private String delFlg;
 
@@ -47,6 +63,22 @@ public class TItem {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer == null ? null : manufacturer.trim();
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner == null ? null : owner.trim();
+    }
+
     public Integer getType() {
         return type;
     }
@@ -55,44 +87,92 @@ public class TItem {
         this.type = type;
     }
 
-    public Integer getMorenGuige() {
-        return morenGuige;
-    }
-
-    public void setMorenGuige(Integer morenGuige) {
-        this.morenGuige = morenGuige;
-    }
-
-    public Integer getMorenYanse() {
-        return morenYanse;
-    }
-
-    public void setMorenYanse(Integer morenYanse) {
-        this.morenYanse = morenYanse;
-    }
-
-    public String getGuigeText() {
-        return guigeText;
-    }
-
-    public void setGuigeText(String guigeText) {
-        this.guigeText = guigeText == null ? null : guigeText.trim();
-    }
-
-    public String getYanseText() {
-        return yanseText;
-    }
-
-    public void setYanseText(String yanseText) {
-        this.yanseText = yanseText == null ? null : yanseText.trim();
-    }
-
     public Integer getPrentItemId() {
         return prentItemId;
     }
 
     public void setPrentItemId(Integer prentItemId) {
         this.prentItemId = prentItemId;
+    }
+
+    public String getParm() {
+        return parm;
+    }
+
+    public void setParm(String parm) {
+        this.parm = parm == null ? null : parm.trim();
+    }
+
+    public String getXiangouFlg() {
+        return xiangouFlg;
+    }
+
+    public void setXiangouFlg(String xiangouFlg) {
+        this.xiangouFlg = xiangouFlg == null ? null : xiangouFlg.trim();
+    }
+
+    public Integer getXiangouShuliang() {
+        return xiangouShuliang;
+    }
+
+    public void setXiangouShuliang(Integer xiangouShuliang) {
+        this.xiangouShuliang = xiangouShuliang;
+    }
+
+    public String getBaoyouFlg() {
+        return baoyouFlg;
+    }
+
+    public void setBaoyouFlg(String baoyouFlg) {
+        this.baoyouFlg = baoyouFlg == null ? null : baoyouFlg.trim();
+    }
+
+    public Integer getWuliuId() {
+        return wuliuId;
+    }
+
+    public void setWuliuId(Integer wuliuId) {
+        this.wuliuId = wuliuId;
+    }
+
+    public String getFapiaoFlg() {
+        return fapiaoFlg;
+    }
+
+    public void setFapiaoFlg(String fapiaoFlg) {
+        this.fapiaoFlg = fapiaoFlg == null ? null : fapiaoFlg.trim();
+    }
+
+    public String getFapiaoTitle() {
+        return fapiaoTitle;
+    }
+
+    public void setFapiaoTitle(String fapiaoTitle) {
+        this.fapiaoTitle = fapiaoTitle == null ? null : fapiaoTitle.trim();
+    }
+
+    public String getShouhouFlg() {
+        return shouhouFlg;
+    }
+
+    public void setShouhouFlg(String shouhouFlg) {
+        this.shouhouFlg = shouhouFlg == null ? null : shouhouFlg.trim();
+    }
+
+    public String getShouhouMiaoshu() {
+        return shouhouMiaoshu;
+    }
+
+    public void setShouhouMiaoshu(String shouhouMiaoshu) {
+        this.shouhouMiaoshu = shouhouMiaoshu == null ? null : shouhouMiaoshu.trim();
+    }
+
+    public String getShangjiaFlg() {
+        return shangjiaFlg;
+    }
+
+    public void setShangjiaFlg(String shangjiaFlg) {
+        this.shangjiaFlg = shangjiaFlg == null ? null : shangjiaFlg.trim();
     }
 
     public String getDelFlg() {

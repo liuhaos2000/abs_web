@@ -20,19 +20,7 @@ public class TItemDetail extends TItemDetailKey {
 
     private String huodongFlg;
 
-    private String hotFlg;
-
-    private Date itemScDate;
-
-    private Date itemYxDate;
-
-    private BigDecimal itemZhongliang1;
-
-    private BigDecimal itemZhongliang2;
-
-    private String itemChandi;
-
-    private String baoyouFlg;
+    private BigDecimal zhongliang;
 
     private String delFlg;
 
@@ -108,60 +96,12 @@ public class TItemDetail extends TItemDetailKey {
         this.huodongFlg = huodongFlg == null ? null : huodongFlg.trim();
     }
 
-    public String getHotFlg() {
-        return hotFlg;
+    public BigDecimal getZhongliang() {
+        return zhongliang;
     }
 
-    public void setHotFlg(String hotFlg) {
-        this.hotFlg = hotFlg == null ? null : hotFlg.trim();
-    }
-
-    public Date getItemScDate() {
-        return itemScDate;
-    }
-
-    public void setItemScDate(Date itemScDate) {
-        this.itemScDate = itemScDate;
-    }
-
-    public Date getItemYxDate() {
-        return itemYxDate;
-    }
-
-    public void setItemYxDate(Date itemYxDate) {
-        this.itemYxDate = itemYxDate;
-    }
-
-    public BigDecimal getItemZhongliang1() {
-        return itemZhongliang1;
-    }
-
-    public void setItemZhongliang1(BigDecimal itemZhongliang1) {
-        this.itemZhongliang1 = itemZhongliang1;
-    }
-
-    public BigDecimal getItemZhongliang2() {
-        return itemZhongliang2;
-    }
-
-    public void setItemZhongliang2(BigDecimal itemZhongliang2) {
-        this.itemZhongliang2 = itemZhongliang2;
-    }
-
-    public String getItemChandi() {
-        return itemChandi;
-    }
-
-    public void setItemChandi(String itemChandi) {
-        this.itemChandi = itemChandi == null ? null : itemChandi.trim();
-    }
-
-    public String getBaoyouFlg() {
-        return baoyouFlg;
-    }
-
-    public void setBaoyouFlg(String baoyouFlg) {
-        this.baoyouFlg = baoyouFlg == null ? null : baoyouFlg.trim();
+    public void setZhongliang(BigDecimal zhongliang) {
+        this.zhongliang = zhongliang;
     }
 
     public String getDelFlg() {

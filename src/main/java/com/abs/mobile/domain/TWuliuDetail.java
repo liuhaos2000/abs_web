@@ -1,13 +1,18 @@
 package com.abs.mobile.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class TWuliu {
-    private Integer wuliuId;
+public class TWuliuDetail extends TWuliuDetailKey {
+    private BigDecimal price;
 
-    private String name;
+    private BigDecimal pricePlus;
 
-    private String owner;
+    private String unitId;
+
+    private String unitName;
+
+    private String toArea;
 
     private String delFlg;
 
@@ -19,28 +24,44 @@ public class TWuliu {
 
     private String uUser;
 
-    public Integer getWuliuId() {
-        return wuliuId;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setWuliuId(Integer wuliuId) {
-        this.wuliuId = wuliuId;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public String getName() {
-        return name;
+    public BigDecimal getPricePlus() {
+        return pricePlus;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setPricePlus(BigDecimal pricePlus) {
+        this.pricePlus = pricePlus;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getUnitId() {
+        return unitId;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner == null ? null : owner.trim();
+    public void setUnitId(String unitId) {
+        this.unitId = unitId == null ? null : unitId.trim();
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName == null ? null : unitName.trim();
+    }
+
+    public String getToArea() {
+        return toArea;
+    }
+
+    public void setToArea(String toArea) {
+        this.toArea = toArea == null ? null : toArea.trim();
     }
 
     public String getDelFlg() {

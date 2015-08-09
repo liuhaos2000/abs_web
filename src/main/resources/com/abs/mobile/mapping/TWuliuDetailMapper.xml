@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TWuliuDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TWuliuDetail" >
+    <id column="wuliu_id" property="wuliuId" jdbcType="INTEGER" />
+    <id column="sub_id" property="subId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="price_plus" property="pricePlus" jdbcType="DECIMAL" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="to_area" property="toArea" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wuliu_id, sub_id, price, price_plus, unit_id, unit_name, to_area, del_flg, c_date, 
+    c_user, u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TWuliuDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wuliu_detail
+    where wuliu_id = #{wuliuId,jdbcType=INTEGER}
+      and sub_id = #{subId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TWuliuDetailKey" >
+    delete from t_wuliu_detail
+    where wuliu_id = #{wuliuId,jdbcType=INTEGER}
+      and sub_id = #{subId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TWuliuDetail" >
+    insert into t_wuliu_detail (wuliu_id, sub_id, price, 
+      price_plus, unit_id, unit_name, 
+      to_area, del_flg, c_date, 
+      c_user, u_date, u_user
+      )
+    values (#{wuliuId,jdbcType=INTEGER}, #{subId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{pricePlus,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{unitName,jdbcType=VARCHAR}, 
+      #{toArea,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TWuliuDetail" >
+    insert into t_wuliu_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wuliuId != null" >
+        wuliu_id,
+      </if>
+      <if test="subId != null" >
+        sub_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="pricePlus != null" >
+        price_plus,
+      </if>
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="unitName != null" >
+        unit_name,
+      </if>
+      <if test="toArea != null" >
+        to_area,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wuliuId != null" >
+        #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="subId != null" >
+        #{subId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pricePlus != null" >
+        #{pricePlus,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null" >
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="toArea != null" >
+        #{toArea,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TWuliuDetail" >
+    update t_wuliu_detail
+    <set >
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pricePlus != null" >
+        price_plus = #{pricePlus,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null" >
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="toArea != null" >
+        to_area = #{toArea,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wuliu_id = #{wuliuId,jdbcType=INTEGER}
+      and sub_id = #{subId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TWuliuDetail" >
+    update t_wuliu_detail
+    set price = #{price,jdbcType=DECIMAL},
+      price_plus = #{pricePlus,jdbcType=DECIMAL},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      to_area = #{toArea,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where wuliu_id = #{wuliuId,jdbcType=INTEGER}
+      and sub_id = #{subId,jdbcType=INTEGER}
+  </update>
+</mapper>

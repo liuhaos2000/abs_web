@@ -3,9 +3,7 @@ package com.abs.mobile.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TOrder {
-    private String orderId;
-
+public class TOrder extends TOrderKey {
     private Date orderDate;
 
     private String status;
@@ -18,17 +16,15 @@ public class TOrder {
 
     private BigDecimal wuliuYunfei;
 
-    private String zhekouType;
+    private String yhqFlg;
 
     private Integer yhqCode;
+
+    private String jifenFlg;
 
     private BigDecimal jifenDixiao;
 
     private BigDecimal shijiPrice;
-
-    private Integer wuliuId;
-
-    private String wuliuCode;
 
     private String delFlg;
 
@@ -39,14 +35,6 @@ public class TOrder {
     private Date uDate;
 
     private String uUser;
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
-    }
 
     public Date getOrderDate() {
         return orderDate;
@@ -96,12 +84,12 @@ public class TOrder {
         this.wuliuYunfei = wuliuYunfei;
     }
 
-    public String getZhekouType() {
-        return zhekouType;
+    public String getYhqFlg() {
+        return yhqFlg;
     }
 
-    public void setZhekouType(String zhekouType) {
-        this.zhekouType = zhekouType == null ? null : zhekouType.trim();
+    public void setYhqFlg(String yhqFlg) {
+        this.yhqFlg = yhqFlg == null ? null : yhqFlg.trim();
     }
 
     public Integer getYhqCode() {
@@ -110,6 +98,14 @@ public class TOrder {
 
     public void setYhqCode(Integer yhqCode) {
         this.yhqCode = yhqCode;
+    }
+
+    public String getJifenFlg() {
+        return jifenFlg;
+    }
+
+    public void setJifenFlg(String jifenFlg) {
+        this.jifenFlg = jifenFlg == null ? null : jifenFlg.trim();
     }
 
     public BigDecimal getJifenDixiao() {
@@ -126,22 +122,6 @@ public class TOrder {
 
     public void setShijiPrice(BigDecimal shijiPrice) {
         this.shijiPrice = shijiPrice;
-    }
-
-    public Integer getWuliuId() {
-        return wuliuId;
-    }
-
-    public void setWuliuId(Integer wuliuId) {
-        this.wuliuId = wuliuId;
-    }
-
-    public String getWuliuCode() {
-        return wuliuCode;
-    }
-
-    public void setWuliuCode(String wuliuCode) {
-        this.wuliuCode = wuliuCode == null ? null : wuliuCode.trim();
     }
 
     public String getDelFlg() {

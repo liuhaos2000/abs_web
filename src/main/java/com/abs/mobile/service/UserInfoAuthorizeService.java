@@ -8,4 +8,10 @@ public interface UserInfoAuthorizeService {
 	 */
 	public void executeGetUserInfo(String code);
 	
+	/**
+	 * 对于关注用户，从微信取得用户所有信息
+	 * @param code
+	 */
+	public void executeGetUserAllInfo(String openId);
+	
 }

@@ -83,10 +83,11 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-            $(document).ready(function() {
-                //
-
-            });
-        </script>
+	if ("${pageCode}" == '1') {
+		window.location.href = "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=1&showwxpaytitle=1#wechat_redirect"
+	} else if ("${pageCode}" == '2') {
+		window.location.href = "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=2&showwxpaytitle=1#wechat_redirect"
+	}
+</script>
 </body>
 </html>

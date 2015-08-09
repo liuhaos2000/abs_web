@@ -21,6 +21,10 @@ public class TUser {
 
     private Integer areaId;
 
+    private String lever;
+
+    private String parent;
+
     private String delFlg;
 
     private Date cDate;
@@ -101,6 +105,22 @@ public class TUser {
 
     public void setAreaId(Integer areaId) {
         this.areaId = areaId;
+    }
+
+    public String getLever() {
+        return lever;
+    }
+
+    public void setLever(String lever) {
+        this.lever = lever == null ? null : lever.trim();
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent == null ? null : parent.trim();
     }
 
     public String getDelFlg() {

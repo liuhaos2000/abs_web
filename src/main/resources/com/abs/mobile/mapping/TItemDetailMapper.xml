@@ -1,39 +1,501 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.abs.mobile.dao.TItemDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemDetail" >
-    <id column="item_id" property="itemId" jdbcType="INTEGER" />
-    <id column="area_id" property="areaId" jdbcType="INTEGER" />
-    <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
-    <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
-    <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
-    <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
-    <result column="shuliang" property="shuliang" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="price_huiyuan" property="priceHuiyuan" jdbcType="DECIMAL" />
-    <result column="price_huodong" property="priceHuodong" jdbcType="DECIMAL" />
-    <result column="huodong_date" property="huodongDate" jdbcType="DATE" />
-    <result column="huodong_flg" property="huodongFlg" jdbcType="CHAR" />
-    <result column="hot_flg" property="hotFlg" jdbcType="CHAR" />
-    <result column="item_sc_date" property="itemScDate" jdbcType="DATE" />
-    <result column="item_yx_date" property="itemYxDate" jdbcType="DATE" />
-    <result column="item_zhongliang1" property="itemZhongliang1" jdbcType="DECIMAL" />
-    <result column="item_zhongliang2" property="itemZhongliang2" jdbcType="DECIMAL" />
-    <result column="item_chandi" property="itemChandi" jdbcType="VARCHAR" />
-    <result column="baoyou_flg" property="baoyouFlg" jdbcType="CHAR" />
-    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
-    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
-    <result column="c_user" property="cUser" jdbcType="CHAR" />
-    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
-    <result column="u_user" property="uUser" jdbcType="CHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abs.mobile.dao.TItemDetailMapper">
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemDetail">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <id column="item_guige" jdbcType="INTEGER" property="itemGuige" />
+    <id column="item_yanse" jdbcType="INTEGER" property="itemYanse" />
+    <result column="guige_text" jdbcType="VARCHAR" property="guigeText" />
+    <result column="yanse_text" jdbcType="VARCHAR" property="yanseText" />
+    <result column="shuliang" jdbcType="INTEGER" property="shuliang" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price_huiyuan" jdbcType="DECIMAL" property="priceHuiyuan" />
+    <result column="price_huodong" jdbcType="DECIMAL" property="priceHuodong" />
+    <result column="huodong_date" jdbcType="DATE" property="huodongDate" />
+    <result column="huodong_flg" jdbcType="VARCHAR" property="huodongFlg" />
+    <result column="zhongliang" jdbcType="DECIMAL" property="zhongliang" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="VARCHAR" property="uUser" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
+    item_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, price, price_huiyuan, 
+    price_huodong, huodong_date, huodong_flg, zhongliang, del_flg, c_date, c_user, u_date, 
+    u_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey">
+    delete from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemDetail">
+    insert into t_item_detail (item_id, item_guige, item_yanse, 
+      guige_text, yanse_text, shuliang, 
+      price, price_huiyuan, price_huodong, 
+      huodong_date, huodong_flg, zhongliang, 
+      del_flg, c_date, c_user, 
+      u_date, u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, 
+      #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{priceHuiyuan,jdbcType=DECIMAL}, #{priceHuodong,jdbcType=DECIMAL}, 
+      #{huodongDate,jdbcType=DATE}, #{huodongFlg,jdbcType=VARCHAR}, #{zhongliang,jdbcType=DECIMAL}, 
+      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
+      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail">
+    insert into t_item_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemGuige != null">
+        item_guige,
+      </if>
+      <if test="itemYanse != null">
+        item_yanse,
+      </if>
+      <if test="guigeText != null">
+        guige_text,
+      </if>
+      <if test="yanseText != null">
+        yanse_text,
+      </if>
+      <if test="shuliang != null">
+        shuliang,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="priceHuiyuan != null">
+        price_huiyuan,
+      </if>
+      <if test="priceHuodong != null">
+        price_huodong,
+      </if>
+      <if test="huodongDate != null">
+        huodong_date,
+      </if>
+      <if test="huodongFlg != null">
+        huodong_flg,
+      </if>
+      <if test="zhongliang != null">
+        zhongliang,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="cDate != null">
+        c_date,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="uDate != null">
+        u_date,
+      </if>
+      <if test="uUser != null">
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemGuige != null">
+        #{itemGuige,jdbcType=INTEGER},
+      </if>
+      <if test="itemYanse != null">
+        #{itemYanse,jdbcType=INTEGER},
+      </if>
+      <if test="guigeText != null">
+        #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null">
+        #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null">
+        #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null">
+        #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null">
+        #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null">
+        #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null">
+        #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null">
+        #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemDetail">
+    update t_item_detail
+    <set>
+      <if test="guigeText != null">
+        guige_text = #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null">
+        yanse_text = #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null">
+        shuliang = #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null">
+        price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null">
+        price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null">
+        huodong_date = #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null">
+        huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null">
+        zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetail">
+    update t_item_detail
+    set guige_text = #{guigeText,jdbcType=VARCHAR},
+      yanse_text = #{yanseText,jdbcType=VARCHAR},
+      shuliang = #{shuliang,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      huodong_date = #{huodongDate,jdbcType=DATE},
+      huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemDetail">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <id column="item_guige" jdbcType="INTEGER" property="itemGuige" />
+    <id column="item_yanse" jdbcType="INTEGER" property="itemYanse" />
+    <result column="guige_text" jdbcType="VARCHAR" property="guigeText" />
+    <result column="yanse_text" jdbcType="VARCHAR" property="yanseText" />
+    <result column="shuliang" jdbcType="INTEGER" property="shuliang" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price_huiyuan" jdbcType="DECIMAL" property="priceHuiyuan" />
+    <result column="price_huodong" jdbcType="DECIMAL" property="priceHuodong" />
+    <result column="huodong_date" jdbcType="DATE" property="huodongDate" />
+    <result column="huodong_flg" jdbcType="VARCHAR" property="huodongFlg" />
+    <result column="zhongliang" jdbcType="DECIMAL" property="zhongliang" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="VARCHAR" property="uUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, price, price_huiyuan, 
+    price_huodong, huodong_date, huodong_flg, zhongliang, del_flg, c_date, c_user, u_date, 
+    u_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey">
+    delete from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemDetail">
+    insert into t_item_detail (item_id, item_guige, item_yanse, 
+      guige_text, yanse_text, shuliang, 
+      price, price_huiyuan, price_huodong, 
+      huodong_date, huodong_flg, zhongliang, 
+      del_flg, c_date, c_user, 
+      u_date, u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, 
+      #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{priceHuiyuan,jdbcType=DECIMAL}, #{priceHuodong,jdbcType=DECIMAL}, 
+      #{huodongDate,jdbcType=DATE}, #{huodongFlg,jdbcType=VARCHAR}, #{zhongliang,jdbcType=DECIMAL}, 
+      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
+      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail">
+    insert into t_item_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemGuige != null">
+        item_guige,
+      </if>
+      <if test="itemYanse != null">
+        item_yanse,
+      </if>
+      <if test="guigeText != null">
+        guige_text,
+      </if>
+      <if test="yanseText != null">
+        yanse_text,
+      </if>
+      <if test="shuliang != null">
+        shuliang,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="priceHuiyuan != null">
+        price_huiyuan,
+      </if>
+      <if test="priceHuodong != null">
+        price_huodong,
+      </if>
+      <if test="huodongDate != null">
+        huodong_date,
+      </if>
+      <if test="huodongFlg != null">
+        huodong_flg,
+      </if>
+      <if test="zhongliang != null">
+        zhongliang,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="cDate != null">
+        c_date,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="uDate != null">
+        u_date,
+      </if>
+      <if test="uUser != null">
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemGuige != null">
+        #{itemGuige,jdbcType=INTEGER},
+      </if>
+      <if test="itemYanse != null">
+        #{itemYanse,jdbcType=INTEGER},
+      </if>
+      <if test="guigeText != null">
+        #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null">
+        #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null">
+        #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null">
+        #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null">
+        #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null">
+        #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null">
+        #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null">
+        #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemDetail">
+    update t_item_detail
+    <set>
+      <if test="guigeText != null">
+        guige_text = #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null">
+        yanse_text = #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null">
+        shuliang = #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null">
+        price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null">
+        price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null">
+        huodong_date = #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null">
+        huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null">
+        zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetail">
+    update t_item_detail
+    set guige_text = #{guigeText,jdbcType=VARCHAR},
+      yanse_text = #{yanseText,jdbcType=VARCHAR},
+      shuliang = #{shuliang,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      huodong_date = #{huodongDate,jdbcType=DATE},
+      huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemDetail">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <id column="area_id" jdbcType="INTEGER" property="areaId" />
+    <id column="item_guige" jdbcType="INTEGER" property="itemGuige" />
+    <id column="item_yanse" jdbcType="INTEGER" property="itemYanse" />
+    <result column="guige_text" jdbcType="VARCHAR" property="guigeText" />
+    <result column="yanse_text" jdbcType="VARCHAR" property="yanseText" />
+    <result column="shuliang" jdbcType="INTEGER" property="shuliang" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price_huiyuan" jdbcType="DECIMAL" property="priceHuiyuan" />
+    <result column="price_huodong" jdbcType="DECIMAL" property="priceHuodong" />
+    <result column="huodong_date" jdbcType="DATE" property="huodongDate" />
+    <result column="huodong_flg" jdbcType="CHAR" property="huodongFlg" />
+    <result column="hot_flg" jdbcType="CHAR" property="hotFlg" />
+    <result column="item_sc_date" jdbcType="DATE" property="itemScDate" />
+    <result column="item_yx_date" jdbcType="DATE" property="itemYxDate" />
+    <result column="item_zhongliang1" jdbcType="DECIMAL" property="itemZhongliang1" />
+    <result column="item_zhongliang2" jdbcType="DECIMAL" property="itemZhongliang2" />
+    <result column="item_chandi" jdbcType="VARCHAR" property="itemChandi" />
+    <result column="baoyou_flg" jdbcType="CHAR" property="baoyouFlg" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="CHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="CHAR" property="uUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
     item_id, area_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, price, 
     price_huiyuan, price_huodong, huodong_date, huodong_flg, hot_flg, item_sc_date, item_yx_date, 
     item_zhongliang1, item_zhongliang2, item_chandi, baoyou_flg, del_flg, c_date, c_user, 
     u_date, u_user
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TItemDetailKey" >
+  <select id="selectByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_item_detail
@@ -42,14 +504,14 @@
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey">
     delete from t_item_detail
     where item_id = #{itemId,jdbcType=INTEGER}
       and area_id = #{areaId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.abs.mobile.domain.TItemDetail" >
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemDetail">
     insert into t_item_detail (item_id, area_id, item_guige, 
       item_yanse, guige_text, yanse_text, 
       shuliang, price, price_huiyuan, 
@@ -67,218 +529,218 @@
       #{baoyouFlg,jdbcType=CHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
       #{cUser,jdbcType=CHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail" >
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail">
     insert into t_item_detail
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="itemId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
         item_id,
       </if>
-      <if test="areaId != null" >
+      <if test="areaId != null">
         area_id,
       </if>
-      <if test="itemGuige != null" >
+      <if test="itemGuige != null">
         item_guige,
       </if>
-      <if test="itemYanse != null" >
+      <if test="itemYanse != null">
         item_yanse,
       </if>
-      <if test="guigeText != null" >
+      <if test="guigeText != null">
         guige_text,
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         yanse_text,
       </if>
-      <if test="shuliang != null" >
+      <if test="shuliang != null">
         shuliang,
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price,
       </if>
-      <if test="priceHuiyuan != null" >
+      <if test="priceHuiyuan != null">
         price_huiyuan,
       </if>
-      <if test="priceHuodong != null" >
+      <if test="priceHuodong != null">
         price_huodong,
       </if>
-      <if test="huodongDate != null" >
+      <if test="huodongDate != null">
         huodong_date,
       </if>
-      <if test="huodongFlg != null" >
+      <if test="huodongFlg != null">
         huodong_flg,
       </if>
-      <if test="hotFlg != null" >
+      <if test="hotFlg != null">
         hot_flg,
       </if>
-      <if test="itemScDate != null" >
+      <if test="itemScDate != null">
         item_sc_date,
       </if>
-      <if test="itemYxDate != null" >
+      <if test="itemYxDate != null">
         item_yx_date,
       </if>
-      <if test="itemZhongliang1 != null" >
+      <if test="itemZhongliang1 != null">
         item_zhongliang1,
       </if>
-      <if test="itemZhongliang2 != null" >
+      <if test="itemZhongliang2 != null">
         item_zhongliang2,
       </if>
-      <if test="itemChandi != null" >
+      <if test="itemChandi != null">
         item_chandi,
       </if>
-      <if test="baoyouFlg != null" >
+      <if test="baoyouFlg != null">
         baoyou_flg,
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         del_flg,
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         c_date,
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         c_user,
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         u_date,
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         u_user,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="itemId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
         #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="areaId != null" >
+      <if test="areaId != null">
         #{areaId,jdbcType=INTEGER},
       </if>
-      <if test="itemGuige != null" >
+      <if test="itemGuige != null">
         #{itemGuige,jdbcType=INTEGER},
       </if>
-      <if test="itemYanse != null" >
+      <if test="itemYanse != null">
         #{itemYanse,jdbcType=INTEGER},
       </if>
-      <if test="guigeText != null" >
+      <if test="guigeText != null">
         #{guigeText,jdbcType=VARCHAR},
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         #{yanseText,jdbcType=VARCHAR},
       </if>
-      <if test="shuliang != null" >
+      <if test="shuliang != null">
         #{shuliang,jdbcType=INTEGER},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="priceHuiyuan != null" >
+      <if test="priceHuiyuan != null">
         #{priceHuiyuan,jdbcType=DECIMAL},
       </if>
-      <if test="priceHuodong != null" >
+      <if test="priceHuodong != null">
         #{priceHuodong,jdbcType=DECIMAL},
       </if>
-      <if test="huodongDate != null" >
+      <if test="huodongDate != null">
         #{huodongDate,jdbcType=DATE},
       </if>
-      <if test="huodongFlg != null" >
+      <if test="huodongFlg != null">
         #{huodongFlg,jdbcType=CHAR},
       </if>
-      <if test="hotFlg != null" >
+      <if test="hotFlg != null">
         #{hotFlg,jdbcType=CHAR},
       </if>
-      <if test="itemScDate != null" >
+      <if test="itemScDate != null">
         #{itemScDate,jdbcType=DATE},
       </if>
-      <if test="itemYxDate != null" >
+      <if test="itemYxDate != null">
         #{itemYxDate,jdbcType=DATE},
       </if>
-      <if test="itemZhongliang1 != null" >
+      <if test="itemZhongliang1 != null">
         #{itemZhongliang1,jdbcType=DECIMAL},
       </if>
-      <if test="itemZhongliang2 != null" >
+      <if test="itemZhongliang2 != null">
         #{itemZhongliang2,jdbcType=DECIMAL},
       </if>
-      <if test="itemChandi != null" >
+      <if test="itemChandi != null">
         #{itemChandi,jdbcType=VARCHAR},
       </if>
-      <if test="baoyouFlg != null" >
+      <if test="baoyouFlg != null">
         #{baoyouFlg,jdbcType=CHAR},
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         #{delFlg,jdbcType=CHAR},
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         #{cDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         #{cUser,jdbcType=CHAR},
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         #{uDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         #{uUser,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemDetail">
     update t_item_detail
-    <set >
-      <if test="guigeText != null" >
+    <set>
+      <if test="guigeText != null">
         guige_text = #{guigeText,jdbcType=VARCHAR},
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         yanse_text = #{yanseText,jdbcType=VARCHAR},
       </if>
-      <if test="shuliang != null" >
+      <if test="shuliang != null">
         shuliang = #{shuliang,jdbcType=INTEGER},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="priceHuiyuan != null" >
+      <if test="priceHuiyuan != null">
         price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
       </if>
-      <if test="priceHuodong != null" >
+      <if test="priceHuodong != null">
         price_huodong = #{priceHuodong,jdbcType=DECIMAL},
       </if>
-      <if test="huodongDate != null" >
+      <if test="huodongDate != null">
         huodong_date = #{huodongDate,jdbcType=DATE},
       </if>
-      <if test="huodongFlg != null" >
+      <if test="huodongFlg != null">
         huodong_flg = #{huodongFlg,jdbcType=CHAR},
       </if>
-      <if test="hotFlg != null" >
+      <if test="hotFlg != null">
         hot_flg = #{hotFlg,jdbcType=CHAR},
       </if>
-      <if test="itemScDate != null" >
+      <if test="itemScDate != null">
         item_sc_date = #{itemScDate,jdbcType=DATE},
       </if>
-      <if test="itemYxDate != null" >
+      <if test="itemYxDate != null">
         item_yx_date = #{itemYxDate,jdbcType=DATE},
       </if>
-      <if test="itemZhongliang1 != null" >
+      <if test="itemZhongliang1 != null">
         item_zhongliang1 = #{itemZhongliang1,jdbcType=DECIMAL},
       </if>
-      <if test="itemZhongliang2 != null" >
+      <if test="itemZhongliang2 != null">
         item_zhongliang2 = #{itemZhongliang2,jdbcType=DECIMAL},
       </if>
-      <if test="itemChandi != null" >
+      <if test="itemChandi != null">
         item_chandi = #{itemChandi,jdbcType=VARCHAR},
       </if>
-      <if test="baoyouFlg != null" >
+      <if test="baoyouFlg != null">
         baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         c_date = #{cDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         c_user = #{cUser,jdbcType=CHAR},
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         u_date = #{uDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         u_user = #{uUser,jdbcType=CHAR},
       </if>
     </set>
@@ -287,7 +749,7 @@
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetail" >
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetail">
     update t_item_detail
     set guige_text = #{guigeText,jdbcType=VARCHAR},
       yanse_text = #{yanseText,jdbcType=VARCHAR},

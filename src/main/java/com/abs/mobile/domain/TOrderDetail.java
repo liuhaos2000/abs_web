@@ -4,17 +4,25 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class TOrderDetail extends TOrderDetailKey {
+    private Integer itemYanse;
+
     private String guigeText;
 
     private String yanseText;
 
+    private String owner;
+
     private Integer shuliang;
 
-    private String priceType;
+    private String huodongFlg;
 
     private BigDecimal price;
 
     private String status;
+
+    private Integer wuliuId;
+
+    private String wuliuCode;
 
     private String delFlg;
 
@@ -25,6 +33,14 @@ public class TOrderDetail extends TOrderDetailKey {
     private Date uDate;
 
     private String uUser;
+
+    public Integer getItemYanse() {
+        return itemYanse;
+    }
+
+    public void setItemYanse(Integer itemYanse) {
+        this.itemYanse = itemYanse;
+    }
 
     public String getGuigeText() {
         return guigeText;
@@ -42,6 +58,14 @@ public class TOrderDetail extends TOrderDetailKey {
         this.yanseText = yanseText == null ? null : yanseText.trim();
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner == null ? null : owner.trim();
+    }
+
     public Integer getShuliang() {
         return shuliang;
     }
@@ -50,12 +74,12 @@ public class TOrderDetail extends TOrderDetailKey {
         this.shuliang = shuliang;
     }
 
-    public String getPriceType() {
-        return priceType;
+    public String getHuodongFlg() {
+        return huodongFlg;
     }
 
-    public void setPriceType(String priceType) {
-        this.priceType = priceType == null ? null : priceType.trim();
+    public void setHuodongFlg(String huodongFlg) {
+        this.huodongFlg = huodongFlg == null ? null : huodongFlg.trim();
     }
 
     public BigDecimal getPrice() {
@@ -72,6 +96,22 @@ public class TOrderDetail extends TOrderDetailKey {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public Integer getWuliuId() {
+        return wuliuId;
+    }
+
+    public void setWuliuId(Integer wuliuId) {
+        this.wuliuId = wuliuId;
+    }
+
+    public String getWuliuCode() {
+        return wuliuCode;
+    }
+
+    public void setWuliuCode(String wuliuCode) {
+        this.wuliuCode = wuliuCode == null ? null : wuliuCode.trim();
     }
 
     public String getDelFlg() {

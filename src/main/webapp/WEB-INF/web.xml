@@ -36,16 +36,16 @@
     <url-pattern>/app/*</url-pattern>
   </filter-mapping>
   
-  	<!-- 指定核心Servlet路径 -->	
+  	<!-- 指定核心Servlet路径
 	<servlet>
 		<servlet-name>coreServlet</servlet-name>
 		<servlet-class>
 			com.abs.weixin.servlet.CoreServlet
 		</servlet-class>
-	</servlet>
+	</servlet> -->	
 	<!-- url-pattern中配置的/coreServlet用于指定该Servlet的访问路径 -->
 	<servlet-mapping>
-		<servlet-name>coreServlet</servlet-name>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>/coreServlet</url-pattern>
 	</servlet-mapping>
   

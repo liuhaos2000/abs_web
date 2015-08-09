@@ -13,7 +13,7 @@ import com.abs.util.commom.AbsConst;
 @Service
 public class SessionServiceImpl implements SessionService {
    
-    @Autowired
+    @Autowired(required = false)
     private  HttpServletRequest request;
     
     @Override

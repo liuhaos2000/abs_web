@@ -1,32 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.abs.mobile.dao.TItemMapper" >
-  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItem" >
-    <id column="item_id" property="itemId" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="moren_guige" property="morenGuige" jdbcType="INTEGER" />
-    <result column="moren_yanse" property="morenYanse" jdbcType="INTEGER" />
-    <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
-    <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
-    <result column="prent_item_id" property="prentItemId" jdbcType="INTEGER" />
-    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
-    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
-    <result column="c_user" property="cUser" jdbcType="CHAR" />
-    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
-    <result column="u_user" property="uUser" jdbcType="CHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abs.mobile.dao.TItemMapper">
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItem">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="owner" jdbcType="VARCHAR" property="owner" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="prent_item_id" jdbcType="INTEGER" property="prentItemId" />
+    <result column="parm" jdbcType="VARCHAR" property="parm" />
+    <result column="xiangou_flg" jdbcType="CHAR" property="xiangouFlg" />
+    <result column="xiangou_shuliang" jdbcType="INTEGER" property="xiangouShuliang" />
+    <result column="baoyou_flg" jdbcType="CHAR" property="baoyouFlg" />
+    <result column="wuliu_id" jdbcType="INTEGER" property="wuliuId" />
+    <result column="fapiao_flg" jdbcType="CHAR" property="fapiaoFlg" />
+    <result column="fapiao_title" jdbcType="VARCHAR" property="fapiaoTitle" />
+    <result column="shouhou_flg" jdbcType="CHAR" property="shouhouFlg" />
+    <result column="shouhou_miaoshu" jdbcType="VARCHAR" property="shouhouMiaoshu" />
+    <result column="shangjia_flg" jdbcType="CHAR" property="shangjiaFlg" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="VARCHAR" property="uUser" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.abs.mobile.domain.TItem" extends="BaseResultMap" >
-    <result column="fu_text" property="fuText" jdbcType="LONGVARCHAR" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.abs.mobile.domain.TItem">
+    <result column="fu_text" jdbcType="LONGVARCHAR" property="fuText" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    item_id, name, type, moren_guige, moren_yanse, guige_text, yanse_text, prent_item_id, 
+  <sql id="Base_Column_List">
+    item_id, name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, xiangou_shuliang, 
+    baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, shangjia_flg, 
     del_flg, c_date, c_user, u_date, u_user
   </sql>
-  <sql id="Blob_Column_List" >
+  <sql id="Blob_Column_List">
     fu_text
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
@@ -34,11 +43,644 @@
     from t_item
     where item_id = #{itemId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_item
     where item_id = #{itemId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.abs.mobile.domain.TItem" >
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItem">
+    insert into t_item (item_id, name, manufacturer, 
+      owner, type, prent_item_id, 
+      parm, xiangou_flg, xiangou_shuliang, 
+      baoyou_flg, wuliu_id, fapiao_flg, 
+      fapiao_title, shouhou_flg, shouhou_miaoshu, 
+      shangjia_flg, del_flg, c_date, 
+      c_user, u_date, u_user, 
+      fu_text)
+    values (#{itemId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{prentItemId,jdbcType=INTEGER}, 
+      #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
+      #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
+      #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, #{shouhouMiaoshu,jdbcType=VARCHAR}, 
+      #{shangjiaFlg,jdbcType=CHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}, 
+      #{fuText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem">
+    insert into t_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="prentItemId != null">
+        prent_item_id,
+      </if>
+      <if test="parm != null">
+        parm,
+      </if>
+      <if test="xiangouFlg != null">
+        xiangou_flg,
+      </if>
+      <if test="xiangouShuliang != null">
+        xiangou_shuliang,
+      </if>
+      <if test="baoyouFlg != null">
+        baoyou_flg,
+      </if>
+      <if test="wuliuId != null">
+        wuliu_id,
+      </if>
+      <if test="fapiaoFlg != null">
+        fapiao_flg,
+      </if>
+      <if test="fapiaoTitle != null">
+        fapiao_title,
+      </if>
+      <if test="shouhouFlg != null">
+        shouhou_flg,
+      </if>
+      <if test="shouhouMiaoshu != null">
+        shouhou_miaoshu,
+      </if>
+      <if test="shangjiaFlg != null">
+        shangjia_flg,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="cDate != null">
+        c_date,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="uDate != null">
+        u_date,
+      </if>
+      <if test="uUser != null">
+        u_user,
+      </if>
+      <if test="fuText != null">
+        fu_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="prentItemId != null">
+        #{prentItemId,jdbcType=INTEGER},
+      </if>
+      <if test="parm != null">
+        #{parm,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangouFlg != null">
+        #{xiangouFlg,jdbcType=CHAR},
+      </if>
+      <if test="xiangouShuliang != null">
+        #{xiangouShuliang,jdbcType=INTEGER},
+      </if>
+      <if test="baoyouFlg != null">
+        #{baoyouFlg,jdbcType=CHAR},
+      </if>
+      <if test="wuliuId != null">
+        #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="fapiaoFlg != null">
+        #{fapiaoFlg,jdbcType=CHAR},
+      </if>
+      <if test="fapiaoTitle != null">
+        #{fapiaoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhouFlg != null">
+        #{shouhouFlg,jdbcType=CHAR},
+      </if>
+      <if test="shouhouMiaoshu != null">
+        #{shouhouMiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shangjiaFlg != null">
+        #{shangjiaFlg,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fuText != null">
+        #{fuText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="prentItemId != null">
+        prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      </if>
+      <if test="parm != null">
+        parm = #{parm,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangouFlg != null">
+        xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      </if>
+      <if test="xiangouShuliang != null">
+        xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      </if>
+      <if test="baoyouFlg != null">
+        baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      </if>
+      <if test="wuliuId != null">
+        wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="fapiaoFlg != null">
+        fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      </if>
+      <if test="fapiaoTitle != null">
+        fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhouFlg != null">
+        shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      </if>
+      <if test="shouhouMiaoshu != null">
+        shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shangjiaFlg != null">
+        shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fuText != null">
+        fu_text = #{fuText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    set name = #{name,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      parm = #{parm,jdbcType=VARCHAR},
+      xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR},
+      fu_text = #{fuText,jdbcType=LONGVARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    set name = #{name,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      parm = #{parm,jdbcType=VARCHAR},
+      xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItem">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="owner" jdbcType="VARCHAR" property="owner" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="prent_item_id" jdbcType="INTEGER" property="prentItemId" />
+    <result column="parm" jdbcType="VARCHAR" property="parm" />
+    <result column="xiangou_flg" jdbcType="CHAR" property="xiangouFlg" />
+    <result column="xiangou_shuliang" jdbcType="INTEGER" property="xiangouShuliang" />
+    <result column="baoyou_flg" jdbcType="CHAR" property="baoyouFlg" />
+    <result column="wuliu_id" jdbcType="INTEGER" property="wuliuId" />
+    <result column="fapiao_flg" jdbcType="CHAR" property="fapiaoFlg" />
+    <result column="fapiao_title" jdbcType="VARCHAR" property="fapiaoTitle" />
+    <result column="shouhou_flg" jdbcType="CHAR" property="shouhouFlg" />
+    <result column="shouhou_miaoshu" jdbcType="VARCHAR" property="shouhouMiaoshu" />
+    <result column="shangjia_flg" jdbcType="CHAR" property="shangjiaFlg" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="VARCHAR" property="uUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.abs.mobile.domain.TItem">
+    <result column="fu_text" jdbcType="LONGVARCHAR" property="fuText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_id, name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, xiangou_shuliang, 
+    baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, shangjia_flg, 
+    del_flg, c_date, c_user, u_date, u_user
+  </sql>
+  <sql id="Blob_Column_List">
+    fu_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItem">
+    insert into t_item (item_id, name, manufacturer, 
+      owner, type, prent_item_id, 
+      parm, xiangou_flg, xiangou_shuliang, 
+      baoyou_flg, wuliu_id, fapiao_flg, 
+      fapiao_title, shouhou_flg, shouhou_miaoshu, 
+      shangjia_flg, del_flg, c_date, 
+      c_user, u_date, u_user, 
+      fu_text)
+    values (#{itemId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{prentItemId,jdbcType=INTEGER}, 
+      #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
+      #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
+      #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, #{shouhouMiaoshu,jdbcType=VARCHAR}, 
+      #{shangjiaFlg,jdbcType=CHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}, 
+      #{fuText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem">
+    insert into t_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="prentItemId != null">
+        prent_item_id,
+      </if>
+      <if test="parm != null">
+        parm,
+      </if>
+      <if test="xiangouFlg != null">
+        xiangou_flg,
+      </if>
+      <if test="xiangouShuliang != null">
+        xiangou_shuliang,
+      </if>
+      <if test="baoyouFlg != null">
+        baoyou_flg,
+      </if>
+      <if test="wuliuId != null">
+        wuliu_id,
+      </if>
+      <if test="fapiaoFlg != null">
+        fapiao_flg,
+      </if>
+      <if test="fapiaoTitle != null">
+        fapiao_title,
+      </if>
+      <if test="shouhouFlg != null">
+        shouhou_flg,
+      </if>
+      <if test="shouhouMiaoshu != null">
+        shouhou_miaoshu,
+      </if>
+      <if test="shangjiaFlg != null">
+        shangjia_flg,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="cDate != null">
+        c_date,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="uDate != null">
+        u_date,
+      </if>
+      <if test="uUser != null">
+        u_user,
+      </if>
+      <if test="fuText != null">
+        fu_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="prentItemId != null">
+        #{prentItemId,jdbcType=INTEGER},
+      </if>
+      <if test="parm != null">
+        #{parm,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangouFlg != null">
+        #{xiangouFlg,jdbcType=CHAR},
+      </if>
+      <if test="xiangouShuliang != null">
+        #{xiangouShuliang,jdbcType=INTEGER},
+      </if>
+      <if test="baoyouFlg != null">
+        #{baoyouFlg,jdbcType=CHAR},
+      </if>
+      <if test="wuliuId != null">
+        #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="fapiaoFlg != null">
+        #{fapiaoFlg,jdbcType=CHAR},
+      </if>
+      <if test="fapiaoTitle != null">
+        #{fapiaoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhouFlg != null">
+        #{shouhouFlg,jdbcType=CHAR},
+      </if>
+      <if test="shouhouMiaoshu != null">
+        #{shouhouMiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shangjiaFlg != null">
+        #{shangjiaFlg,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fuText != null">
+        #{fuText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="prentItemId != null">
+        prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      </if>
+      <if test="parm != null">
+        parm = #{parm,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangouFlg != null">
+        xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      </if>
+      <if test="xiangouShuliang != null">
+        xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      </if>
+      <if test="baoyouFlg != null">
+        baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      </if>
+      <if test="wuliuId != null">
+        wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      </if>
+      <if test="fapiaoFlg != null">
+        fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      </if>
+      <if test="fapiaoTitle != null">
+        fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhouFlg != null">
+        shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      </if>
+      <if test="shouhouMiaoshu != null">
+        shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shangjiaFlg != null">
+        shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null">
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null">
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null">
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fuText != null">
+        fu_text = #{fuText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    set name = #{name,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      parm = #{parm,jdbcType=VARCHAR},
+      xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR},
+      fu_text = #{fuText,jdbcType=LONGVARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItem">
+    update t_item
+    set name = #{name,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      prent_item_id = #{prentItemId,jdbcType=INTEGER},
+      parm = #{parm,jdbcType=VARCHAR},
+      xiangou_flg = #{xiangouFlg,jdbcType=CHAR},
+      xiangou_shuliang = #{xiangouShuliang,jdbcType=INTEGER},
+      baoyou_flg = #{baoyouFlg,jdbcType=CHAR},
+      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      fapiao_flg = #{fapiaoFlg,jdbcType=CHAR},
+      fapiao_title = #{fapiaoTitle,jdbcType=VARCHAR},
+      shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
+      shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
+      shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItem">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="moren_guige" jdbcType="INTEGER" property="morenGuige" />
+    <result column="moren_yanse" jdbcType="INTEGER" property="morenYanse" />
+    <result column="guige_text" jdbcType="VARCHAR" property="guigeText" />
+    <result column="yanse_text" jdbcType="VARCHAR" property="yanseText" />
+    <result column="prent_item_id" jdbcType="INTEGER" property="prentItemId" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="c_date" jdbcType="TIMESTAMP" property="cDate" />
+    <result column="c_user" jdbcType="CHAR" property="cUser" />
+    <result column="u_date" jdbcType="TIMESTAMP" property="uDate" />
+    <result column="u_user" jdbcType="CHAR" property="uUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.abs.mobile.domain.TItem">
+    <result column="fu_text" jdbcType="LONGVARCHAR" property="fuText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_id, name, type, moren_guige, moren_yanse, guige_text, yanse_text, prent_item_id, 
+    del_flg, c_date, c_user, u_date, u_user
+  </sql>
+  <sql id="Blob_Column_List">
+    fu_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItem">
     insert into t_item (item_id, name, type, 
       moren_guige, moren_yanse, guige_text, 
       yanse_text, prent_item_id, del_flg, 
@@ -50,143 +692,143 @@
       #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=CHAR}, #{uDate,jdbcType=TIMESTAMP}, 
       #{uUser,jdbcType=CHAR}, #{fuText,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem" >
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem">
     insert into t_item
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="itemId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
         item_id,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="morenGuige != null" >
+      <if test="morenGuige != null">
         moren_guige,
       </if>
-      <if test="morenYanse != null" >
+      <if test="morenYanse != null">
         moren_yanse,
       </if>
-      <if test="guigeText != null" >
+      <if test="guigeText != null">
         guige_text,
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         yanse_text,
       </if>
-      <if test="prentItemId != null" >
+      <if test="prentItemId != null">
         prent_item_id,
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         del_flg,
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         c_date,
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         c_user,
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         u_date,
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         u_user,
       </if>
-      <if test="fuText != null" >
+      <if test="fuText != null">
         fu_text,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="itemId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
         #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="morenGuige != null" >
+      <if test="morenGuige != null">
         #{morenGuige,jdbcType=INTEGER},
       </if>
-      <if test="morenYanse != null" >
+      <if test="morenYanse != null">
         #{morenYanse,jdbcType=INTEGER},
       </if>
-      <if test="guigeText != null" >
+      <if test="guigeText != null">
         #{guigeText,jdbcType=VARCHAR},
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         #{yanseText,jdbcType=VARCHAR},
       </if>
-      <if test="prentItemId != null" >
+      <if test="prentItemId != null">
         #{prentItemId,jdbcType=INTEGER},
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         #{delFlg,jdbcType=CHAR},
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         #{cDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         #{cUser,jdbcType=CHAR},
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         #{uDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         #{uUser,jdbcType=CHAR},
       </if>
-      <if test="fuText != null" >
+      <if test="fuText != null">
         #{fuText,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItem">
     update t_item
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="morenGuige != null" >
+      <if test="morenGuige != null">
         moren_guige = #{morenGuige,jdbcType=INTEGER},
       </if>
-      <if test="morenYanse != null" >
+      <if test="morenYanse != null">
         moren_yanse = #{morenYanse,jdbcType=INTEGER},
       </if>
-      <if test="guigeText != null" >
+      <if test="guigeText != null">
         guige_text = #{guigeText,jdbcType=VARCHAR},
       </if>
-      <if test="yanseText != null" >
+      <if test="yanseText != null">
         yanse_text = #{yanseText,jdbcType=VARCHAR},
       </if>
-      <if test="prentItemId != null" >
+      <if test="prentItemId != null">
         prent_item_id = #{prentItemId,jdbcType=INTEGER},
       </if>
-      <if test="delFlg != null" >
+      <if test="delFlg != null">
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
-      <if test="cDate != null" >
+      <if test="cDate != null">
         c_date = #{cDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cUser != null" >
+      <if test="cUser != null">
         c_user = #{cUser,jdbcType=CHAR},
       </if>
-      <if test="uDate != null" >
+      <if test="uDate != null">
         u_date = #{uDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="uUser != null" >
+      <if test="uUser != null">
         u_user = #{uUser,jdbcType=CHAR},
       </if>
-      <if test="fuText != null" >
+      <if test="fuText != null">
         fu_text = #{fuText,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abs.mobile.domain.TItem" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abs.mobile.domain.TItem">
     update t_item
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
@@ -203,7 +845,7 @@
       fu_text = #{fuText,jdbcType=LONGVARCHAR}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItem" >
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItem">
     update t_item
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},

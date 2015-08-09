@@ -52,12 +52,12 @@ public class MenuManager {
         ViewButton btn11 = new ViewButton();
         btn11.setName("进入店铺");
         btn11.setType("view");
-        btn11.setUrl("http://qbctest.wicp.net/abs_web");
+        btn11.setUrl("http://qbctest.wicp.net/abs_web/app/mobile/page/toWinXinShop?pageCode=1");
         
         ViewButton btn12 = new ViewButton();
         btn12.setName("商品分类");
         btn12.setType("view");
-        btn12.setUrl("http://163.com");
+        btn12.setUrl("http://qbctest.wicp.net/abs_web/app/mobile/page/toWinXinShop?pageCode=2");
         
         CommonButton btn21 = new CommonButton();
         btn21.setName("进入店铺");

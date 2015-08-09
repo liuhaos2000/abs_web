@@ -1,6 +1,7 @@
 package com.abs.mobile.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -32,5 +33,17 @@ public class MobilePageController {
     @RequestMapping("/huiyuan")
     public String toHuiyuan() {
         return "mobile/huiyuan";
+    }
+    
+    // 系统外
+    @RequestMapping("/toWinXinShop")
+    public String toWinXinShop(String pageCode,ModelMap map) {
+    	map.put("pageCode", pageCode);
+    	if("1".equals(pageCode)){
+    		return "redirect:http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=1&showwxpaytitle=1#wechat_redirect";
+    	}else if("2".equals(pageCode)){
+    		return "redirect:http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=2&showwxpaytitle=1#wechat_redirect";
+    	}
+		return null;
     }
 }
