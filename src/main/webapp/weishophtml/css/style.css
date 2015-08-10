@@ -258,7 +258,7 @@ img{
 .footer a p{
 	color:#798595;
 	margin-bottom:0;
-	padding-top:32px;
+	padding-top:0px;
 	font-family:'SimHei',sans-serif;
 }
 .footer a.active p{
