@@ -21,7 +21,7 @@
     </div>
 <div class="container today_miaosha">
         <div class="panel panel-default">
-            <div class="panel-heading">特价商品</div>
+            <div class="panel-heading">今日特价</div>
             <div class="panel-body">
                 <div class="container">
                     <div class="row">
@@ -184,13 +184,14 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>	
 <script type="text/javascript">
 var UrlConfig = {
-	    path:'<%=request.getContextPath() %>',
-		getLunboList: '<%=request.getContextPath() %>/app/mobile/home/getLunBolist',
+	    getLunboList: '<%=request.getContextPath() %>/app/mobile/home/getLunBolist',
 	    getTejiaItem: '<%=request.getContextPath() %>/app/mobile/home/getTejiaItem',
 	};
 
 $(document).ready(function() {
             	//
+
+
 								function timer(id){
 									var jqueryID = '#' + id;
 
@@ -225,6 +226,8 @@ $(document).ready(function() {
 								    	timer(djsList[i].id);
 								    }
 								});
+
+							
             });
             
 getLunboList();
@@ -238,17 +241,11 @@ function getLunboList() {
 	    //cache:false,    
 	    dataType:'json',    
 	    success:function(result) {
+	    	
 	        if(result.successful == true ){
 	        	for (var i = 0; i < result.data.length; i++) {
 	        		var lunbo = result.data[i];
-	        		var link;
-	        		if(lunbo.action=='#'||lunbo.action==''){
-	        			link='#';
-	        		}else{
-	        			link=UrlConfig.path+lunbo.action
-	        		}
-	        		
-	        		$("#owl-demo1").append('<div class="item"><a href="'+link+'"><img src="'+lunbo.imgPath +'" class="img-responsive"></a></div>');
+	        		$("#owl-demo1").append('<div class="item"><img src="'+lunbo.imgPath +'" class="img-responsive"></div>');
 	        	}
                 $("#owl-demo1").owlCarousel({
                     items: 1,
@@ -264,6 +261,6 @@ function getLunboList() {
 	     }
 	}); 
 }
-</script>
+        </script>
 </body>
 </html>
