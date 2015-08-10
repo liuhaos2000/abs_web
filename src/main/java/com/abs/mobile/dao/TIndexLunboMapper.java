@@ -1,5 +1,7 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+
 import com.abs.mobile.domain.TIndexLunbo;
 
 public interface TIndexLunboMapper {
@@ -14,4 +16,6 @@ public interface TIndexLunboMapper {
     int updateByPrimaryKeySelective(TIndexLunbo record);
 
     int updateByPrimaryKey(TIndexLunbo record);
+    
+    List<TIndexLunbo> getLunboList();
 }
