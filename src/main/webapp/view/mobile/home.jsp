@@ -14,7 +14,9 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
 </head>
 <body>
-
+        <div class="icon-center">
+            <i class="icon-spinner icon-spin icon-4x "></i> 
+        </div>
     <div class="container pic_show">
         <div id="owl-demo1" class="owl-carousel owl-theme">
         </div>

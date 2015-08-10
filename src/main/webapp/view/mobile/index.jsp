@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -35,7 +36,6 @@
 							<img src="<%=request.getContextPath() %>/resources/images/search.png"></span>
 					</p>
 				</div>
-
 			</div>
 		</div>
 		<!-- 探出窗口 -->
@@ -63,6 +63,7 @@
                 </li>
             </ul>
         </div>
+
 	</header>
 
 	<div id="main_div">
@@ -75,23 +76,27 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" class="active" id="home-bt">
-						<p class="footer_index">首页</p>
+                        <div><i class="icon-home  icon-2x"></i></div>
+                        <div><p class="">首页</p></div>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="type-bt">
-						<p class="footer_huodong">分类</p>
+                        <div><i class="icon-th-large  icon-2x"></i></div>
+                        <div><p class="">分类</p></div>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="cart-bt">
-						<p class="footer_pinpai">购物车</p>
+                        <div><i class="icon-shopping-cart  icon-2x"></i></div>
+                        <div><p class="">购物车</p></div>
 					</a>
 					<span class="cartcount">3</span>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="huiyuan-bt">
-						<p class="footer_huiyuan">会员</p>
+                        <div><i class="icon-user  icon-2x"></i></div>
+                        <div><p class="">会员</p></div>
 					</a>
 				</div>
 			</div>
@@ -112,7 +117,7 @@ var UrlConfig = {
                  
                  $("#home-bt").click(function(){
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
-                			 '/app/mobile/page/home'); 
+                			'/app/mobile/page/home'); 
                  }); 
                  $("#type-bt").click(function(){
                      $('#main_div').load('<%=request.getContextPath() %>' +

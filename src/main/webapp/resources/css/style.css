@@ -256,13 +256,19 @@ img{
 	display:block;
 }
 .footer a p{
-	color:#798595;
-	margin-bottom:0;
-	padding-top:32px;
-	font-family:'SimHei',sans-serif;
+    color:#999999;
+    margin-bottom:0;
+    padding-top:0px;
+    font-family:'SimHei',sans-serif;
+}
+.footer a i{
+    color:#999999;
 }
 .footer a.active p{
-	color:#ff7272;
+    color:#ff7272;
+}
+.footer a.active i{
+    color:#ff7272;
 }
 .footer a p.footer_index{
 	background:url(../../resources/images/shouye.png) no-repeat center 4px;
@@ -299,6 +305,7 @@ img{
 .footer-block{
 	border-left:1px solid #e5e5e5;
 	border-right:1px solid #e5e5e5;
+	padding-top:8px;
 }
 
 
@@ -1515,4 +1522,14 @@ padding-right:25px !important;
     display:none;
     border-radius:50px;
     
+}
+
+.icon-center{
+    color:#999999;
+    position:absolute;
+    top:50%;
+    left:50%;
+-webkit-transform: translateX(-50%) translateY(-50%);
+-moz-transform: translateX(-50%) translateY(-50%);
+-ms-transform: translateX(-50%) translateY(-50%);
 }
