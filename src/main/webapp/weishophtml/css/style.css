@@ -256,12 +256,18 @@ img{
 	display:block;
 }
 .footer a p{
-	color:#798595;
+	color:#999999;
 	margin-bottom:0;
 	padding-top:0px;
 	font-family:'SimHei',sans-serif;
 }
+.footer a i{
+	color:#999999;
+}
 .footer a.active p{
+	color:#ff7272;
+}
+.footer a.active i{
 	color:#ff7272;
 }
 .footer a p.footer_index{
@@ -299,6 +305,7 @@ img{
 .footer-block{
 	border-left:1px solid #e5e5e5;
 	border-right:1px solid #e5e5e5;
+	padding-top:8px;
 }
 
 
