@@ -26,8 +26,12 @@
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-9 top_search">
 					<p class="navbar-text input-group">
-						<input type="text" class="form-control">
-						<span class="input-group-addon">
+						<input id="searchparm" name="searchparm" type="text" class="form-control" 
+						        data-container="body" 
+						        data-toggle="popover" 
+						        data-placement="bottom" 
+						        data-content="要点啥！">
+						<span id="search-bt" class="input-group-addon">
 							<img src="<%=request.getContextPath() %>/resources/images/search.png"></span>
 					</p>
 				</div>
@@ -83,6 +87,7 @@
 					<a href="#" id="cart-bt">
 						<p class="footer_pinpai">购物车</p>
 					</a>
+					<span class="cartcount">3</span>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="huiyuan-bt">
@@ -98,6 +103,11 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>	
 <script type="text/javascript">
+var UrlConfig = {
+        path:'<%=request.getContextPath() %>',
+        getCartCount: '<%=request.getContextPath() %>/app/mobile/cart/getCount',
+    };
+    
             $(document).ready(function() {
                  
                  $("#home-bt").click(function(){
@@ -115,7 +125,18 @@
                  $("#cart-bt").click(function(){
                 	 window.location.href='<%=request.getContextPath() %>'+
                 	         '/app/mobile/page/cart'; 
+                 });
+                 
+                 $("#search-bt").click(function(){
+                	 if($("#searchparm").val()==''){
+                		 $('#searchparm').popover('show');
+                		 return;
+                	 }
+                     window.location.href='<%=request.getContextPath() %>'+
+                             '/app/mobile/page/itemlist?searchparm='+$("#searchparm").val(); 
                  }); 
+                 
+                 
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-52);
 			    	$("#main_div").css({"overflow":"auto"});
@@ -124,6 +145,31 @@
 			    });
 							
             });
+            
+            getCartCount();
+
+            function getCartCount() {
+            	   $.ajax({    
+            	        url:UrlConfig.getCartCount,// 跳转到 action    
+            	        data:{},    
+            	        type:'post',    
+            	        //cache:false,    
+            	        dataType:'json',    
+            	        success:function(result) {
+            	            if(result.successful == true ){
+            	            	if (result.data > 0) {
+            	            		$('.cartcount').css("display","block");
+            	            		$('.cartcount').html(result.data);
+            	            	} else {
+            	            		$('.cartcount').css("display","none");
+            	            	}
+            	                
+            	            }else{
+            	                
+            	            }
+            	         }
+            	    }); 
+            }
         </script>
 </body>
 </html>

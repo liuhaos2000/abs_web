@@ -1504,3 +1504,14 @@ padding-right:25px !important;
 .maindiv{
 	background-color:#EEEEEE;
 }
+
+.cartcount{
+	background-color:#ff4444;
+	position:absolute;
+	top:10%;
+    right:15%;
+	width:20px;
+	height:20px;
+	z-index:10;
+	border-radius:50px;
+}

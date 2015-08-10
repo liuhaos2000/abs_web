@@ -13,22 +13,18 @@ import com.abs.mobile.domain.TIndexLunbo;
 import com.abs.mobile.service.HomeService;
 
 @Controller
-@RequestMapping("/mobile/home")
-public class HomeController extends BaseController {
+@RequestMapping("/mobile/cart")
+public class CartController extends BaseController {
 	
-    @Resource
-    private HomeService homeService;
-    
     /**
-     * 获取轮播数据
+     * 取得购物车中商品数量
      * @return
      */
-    @RequestMapping("/getLunBolist")
+    @RequestMapping("/getCount")
     @ResponseBody
     public Result getLunBolist() {
         Result request = new Result();
-        List<TIndexLunbo> LunboList= homeService.getLunBoList();
-        request.setData(LunboList);
+        request.setData(3);
         return request;
     }
 }

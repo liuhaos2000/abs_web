@@ -35,6 +35,13 @@ public class MobilePageController {
         return "mobile/huiyuan";
     }
     
+    // itemlist
+    @RequestMapping("/itemlist")
+    public String toItemlist(String searchparm,ModelMap map) {
+        map.put("searchparm", searchparm);
+        return "mobile/itemlist";
+    }
+
     // 系统外
     @RequestMapping("/toWinXinShop")
     public String toWinXinShop(String pageCode,ModelMap map) {
