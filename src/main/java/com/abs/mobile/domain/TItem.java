@@ -5,7 +5,7 @@ import java.util.Date;
 public class TItem {
     private Integer itemId;
 
-    private String name;
+    private String itemName;
 
     private String manufacturer;
 
@@ -55,12 +55,12 @@ public class TItem {
         this.itemId = itemId;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setItemName(String itemName) {
+        this.itemName = itemName == null ? null : itemName.trim();
     }
 
     public String getManufacturer() {
