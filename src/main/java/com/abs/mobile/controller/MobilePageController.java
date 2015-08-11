@@ -30,8 +30,8 @@ public class MobilePageController {
     // home
     @RequestMapping("/home")
     public String toHome(ModelMap map) {
-        List<Map<String, Object>> data = homeService.getItem();
-        map.put("data", data);
+    	Map<String, Object> resultmap = homeService.getItem();
+        map.put("data", resultmap);
         return "mobile/home";
     }
     // type

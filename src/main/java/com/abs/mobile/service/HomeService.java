@@ -19,5 +19,5 @@ public interface HomeService {
      * @param request
      * @return
      */
-    public List<Map<String, Object>> getItem();
+    public Map<String, Object> getItem();
 }

@@ -61,37 +61,8 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="fuzhuang">
         <table class="table" id="subtype_tb">
-             <tr class="type-tr">
-                <td class="type-td"><a href="#">香水</a></td>
-                <td class="type-td"><a href="#">彩妆彩妆 </a></td>
-             </tr>
-                <tr>
-                    <td>
-                    <a href="#">护肤</a>
-                    </td>
-                    <td>
-                    <a href="#">防晒</a>
-                    </td>
-                </tr>
-                                <tr>
-                    <td>
-                    <a href="#">护肤</a>
-                    </td>
-                    <td>
-                    <a href="#">防晒</a>
-                    </td>
-                </tr>
-                                <tr>
-                    <td>
-                    <a href="#">护肤</a>
-                    </td>
-                    <td>
-                    <a href="#">防晒</a>
-                    </td>
-                </tr>
         </table>
     </div>
-
   </div>
 
 </div>
@@ -105,6 +76,8 @@ $(document).ready(function() {
         var typeId = $(this).attr("typeid");
         getSubtype(typeId);
     });
+
+    
 });
 function init(){
 	$("#type_ul li:first").addClass("active");
@@ -122,8 +95,21 @@ function getSubtype(id){
             success:function(result) {
                 if(result.successful == true ){
                     for (var i = 0; i < result.data.length; i++) {
-                        $("#subtype_tb").append(result.data[i].name);
+                    	var yushu = i%2;
+                    	if(yushu==0){
+                    		if(i==(result.data.length-1)){
+                    			$("#subtype_tb").append('<tr class="type-tr"><td typeid="'+result.data[i].typeId+'" colspan="2" class="type-td"><a href="#">'+result.data[i].name+'</a></td></tr>');
+                    		}else{
+                    			$("#subtype_tb").append('<tr class="type-tr"><td typeid="'+result.data[i].typeId+'"class="type-td"><a href="#">'+result.data[i].name+'</a></td><td typeid="'+result.data[i+1].typeId+'" class="type-td"><a href="#">'+result.data[i+1].name+result.data[i+1].typeId+' </a></td></tr>');
+                    		}
+                   			i=i+1;
+                    	}
                     }
+                    //绑定事件
+                    $("td").bind("click",function(){
+                    	window.location.href='<%=request.getContextPath() %>'+
+                        '/app/mobile/page/itemlist?typeId='+$(this).attr("typeid"); 
+                    });
                 }else{
                 }
              }

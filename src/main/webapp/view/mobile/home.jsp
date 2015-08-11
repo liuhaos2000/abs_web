@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,33 @@
             <div class="panel-heading">特价商品</div>
             <div class="panel-body">
                 <div class="container">
+                <!--  -->
+                	<c:forEach items="${data['HDFLG_5']}" var="item" varStatus="status">
+                    		<c:if test="${status.index % 2 eq 0}">
+                    			<div class="row">
+                    				<c:forEach items="${data['HDFLG_5']}" var="item_2" varStatus="status_2"
+                    							begin="${status.index}" end="${status.index + 1}">
+                         			 <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
+                           				 <a href="#">
+                                		 <img src="${item_2.path}">
+                               			  <p class="daojishi_name">${item_2.item_name}</p>
+                               			  <p class="daojishi_price">特价: ￥${item_2.price_huiyuan}</p>
+                            			</a>
+                         			 </div>
+                         			</c:forEach>	
+								</div>
+							</c:if>
+
+                    </c:forEach>	
+ 
+                    	
+
+
+                    	
+                	
+                
+                
+                
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">

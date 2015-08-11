@@ -33,16 +33,13 @@ public class HomeServiceImpl implements HomeService {
      * 取得商品
      */
     @Override
-    public List<Map<String, Object>> getItem() {
+    public Map<String, Object> getItem() {
         
-        List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
-       
         List<Map<String, String>> itemList = tItemMapper.getItemTejia();
         Map<String, Object> group = new HashMap<String, Object>();
         group.put("HDFLG_5", itemList);
-        result.add(group);
        
-        return result;
+        return group;
     }
 
 
