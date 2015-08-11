@@ -3,7 +3,7 @@
 <mapper namespace="com.abs.mobile.dao.TItemMapper" >
   <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItem" >
     <id column="item_id" property="itemId" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
     <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
     <result column="owner" property="owner" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
@@ -28,9 +28,9 @@
     <result column="fu_text" property="fuText" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    item_id, name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, xiangou_shuliang, 
-    baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, shangjia_flg, 
-    del_flg, c_date, c_user, u_date, u_user
+    item_id, item_name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, 
+    xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, 
+    shangjia_flg, del_flg, c_date, c_user, u_date, u_user
   </sql>
   <sql id="Blob_Column_List" >
     fu_text
@@ -48,7 +48,7 @@
     where item_id = #{itemId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TItem" >
-    insert into t_item (item_id, name, manufacturer, 
+    insert into t_item (item_id, item_name, manufacturer, 
       owner, type, prent_item_id, 
       parm, xiangou_flg, xiangou_shuliang, 
       baoyou_flg, wuliu_id, fapiao_flg, 
@@ -56,7 +56,7 @@
       shangjia_flg, del_flg, c_date, 
       c_user, u_date, u_user, 
       fu_text)
-    values (#{itemId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+    values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
       #{owner,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{prentItemId,jdbcType=INTEGER}, 
       #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
       #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
@@ -71,8 +71,8 @@
       <if test="itemId != null" >
         item_id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="itemName != null" >
+        item_name,
       </if>
       <if test="manufacturer != null" >
         manufacturer,
@@ -139,8 +139,8 @@
       <if test="itemId != null" >
         #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
       </if>
       <if test="manufacturer != null" >
         #{manufacturer,jdbcType=VARCHAR},
@@ -207,8 +207,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItem" >
     update t_item
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
       </if>
       <if test="manufacturer != null" >
         manufacturer = #{manufacturer,jdbcType=VARCHAR},
@@ -275,7 +275,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abs.mobile.domain.TItem" >
     update t_item
-    set name = #{name,jdbcType=VARCHAR},
+    set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
@@ -300,7 +300,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItem" >
     update t_item
-    set name = #{name,jdbcType=VARCHAR},
+    set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
