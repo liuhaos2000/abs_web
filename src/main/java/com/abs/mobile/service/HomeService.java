@@ -1,6 +1,7 @@
 package com.abs.mobile.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.abs.mobile.domain.TIndexLunbo;
 
@@ -13,4 +14,10 @@ public interface HomeService {
 	 */
 	public List<TIndexLunbo> getLunBoList();
 	
+    /**
+     * 取得商品
+     * @param request
+     * @return
+     */
+    public List<Map<String, Object>> getItem();
 }

@@ -258,48 +258,42 @@ img{
 .footer a p{
 	color:#999999;
 	margin-bottom:0;
-	padding-top:0px;
+	padding-top:32px;
 	font-family:'SimHei',sans-serif;
-}
-.footer a i{
-	color:#999999;
 }
 .footer a.active p{
 	color:#ff7272;
 }
-.footer a.active i{
-	color:#ff7272;
-}
 .footer a p.footer_index{
-	background:url(../images/shouye.png) no-repeat center 4px;
+	background:url(../images/home.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a.active p.footer_index{
-	background:url(../images/shouye_ac.png) no-repeat center 4px;
+	background:url(../images/home_a.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a p.footer_huodong{
-	background:url(../images/huodong.png) no-repeat center 4px;
+	background:url(../images/type.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a.active p.footer_huodong{
-	background:url(../images/huodong_ac.png) no-repeat center 4px;
+	background:url(../images/type_a.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a p.footer_pinpai{
-	background:url(../images/pinpai.png) no-repeat center 4px;
+	background:url(../images/cart.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a.active p.footer_pinpai{
-	background:url(../images/pinpai_ac.png) no-repeat center 4px;
+	background:url(../images/cart_a.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a p.footer_huiyuan{
-	background:url(../images/huiyuan.png) no-repeat center 4px;
+	background:url(../images/account.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer a.active p.footer_huiyuan{
-	background:url(../images/huiyuan_ac.png) no-repeat center 4px;
+	background:url(../images/account_a.png) no-repeat center 4px;
 	background-size:27px 27px;
 }
 .footer-block{
@@ -1530,4 +1524,11 @@ padding-right:25px !important;
 -webkit-transform: translateX(-50%) translateY(-50%);
 -moz-transform: translateX(-50%) translateY(-50%);
 -ms-transform: translateX(-50%) translateY(-50%);
+}
+.icon-spin {
+  display: inline-block;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
 }

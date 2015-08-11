@@ -322,4 +322,8 @@
       u_user = #{uUser,jdbcType=VARCHAR}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
+  <!-- 自定义 -->
+  <select id="getItemTejia" resultType="map">
+      select * from t_item
+  </select>
 </mapper>

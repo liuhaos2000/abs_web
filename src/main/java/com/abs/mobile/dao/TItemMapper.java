@@ -1,5 +1,8 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.abs.mobile.domain.TItem;
 
 public interface TItemMapper {
@@ -16,4 +19,6 @@ public interface TItemMapper {
     int updateByPrimaryKeyWithBLOBs(TItem record);
 
     int updateByPrimaryKey(TItem record);
+    
+    List<Map<String, String>> getItemTejia();
 }

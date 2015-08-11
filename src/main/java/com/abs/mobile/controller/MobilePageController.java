@@ -1,13 +1,22 @@
 package com.abs.mobile.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.abs.mobile.service.HomeService;
 
 @Controller
 @RequestMapping("/mobile/page")
 public class MobilePageController {
 
+    @Resource
+    HomeService homeService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -16,7 +25,9 @@ public class MobilePageController {
 	}
     // home
     @RequestMapping("/home")
-    public String toHome() {
+    public String toHome(ModelMap map) {
+        List<Map<String, Object>> data = homeService.getItem();
+        map.put("data", data);
         return "mobile/home";
     }
     // type

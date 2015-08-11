@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
 </head>
 <body>
-
+    <!-- 
         <div class="container typelist_main">
             <div class="panel p2">
                 <div class="panel-heading">
@@ -43,8 +43,80 @@
                 </div>
             </div>
         </div>
-        
+         -->
+<div class="tabbable tabs-left">
 
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#fuzhuang" aria-controls="fuzhuang" role="tab" data-toggle="tab">服装</a></li>
+    <li role="presentation"><a href="#jiadian" aria-controls="jiadian" role="tab" data-toggle="tab">家电</a></li>
+    <li role="presentation"><a href="#muying" aria-controls="muying" role="tab" data-toggle="tab">母婴用品</a></li>
+    <li role="presentation"><a href="#huazhuangping" aria-controls="huazhuangping" role="tab" data-toggle="tab">化妆品</a></li>
+    <li role="presentation">
+        <a href="#huazhuangping" 
+            aria-controls="huazhuangping" role="tab" 
+            data-toggle="tab">化妆品</a>
+    </li>
+        <li role="presentation">
+        <a href="#huazhuangping" 
+            aria-controls="huazhuangping" role="tab" 
+            data-toggle="tab">化妆品化妆品</a>
+    </li>
+        <li role="presentation">
+        <a href="#huazhuangping" 
+            aria-controls="huazhuangping" role="tab" 
+            data-toggle="tab">化妆品</a>
+    </li>
+            <li role="presentation">
+        <a href="#huazhuangping" 
+            aria-controls="huazhuangping" role="tab" 
+            data-toggle="tab">化妆品</a>
+    </li>
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="fuzhuang">
+        <table class="table">
+             <tr class="type-tr">
+                <td class="type-td">
+                    <a href="#">香水</a>
+                </td>
+                <td class="type-td">
+                    <a href="#">彩妆彩妆 </a>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                    <a href="#">护肤</a>
+                    </td>
+                    <td>
+                    <a href="#">防晒</a>
+                    </td>
+                </tr>
+                                <tr>
+                    <td>
+                    <a href="#">护肤</a>
+                    </td>
+                    <td>
+                    <a href="#">防晒</a>
+                    </td>
+                </tr>
+                                <tr>
+                    <td>
+                    <a href="#">护肤</a>
+                    </td>
+                    <td>
+                    <a href="#">防晒</a>
+                    </td>
+                </tr>
+        </table>
+    </div>
+
+  </div>
+
+</div>
 
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>

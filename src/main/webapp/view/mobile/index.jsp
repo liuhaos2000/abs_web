@@ -12,7 +12,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -39,7 +38,9 @@
 			</div>
 		</div>
 		<!-- 探出窗口 -->
-        <div class="popupshadow"></div>
+        <div class="popupshadow">
+
+        </div>
         <div class="popup">
             <img src="<%=request.getContextPath() %>/resources/images/popup_icon.png">
             <ul>
@@ -76,27 +77,23 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" class="active" id="home-bt">
-                        <div><i class="icon-home  icon-2x"></i></div>
-                        <div><p class="">首页</p></div>
+                        <p class="footer_index">首页</p>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="type-bt">
-                        <div><i class="icon-th-large  icon-2x"></i></div>
-                        <div><p class="">分类</p></div>
+                        <p class="footer_huodong">分类</p>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="cart-bt">
-                        <div><i class="icon-shopping-cart  icon-2x"></i></div>
-                        <div><p class="">购物车</p></div>
+                        <p class="footer_pinpai">购物车</p>
 					</a>
 					<span class="cartcount">3</span>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
 					<a href="#" id="huiyuan-bt">
-                        <div><i class="icon-user  icon-2x"></i></div>
-                        <div><p class="">会员</p></div>
+                        <p class="footer_huiyuan">会员</p>
 					</a>
 				</div>
 			</div>
@@ -114,33 +111,37 @@ var UrlConfig = {
     };
     
             $(document).ready(function() {
-                 
                  $("#home-bt").click(function(){
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
-                			'/app/mobile/page/home'); 
+                			'/app/mobile/page/home');
+                	 $('.footer-block a').removeClass("active");
+                	 $(this).addClass("active");
                  }); 
                  $("#type-bt").click(function(){
                      $('#main_div').load('<%=request.getContextPath() %>' +
                              '/app/mobile/page/type'); 
+                     $('.footer-block a').removeClass("active");
+                     $(this).addClass("active");
                  }); 
                  $("#huiyuan-bt").click(function(){
                      $('#main_div').load('<%=request.getContextPath() %>' +
                              '/app/mobile/page/huiyuan'); 
+                     $('.footer-block a').removeClass("active");
+                     $(this).addClass("active");
                  }); 
                  $("#cart-bt").click(function(){
                 	 window.location.href='<%=request.getContextPath() %>'+
                 	         '/app/mobile/page/cart'; 
                  });
-                 
+
                  $("#search-bt").click(function(){
                 	 if($("#searchparm").val()==''){
-                		 $('#searchparm').popover('show');
+                		 //$('#searchparm').popover('show');
                 		 return;
                 	 }
                      window.location.href='<%=request.getContextPath() %>'+
                              '/app/mobile/page/itemlist?searchparm='+$("#searchparm").val(); 
                  }); 
-                 
                  
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-52);
@@ -148,6 +149,8 @@ var UrlConfig = {
 
 			    	$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home');
 			    });
+			    
+
 							
             });
             
@@ -173,6 +176,7 @@ var UrlConfig = {
             	                
             	            }
             	         }
+
             	    }); 
             }
         </script>

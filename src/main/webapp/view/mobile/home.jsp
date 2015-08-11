@@ -14,97 +14,47 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
 </head>
 <body>
-        <div class="icon-center">
-            <i class="icon-spinner icon-spin icon-4x "></i> 
-        </div>
-    <div class="container pic_show">
-        <div id="owl-demo1" class="owl-carousel owl-theme">
-        </div>
+    <div class="icon-center">
+        <img class="icon-spin"
+            src="<%=request.getContextPath()%>/resources/images/loading.png">
     </div>
-<div class="container today_miaosha">
-        <div class="panel panel-default">
+	<div class="container pic_show">
+		<div id="owl-demo1" class="owl-carousel owl-theme"></div>
+	</div>
+	<div class="container today_miaosha">
+        <div class="panel panel-default my-panel">
             <div class="panel-heading">特价商品</div>
             <div class="panel-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                <p class="daojishi_price">￥198.00</p>
-                                <p id="djs1" class="daojishi" data-date="june 18,2016 20:30:30">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                <p class="daojishi_price">￥456.00</p>
-                                <p id="djs2" class="daojishi" data-date="june 18,2016 23:20:41">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
-                            </a>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
-                            <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms3.png">
-                                <p class="daojishi_price">￥173.00</p>
-                                <p id="djs3" class="daojishi" data-date="june 18,2016 00:00:03">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
                     </div>
-                                        <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                <p class="daojishi_price">￥198.00</p>
-                                <p id="djs4" class="daojishi" data-date="june 18,2016 20:30:30">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                <p class="daojishi_price">￥456.00</p>
-                                <p id="djs5" class="daojishi" data-date="june 18,2016 23:20:41">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
-                            </a>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
-                            <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms3.png">
-                                <p class="daojishi_price">￥173.00</p>
-                                <p id="djs6" class="daojishi" data-date="june 18,2016 00:00:03">
-                                    <span class="hour">00</span>
-                                    :
-                                    <span class="min">00</span>
-                                    :
-                                    <span class="sec">00</span>
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
                     </div>
@@ -118,60 +68,34 @@
             <div class="panel-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                <p class="daojishi_price">￥198.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                <p class="daojishi_price">￥456.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
-                            </a>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
-                            <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms3.png">
-                                <p class="daojishi_price">￥173.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                <p class="daojishi_price">￥198.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
+                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
                             <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                <p class="daojishi_price">￥456.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
-                            </a>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 daojishi_body">
-                            <a href="#">
-                                <img src="<%=request.getContextPath() %>/resources/images/ms3.png">
-                                <p class="daojishi_price">￥173.00</p>
-                                <p>
-                                    销量：10234
-                                </p>
+                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
+                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
+                                 <p class="daojishi_price">特价: ￥198.00</p>
                             </a>
                         </div>
                     </div>
@@ -232,7 +156,7 @@ $(document).ready(function() {
 getLunboList();
 
 function getLunboList() {
-
+    
     $.ajax({    
         url:UrlConfig.getLunboList,// 跳转到 action    
         data:{},    
@@ -260,6 +184,7 @@ function getLunboList() {
                     autoplay: true,
                     autoplayTimeout: 4000,
                 });
+                $(".icon-center").hide();
             }else{
                 
             }
