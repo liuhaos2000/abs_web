@@ -138,4 +138,21 @@
       u_user = #{uUser,jdbcType=VARCHAR}
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>
+  <!-- 查找父类型 -->
+  <select id="getTypePrent" resultMap="BaseResultMap"  >
+    select 
+        <include refid="Base_Column_List" />
+    from t_item_type
+    where prent_id='-1'
+          and del_flg='0'
+  </select>
+  <!-- 查找子类型2级 -->
+  <select id="getTypeLevel2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+        <include refid="Base_Column_List" />
+    from t_item_type
+    where prent_id= #{prentId,jdbcType=VARCHAR}
+          and del_flg='0'
+  </select>
+  
 </mapper>

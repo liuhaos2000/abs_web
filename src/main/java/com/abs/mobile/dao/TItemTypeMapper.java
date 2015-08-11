@@ -1,5 +1,7 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+
 import com.abs.mobile.domain.TItemType;
 
 public interface TItemTypeMapper {
@@ -14,4 +16,8 @@ public interface TItemTypeMapper {
     int updateByPrimaryKeySelective(TItemType record);
 
     int updateByPrimaryKey(TItemType record);
+    
+    List<TItemType> getTypePrent();
+    
+    List<TItemType> getTypeLevel2(String typeId);
 }

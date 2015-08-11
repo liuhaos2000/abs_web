@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.HomeService;
+import com.abs.mobile.service.TypeService;
 
 @Controller
 @RequestMapping("/mobile/page")
@@ -17,6 +19,8 @@ public class MobilePageController {
 
     @Resource
     HomeService homeService;
+    @Resource
+    TypeService typeService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -32,7 +36,9 @@ public class MobilePageController {
     }
     // type
     @RequestMapping("/type")
-    public String toType() {
+    public String toType(ModelMap map) {
+        List<TItemType> typeList=typeService.getTypePrentList();
+        map.put("typeList", typeList);
         return "mobile/type";
     }
     // cart

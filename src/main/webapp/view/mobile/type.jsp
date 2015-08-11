@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,7 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
+	<link rel="stylesheet" type="text/css" href="${path}/resources/css/media.css">
 </head>
 <body>
     <!-- 
@@ -47,46 +49,22 @@
 <div class="tabbable tabs-left">
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#fuzhuang" aria-controls="fuzhuang" role="tab" data-toggle="tab">服装</a></li>
-    <li role="presentation"><a href="#jiadian" aria-controls="jiadian" role="tab" data-toggle="tab">家电</a></li>
-    <li role="presentation"><a href="#muying" aria-controls="muying" role="tab" data-toggle="tab">母婴用品</a></li>
-    <li role="presentation"><a href="#huazhuangping" aria-controls="huazhuangping" role="tab" data-toggle="tab">化妆品</a></li>
-    <li role="presentation">
-        <a href="#huazhuangping" 
-            aria-controls="huazhuangping" role="tab" 
-            data-toggle="tab">化妆品</a>
-    </li>
-        <li role="presentation">
-        <a href="#huazhuangping" 
-            aria-controls="huazhuangping" role="tab" 
-            data-toggle="tab">化妆品化妆品</a>
-    </li>
-        <li role="presentation">
-        <a href="#huazhuangping" 
-            aria-controls="huazhuangping" role="tab" 
-            data-toggle="tab">化妆品</a>
-    </li>
-            <li role="presentation">
-        <a href="#huazhuangping" 
-            aria-controls="huazhuangping" role="tab" 
-            data-toggle="tab">化妆品</a>
-    </li>
-
+  <ul id="type_ul" class="nav nav-tabs" role="tablist">
+    <c:forEach items="${typeList}" var="type">
+        <li role="presentation" typeid="${type.typeId}">
+             <a href="#" role="tab" data-toggle="tab" >${type.name}</a>
+         </li>
+    </c:forEach>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="fuzhuang">
-        <table class="table">
+        <table class="table" id="subtype_tb">
              <tr class="type-tr">
-                <td class="type-td">
-                    <a href="#">香水</a>
-                </td>
-                <td class="type-td">
-                    <a href="#">彩妆彩妆 </a>
-                </td>
-                </tr>
+                <td class="type-td"><a href="#">香水</a></td>
+                <td class="type-td"><a href="#">彩妆彩妆 </a></td>
+             </tr>
                 <tr>
                     <td>
                     <a href="#">护肤</a>
@@ -121,25 +99,36 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-            $(document).ready(function() {
-            	//
-                $(".p2 a").click(function(e) {
-                    e.preventDefault();
-                    $('.popupshadow').show();
-                    $('.popup').animate({
-                        right: '0'
-                    });
-                });
-
-                $(window).click(function() {
-                    if ($('.popup').css('right') == '0px') {
-                            $('.popupshadow').hide();
-                        $('.popup').animate({
-                            right: '-70%'
-                        });
+$(document).ready(function() {
+	init();
+    $("li").click(function(e) {
+        var typeId = $(this).attr("typeid");
+        getSubtype(typeId);
+    });
+});
+function init(){
+	$("#type_ul li:first").addClass("active");
+	getSubtype($("#type_ul li:first").attr("typeid"));
+}
+function getSubtype(id){
+        var url = "${path}/app/mobile/type/getSubTypeList"
+        $("#subtype_tb").html("");
+        $.ajax({    
+            url:url,// 跳转到 action    
+            data:{typeId:id},    
+            type:'post',    
+            //cache:false,    
+            dataType:'json',    
+            success:function(result) {
+                if(result.successful == true ){
+                    for (var i = 0; i < result.data.length; i++) {
+                        $("#subtype_tb").append(result.data[i].name);
                     }
-                });
-            });
-        </script>
+                }else{
+                }
+             }
+        });
+}
+</script>
 </body>
 </html>
