@@ -381,4 +381,9 @@
         							 or t12.item_guige <![CDATA[<]]> t1.item_guige)	
         				)
   </select>
+  <!--   列表查询  u.group_id = #{param1.groupId}-->
+  <select id="getItemList" resultType="map">
+    
+  </select>
+
 </mapper>
