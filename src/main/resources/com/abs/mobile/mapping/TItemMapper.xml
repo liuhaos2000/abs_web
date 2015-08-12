@@ -386,7 +386,61 @@
   </select>
   <!--   列表查询  u.group_id = #{param1.groupId}-->
   <select id="getItemList" resultType="map">
-    
+            SELECT t1.item_id,
+                   t1.item_name,
+                   t2.min_price,
+                   t3.max_price,
+                   t4.path,
+                   ifnull(t5.xiaoliang,0) AS xiaoliang,
+                   ifnull(t6.pingjia_zongshu,0) AS pingjia_zongshu,
+                   ifnull(t6.good_zongshu,0) AS good_zongshu,
+                   CONCAT(ifnull(ROUND((t6.pingjia_zongshu/t6.good_zongshu))*100,0),'%') AS haopingdu
+            FROM t_item t1
+            INNER JOIN
+              ( SELECT t21.item_id,
+                       min(t21.price) AS price,
+                       min(t21.price_huiyuan) AS price_huiyuan,
+                       min(t21.price_huodong) AS price_huodong,
+                       CASE
+                           WHEN (min(t21.price) <![CDATA[<=]]> min(t21.price_huiyuan))
+                                AND (min(t21.price) <![CDATA[<=]]> min(t21.price_huodong)) THEN min(t21.price)
+                           WHEN (min(t21.price_huiyuan) <![CDATA[<=]]> min(t21.price))
+                                AND (min(t21.price_huiyuan) <![CDATA[<=]]> min(t21.price_huodong)) THEN min(t21.price_huiyuan)
+                           ELSE min(t21.price_huodong)
+                       END AS min_price
+               FROM t_item_detail t21
+               GROUP BY t21.item_id ) t2 ON t1.item_id=t2.item_id
+            INNER JOIN
+              ( SELECT t31.item_id,
+                       max(t31.price) AS price,
+                       max(t31.price_huiyuan) AS price_huiyuan,
+                       max(t31.price_huodong) AS price_huodong,
+                       CASE
+                           WHEN (max(t31.price) <![CDATA[>=]]> max(t31.price_huiyuan))
+                                AND (max(t31.price) <![CDATA[>=]]> max(t31.price_huodong)) THEN max(t31.price)
+                           WHEN (max(t31.price_huiyuan) <![CDATA[>=]]> max(t31.price))
+                                AND (max(t31.price_huiyuan) <![CDATA[>=]]> max(t31.price_huodong)) THEN max(t31.price_huiyuan)
+                           ELSE max(t31.price_huodong)
+                       END AS max_price
+               FROM t_item_detail t31
+               GROUP BY t31.item_id ) t3 ON t1.item_id=t3.item_id
+            LEFT OUTER JOIN t_item_picture t4 ON t1.item_id=t4.item_id
+            LEFT OUTER JOIN t_item_xiaoliang t5 ON t1.item_id=t5.item_id
+            LEFT OUTER JOIN
+              ( SELECT t61.item_id,
+                       Count(t61.pingjia_id) AS pingjia_zongshu,
+                       sum( CASE WHEN t61.pingjia_level<![CDATA[>=]]>'4' THEN 1 ELSE 0 END ) AS good_zongshu
+               FROM t_item_pingjia t61
+               GROUP BY t61.item_id ) t6 ON t1.item_id=t6.item_id
+            WHERE t1.del_flg='0'
+              AND t4.picture_type='3'
+              AND t4.del_flg='0'
+              AND t1.item_name LIKE #{param1}
+              <!-- <if test="param1.searchparm != null"> </if> 
+              	AND t1.item_name LIKE ${param1.searchparm}
+             
+              	AND t1.type=${param1.typeId}-->
+              
   </select>
 
 </mapper>

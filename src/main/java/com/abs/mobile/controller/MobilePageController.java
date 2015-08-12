@@ -1,26 +1,33 @@
 package com.abs.mobile.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.HomeService;
+import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.TypeService;
+import com.abs.util.commom.AbsTool;
 
 @Controller
 @RequestMapping("/mobile/page")
 public class MobilePageController {
 
     @Resource
-    HomeService homeService;
+    private HomeService homeService;
     @Resource
-    TypeService typeService;
+    private TypeService typeService;
+    @Resource
+    private ItemListService itemListService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -54,8 +61,23 @@ public class MobilePageController {
     
     // itemlist
     @RequestMapping("/itemlist")
-    public String toItemlist(String searchparm,ModelMap map) {
+    public String getItemList(
+			@RequestParam(value="page", defaultValue="1") int pageNo, 
+			@RequestParam(value="rows", defaultValue="2") int pageSize,
+			@RequestParam(value="orderby", defaultValue="min_price asc") String orderby,
+			String searchparm,String typeId,ModelMap map) {
+    	PageInfo pageInfo = new PageInfo(pageNo,pageSize,orderby);
+    	Map<String, Object> params = new HashMap<String, Object>();
+    	params.put("searchparm", AbsTool.addLike(searchparm));
+    	params.put("typeId", typeId);
+        List<Map<String, String>> data = itemListService.getItemList(params, pageInfo);
+        // 返回结果
+        map.put("itemList", data);
+        map.put("page", pageNo);
+        map.put("rows", pageSize);
+        map.put("orderby", orderby);
         map.put("searchparm", searchparm);
+        map.put("typeId", typeId);
         return "mobile/itemlist";
     }
 
