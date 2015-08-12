@@ -1278,6 +1278,10 @@ img{
 		width:30%;
 		height:auto;
 }
+.itemlist_img{
+	width:82px;
+	height:82px;
+}
 .tb_item .tr_item .td_item_info{
 		text-align:center;
 		width:70%;
@@ -1614,3 +1618,11 @@ padding-right:25px !important;
 .tabs-left>.tab-content{float:left;margin-right:19px;width: 55%;}
 .type-tr{}
 .type-td{width: 50%}
+/*产品列表*/
+.col-no-pad{
+    padding-left:0 !important;
+    padding-right:0 !important;
+}
+.p-no-bottom{
+	margin-bottom:2px !important;
+}
