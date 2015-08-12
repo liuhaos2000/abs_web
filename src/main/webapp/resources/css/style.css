@@ -1269,23 +1269,24 @@ img{
 	width:100%;
 }
 .tb_item .tr_item{
-	padding-top:8px;
-	padding-bottom:8px;
 	border:1px solid #c8c7cc;
+	height:auto;
 }
 .tb_item .tr_item .td_item_img{
 		text-align:center;
 		width:30%;
 		height:auto;
+		padding: 5px 0 5px 0;
 }
 .itemlist_img{
 	width:82px;
 	height:82px;
 }
 .tb_item .tr_item .td_item_info{
-		text-align:center;
+		text-align:left;
 		width:70%;
 		height:auto;
+		padding: 5px 0 5px 0;
 }
 .tb_item .tr_item .td_item_info .item_list_name{
 	font-family:'SimHei',sans-serif;
@@ -1625,4 +1626,10 @@ padding-right:25px !important;
 }
 .p-no-bottom{
 	margin-bottom:2px !important;
+}
+.page-bt{
+	position: absolute;
+	bottom:0;
+	left:0;
+	width: 100%
 }

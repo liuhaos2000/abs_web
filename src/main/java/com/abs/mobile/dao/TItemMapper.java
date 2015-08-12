@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
 
 import com.abs.mobile.domain.TItem;
 
@@ -28,5 +29,5 @@ public interface TItemMapper {
     /**
      * List用
      */
-    List<Map<String, String>> getItemList(String params,PageInfo pageInfo);
+    Page<Map<String, String>> getItemList(Map<String, Object> pMap,PageInfo pageInfo);
 }

@@ -1,9 +1,9 @@
 package com.abs.mobile.service;
 
-import java.util.List;
 import java.util.Map;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
 
 public interface ItemListService {
 	
@@ -12,6 +12,6 @@ public interface ItemListService {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String, String>> getItemList(Map<String, Object> params,PageInfo pageInfo);
+	public Page<Map<String, String>> getItemList(Map<String, Object> params,PageInfo pageInfo);
 
 }

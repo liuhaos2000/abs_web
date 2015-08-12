@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.web.util.Result;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,12 +36,14 @@ public class ItemListController extends BaseController {
 			@RequestParam(value="orderby", defaultValue="xiaoliang asc") String orderby,
 			String searchparm,String typeId) {
     	Result result = new Result();
-    	PageInfo pageInfo = new PageInfo(pageNo,pageSize,orderby);
+    	int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
+    	PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
     	Map<String, Object> params = new HashMap<String, Object>();
-    	params.put("searchparm", AbsTool.addLike(searchparm));
+    	params.put("searchParm", AbsTool.addLike(searchparm));
     	params.put("typeId", typeId);
-        List<Map<String, String>> data = itemListService.getItemList(params, pageInfo);
-        result.setData(data);
+    	Page<Map<String,String>> page = itemListService.getItemList(params, pageInfo);
+        
+    	result.setData(page.getTotalElements());
         return result;
     }
 }

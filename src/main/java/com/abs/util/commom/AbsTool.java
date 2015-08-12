@@ -9,7 +9,7 @@ public class AbsTool {
 	 * @return
 	 */
 	public static String addLike(String parm) {
-		String result="";
+		String result=null;
 		if(StringUtils.isNotEmpty(parm)){
 			result="%"+parm.trim()+"%";
 		}

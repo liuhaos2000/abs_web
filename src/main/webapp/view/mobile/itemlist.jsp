@@ -35,121 +35,29 @@
         </div>
     </header>
 	
-	   <div id="main_div"> 
+	<div id="main_div"> 
         <table class=" tb_item">
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img class="itemlist_img" src="${path}/resources/images/ms1.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name p-no-bottom">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price p-no-bottom">￥100.00 - 400.00</p>
-                                <p class="item_list_hpd p-no-bottom">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms2.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms1.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms2.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms1.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms2.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms1.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-            <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms2.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
-                        <tr class=" tr_item">
-                <td class="td_item_img">
-                    <img  src="images/ms2.png">
-                </td>
-                <td class="td_item_info">
-                            <a href="item_detail.html">
-                                <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                <p class="item_list_price">￥4561110.00</p>
-                                <p class="item_list_hpd">好评度：96% (1960人)</p>
-                            </a>
-                </td>
-            </tr>
+            <c:forEach items="${itemList}" var="item">
+                <tr class=" tr_item" itemId="${item.item_id}">
+                    <td class="td_item_img" valign="middle">
+                        <img class="itemlist_img" src="${item.path}">
+                    </td>
+                    <td class="td_item_info" valign="top">
+                        <div>
+                                <a href="item_detail.html">
+                                    <p class="item_list_name p-no-bottom">${item.item_name}</p>
+                                    <p class="item_list_price p-no-bottom">￥${item.price}</p>
+                                    <p class="item_list_hpd p-no-bottom">销量：${item.haopingdu}</p>
+                                    <p class="item_list_hpd p-no-bottom">好评度：${item.haopingdu} (${item.pingjia_zongshu}人)</p>
+                                </a></div>
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
-        <div class="container">
+        <div class="container page-bt">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-no-pad">
-                    <button id="fanye" class="btn btn-block btn-mini btn-info" type="button">点击加载更多</button>
+                    <button id="fanye_bt" class="btn btn-block btn-mini btn-info" type="button">点击加载更多</button>
                 </div>
             </div>
         </div>
@@ -160,26 +68,59 @@
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/icheck.min.js"></script>
 <script type="text/javascript">
+var pageParm = {
+	    page:'${page}',
+	    rows:'${rows}',
+	    orderby:'${orderby}',
+	    searchparm:'${searchparm}',
+	    typeId:'${typeId}',
+	    pagetotal:'${pagetotal}'
+};
+var page;
+var rows;
+var orderby;
 $(document).ready(function() {
+	
     //设置高度          
     $(function(){
         $("#main_div").height($(window).height()-$("header").height()-2);
         $("#main_div").css({"overflow":"auto"});
+        changeBt();
     });
-    //滚动条
-    /*
-    $("#main_div").scroll(function() {
-        
-        if ($("#main_div").scrollTop()<=0){
-            alert("上翻页");
-        }
-        if ($("#main_div").scrollTop() >= $("#main_div")[0].scrollHeight-$("#main_div").height()) {
-            alert("下翻页");
-        }
-        
-    });
-    */
+    // 翻页
+    $("#fanye_bt").click(function(){
+    	pageParm.page=pageParm.page++;
+    	var url="${path}/app/mobile/itemlist/getItemList";
+        $.ajax({    
+            url:url,// 跳转到 action    
+            data:pageParm,    
+            type:'post',    
+            dataType:'json',    
+            success:function(result) {
+                if(result.successful == true ){
+                	
+                }else{
+                	
+                }
+             }
+        });
+    }); 
 });
+function changeBt(){
+	//是否有下一页
+	    alert(pageParm.page);
+        alert(pageParm.pagetotal);
+	if(pageParm.page>=pageParm.pagetotal){
+
+		//disabled="disabled"
+		//$('#button').attr('disabled',"true");添加disabled属性 
+		//$('#button').removeAttr("disabled"); 移除disabled属性 
+		$('#fanye_bt').attr('disabled',"true");
+	} else {
+		
+		$('#fanye_bt').removeAttr("disabled");
+	}
+}
 </script>
 </body>
 </html>

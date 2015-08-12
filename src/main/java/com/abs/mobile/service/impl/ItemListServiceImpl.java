@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.abs.mobile.dao.TItemMapper;
@@ -24,8 +25,8 @@ public class ItemListServiceImpl implements ItemListService {
      * @return Map
      */
 	@Override
-	public List<Map<String, String>> getItemList(Map<String, Object> params, PageInfo pageInfo) {
-		return tItemMapper.getItemList((String)params.get("searchparm"),pageInfo);
+	public Page<Map<String, String>> getItemList(Map<String, Object> pMap, PageInfo pageInfo) {
+		return tItemMapper.getItemList(pMap,pageInfo);
 	}
 
 

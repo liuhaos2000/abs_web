@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,16 +67,26 @@ public class MobilePageController {
 			@RequestParam(value="rows", defaultValue="2") int pageSize,
 			@RequestParam(value="orderby", defaultValue="min_price asc") String orderby,
 			String searchparm,String typeId,ModelMap map) {
-    	PageInfo pageInfo = new PageInfo(pageNo,pageSize,orderby);
+        int pgNo = pageNo > 0 ? pageNo - 1 : pageNo;
+    	PageInfo pageInfo = new PageInfo(pgNo,pageSize,orderby);
     	Map<String, Object> params = new HashMap<String, Object>();
-    	params.put("searchparm", AbsTool.addLike(searchparm));
+    	params.put("searchParm", AbsTool.addLike(searchparm));
     	params.put("typeId", typeId);
-        List<Map<String, String>> data = itemListService.getItemList(params, pageInfo);
+    	Page<Map<String,String>> page = itemListService.getItemList(params, pageInfo);
         // 返回结果
-        map.put("itemList", data);
+        map.put("itemList", page.getContent());
         map.put("page", pageNo);
         map.put("rows", pageSize);
         map.put("orderby", orderby);
+        map.put("total", page.getTotalElements());
+        
+        int shang = (int)page.getTotalElements() / pageSize;
+        int yushu = (int)page.getTotalElements() % pageSize;
+        if(yushu>0){
+            shang = shang+1;
+        }
+        map.put("pagetotal", shang);
+        //参数返回
         map.put("searchparm", searchparm);
         map.put("typeId", typeId);
         return "mobile/itemlist";

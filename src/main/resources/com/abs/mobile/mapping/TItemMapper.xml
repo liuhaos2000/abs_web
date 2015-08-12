@@ -390,6 +390,7 @@
                    t1.item_name,
                    t2.min_price,
                    t3.max_price,
+                   CONCAT(t2.min_price,' - ',t3.max_price) AS price,
                    t4.path,
                    ifnull(t5.xiaoliang,0) AS xiaoliang,
                    ifnull(t6.pingjia_zongshu,0) AS pingjia_zongshu,
@@ -435,12 +436,12 @@
             WHERE t1.del_flg='0'
               AND t4.picture_type='3'
               AND t4.del_flg='0'
-              AND t1.item_name LIKE #{param1}
-              <!-- <if test="param1.searchparm != null"> </if> 
-              	AND t1.item_name LIKE ${param1.searchparm}
-             
-              	AND t1.type=${param1.typeId}-->
-              
+              <if test="param1.searchParm != null">
+                AND t1.item_name LIKE #{param1.searchParm}
+              </if>
+              <if test="param1.typeId != null"> 
+                AND t1.type=${param1.typeId}
+              </if>
   </select>
 
 </mapper>

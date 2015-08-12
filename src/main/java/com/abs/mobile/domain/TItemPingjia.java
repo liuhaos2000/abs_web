@@ -7,7 +7,7 @@ public class TItemPingjia extends TItemPingjiaKey {
 
     private String nickname;
 
-    private String level;
+    private String pingjiaLevel;
 
     private String pingjiaText;
 
@@ -39,12 +39,12 @@ public class TItemPingjia extends TItemPingjiaKey {
         this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getLevel() {
-        return level;
+    public String getPingjiaLevel() {
+        return pingjiaLevel;
     }
 
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
+    public void setPingjiaLevel(String pingjiaLevel) {
+        this.pingjiaLevel = pingjiaLevel == null ? null : pingjiaLevel.trim();
     }
 
     public String getPingjiaText() {
