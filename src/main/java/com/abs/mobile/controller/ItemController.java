@@ -15,20 +15,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.abs.mobile.service.ItemListService;
+import com.abs.mobile.service.ItemService;
 import com.abs.util.commom.AbsTool;
 
 @Controller
-@RequestMapping("/mobile/itemlist")
-public class ItemListController extends BaseController {
+@RequestMapping("/mobile/item")
+public class ItemController extends BaseController {
 	
     @Resource
-    private ItemListService itemListService;
+    private ItemService itemService;
     
     /**
      * 获取商品列表
      * @return
      */
-    @RequestMapping("/getItemList")
+    @RequestMapping("/getItemPictureList")
     @ResponseBody
     public Result getItemList(
 			@RequestParam(value="page", defaultValue="1") int pageNo, 
@@ -36,14 +37,14 @@ public class ItemListController extends BaseController {
 			@RequestParam(value="orderby", defaultValue="xiaoliang asc") String orderby,
 			String searchparm,String typeId) {
     	Result result = new Result();
-    	int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
-    	PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
-    	Map<String, Object> params = new HashMap<String, Object>();
-    	params.put("searchParm", AbsTool.addLike(searchparm));
-    	params.put("typeId", typeId);
-    	Page<Map<String,String>> page = itemListService.getItemList(params, pageInfo);
-        
-    	result.setData(page.getContent());
+//    	int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
+//    	PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
+//    	Map<String, Object> params = new HashMap<String, Object>();
+//    	params.put("searchParm", AbsTool.addLike(searchparm));
+//    	params.put("typeId", typeId);
+//    	Page<Map<String,String>> page = itemListService.getItemList(params, pageInfo);
+//        
+//    	result.setData(page.getContent());
     	
         return result;
     }

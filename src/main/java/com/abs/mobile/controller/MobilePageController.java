@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.ItemListService;
+import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.TypeService;
 import com.abs.util.commom.AbsTool;
 
@@ -29,6 +30,8 @@ public class MobilePageController {
     private TypeService typeService;
     @Resource
     private ItemListService itemListService;
+    @Resource
+    private ItemService itemService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -91,7 +94,16 @@ public class MobilePageController {
         map.put("typeId", typeId);
         return "mobile/itemlist";
     }
-
+    // item
+    @RequestMapping("/item")
+    public String toItem(String itemId,ModelMap map) {
+        
+        Map<String, Object> resultMap =  itemService.getItem(itemId);
+        
+        map.put("result", resultMap);  
+        
+        return "mobile/item";
+    }
     // 系统外
     @RequestMapping("/toWinXinShop")
     public String toWinXinShop(String pageCode,ModelMap map) {

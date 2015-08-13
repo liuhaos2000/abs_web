@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-2 col-xs-3 top_logo">
 					<p class="navbar-text">
-						<a href="#">
+						<a href="<%=request.getContextPath() %>">
 							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="瑞和商城"></a>
 					</p>
 				</div>

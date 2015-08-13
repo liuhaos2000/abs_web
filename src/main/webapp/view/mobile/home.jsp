@@ -34,7 +34,7 @@
                     			<div class="row">
                     				<c:forEach items="${data['HDFLG_5']}" var="item_2" varStatus="status_2"
                     							begin="${status.index}" end="${status.index + 1}">
-                         			 <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
+                         			 <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body" itemid="${item_2.item_id}">
                            				 <a href="#">
                                 		 <img src="${item_2.path}">
                                			  <p class="daojishi_name">${item_2.item_name}</p>
@@ -44,90 +44,7 @@
                          			</c:forEach>	
 								</div>
 							</c:if>
-
                     </c:forEach>	
- 
-                    	
-
-
-                    	
-                	
-                
-                
-                
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container today_miaosha">
-        <div class="panel panel-default">
-            <div class="panel-heading">热卖商品</div>
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms1.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 daojishi_body">
-                            <a href="#">
-                                 <img src="<%=request.getContextPath() %>/resources/images/ms2.png">
-                                 <p class="daojishi_name">比欧全护肤界面景华路景华路景华路</p>
-                                 <p class="daojishi_price">特价: ￥198.00</p>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -145,47 +62,15 @@ var UrlConfig = {
     };
 
 $(document).ready(function() {
-                //
-                                function timer(id){
-                                    var jqueryID = '#' + id;
-
-                                    var endTime = new Date($(jqueryID).data('date'));
-                                  
-                                    var currentTime = new Date();
-                                    
-                                    var intDiff = parseInt((endTime-currentTime)/1000);
-                                    
-                                    window.setInterval(function(){
-                                        var day=0,
-                                            hour=0,
-                                            minute=0,
-                                            second=0;
-                                        if(intDiff > 0){
-                                            hour = Math.floor(intDiff / (60 * 60));
-                                            minute = Math.floor(intDiff / 60)  - (hour * 60);
-                                            second = Math.floor(intDiff) - (hour * 60 * 60) - (minute * 60);
-                                        }
-                                        if (hour <= 9) hour = '0' + hour;
-                                        if (minute <= 9) minute = '0' + minute;
-                                        if (second <= 9) second = '0' + second;
-                                        $(jqueryID +' .hour').html(hour);
-                                        $(jqueryID +' .min').html(minute);
-                                        $(jqueryID +' .sec').html(second);
-                                        intDiff--;
-                                    }, 1000);
-                                }
-                                $(function(){
-                                    var djsList = $('.daojishi');
-                                    for(var i = 0;i < djsList.length; i++){
-                                        timer(djsList[i].id);
-                                    }
-                                });
-            });
-            
-getLunboList();
+	getLunboList();
+	
+    $("div[itemId]").bind("click",function(){
+        window.location.href='<%=request.getContextPath() %>'+
+        '/app/mobile/page/item?itemId='+$(this).attr("itemId"); 
+    });
+});
 
 function getLunboList() {
-    
     $.ajax({    
         url:UrlConfig.getLunboList,// 跳转到 action    
         data:{},    
@@ -197,13 +82,12 @@ function getLunboList() {
                 for (var i = 0; i < result.data.length; i++) {
                     var lunbo = result.data[i];
                     var link;
-                    if(lunbo.action=='#'||lunbo.action==''){
+                    if(lunbo.action=='#'||lunbo.action==''||lunbo.action==null){
                         link='#';
                     }else{
                         link=UrlConfig.path+lunbo.action
                     }
-                    
-                    $("#owl-demo1").append('<div class="item"><a href="'+link+'"><img src="'+lunbo.imgPath +'" class="img-responsive"></a></div>');
+                    $("#owl-demo1").append('<div class="item"><a href="'+link+'"><img src="'+lunbo.imgPath +'" class="img-responsive img-lunbo"></a></div>');
                 }
                 $("#owl-demo1").owlCarousel({
                     items: 1,
@@ -213,7 +97,6 @@ function getLunboList() {
                     autoplay: true,
                     autoplayTimeout: 4000,
                 });
-                $(".icon-center").hide();
             }else{
                 
             }

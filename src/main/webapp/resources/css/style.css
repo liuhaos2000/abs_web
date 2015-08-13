@@ -1330,12 +1330,7 @@ img{
 	margin: 10px 10px 10px 0px ;
 	width:90%;
 }
-.my-badge{
-	position:absolute;
-	top:22%;
-	left:50%
-}
-.badge-important{background-color:#b94a48;}
+
 .detail-name{
 	padding:5px 0px 0px 10px;
 	border-top: 2px solid #e5e5e5;
@@ -1550,6 +1545,7 @@ padding-right:25px !important;
     top:50%;
     left:50%;
     z-index:10;
+    display:none;
 -webkit-transform: translateX(-50%) translateY(-50%);
 -moz-transform: translateX(-50%) translateY(-50%);
 -ms-transform: translateX(-50%) translateY(-50%);
@@ -1627,9 +1623,19 @@ padding-right:25px !important;
 .p-no-bottom{
 	margin-bottom:2px !important;
 }
-.page-bt{
-	position: absolute;
-	bottom:0;
-	left:0;
-	width: 100%
+/*产品列表*/
+.item-cartcount{
+    background-color:#ff4444;
+    position:absolute;
+    top:20%;
+    right:28%;
+    width:20px;
+    height:20px;
+    z-index:10;
+    display:none;
+    border-radius:50px;
+    border:1px solid #FFFFFF;
+}
+.img-lunbo{
+	max-height: 200px !important;
 }
