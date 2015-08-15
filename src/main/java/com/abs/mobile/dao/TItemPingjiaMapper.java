@@ -1,6 +1,7 @@
 package com.abs.mobile.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public interface TItemPingjiaMapper {
     /**
      * 取得评价
      */
-    Page<TItemPingjia> getPingjia(String itemId,PageInfo pageInfo);
+    Page<Map<String,String>> getPingjia(String itemId,PageInfo pageInfo);
     /**
      * 取得评价
      */

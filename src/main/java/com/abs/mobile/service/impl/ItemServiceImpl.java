@@ -27,6 +27,7 @@ import com.abs.mobile.domain.TItemXiaoliang;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.SessionService;
+import com.abs.util.commom.AbsTool;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -51,6 +52,8 @@ public class ItemServiceImpl implements ItemService {
 		// 是否下架 或者逻辑删除
 		if ("1".equals(item.getShangjiaFlg()) || "1".equals(item.getDelFlg())) {
 			resultMap.put("item", item);
+			String itemParm = item.getParm();
+			resultMap.put("itemParm", AbsTool.changeItemParm(itemParm));
 		} else {
 			return null;
 		}
@@ -73,8 +76,8 @@ public class ItemServiceImpl implements ItemService {
 		}
 		// 取得评价信息
 		PageInfo pageInfo = new PageInfo(0, 10, "pingjia_date desc");
-		Page<TItemPingjia> page = tItemPingjiaMapper.getPingjia(itemId, pageInfo);
-		List<TItemPingjia> TItemPingjia = page.getContent();
+		Page<Map<String,String>> page = tItemPingjiaMapper.getPingjia(itemId, pageInfo);
+		List<Map<String,String>> TItemPingjia = page.getContent();
 		Long pingjiaTotle = page.getTotalElements();
 		resultMap.put("TItemPingjia", TItemPingjia);
 		resultMap.put("pingjiaTotle", pingjiaTotle);

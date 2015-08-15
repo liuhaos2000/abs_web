@@ -174,10 +174,18 @@
     where item_id = #{itemId,jdbcType=INTEGER}
       and pingjia_id = #{pingjiaId,jdbcType=INTEGER}
   </update>
-  <select id="getPingjia" resultMap="BaseResultMap">
+  <select id="getPingjia" resultType="map">
     select 
-    <include refid="Base_Column_List" />
-    from t_item_pingjia
-    where item_id = #{param1}
+				date_format(t1.pingjia_date,'%Y-%m-%d- %H:%i:%S') as pingjia_date,
+				t1.pingjia_level,
+				t1.pingjia_text,
+				t2.open_id,
+				t2.nickname,
+				t2.weixin_image_url
+    from t_item_pingjia t1
+				INNER JOIN t_user t2
+						on t1.open_id = t2.open_id
+    where t1.item_id = #{param1}
+        and t1.del_flg='0'
   </select>
 </mapper>

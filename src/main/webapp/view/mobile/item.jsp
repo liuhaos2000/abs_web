@@ -106,45 +106,51 @@
                         <a href="#panel-1" data-toggle="tab">评价</a>
                     </li>
                     <li>
-                        <a href="#panel-1" data-toggle="tab">商品详情</a>
+                        <a href="#panel-2" data-toggle="tab">商品详情</a>
                     </li>
                     <li>
-                        <a href="#panel-1" data-toggle="tab">参数</a>
+                        <a href="#panel-3" data-toggle="tab">参数</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="panel-1">
-                            <div class="media pinlun-one">
-                                <div class="media-left">
-                                   <a href="#">
-                                        <img class="media-object img-circle img-pinglun" src="${path}/resources/images/15901_60.png" alt="">
-                                   </a>
-                                </div>
-                                <div class="media-body">
-                                    <p class="pl-name">王三</p>
-                                    <p class="pl-neirong">很好的东西，下次还买。</p>
-                                    <p class="pl-date">2012年12月26</p>
-                                </div>
-                             </div>
-                            <div class="media pinlun-one">
-                                <div class="media-left">
-                                   <a href="#">
-                                        <img class="media-object img-circle img-pinglun" src="${path}/resources/images/15901_60.png" alt="">
-                                   </a>
-                                </div>
-                                <div class="media-body">
-                                    <p class="pl-name">王三</p>
-                                    <p class="pl-neirong">很好的东西，下次还买。</p>
-                                    <p class="pl-date">2012年12月26</p>
-                                </div>
-                             </div>
+                    		<c:forEach items="${result.TItemPingjia}" var="pj">
+                    		     <div class="media pinlun-one">
+                                    <div class="media-left">
+                                       <a href="#">
+                                            <img class="media-object img-circle img-pinglun" 
+                                            	src="${pj.weixin_image_url}" alt="">
+                                       </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p class="pl-name">${pj.nickname}</p>
+                                        <p class="pl-neirong">${pj.pingjia_text}</p>
+                                        <p class="pl-date">${pj.pingjia_date}</p>
+                                    </div>
+                                 </div>
+                    		</c:forEach>
                          </div>
                          <div class="tab-pane" id="panel-2">
                        		 <div class="text-edit">
                                                                                       图片文字说明
                                  <img  src="${path}/resources/images/awj1.jpg" alt="">
                              </div>
-                    </div>
+                    	</div>
+                    	<div class="tab-pane" id="panel-3">
+                       		 <div class="container">
+                       		 	<div class="row">
+                       		 		<c:forEach items="${result.itemParm}" var="pm">
+                       		 			<div class="col-md-4 col-sm-4 col-xs-4 ">
+                       		 				<p class="pl-name">${pm.key}:</p>
+                       		 			</div>
+                       		 			<div class="col-md-8 col-sm-8 col-xs-8 ">
+                       		 				<p class="pl-name">${pm.value}</p>
+                       		 			</div>
+                       		 		</c:forEach>
+
+                       		 	</div>
+                       		 </div>
+                    	</div>
                       </div>
                   </div>
           </div>
