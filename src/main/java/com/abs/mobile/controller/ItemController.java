@@ -37,14 +37,6 @@ public class ItemController extends BaseController {
 			@RequestParam(value="orderby", defaultValue="xiaoliang asc") String orderby,
 			String searchparm,String typeId) {
     	Result result = new Result();
-//    	int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
-//    	PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
-//    	Map<String, Object> params = new HashMap<String, Object>();
-//    	params.put("searchParm", AbsTool.addLike(searchparm));
-//    	params.put("typeId", typeId);
-//    	Page<Map<String,String>> page = itemListService.getItemList(params, pageInfo);
-//        
-//    	result.setData(page.getContent());
     	
         return result;
     }

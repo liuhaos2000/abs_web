@@ -1,5 +1,10 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
+
 import com.abs.mobile.domain.TItemPingjia;
 import com.abs.mobile.domain.TItemPingjiaKey;
 
@@ -15,4 +20,12 @@ public interface TItemPingjiaMapper {
     int updateByPrimaryKeySelective(TItemPingjia record);
 
     int updateByPrimaryKey(TItemPingjia record);
+    /**
+     * 取得评价
+     */
+    Page<TItemPingjia> getPingjia(String itemId,PageInfo pageInfo);
+    /**
+     * 取得评价
+     */
+    List<TItemPingjia> getPingjia(String itemId);
 }

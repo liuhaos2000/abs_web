@@ -314,7 +314,6 @@ img{
 	padding-left:0;
 	padding-right:0;
 	margin-top:0px;
-	border-top: 1px solid #e5e5e5;
 }
 .pic_show .item img{
 	margin:0 auto;
@@ -408,6 +407,7 @@ img{
 	font-size:1.5em;
 	background:#fff;
 	border-bottom-width:0;
+	border-bottom:1px solid #c8c7cc;
 }
 .today_miaosha .panel-body{
 	padding:0;
@@ -423,11 +423,10 @@ img{
 .today_miaosha .panel-body .container .row{
 	margin-left:0;
 	margin-right:0;
+	border-bottom:1px solid #c8c7cc;
 }
 .today_miaosha .daojishi_body{
 	border-right:1px solid #c8c7cc;
-	border-top:1px solid #c8c7cc;
-	border-bottom:1px solid #c8c7cc;
 	padding:2px 0 10px;
 	min-height:150px;
 }
@@ -1332,18 +1331,19 @@ img{
 }
 
 .detail-name{
-	padding:5px 0px 0px 10px;
-	border-top: 2px solid #e5e5e5;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid #B7B7B7;
 }
 .detail-name .detail-name-p{
 	font-family:'SimHei',sans-serif;
 	color:#000000;
 	font-size:1.5em;
+	padding:3px 0px 3px 10px;
+	border-top: 2px solid #B7B7B7;
+	margin-bottom: 0;
 }
 .detail-price{
-	padding:5px 0px 5px 10px;
-	border-bottom: 1px solid #e5e5e5;
+	padding:3px 0px 3px 10px;
+	border-bottom: 1px solid #B7B7B7;
 }
 .detail-price .detail-price-p{
 	font-family:'SimHei',sans-serif;
@@ -1351,13 +1351,44 @@ img{
 	font-size:1.3em;
 	margin: 0 0 0 !important;
 }
+.detail-xinghao{
+	padding:3px 0px 3px 10px;
+}
+.detail-xinghao-bt{
+	margin-left:6px !important;
+	margin-top:5px !important;
+}
+.tab-all{
+	border-top: 2px solid #B7B7B7;
+	background-color: #FFFFFF
+}
 .img-pinglun{
 	display: inline;
 	width: 50px;
 	height: 50px;
 }
-.my-media-left{
-	vertical-align:baseline  !important;
+.pinlun-one{
+	padding-top: 10px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-top:0;
+}
+.pl-name{
+	font-family:'SimHei',sans-serif;
+	color:#000000;
+	padding:0 0 3px 10px;
+	margin-bottom: 0;
+}
+.pl-neirong{
+	font-family:'SimHei',sans-serif;
+	color:#000000;
+	padding:0 0 3px 10px;
+	margin-bottom: 0;
+}
+.pl-date{
+	font-family:'SimHei',sans-serif;
+	color:#8C8C8C;
+	padding:0 0 0 10px;
+	margin-bottom: 0;
 }
 .text-edit img{
 	width: 100%;

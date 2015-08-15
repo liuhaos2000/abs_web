@@ -232,4 +232,55 @@
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
+  <!--  -->
+  <select id="getItemMinMaxPrice" resultType="map" parameterType="java.lang.String" >
+        SELECT 				t21.item_id,
+                               min(t21.price) AS price,
+                               min(t21.price_huiyuan) AS price_huiyuan,
+                               min(t21.price_huodong) AS price_huodong,
+                               CASE
+                                   WHEN (min(t21.price) <![CDATA[<=]]> min(t21.price_huiyuan))
+                                        AND (min(t21.price)  <![CDATA[<=]]>  min(t21.price_huodong)) THEN min(t21.price)
+                                   WHEN (min(t21.price_huiyuan)  <![CDATA[<=]]>  min(t21.price))
+                                        AND (min(t21.price_huiyuan)  <![CDATA[<=]]>  min(t21.price_huodong)) THEN min(t21.price_huiyuan)
+                                   ELSE min(t21.price_huodong)
+                               END AS min_price,
+                               max(t21.price) AS price,
+                               max(t21.price_huiyuan) AS price_huiyuan,
+                               max(t21.price_huodong) AS price_huodong,
+                               CASE
+                                   WHEN (max(t21.price)  <![CDATA[>=]]>  max(t21.price_huiyuan))
+                                        AND (max(t21.price)  <![CDATA[>=]]>  max(t21.price_huodong)) THEN max(t21.price)
+                                   WHEN (max(t21.price_huiyuan)  <![CDATA[>=]]>  max(t21.price))
+                                        AND (max(t21.price_huiyuan)  <![CDATA[>=]]>  max(t21.price_huodong)) THEN max(t21.price_huiyuan)
+                                   ELSE max(t21.price_huodong)
+                               END AS max_price
+        FROM t_item_detail t21
+        where 
+        		t21.item_id=#{itemId}
+        GROUP BY t21.item_id
+  </select>
+  <select id="getItemDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_detail
+    where item_id = #{itemId}
+    	 and del_flg='0'
+  </select>
+  <select id="getItemXinghao" resultType="map" parameterType="java.lang.String" >
+  	select  DISTINCT
+ 		t1.item_guige,
+ 		t1.guige_text
+    from t_item_detail t1
+    where t1.item_id = #{itemId}
+    	and t1.item_guige!='0'
+  </select>
+  <select id="getItemYanse" resultType="map" parameterType="java.lang.String" >
+	select  DISTINCT
+ 		t1.item_yanse,
+ 		t1.yanse_text
+    from t_item_detail t1
+    where t1.item_id = #{itemId}
+    	and t1.item_yanse!='0'
+  </select>
 </mapper>

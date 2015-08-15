@@ -99,7 +99,11 @@ public class MobilePageController {
     public String toItem(String itemId,ModelMap map) {
         
         Map<String, Object> resultMap =  itemService.getItem(itemId);
-        
+        if(resultMap==null){
+        	map.put("resultFlg", false);
+        	map.put("resultMessage", "该产品已经下架！");
+        }
+        map.put("resultFlg", true);
         map.put("result", resultMap);  
         
         return "mobile/item";

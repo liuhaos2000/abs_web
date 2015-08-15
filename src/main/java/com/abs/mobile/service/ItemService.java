@@ -5,9 +5,10 @@ import java.util.Map;
 public interface ItemService {
 	
 	/**
-	 * 取得图片
+	 * 取得商品
 	 * @return
 	 */
 	public  Map<String, Object> getItem(String itemId);
 	
+
 }
