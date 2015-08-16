@@ -134,6 +134,8 @@
                        		 <div class="text-edit">
                                                                                       图片文字说明
                                  <img  src="${path}/resources/images/awj1.jpg" alt="">
+                                 <img  src="${path}/resources/images/er.png" alt="">
+                                 <img  src="${path}/resources/images/er1.webp" alt="">
                              </div>
                     	</div>
                     	<div class="tab-pane" id="panel-3">

@@ -436,11 +436,11 @@
             WHERE t1.del_flg='0'
               AND t4.picture_type='3'
               AND t4.del_flg='0'
-              <if test="param1.searchParm != null">
+              <if test="param1.searchParm != null and param1.searchParm != ''">
                 AND t1.item_name LIKE #{param1.searchParm}
               </if>
-              <if test="param1.typeId != null"> 
-                AND t1.type=${param1.typeId}
+              <if test="param1.typeId != null and param1.typeId != ''"> 
+                AND t1.type=#{param1.typeId}
               </if>
   </select>
 
