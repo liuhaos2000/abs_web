@@ -1,6 +1,9 @@
 package com.abs.mobile.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -70,5 +73,22 @@ public class CartServiceImpl implements CartService {
 		int count = (int)tCartMapper.getCount(user.getOpenId());
 		return count;
 	}
+
+    @Override
+    public Map<String, Object> getCartItem() {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        
+        TUser user = sessionService.getLoginUser();
+        List<Map<String, String>> list = tCartMapper.getItemFromCart(user.getOpenId());
+        resultMap.put("itemList", list);
+        
+        return resultMap;
+    }
+
+    @Override
+    public int delItemFromCart(String itemId, String guige, String yanse) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
 }

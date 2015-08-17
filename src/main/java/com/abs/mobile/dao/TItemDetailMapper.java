@@ -25,12 +25,6 @@ public interface TItemDetailMapper {
      */
     List<TItemDetail> getItemDetail(String itemId);
     /**
-     * 取得商品最大最小价格
-     * @param itemId
-     * @return
-     */
-    Map<String, String> getItemMinMaxPrice(String itemId);
-    /**
      * 取得商品型号
      * @param itemId
      * @return
@@ -42,4 +36,14 @@ public interface TItemDetailMapper {
      * @return
      */
     List<Map<String, String>> getItemYanse(String itemId);
+    /**
+     * 取得单品销售价格
+     * 
+     */
+    Map<String, String> getItemSalePrice(String itemId,String guige,String yanse);
+    /**
+     * 取得商品所有价格（FROM-TO）
+     * 
+     */
+    Map<String, String> getItemPriceFromTo(String itemId);
 }

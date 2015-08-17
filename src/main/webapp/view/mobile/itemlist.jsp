@@ -44,7 +44,6 @@
                     </td>
                     <td class="td_item_info" valign="top">
                         <div>
-                                
                                     <p class="item_list_name p-no-bottom">${item.item_name}</p>
                                     <p class="item_list_price p-no-bottom">￥${item.price}</p>
                                     <p class="item_list_hpd p-no-bottom">销量：${item.haopingdu}</p>

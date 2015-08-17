@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abs.mobile.domain.TItemType;
+import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
@@ -32,6 +33,8 @@ public class MobilePageController {
     private ItemListService itemListService;
     @Resource
     private ItemService itemService;
+    @Resource
+    private CartService cartService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -54,7 +57,12 @@ public class MobilePageController {
     }
     // cart
     @RequestMapping("/cart")
-    public String toCart() {
+    public String toCart(ModelMap map) {
+        
+        Map<String, Object> resultMap =  cartService.getCartItem();
+        map.put("resultFlg", true);
+        map.put("result", resultMap);  
+        
         return "mobile/cart";
     }
     // huiyuan
@@ -107,6 +115,11 @@ public class MobilePageController {
         map.put("result", resultMap);  
         
         return "mobile/item";
+    }
+    // order
+    @RequestMapping("/order")
+    public String toOrder() {
+        return "mobile/order";
     }
     // 系统外
     @RequestMapping("/toWinXinShop")

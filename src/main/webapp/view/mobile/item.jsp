@@ -31,14 +31,7 @@
                 <p class="detail-name-p">${result.item.itemName}</p>
             </div>
             <div class="row detail-price">
-            	<c:choose>
-            		<c:when test="${result.itemDetail.size()<= 1}">
-            			<p class="detail-price-p">价额：${result.mmPrice.min_price}</p>
-            		</c:when>
-            		 <c:otherwise>
-            		 	<p class="detail-price-p">价额：${result.mmPrice.min_price} - ${result.mmPrice.max_price}</p>
-            		 </c:otherwise>
-            	</c:choose>
+            			<p class="detail-price-p">价额：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
             </div>
             <c:choose>
             	<c:when test="${result.itemDetail.size()> 1}">
@@ -124,6 +117,11 @@
                                     </div>
                                     <div class="media-body">
                                         <p class="pl-name">${pj.nickname}</p>
+                                        <div class=pl-star>
+                                            <c:forEach begin="1" end="${pj.pingjia_level}" step="1">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </c:forEach>
+                                        </div>
                                         <p class="pl-neirong">${pj.pingjia_text}</p>
                                         <p class="pl-date">${pj.pingjia_date}</p>
                                     </div>
@@ -149,7 +147,6 @@
                        		 				<p class="pl-name">${pm.value}</p>
                        		 			</div>
                        		 		</c:forEach>
-
                        		 	</div>
                        		 </div>
                     	</div>
@@ -181,7 +178,8 @@
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
         getCartCount: '<%=request.getContextPath() %>/app/mobile/cart/getCount',
-    	addItemToCart:'<%=request.getContextPath() %>/app/mobile/cart/addItem'
+    	addItemToCart:'<%=request.getContextPath() %>/app/mobile/cart/addItem',
+    	getItemSalePrice:'<%=request.getContextPath() %>/app/mobile/item/getItemSalePrice',
     };
 var pageParm = {
 	    page:'${page}',
@@ -215,13 +213,14 @@ $(document).ready(function() {
 		var yanse=0;
     	var shuliang= $("#shuliang").text();
     	if("${result.itemDetail.size()}" > 1){
+
     		if("${result.xinghao.size()}" > 1){
     	    	var val=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
     	    	if(val==null){
     	    		alert("请选择型号");
     	    		return false;
     			}else{
-    	    	    xinghao=val;
+    				xinghao=val;
     	    	}
     		}
     		if("${result.yanse.size()}" > 1){
@@ -230,7 +229,7 @@ $(document).ready(function() {
     	    		alert("请选择颜色");
     	    		return false;
     			}else{
-    	    	    yanse=val;
+    				yanse=val;
     	    	}
     		}
     		addItemToCart(itemId,xinghao,yanse,shuliang);
@@ -240,8 +239,8 @@ $(document).ready(function() {
     }); 
     // 购物车
     $("#cart_bt").click(function(){
-		
-    	
+        window.location.href='<%=request.getContextPath() %>'+
+        '/app/mobile/page/cart'; 
     }); 
     // 数量加
     $("#add_bt").click(function(){
@@ -258,6 +257,27 @@ $(document).ready(function() {
     		return;
     	}
     	$("#shuliang").html(s);
+    }); 
+    
+    $(":radio").change(function(){
+        var itemId = '${result.item.itemId}';
+        var xinghao=0;
+        var yanse=0;
+        if("${result.itemDetail.size()}" > 1){
+            if("${result.xinghao.size()}" > 1&&"${result.yanse.size()}" > 1){
+            	var xinghao=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
+                var yanse=$('input:radio[name="yanse"]:checked').attr('yanseId');
+                if(xinghao!=null&&yanse!=null){
+                	getItemSalePrice(itemId,xinghao,yanse);
+                }
+            }else if("${result.xinghao.size()}" > 1){
+            	xinghao=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
+            	getItemSalePrice(itemId,xinghao,yanse);
+            }else if("${result.yanse.size()}" > 1){
+            	yanse=$('input:radio[name="yanse"]:checked').attr('yanseId');
+            	getItemSalePrice(itemId,xinghao,yanse);
+            }
+        }
     }); 
 });
 
@@ -295,6 +315,21 @@ function getCartCount() {
                  } else {
                      $('.item-cartcount').css("display","none");
                  }
+             }else{
+             }
+          }
+     }); 
+}
+function getItemSalePrice(itemId,guige,yanse) {
+    $.ajax({    
+         url:UrlConfig.getItemSalePrice,// 跳转到 action    
+         data:{itemId:itemId,guige:guige,yanse:yanse},    
+         type:'post',    
+         //cache:false,    
+         dataType:'json',    
+         success:function(result) {
+             if(result.successful == true ){
+            	 $('#itemPrice').html(result.data.sale_price);
              }else{
              }
           }
