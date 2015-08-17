@@ -232,34 +232,6 @@
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
-  <!--  -->
-  <select id="getItemMinMaxPrice" resultType="map" parameterType="java.lang.String" >
-        SELECT 				t21.item_id,
-                               min(t21.price) AS price,
-                               min(t21.price_huiyuan) AS price_huiyuan,
-                               min(t21.price_huodong) AS price_huodong,
-                               CASE
-                                   WHEN (min(t21.price) <![CDATA[<=]]> min(t21.price_huiyuan))
-                                        AND (min(t21.price)  <![CDATA[<=]]>  min(t21.price_huodong)) THEN min(t21.price)
-                                   WHEN (min(t21.price_huiyuan)  <![CDATA[<=]]>  min(t21.price))
-                                        AND (min(t21.price_huiyuan)  <![CDATA[<=]]>  min(t21.price_huodong)) THEN min(t21.price_huiyuan)
-                                   ELSE min(t21.price_huodong)
-                               END AS min_price,
-                               max(t21.price) AS price,
-                               max(t21.price_huiyuan) AS price_huiyuan,
-                               max(t21.price_huodong) AS price_huodong,
-                               CASE
-                                   WHEN (max(t21.price)  <![CDATA[>=]]>  max(t21.price_huiyuan))
-                                        AND (max(t21.price)  <![CDATA[>=]]>  max(t21.price_huodong)) THEN max(t21.price)
-                                   WHEN (max(t21.price_huiyuan)  <![CDATA[>=]]>  max(t21.price))
-                                        AND (max(t21.price_huiyuan)  <![CDATA[>=]]>  max(t21.price_huodong)) THEN max(t21.price_huiyuan)
-                                   ELSE max(t21.price_huodong)
-                               END AS max_price
-        FROM t_item_detail t21
-        where 
-        		t21.item_id=#{itemId}
-        GROUP BY t21.item_id
-  </select>
   <select id="getItemDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -282,5 +254,63 @@
     from t_item_detail t1
     where t1.item_id = #{itemId}
     	and t1.item_yanse!='0'
+  </select>
+  <select id="getItemSalePrice" resultType="map">
+    SELECT 
+        CASE 
+            WHEN t1.huodong_flg = '0' THEN t1.price 
+            WHEN t1.huodong_flg = '1' THEN t1.price_huiyuan 
+            WHEN t1.huodong_flg = '7' THEN t1.price_huodong 
+            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.price_huodong 
+            ELSE t1.price_huiyuan 
+        END AS sale_price,
+        CASE 
+            WHEN t1.huodong_flg = '0' THEN  t1.huodong_flg 
+            WHEN t1.huodong_flg = '1' THEN  t1.huodong_flg 
+            WHEN t1.huodong_flg = '7' THEN  t1.huodong_flg 
+            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.huodong_flg 
+            ELSE '1'
+        END AS end_price_type
+          ,item_id, item_guige, item_yanse, guige_text
+            , yanse_text, shuliang, price, price_huiyuan, price_huodong
+            , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+            , c_user, u_date, u_user
+    FROM t_item_detail t1
+    WHERE t1.item_id = #{param1}
+            AND t1.item_guige = #{param2}
+            AND t1.item_yanse = #{param3}
+  </select>
+  <select id="getItemPriceFromTo" resultType="map"  parameterType="java.lang.String">
+        Select 
+            t11.item_id,
+            min(t11.sale_price) as min_sale_price,
+            max(t11.sale_price) as max_sale_price,
+            concat(min(t11.sale_price),' - ',max(t11.sale_price)) as price_from_to
+        from
+            (
+                SELECT 
+                CASE 
+                    WHEN t111.huodong_flg = '0' THEN t111.price 
+                    WHEN t111.huodong_flg = '1' THEN t111.price_huiyuan 
+                    WHEN t111.huodong_flg = '7' THEN t111.price_huodong 
+                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.price_huodong 
+                    ELSE t111.price_huiyuan 
+                END AS sale_price,
+                CASE 
+                    WHEN t111.huodong_flg = '0' THEN  t111.huodong_flg 
+                    WHEN t111.huodong_flg = '1' THEN  t111.huodong_flg 
+                    WHEN t111.huodong_flg = '7' THEN  t111.huodong_flg 
+                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.huodong_flg 
+                    ELSE '1'
+                END AS end_price_type
+                  ,item_id, item_guige, item_yanse, guige_text
+                    , yanse_text, shuliang, price, price_huiyuan, price_huodong
+                    , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+                    , c_user, u_date, u_user
+                FROM t_item_detail t111
+                WHERE t111.item_id = #{itemId}
+            ) t11
+        group by
+        t11.item_id
   </select>
 </mapper>

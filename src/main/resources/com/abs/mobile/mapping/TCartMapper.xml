@@ -158,4 +158,46 @@
    		open_id =#{openId}
    		and del_flg='0'
   </select>
+  <select id="getItemFromCart" resultType="map" parameterType="java.lang.String" >
+            select  
+                    t1.item_id,t1.item_guige,t1.item_yanse,t1.open_id,t1.shuliang,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user,t2.item_name,
+                    t3.end_price_type,t3.sale_price,t3.item_guige,t3.guige_text,t3.item_yanse,t3.yanse_text,t4.path
+            from t_cart t1 
+                            INNER JOIN t_item t2 
+                                on t1.item_id=t2.item_id 
+                            INNER JOIN (
+                                SELECT 
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN t31.price 
+                                        WHEN t31.huodong_flg = '1' THEN t31.price_huiyuan 
+                                        WHEN t31.huodong_flg = '7' THEN t31.price_huodong 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.price_huodong 
+                                        ELSE t31.price_huiyuan 
+                                    END AS sale_price,
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '1' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '7' THEN  t31.huodong_flg 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.huodong_flg 
+                                        ELSE '1'
+                                    END AS end_price_type
+                                      ,item_id, item_guige, item_yanse, guige_text
+                                        , yanse_text, shuliang, price, price_huiyuan, price_huodong
+                                        , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+                                        , c_user, u_date, u_user
+                                FROM t_item_detail t31
+                                                ) t3 on t1.item_id=t3.item_id and t1.item_guige=t3.item_guige and t1.item_yanse=t3.item_yanse
+                                    INNER JOIN t_item_picture t4
+                                                on t1.item_id = t4.item_id
+                                                
+            
+                where 
+                         t4.picture_type='3'
+                         and t4.del_flg='0'
+                         and t1.open_id=#{openId}
+                         and t1.del_flg='0'
+                         and t2.del_flg='0'
+                         and t2.shangjia_flg='1'
+                         and t3.shuliang>=t1.shuliang
+  </select>
 </mapper>

@@ -1373,12 +1373,14 @@ img{
 	margin-top:0;
 }
 .pl-name{
+	float:left;
 	font-family:'SimHei',sans-serif;
 	color:#000000;
 	padding:0 0 3px 10px;
 	margin-bottom: 0;
 }
 .pl-neirong{
+	clear:both;
 	font-family:'SimHei',sans-serif;
 	color:#000000;
 	padding:0 0 3px 10px;
@@ -1390,6 +1392,11 @@ img{
 	padding:0 0 0 10px;
 	margin-bottom: 0;
 }
+.pl-star{
+    float:left;
+    padding-left: 20px;
+    color: #FFCC00;
+}
 .text-edit img{
 	width: 100%;
 	height: 100%;
@@ -1400,25 +1407,35 @@ img{
 }
 /*购物车*/
 .cart-item-row{
-	overflow:hidden;
-	border: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
 	padding-top:10px;
 	padding-bottom:10px;
 }
-.cart-item-col{
-	margin-bottom:-9999px;
-	padding-bottom:9999px;
+.cart-col-box{
+	padding:0 0 0 0;
 }
-.cart-item-checkbox{
-	text-align:center;
-	
+.cart-col-info{
+    margin-left: -10px;
 }
-.cart-item-checkbox-sub{
-	margin-top:100%;
+.cart-col-checkbox{
+	text-align: center;
+}
+.cart-col-checkbox2{
+    margin-top: 28px;
+}
+.cart_item_name{
+    font-family:'SimHei',sans-serif;
+    color:#000000;
+    font-size:1.0em;
+}
+.cart_item_price{
+    font-family:'SimHei',sans-serif;
+    color:#ff4444;
+    font-size:1em;
 }
 .cart-img{
-	width: 75px;
-	height:75px;
+	width: 86px;
+	height:86px;
 }
 
 .footer-row{
@@ -1439,7 +1456,7 @@ img{
 .btn-clipboard{
     position:absolute;
     top:-10px;
-    right:0;
+    right:-10px;
     z-index:10;
     display:block;
     padding:5px 8px;
@@ -1447,7 +1464,8 @@ img{
     color:#767676;
     cursor:pointer;
     background-color:#fff;
-    border:1px solid #e1e1e8;
+    border-left:1px solid #e1e1e8;
+    border-bottom:1px solid #e1e1e8;
     border-radius:0 4px 0 4px
 }
 .main-box{position:relative ;}

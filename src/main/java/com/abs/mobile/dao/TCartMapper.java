@@ -1,5 +1,8 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TCartKey;
 
@@ -22,4 +25,10 @@ public interface TCartMapper {
      * @return
      */
     long getCount(String openId);
+    /**
+     * 取得购车商品信息
+     * @param openId
+     * @return
+     */
+    List<Map<String, String>> getItemFromCart(String openId);
 }
