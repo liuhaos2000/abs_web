@@ -116,11 +116,13 @@ public class MobilePageController {
         
         return "mobile/item";
     }
+
     // order
     @RequestMapping("/order")
     public String toOrder() {
         return "mobile/order";
     }
+
     // 系统外
     @RequestMapping("/toWinXinShop")
     public String toWinXinShop(String pageCode,ModelMap map) {
