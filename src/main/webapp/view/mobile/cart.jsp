@@ -88,7 +88,8 @@ $(document).ready(function() {
     });
     //
     $("#jiesuan").click(function(){
-        location.href ="order_submit.html";
+        window.location.href='<%=request.getContextPath() %>'+
+        '/app/mobile/page/order'; 
     });
     // check change
     $(':checkbox').on('ifChanged', function(event){
@@ -142,6 +143,23 @@ function countTotal() {
         }
      }); 
     $("#total").html(total);
+        countTotal();
+    });
+    //
+    //btn-clipboard
+    $(".btn-clipboard").click(function(){
+    	var itemId = $(this).attr("itemid");
+    	var guige = $(this).attr("guige");
+    	var yanse = $(this).attr("yanse");
+    	delectItem(itemId,guige,yanse);
+    	countTotal();
+    }); 
+});
+
+function autoCheck() {
+	$(":checkbox").each(function(){
+		   $(this).iCheck('check');
+	});  
 }
 function delectItem(itemId,guige,yanse){
     $.ajax({    
