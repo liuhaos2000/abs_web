@@ -41,4 +41,17 @@ public class CartController extends BaseController {
         cartService.addItem(itemId, xinghao, yanse, shuliang);
         return request;
     }
+    
+    /**
+     * 删除
+     * @return
+     */
+    @RequestMapping("/delItemFromCart")
+    @ResponseBody
+    public Result delItemFromCart(String itemId,String guige,
+    				String yanse) {
+        Result request = new Result();
+        cartService.delItemFromCart(itemId, guige, yanse);
+        return request;
+    }
 }

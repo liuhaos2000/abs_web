@@ -74,6 +74,9 @@ public class CartServiceImpl implements CartService {
 		return count;
 	}
 
+	/**
+	 * 取得购物车商品
+	 */
     @Override
     public Map<String, Object> getCartItem() {
         Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -85,10 +88,18 @@ public class CartServiceImpl implements CartService {
         return resultMap;
     }
 
+    /**
+     * 删除购物车商品
+     */
     @Override
     public int delItemFromCart(String itemId, String guige, String yanse) {
-        // TODO Auto-generated method stub
-        return 0;
+    	TUser user = sessionService.getLoginUser();
+    	TCartKey key = new TCartKey();
+    	key.setItemId(Integer.valueOf(itemId));
+    	key.setItemGuige(Integer.valueOf(guige));
+    	key.setItemYanse(Integer.valueOf(yanse));
+    	key.setOpenId(user.getOpenId());
+    	return tCartMapper.deleteByPrimaryKey(key);
     }
 
 }

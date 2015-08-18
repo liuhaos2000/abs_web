@@ -18,16 +18,13 @@
 
 	<div id="main_div">
 	    <div class="container ">
-            <c:forEach items="${result.itemList}" var="item">
-                <div class="row cart-item-row">
+            <c:forEach items="${result.itemList}" var="item"  varStatus="status">
+                <div class="row cart-item-row" recordkey="cartitem${status.index}">
                     <div class="col-md-2 col-sm-2 col-xs-2 cart-col-box cart-col-checkbox">
                        <div class="cart-col-checkbox2">
                             <input type="checkbox" 
-                                   itemid="${item.item_id}" 
-                                   guige="${item.item_guige}" 
-                                   yanse="${item.item_yanse}"
                                    price="${item.sale_price}"
-                                   shuliang="${item.shuliang}">
+                                   recordkey="cartitem${status.index}">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 cart-col-box">
@@ -38,13 +35,14 @@
                         <p class="cart_item_price p-no-bottom">￥${item.sale_price}</p>
                             <div class="btn-group" role="group" >
                                 <button type="button" name="jian_bt" class="btn btn-default btn-xs">-</button>
-                                <button type="button" class="btn btn-default btn-xs">${item.shuliang}</button>
+                                <button type="button" recordkey="cartitem${status.index}" class="btn btn-default btn-xs">${item.shuliang}</button>
                                 <button type="button" name="add_bt" class="btn btn-default btn-xs">+</button>
                             </div>
                             <span class="btn-clipboard" 
                                    itemid="${item.item_id}" 
                                    guige="${item.item_guige}" 
-                                   yanse="${item.item_yanse}">x</span>
+                                   yanse="${item.item_yanse}"
+                                   recordkey="cartitem${status.index}">x</span>
                     </div>
                 </div>
             </c:forEach>
@@ -133,6 +131,50 @@ function countTotal() {
         }
      }); 
     $("#total").html(total);
+        countTotal();
+    });
+    //
+    //btn-clipboard
+    $(".btn-clipboard").click(function(){
+    	var itemId = $(this).attr("itemid");
+    	var guige = $(this).attr("guige");
+    	var yanse = $(this).attr("yanse");
+    	delectItem(itemId,guige,yanse);
+    	countTotal();
+    }); 
+});
+
+function autoCheck() {
+	$(":checkbox").each(function(){
+		   $(this).iCheck('check');
+	});  
+}
+function countTotal() {
+	var total=0;
+    $(":checkbox").each(function(){
+        if($(this).prop("checked")==true){
+        	var key = $(this).attr("recordkey");
+        	total = total+$(this).attr("price") * $("button[recordkey = "+ key +"]").text();
+        }else{
+        }
+     }); 
+    $("#total").html(total);
+}
+function delectItem(itemId,guige,yanse){
+    $.ajax({    
+        url:UrlConfig.delItemToCart,// 跳转到 action    
+        data:{itemId:itemId,guige:guige,yanse:yanse},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+                window.location.href='<%=request.getContextPath() %>'+
+                '/app/mobile/page/cart'; 
+            }else{
+            }
+         }
+    }); 
 }
         </script>
 </body>
