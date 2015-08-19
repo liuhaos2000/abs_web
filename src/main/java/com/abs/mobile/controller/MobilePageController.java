@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
@@ -119,7 +120,7 @@ public class MobilePageController {
 
     // order
     @RequestMapping("/order")
-    public String toOrder() {
+    public String toOrder(List<TCart> itemList,ModelMap map) {
         return "mobile/order";
     }
 

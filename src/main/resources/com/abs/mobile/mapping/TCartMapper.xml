@@ -156,7 +156,6 @@
 	from t_cart 
 	WHERE
    		open_id =#{openId}
-   		and del_flg='0'
   </select>
   <select id="getItemFromCart" resultType="map" parameterType="java.lang.String" >
             select  
@@ -195,7 +194,6 @@
                          t4.picture_type='3'
                          and t4.del_flg='0'
                          and t1.open_id=#{openId}
-                         and t1.del_flg='0'
                          and t2.del_flg='0'
                          and t2.shangjia_flg='1'
                          and t3.shuliang>=t1.shuliang

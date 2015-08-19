@@ -46,7 +46,6 @@
                     </div>
                 </div>
             </c:forEach>
-
 		</div>
 	</div>
 
@@ -57,7 +56,7 @@
 					<p class="foot-text">总价：<span id="total">210</span>元</p>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-					<button id="jiesuan" class="btn btn-success a-btn" type="button">结算</button>
+					<button id="jiesuan_bt" class="btn btn-success a-btn" type="button">结算</button>
 				</div>
 			</div>
 		</div>
@@ -86,9 +85,10 @@ $(document).ready(function() {
         autoCheck();
         countTotal();
     });
-    //
-    $("#jiesuan").click(function(){
-        location.href ="order_submit.html";
+    // 结算
+    $("#jiesuan_bt").click(function(){
+    	var list = getSubmitItem();
+    	
     });
     // check change
     $(':checkbox').on('ifChanged', function(event){
