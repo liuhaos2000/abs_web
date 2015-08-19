@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,6 +106,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>	
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>	
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -112,24 +115,28 @@ var UrlConfig = {
     
             $(document).ready(function() {
                  $("#home-bt").click(function(){
+                	 loadshow('${path}');
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
                 			'/app/mobile/page/home');
                 	 $('.footer-block a').removeClass("active");
                 	 $(this).addClass("active");
                  }); 
                  $("#type-bt").click(function(){
+                	 loadshow('${path}');
                      $('#main_div').load('<%=request.getContextPath() %>' +
                              '/app/mobile/page/type'); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
                  $("#huiyuan-bt").click(function(){
+                	 loadshow('${path}');
                      $('#main_div').load('<%=request.getContextPath() %>' +
                              '/app/mobile/page/huiyuan'); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
                  $("#cart-bt").click(function(){
+                	 loadshow('${path}');
                 	 window.location.href='<%=request.getContextPath() %>'+
                 	         '/app/mobile/page/cart'; 
                  });

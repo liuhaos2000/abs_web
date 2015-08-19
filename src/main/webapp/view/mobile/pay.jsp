@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>购物车</title>
+	<title>支付</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -28,9 +28,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 cart-col-box">
-                    	<a href="${path}/app/mobile/page/item?itemId=${item.item_id}">
-                        	<img class="cart-img" src="${item.path}" alt="">
-                        </a>
+                        <img class="cart-img" src="${item.path}" alt="">
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 cart-col-box cart-col-info">
                         <p class="cart_item_name p-no-bottom">${item.item_name}${item.guige_text}${item.yanse_text}</p>

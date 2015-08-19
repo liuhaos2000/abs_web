@@ -154,6 +154,13 @@
                   </div>
           </div>
              </div>
+             
+             
+             
+
+             
+             
+             
     </div>
     <footer class="tool_foot">
         <div class="container footer itme_detail_top">
@@ -174,6 +181,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -217,7 +225,7 @@ $(document).ready(function() {
     		if("${result.xinghao.size()}" > 1){
     	    	var val=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
     	    	if(val==null){
-    	    		alert("请选择型号");
+    	    		myalert("请选择型号","main_div");
     	    		return false;
     			}else{
     				xinghao=val;
@@ -226,7 +234,7 @@ $(document).ready(function() {
     		if("${result.yanse.size()}" > 1){
     	    	var val=$('input:radio[name="yanse"]:checked').attr('yanseId');
     	    	if(val==null){
-    	    		alert("请选择颜色");
+    	    		myalert("请选择颜色","main_div");
     	    		return false;
     			}else{
     				yanse=val;

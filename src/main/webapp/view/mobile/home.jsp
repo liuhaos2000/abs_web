@@ -54,6 +54,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>  
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>  
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
