@@ -22,6 +22,7 @@ import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
+import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.TypeService;
 import com.abs.util.commom.AbsTool;
 
@@ -39,6 +40,8 @@ public class MobilePageController {
     private ItemService itemService;
     @Resource
     private CartService cartService;
+    @Resource
+    private OrderService orderService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -125,11 +128,10 @@ public class MobilePageController {
     @RequestMapping("/order")
     public String toOrder(String cartItem,ModelMap map) {
         JSONArray json = JSONArray.fromObject(cartItem);
-        @SuppressWarnings({ "unchecked", "unused" })
+        @SuppressWarnings("unchecked")
         List<TCart> cartList = (List<TCart>)JSONArray.toList(json, TCart.class);
-        
-        
-        
+        Map<String, Object> result = orderService.initOrder(cartList);
+        map.put("result", result);
         return "mobile/order";
     }
 

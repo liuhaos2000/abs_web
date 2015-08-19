@@ -1,6 +1,7 @@
 package com.abs.mobile.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor=Exception.class) 
     public Map<String, Object> initOrder(List<TCart> cartList) {
-        
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        for(TCart tcart : cartList){
+            if(tcart==null){
+                resultMap.put("message", "没有购物数据！");
+                return resultMap;
+            }
+        }
+        // 没有图片信息。。。
+        resultMap.put("cartList", cartList);
         TUser user=sessionService.getLoginUser();
         Date date = new Date();
         //更新Cart到数据库
@@ -55,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
         //邮件模板
         //积分 TODO
         
-        return null;
+        return resultMap;
     }
 
 
