@@ -175,7 +175,7 @@
                                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906172">
                                         <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
                                             <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
-                                        </div>
+                                        </div> 
                                         <div class="col-md-10 col-sm-10 col-xs-10 order-container">
                                             <div class="order-p">
                                                 
