@@ -172,53 +172,40 @@
                         <div class="accordion-group">
                             <div class="accordion-inner">
                                     <div class="row">
-                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906172">
-                                        <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
-                                            <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
-                                        </div> 
-                                        <div class="col-md-10 col-sm-10 col-xs-10 order-container">
-                                            <div class="order-p">
-                                                
-                                                    购物清单
-                                               
-                                            </div>
-                                             </a>
-                                        </div>
+                                        <a class="accordion-toggle collapsed" 
+                                                data-toggle="collapse" 
+                                                data-parent="#accordion-483788" 
+                                                href="#accordion-element-906172"
+                                                aria-expanded="true">
+                                            <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
+                                                <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
+                                            </div> 
+                                            <div class="col-md-10 col-sm-10 col-xs-10 order-container">
+                                                    <p class="p-no-bottom order-ad-left">购物清单</p>
+                                                 </div>
+                                        </a>
                                     </div>
                             </div>
-                            <div id="accordion-element-906172" class="accordion-body collapse">
+                            <div id="accordion-element-906172" class="accordion-body collapse in">
                                 <div class="accordion-inner">
                                     <div class="row order-item-row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">
-                                            <img class="cart-img" src="img/15901_60.png" alt="">
+                                            <img class="order-item-img" src="${path}/resources/images/15901_60.png" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">
-                                            <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button type="button" class="btn btn-default">10个</button>
-                                                </div>
+                                            <p class="order-ad-right p-no-bottom">三星AS9000 双卡双待/2G内存/16G</p>
+                                            <p class="cart_item_price p-no-bottom f-left">￥123.00</p>
+                                            <p class="order-ad-right p-no-bottom f-left">&nbsp;x&nbsp;10个</p>
                                         </div>
                                     </div>
                                     <div class="row order-item-row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">
-                                            <img class="cart-img" src="img/15901_60.png" alt="">
+                                            <img class="order-item-img" src="${path}/resources/images/15901_60.png" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">
-                                            <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button type="button" class="btn btn-default">10个</button>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="row order-item-row">
-                                        <div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">
-                                            <img class="cart-img" src="img/15901_60.png" alt="">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">
-                                            <p class="item_list_name">三星AS9000 双卡双待/2G内存/16G</p>
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button type="button" class="btn btn-default">10个</button>
-                                                </div>
+                                            <p class="order-ad-right p-no-bottom">三星AS9000 双卡双待/2G内存/16G</p>
+                                            <p class="cart_item_price p-no-bottom f-left">￥123.00</p>
+                                            <p class="order-ad-right p-no-bottom f-left">&nbsp;x&nbsp;10个</p>
                                         </div>
                                     </div>
                                 </div>
@@ -227,16 +214,16 @@
                         <div class="accordion-group">
                             <div class="accordion-inner">
                                     <div class="row">
+                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906173">
                                         <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
                                             <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10 order-container">
                                             <div class="order-p">
-                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906173">
-                                                    送货方式：圆通快递(10.00元)
-                                                </a>
+                                                    <p class="p-no-bottom order-ad-left">送货方式：圆通快递(10.00元)</p>
                                             </div>
                                         </div>
+                                      </a>  
                                     </div>
                             </div>
                             <div id="accordion-element-906173" class="accordion-body collapse">
@@ -248,16 +235,16 @@
                         <div class="accordion-group">
                             <div class="accordion-inner">
                                     <div class="row">
+                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906174">
                                         <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
                                             <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10 order-container">
                                             <div class="order-p">
-                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906174">
-                                                    可用积分：20
-                                                </a>
+                                                    <p class="p-no-bottom order-ad-left">可用积分：20</p>
                                             </div>
                                         </div>
+                                      </a>
                                     </div>
                             </div>
                             <div id="accordion-element-906174" class="accordion-body collapse">
@@ -270,12 +257,16 @@
                             <div class="accordion-heading">
                                 <div class="row order-totle-row">
                                     <div class="col-md-1 col-sm-1 col-xs-1"></div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">商品总价：</div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <p class="p-no-bottom order-ad-left">商品总价：</p>
+                                    </div>
                                     <div class="col-md-2 col-sm-2 col-xs-2">100.00</div>
                                 </div>
                                 <div class="row  order-totle-row">
                                     <div class="col-md-1 col-sm-1 col-xs-1"></div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">运费：</div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                       <p class="p-no-bottom order-ad-left">运费：</p>
+                                    </div>
                                     <div class="col-md-2 col-sm-2 col-xs-2">100.00</div>
                                 </div>
                             </div>
@@ -383,13 +374,13 @@
     </div>
 
     <footer class="tool_foot">
-        <div class="container">
+        <div class="container footer itme_detail_top">
             <div class="row footer-row">
                 <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-                    <p class="foot-text">总价：210元</p>
+                    <p class="foot-text">总价：<span id="total">210</span>元</p>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-                    <button class="btn btn-success a-btn" type="button">微信支付</button>
+                    <button id="zhifu_bt" class="btn btn-success a-btn" type="button">支付</button>
                 </div>
             </div>
         </div>

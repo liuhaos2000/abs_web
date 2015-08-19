@@ -1305,6 +1305,9 @@ img{
 	font-size:0.8em;
 	text-align:left;
 }
+.page-bt{
+	margin: 10px 0 10px 0;
+}
 
 /* 商品列表页面*/
 .tool_top{
@@ -1479,6 +1482,7 @@ img{
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
 	border-radius:4px;
+	background-color: #FFFFFF;
 }
 .accordion-heading{border-bottom:0;}
 .accordion-heading .accordion-toggle{display:block;padding:8px 15px;}
@@ -1488,9 +1492,27 @@ img{
 .order-container{
 	padding-left:0 !important;
 	padding-right:0 !important;
+	
 }
-.order-p{
-padding-right:25px !important;
+.o-ad{
+	border: 6px dashed #B59DF7;
+}
+.od-ad-row{
+	border-bottom: 1px solid #B7B7B7;
+	margin-bottom: 10px;
+}
+.order-ad-left{
+    font-family:'SimHei',sans-serif;
+    color:#000000;
+    font-size:1.0em;
+    font-weight :bold;
+}
+.order-ad-right{
+    padding-right:15px !important;
+    padding-left:5px !important;
+    font-family:'SimHei',sans-serif;
+    color:#000000;
+    font-size:1.0em;
 }
 .order-icon-col{
 	position: relative;
@@ -1512,8 +1534,20 @@ padding-right:25px !important;
 .address-new-bt{
 	text-align:center;
 }
+
+.order-item-img{
+    width: 72px;
+    height:72px;
+}
+.f-left{
+	float: left;
+}
 .order-item-row{
 	overflow:hidden;
+	padding:10px 0 10px 0;
+	border-bottom: 1px solid #B7B7B7;
+	border-top: 1px solid #B7B7B7;
+	margin-top: -1px;
 }
 .order-totle-row{
 	margin-left:0px !important;

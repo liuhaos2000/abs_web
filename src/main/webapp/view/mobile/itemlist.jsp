@@ -54,9 +54,9 @@
             </c:forEach>
         </table>
         <div class="container">
-            <div class="row">
+            <div class="row page-bt">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-no-pad">
-                    <button id="fanye_bt" class="btn btn-block btn-mini btn-info" type="button">点击加载更多</button>
+                    <button id="fanye_bt" class="btn btn-block btn-default btn-sm" type="button">点击加载更多</button>
                 </div>
             </div>
         </div>
