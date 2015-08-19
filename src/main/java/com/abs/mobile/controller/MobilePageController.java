@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -120,7 +123,13 @@ public class MobilePageController {
 
     // order
     @RequestMapping("/order")
-    public String toOrder(List<TCart> itemList,ModelMap map) {
+    public String toOrder(String cartItem,ModelMap map) {
+        JSONArray json = JSONArray.fromObject(cartItem);
+        @SuppressWarnings({ "unchecked", "unused" })
+        List<TCart> cartList = (List<TCart>)JSONArray.toList(json, TCart.class);
+        
+        
+        
         return "mobile/order";
     }
 

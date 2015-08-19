@@ -209,4 +209,11 @@
     where open_id = #{openId,jdbcType=VARCHAR}
       and address_id = #{addressId,jdbcType=INTEGER}
   </update>
+  <select id="getUserAddress" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_address
+    where open_id = #{openId}
+    order by addressId DESC
+  </select>
 </mapper>

@@ -46,6 +46,9 @@
                     </div>
                 </div>
             </c:forEach>
+            <form id="cartForm" action="/abs_web/app/mobile/page/order" method="post">
+                <input type="hidden" id="cartItem" name="cartItem" >
+            </form>
 		</div>
 	</div>
 
@@ -87,7 +90,12 @@ $(document).ready(function() {
     });
     // 结算
     $("#jiesuan_bt").click(function(){
-    	var list = getSubmitItem();
+    	var parm = getSubmitItem();
+    	if(parm==0){
+    		alert("购物车是空的!");
+    	}
+    	$("#cartItem").val(parm);
+    	$("#cartForm").submit();
     	
     });
     // check change
@@ -158,6 +166,35 @@ function delectItem(itemId,guige,yanse){
             }
          }
     }); 
+}
+function getSubmitItem(){
+	var list = new Array();
+	$(":checkbox").each(function(){
+	    var key = $(this).attr("recordkey");
+		var itemId = $(".btn-clipboard[recordkey = "+ key +"]").attr("itemid");
+		var itemGuige=$(".btn-clipboard[recordkey = "+ key +"]").attr("guige");
+		var itemYanse=$(".btn-clipboard[recordkey = "+ key +"]").attr("yanse");
+		//数量
+		var shuliang = $("button[recordkey = "+ key +"]").text();
+        //FLG
+        var delFlg;
+		if($(this).prop("checked")==true){
+			delFlg='1';
+		}else{
+			delFlg='0';
+		}
+		
+		list.push({itemId: itemId,
+              itemGuige: itemGuige,
+              itemYanse: itemYanse,
+              shuliang: shuliang,
+              delFlg: delFlg}); 
+    }); 
+	//alert(JSON.stringify(list));
+	if(list.length==0){
+		return 0;
+	}
+	return JSON.stringify(list);
 }
         </script>
 </body>
