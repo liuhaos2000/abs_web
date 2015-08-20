@@ -90,4 +90,18 @@
       agency_id = #{agencyId,jdbcType=SMALLINT}
     where region_id = #{regionId,jdbcType=SMALLINT}
   </update>
+  <!-- 取地址一级 -->
+  <select id="getRegion1" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_region
+    where region_type='1'
+  </select>
+    <!-- 取地址二三级 -->
+  <select id="getRegion2" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_region
+    where parent_id=#{param1}
+  </select>
 </mapper>

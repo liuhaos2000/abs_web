@@ -214,6 +214,6 @@
     <include refid="Base_Column_List" />
     from t_user_address
     where open_id = #{openId}
-    order by addressId DESC
+    order by del_flg DESC, address_id DESC
   </select>
 </mapper>

@@ -1553,6 +1553,9 @@ img{
 	margin-left:0px !important;
 	margin-right:0px !important;
 }
+.new-ad{
+	margin-top: 6px;
+}
 .btn-mini{padding:0 6px;font-size:10.5px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 /*地址*/
 .adderss_name{
@@ -1632,6 +1635,14 @@ img{
 -webkit-transform: translateX(-50%) translateY(-50%);
 -moz-transform: translateX(-50%) translateY(-50%);
 -ms-transform: translateX(-50%) translateY(-50%);
+}
+
+.modal-right{
+	padding: 0 0 0 0;
+	margin-left: -10px; 
+}
+.modal-left{
+	margin-top: 14px;
 }
 
 /*旋转*/
@@ -1746,5 +1757,5 @@ img{
 	top:0;
 	height:100%;
 	width:100%;
-	background:rgba(101,101,101,0);
+	background:rgba(101,101,101,1);
 }

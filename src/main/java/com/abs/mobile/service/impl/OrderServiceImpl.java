@@ -41,11 +41,9 @@ public class OrderServiceImpl implements OrderService {
                 return resultMap;
             }
         }
-        // 没有图片信息。。。
-        resultMap.put("cartList", cartList);
         TUser user=sessionService.getLoginUser();
         Date date = new Date();
-        //更新Cart到数据库
+        //1 更新Cart到数据库
         for(TCart tcart : cartList){
             TCartKey key = new TCartKey();
             key.setItemId(tcart.getItemId());
@@ -57,12 +55,26 @@ public class OrderServiceImpl implements OrderService {
             dbCart.setDelFlg(tcart.getDelFlg());
             dbCart.setuDate(date);
             dbCart.setuUser("TOORDER");
+            tCartMapper.updateByPrimaryKey(dbCart);
         }
-        //取得用户地址
+        //1.1返回商品清单
+        List<Map<String, String>> itemlist = tCartMapper.getItemFromCart(user.getOpenId());
+        if(itemlist.size()>0){
+        	for(int i=0;i<itemlist.size();i++){
+        		// list中删除未选中的商品
+        		if(!("1".equals(itemlist.get(i).get("del_flg")))){  
+        			itemlist.remove(i);  
+        			i=i-1;
+                }  
+        	}
+        }
+        resultMap.put("itemlist", itemlist);
+        //2取得用户地址
+        List<TUserAddress> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
+        resultMap.put("uadList", uadList);
         //tUserAddressMapper
-        //取得购物信息？已经有了？
-        //邮件模板
-        //积分 TODO
+        //3邮件模板
+        //4积分 TODO
         
         return resultMap;
     }
