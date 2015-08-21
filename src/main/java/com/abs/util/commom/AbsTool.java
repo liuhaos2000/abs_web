@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import org.apache.commons.lang.StringUtils; 
 
 public class AbsTool {
 	/**
@@ -43,5 +44,18 @@ public class AbsTool {
 		}
 		return list;
 	}
+	
+	/**
+	 * tel check
+	 * @param parm
+	 * @return
+	 */
+	public static boolean checkTel(String tel) {
+		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");  
+		Matcher m = p.matcher(tel);  
+		return m.matches();
+	}
+	
+ 
 
 }

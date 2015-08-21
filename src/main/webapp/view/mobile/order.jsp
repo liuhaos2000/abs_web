@@ -28,13 +28,13 @@
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-md-3 col-sm-3 col-xs-3 control-label modal-left">姓名：</label>
                                 <div class="col-md-8 col-sm-8 col-xs-8 modal-right">
-                                  <input type="text" class="form-control" id="inputPassword3" placeholder="请填写姓名">
+                                  <input id="mailName" type="text" class="form-control" id="inputPassword3" placeholder="请填写姓名">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-md-3 col-sm-3 col-xs-3 control-label modal-left">电话：</label>
                                 <div class="col-md-8 col-sm-8 col-xs-8 modal-right">
-                                  <input type="text" class="form-control" id="inputPassword3" placeholder="收件人电话">
+                                  <input id="mailTel" type="text" class="form-control" id="inputPassword3" placeholder="收件人电话">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,6 +42,9 @@
                                 <div class="col-md-8 col-sm-8 col-xs-8 modal-right">
                                   <select id="ad1" class="form-control">
                                         <option value="">请选择</option>
+                                        <c:forEach items="${result.regionList}" var="item" >
+                                        	<option value="${item.regionId}">${item.regionName}</option>
+                                        </c:forEach>
                                   </select>
                                 </div>
                             </div>
@@ -64,13 +67,13 @@
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-md-3 col-sm-3 col-xs-3 control-label modal-left">详细：</label>
                                 <div class="col-md-8 col-sm-8 col-xs-8 modal-right">
-                                  <input type="text" class="form-control" id="inputEmail3" placeholder="详细地址">
+                                  <input id="ad4" type="text" class="form-control" id="inputEmail3" placeholder="详细地址">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-md-3 col-sm-3 col-xs-3 control-label modal-left"></label>
                                 <div class="col-md-8 col-sm-8 col-xs-8 modal-right">
-                                  <input type="checkbox"> 默认收货地址
+                                  <input id="morenFlg" type="checkbox"> 默认收货地址
                                 </div>
                             </div>
                          </form>
@@ -82,10 +85,10 @@
                 </div>
             </div>
         </div>
-   
-   
-   
     <!-- Modal End -->
+   
+   
+
     <div id="main_div" class="maindiv">
         <div class="container-fluid order-container">
             <div class="row-fluid">
@@ -102,13 +105,14 @@
                                         	<!-- 如果有地址 开始 -->
                                         	<c:choose>
    												<c:when test="${result.uadList.size()> 0}">
-                                                    <div class="container">
+                                                    <div class="container" name="head-address">
                                                         <div class="row">
+                                                        	<input type="hidden" id="head-adid" value="${result.uadList[0].address_id}">
                                                             <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
                                                                 <p class="p-no-bottom order-ad-left">收件人:</p> 
                                                             </div>
                                                             <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                                <p class="p-no-bottom order-ad-right">${result.uadList[0].name}</p> 
+                                                                <p class="p-no-bottom order-ad-right" id="head-name">${result.uadList[0].name}</p> 
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -116,20 +120,17 @@
                                                                 <p class="p-no-bottom order-ad-left ">地址:</p> 
                                                             </div>
                                                             <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                                <p class="p-no-bottom order-ad-right">
-                                                                  ${result.uadList[0].regionName1}
-                                                                  ${result.uadList[0].regionName2}
-                                                                  ${result.uadList[0].regionName3}
-                                                                  ${result.uadList[0].addressDetail}
+                                                                <p class="p-no-bottom order-ad-right" id="head-ad">
+                                                                  ${result.uadList[0].adname1}${result.uadList[0].adname2}${result.uadList[0].adname3}${result.uadList[0].address_detail}
                                                                 </p> 
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                                <p class="p-no-bottom order-ad-left">电话:</p> 
+                                                                <p class="p-no-bottom order-ad-left" >电话:</p> 
                                                             </div>
                                                             <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                                <p class="p-no-bottom order-ad-left">
+                                                                <p class="p-no-bottom order-ad-right" id="head-tel">
                                                                 	${result.uadList[0].tel}
                                                                 </p> 
                                                             </div>
@@ -137,10 +138,10 @@
                                                     </div>
    												</c:when>
    												<c:otherwise> 
-   													<div class="container">
+   													<div class="container" name="head-address">
                                                 		<div class="row">
                                                 			<div class="col-md-12 col-sm-12 col-xs-12 new-ad">
-                                                       			 <button class="btn btn-default btn-block btn-lg address-new" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增地址</button>
+                                                       			 <button id="adnew_bt2" class="btn btn-default btn-block btn-lg address-new" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增地址</button>
                                                     		</div>
                                                 		</div>
                                                 	</div>
@@ -153,109 +154,65 @@
                                     </div>
                             </div>
                             <div id="accordion-element-588573" class="accordion-body collapse">
-                                <div class="accordion-inner">
-                                    <div class="row od-ad-row">
-                                        <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col">
-                                            <button class="btn btn-mini btn-default" type="button">改</button>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10 order-container">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">收件人:</p> 
+                                <div class="accordion-inner" name="body-address">
+                                    <!-- dizhi start -->
+                                    <c:forEach items="${result.uadList}" var="item" varStatus="status">
+                                        <div class="row od-ad-row">
+                                            <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col">
+                                                <button class="btn btn-mini btn-default" 
+                                                        type="button"
+                                                        name="upd_adress"
+                                                        addressid="${item.address_id}"
+                                                        adname="${item.name}"
+                                                        ad1="${item.adname1}"
+                                                        ad2="${item.adname2}"
+                                                        ad3="${item.adname3}"
+                                                        ad4="${item.address_detail}"
+                                                        tel="${item.tel}">改</button>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10 col-xs-10 order-container" 
+                                                     name="addiv"
+                                                     adid="${item.address_id}"
+                                                     adname="${item.name}"
+                                                     ad1="${item.adname1}"
+                                                     ad2="${item.adname2}"
+                                                     ad3="${item.adname3}"
+                                                     ad4="${item.address_detail}"
+                                                     tel="${item.tel}">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-left">收件人:</p> 
+                                                        </div>
+                                                        <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-right">${item.name}</p> 
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">刘浩</p> 
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-left ">地址:</p> 
+                                                        </div>
+                                                        <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-right">
+                                                            ${item.adname1}${item.adname2}${item.adname3}${item.address_detail}</p> 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left ">地址:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">重庆市渝中区大坪石油路2号7栋1-3石油路2号7栋1-3</p> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">电话:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">13800001111</p> 
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-left">电话:</p> 
+                                                        </div>
+                                                        <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
+                                                            <p class="p-no-bottom order-ad-right">${item.tel}</p> 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row od-ad-row">
-                                        <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col">
-                                            <button class="btn btn-mini btn-default" type="button">改</button>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10 order-container">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">收件人:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">刘浩</p> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left ">地址:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">重庆市渝中区大坪石油路2号7栋1-3石油路2号7栋1-3</p> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">电话:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">13800001111</p> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row od-ad-row">
-                                        <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col">
-                                            <button class="btn btn-mini btn-default" type="button">改</button>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10 order-container">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">收件人:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">刘浩</p> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left ">地址:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">重庆市渝中区大坪石油路2号7栋1-3石油路2号7栋1-3</p> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-left">电话:</p> 
-                                                    </div>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">
-                                                        <p class="p-no-bottom order-ad-right">13800001111</p> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
+                                    <!-- dizhi end -->
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12 address-new-bt">
-                                            <button class="btn btn-default btn-block address-new" type="button" data-toggle="modal" data-target="#myModal">新增地址</button>
+                                            <button id="adnew_bt1" class="btn btn-default btn-block address-new" type="button" data-toggle="modal" data-target="#myModal">新增地址</button>
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +246,7 @@
                                         	<div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">
                                          	  <p class="order-ad-right p-no-bottom">${item.item_name}_${item.guige_text}_${item.yanse_text}</p>
                                           	  <p class="cart_item_price p-no-bottom f-left">￥${item.sale_price}</p>
-                                          	  <p class="order-ad-right p-no-bottom f-left">&nbsp;x&nbsp;${item.shuliang}个</p>
+                                          	  <p class="order-ad-right p-no-bottom f-left">&nbsp;x${item.shuliang}</p>
                                           	  <c:set var="heji" value="${heji+(item.sale_price*item.shuliang)}"></c:set>
                                        		 </div>
                                    	    </div>
@@ -383,12 +340,19 @@
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/icheck.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
         getRegion:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel1',
         getRegion2:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel2',
+        saveAd:'<%=request.getContextPath() %>/app/mobile/useradress/saveAddress',
+        loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress'
     };
+//更新用
+var modal;
+var addressid;
+
 $(document).ready(function() {
     //
     $('input').iCheck({
@@ -402,23 +366,32 @@ $(document).ready(function() {
         $("#main_div").css({"overflow":"auto"});
         // 合计
         $("#total").html("${heji}");
+        // 绑定单击事件
+        bindEvent();
     });
     //
     $("#queding").click(function(){
         location.href ="order_submit.html";
     });
 	// 取一级地址
-    $('#myModal').on('show.bs.modal', function (e) {
-    	getRegion();
-    })
+    //$('#myModal').on('show.bs.modal', function (e) {
+    //});
     // 取二级地址
     $('#ad1').change(function(){
+    	$('#ad2').html('<option  value="">请选择</option>');
+    	$('#ad3').html('<option  value="">请选择</option>');
     	getRegion2($(this).val(),'ad2');
-    })
+    });
         // 取二级地址
     $('#ad2').change(function(){
+    	$('#ad3').html('<option  value="">请选择</option>');
     	getRegion2($(this).val(),'ad3');
-    })
+    });
+    //adnew_bt1
+    $('#save_bt').click(function(){
+    	saveAddress();
+    });
+    
 });
 function getRegion(){
     $.ajax({    
@@ -453,6 +426,222 @@ function getRegion2(parent,o){
             }
          }
     }); 
+}
+function clearModal(){
+	$('#mailName').val("");
+	$('#mailTel').val("");
+	$('#ad4').val("");
+	$('#ad2').html('<option  value="">请选择</option>');
+	$('#ad3').html('<option  value="">请选择</option>');
+	$('#morenFlg').iCheck('uncheck');
+	$('#ad1 option:first').attr('selected','selected');
+}
+function saveAddress(){
+	var checkflg;
+	if($('#morenFlg').prop("checked")==true){
+		checkflg='1';
+	}else{
+		checkflg='0';
+	}
+    $.ajax({
+        url:UrlConfig.saveAd, 
+        data:{regionName1:$('#ad1').val(),
+        	  regionName2:$('#ad2').val(),
+        	  regionName3:$('#ad3').val(),
+        	  addressDetail:$('#ad4').val(),
+        	  name:$('#mailName').val(),
+        	  tel:$('#mailTel').val(),
+        	  delFlg:checkflg,
+        	  mode:modal,
+        	  addressId:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	if(result.data.mode=='UPD'){
+            	}else if(result.data.mode=='ADD'){
+            	}
+            	//刷新
+            	refreshHead(result.data.udMap[0]);
+            	refreshList(result.data.uadList);
+            	//收缩页面
+            	$("#accordion-element-588573").collapse('hide');
+                $("#main_div").scrollTop(0);
+                // 绑定单击事件
+				bindEvent();
+                // 关闭模态窗口
+                $('#myModal').modal('hide');
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    }); 
+}
+function loadUpdAddress(addressid){
+    $.ajax({    
+        url:UrlConfig.loadUpdAdress, 
+        data:{addressid:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	var userAddress = result.data.userAddress;
+            	
+            	$('#ad1').val(userAddress.regionName1);
+            	//$('#ad2').val(userAddress.regionName2);
+            	//$('#ad3').val(userAddress.regionName3);
+            	$('#ad4').val(userAddress.addressDetail);
+            	$('#mailName').val(userAddress.name);
+            	$('#mailTel').val(userAddress.tel);
+            	
+            	var region2 = result.data.region2;
+            	var region3 = result.data.region3;
+            	//二级地址
+            	for (var i = 0; i < region2.length; i++) {
+            		$("#ad2").append('<option value="'+region2[i].regionId+'">'+region2[i].regionName+'</option>');
+            	}
+            	$('#ad2').val(userAddress.regionName2);
+            	// 三级地址
+            	for (var i = 0; i < region3.length; i++) {
+            		$("#ad3").append('<option value="'+region3[i].regionId+'">'+region3[i].regionName+'</option>');
+            	}
+            	$('#ad3').val(userAddress.regionName3);
+            	// 默认
+            	if(userAddress.delFlg=='1'){
+            		$('#morenFlg').iCheck('check');
+            	}else{
+            		$('#morenFlg').iCheck('uncheck');
+            	}
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    }); 
+}
+function bindEvent(){
+    $('div[name="addiv"]').bind("click",function(){
+    	//id="head-ad"
+    	$("#head-name").html($(this).attr("adname"));
+    	$("#head-ad").html($(this).attr("ad1")+$(this).attr("ad2")+
+    			$(this).attr("ad3")+$(this).attr("ad4"));
+    	$("#head-tel").html($(this).attr("tel"));
+    	$("#head-adid").val($(this).attr("adid"));
+    	$("#accordion-element-588573").collapse('hide');
+    	$("#main_div").scrollTop(0);
+    });
+    $('button[name="upd_adress"]').bind("click",function(){
+    	modal="UPD";
+    	addressid=$(this).attr("addressid");
+    	loadUpdAddress($(this).attr("addressid"));
+    	$('#myModal').modal('show');
+    });
+    $('#adnew_bt2').bind("click",function(event){
+    	modal="ADD";
+    	clearModal();
+    	//阻止事件冒泡
+    	//event.stopPropagation(); 
+    });
+    $('#adnew_bt1').bind("click",function(){
+    	modal="ADD";
+    	clearModal();
+    });
+}
+function refreshHead(item){
+	// 
+	$('div[name="head-address"]').html('<div class="row">                                                                 '+
+            '	<input type="hidden" id="head-adid" value="'+item.address_id+'">               '+
+            '    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-left">收件人:</p>                          '+
+            '    </div>                                                                        '+
+            '    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-right" id="head-name">'+item.name+'</p>    '+
+            '    </div>                                                                        '+
+            '</div>                                                                            '+
+            '<div class="row">                                                                 '+
+            '    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-left ">地址:</p>                           '+
+            '    </div>                                                                        '+
+            '    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-right" id="head-ad">                       '+
+            '          '+item.adname1+item.adname2+item.adname3+item.address_detail+'          '+
+            '        </p>                                                                      '+
+            '    </div>                                                                        '+
+            '</div>                                                                            '+
+            '<div class="row">                                                                 '+
+            '    <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-left" >电话:</p>                           '+
+            '    </div>                                                                        '+
+            '    <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">                           '+
+            '        <p class="p-no-bottom order-ad-right" id="head-tel">                      '+
+            '        	'+item.tel+'                                                           '+
+            '        </p>                                                                      '+
+            '    </div>                                                                        '+
+            '</div>                                                                            ');
+}
+function refreshList(list){
+	$('div[name="body-address"]').html('');
+	for(var i=0;i<list.length;i++){
+		$('div[name="body-address"]').append('<div class="row od-ad-row">                                                     '+
+                '    <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col">                     '+
+                '        <button class="btn btn-mini btn-default"                                '+
+                '                type="button"                                                   '+
+                '                name="upd_adress"                                               '+
+                '                addressid="'+list[i].address_id+'"                              '+
+                '                adname="'+list[i].name+'"                                       '+
+                '                ad1="'+list[i].adname1+'"                                       '+
+                '                ad2="'+list[i].adname2+'"                                       '+
+                '                ad3="'+list[i].adname3+'"                                       '+
+                '                ad4="'+list[i].address_detail+'"                                '+
+                '                tel="'+list[i].tel+'">改</button>                               '+
+                '    </div>                                                                      '+
+                '    <div class="col-md-10 col-sm-10 col-xs-10 order-container"                  '+
+                '             name="addiv"                                                       '+
+                '             adid="'+list[i].address_id+'"                                      '+
+                '             adname="'+list[i].name+'"                                          '+
+                '             ad1="'+list[i].adname1+'"                                          '+
+                '             ad2="'+list[i].adname2+'"                                          '+
+                '             ad3="'+list[i].adname3+'"                                          '+
+                '             ad4="'+list[i].address_detail+'"                                   '+
+                '             tel="'+list[i].tel+'">                                             '+
+                '        <div class="container">                                                 '+
+                '            <div class="row">                                                   '+
+                '                <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-left">收件人:</p>            '+
+                '                </div>                                                          '+
+                '                <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-right">'+list[i].name+'</p>  '+
+                '                </div>                                                          '+
+                '            </div>                                                              '+
+                '            <div class="row">                                                   '+
+                '                <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-left ">地址:</p>             '+
+                '                </div>                                                          '+
+                '                <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-right">                      '+
+                '                    '+list[i].adname1+list[i].adname2+list[i].adname3+list[i].address_detail+'</p> '+
+                '                </div>                                                          '+
+                '            </div>                                                              '+
+                '            <div class="row">                                                   '+
+                '                <div class="col-md-3 col-sm-3 col-xs-3 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-left">电话:</p>              '+
+                '                </div>                                                          '+
+                '                <div class="col-md-9 col-sm-9 col-xs-9 col-no-pad">             '+
+                '                    <p class="p-no-bottom order-ad-right">'+list[i].tel+'</p>   '+
+                '                </div>                                                          '+
+                '            </div>                                                              '+
+                '        </div>                                                                  '+
+                '    </div>                                                                      '+
+                '</div>');
+	}
+	$('div[name="body-address"]').append('<div class="row">                                                   '+
+            '    <div class="col-md-12 col-sm-12 col-xs-12 address-new-bt">      '+
+            '        <button id="adnew_bt1" class="btn btn-default btn-block     '+
+			'                   address-new" type="button" data-toggle="modal"   '+
+			'				   data-target="#myModal">新增地址</button>          '+
+            '    </div>                                                          '+
+            '</div>                                                              ');
 }
         </script>
 </body>

@@ -25,4 +25,7 @@ public class AbsConst {
             + "appid={0}&redirect_uri=http://mfbtest.duapp.com"
             + "{1}&response_type=code&scope=snsapi_base&state={2}#wechat_redirect";
 
+    
+    public static final String MODE_ADD = "ADD";
+    public static final String MODE_UPD = "UPD";
 }

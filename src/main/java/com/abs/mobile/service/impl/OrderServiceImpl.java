@@ -11,13 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abs.mobile.dao.TCartMapper;
+import com.abs.mobile.dao.TRegionMapper;
 import com.abs.mobile.dao.TUserAddressMapper;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TCartKey;
+import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.domain.TUserAddress;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
+import com.abs.mobile.service.UserAdderssService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     private SessionService sessionService;
     @Resource
     private TUserAddressMapper tUserAddressMapper;
+    @Resource
+    private TRegionMapper tRegionMapper;
+    
     /**
      * 订单初始化
      */
@@ -70,8 +76,11 @@ public class OrderServiceImpl implements OrderService {
         }
         resultMap.put("itemlist", itemlist);
         //2取得用户地址
-        List<TUserAddress> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
+        List<Map<String,String>> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
         resultMap.put("uadList", uadList);
+        
+        List<TRegion> regionList= tRegionMapper.getRegion1();
+        resultMap.put("regionList", regionList);
         //tUserAddressMapper
         //3邮件模板
         //4积分 TODO

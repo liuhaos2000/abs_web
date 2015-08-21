@@ -209,11 +209,67 @@
     where open_id = #{openId,jdbcType=VARCHAR}
       and address_id = #{addressId,jdbcType=INTEGER}
   </update>
-  <select id="getUserAddress" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user_address
-    where open_id = #{openId}
-    order by del_flg DESC, address_id DESC
+  <select id="getUserAddress" resultType="map" parameterType="java.lang.String" >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{openId}
+            order by t1.del_flg DESC,t1.address_id DESC
   </select>
+  <select id="getUserAddressInsert" resultType="map" parameterType="java.lang.String" >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{openId}
+            order by t1.address_id DESC LIMIT 0,1
+  </select>
+  <select id="getUserAddressUpdate" resultType="map"  >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{param1}
+            	and t1.address_id= #{param2}
+  </select>
+    <insert id="insertAddress" parameterType="com.abs.mobile.domain.TUserAddress" >
+      insert into t_user_address 
+   			 values (#{openId,jdbcType=VARCHAR}, 
+						ifnull((select max(t1.address_id)+1 
+										from t_user_address t1 
+										where t1.open_id=#{openId,jdbcType=VARCHAR} 
+										group by t1.open_id),1), 
+						#{country,jdbcType=VARCHAR}, 
+      					#{regionName1,jdbcType=VARCHAR},
+      					#{regionName2,jdbcType=VARCHAR}, 
+      					#{regionName3,jdbcType=VARCHAR}, 
+      					#{addressDetail,jdbcType=VARCHAR}, 
+      					#{name,jdbcType=VARCHAR}, 
+      					#{tel,jdbcType=VARCHAR}, 
+      					#{post,jdbcType=VARCHAR}, 
+      					#{delFlg,jdbcType=CHAR}, 
+      					#{cDate,jdbcType=TIMESTAMP}, 
+      					#{cUser,jdbcType=VARCHAR}, 
+      					#{uDate,jdbcType=TIMESTAMP}, 
+      					#{uUser,jdbcType=VARCHAR}
+      		)
+    </insert>
+    <update id="updAddressMoren" parameterType="java.lang.String" >
+    	update t_user_address
+    		set del_flg='0'
+		where open_id=#{openId}
+	</update>
 </mapper>
