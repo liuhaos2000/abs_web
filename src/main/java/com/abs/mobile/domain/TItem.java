@@ -35,6 +35,12 @@ public class TItem {
 
     private String shangjiaFlg;
 
+    private Integer fromArea;
+
+    private String frendTitle;
+
+    private String frendText;
+
     private String delFlg;
 
     private Date cDate;
@@ -173,6 +179,30 @@ public class TItem {
 
     public void setShangjiaFlg(String shangjiaFlg) {
         this.shangjiaFlg = shangjiaFlg == null ? null : shangjiaFlg.trim();
+    }
+
+    public Integer getFromArea() {
+        return fromArea;
+    }
+
+    public void setFromArea(Integer fromArea) {
+        this.fromArea = fromArea;
+    }
+
+    public String getFrendTitle() {
+        return frendTitle;
+    }
+
+    public void setFrendTitle(String frendTitle) {
+        this.frendTitle = frendTitle == null ? null : frendTitle.trim();
+    }
+
+    public String getFrendText() {
+        return frendText;
+    }
+
+    public void setFrendText(String frendText) {
+        this.frendText = frendText == null ? null : frendText.trim();
     }
 
     public String getDelFlg() {

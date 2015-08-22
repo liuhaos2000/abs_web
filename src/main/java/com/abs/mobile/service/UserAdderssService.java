@@ -33,4 +33,9 @@ public interface UserAdderssService {
      * @return
      */
 	public Map<String, Object> loadUpdAdress(String addressid);
+    /**
+     * 删除地址
+     * @return
+     */
+	public Map<String, Object> deleteAddress(String addressid);
 }

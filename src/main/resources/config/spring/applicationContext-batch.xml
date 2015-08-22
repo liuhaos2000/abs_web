@@ -16,7 +16,7 @@
 			http://www.springframework.org/schema/task/spring-task-3.2.xsd
 			">
 
-	<!-- 0 1 * * * ? -->
+	<!-- 0 1 * * * ? --> 
 	<task:scheduled-tasks>
 		<task:scheduled ref="accessTokenBatch" method="job1" cron="0 1 * * * ?" />
 	</task:scheduled-tasks>

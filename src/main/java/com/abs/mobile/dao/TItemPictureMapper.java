@@ -22,5 +22,5 @@ public interface TItemPictureMapper {
      * @param itemId
      * @return
      */
-    List<TItemPicture> getItemPictures(String itemId);
+    List<TItemPicture> getItemPictures(String itemId,String type);
 }

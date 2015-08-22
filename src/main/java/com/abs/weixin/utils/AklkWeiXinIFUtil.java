@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.abs.util.EmojiFilter;
 import com.abs.util.Log4jUtil;
 import com.abs.weixin.pojo.AccessToken;
+import com.abs.weixin.pojo.JsApiTicket;
 import com.abs.weixin.pojo.Menu;
 import com.abs.weixin.pojo.OpenId;
 import com.abs.weixin.pojo.WeixinUserInfo;
@@ -36,7 +37,8 @@ public class AklkWeiXinIFUtil {
 	// 获取access_token的接口地址（GET） 限200（次/天）
 	public static String access_token_url = 
 		"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
-
+	public static String jsapi_ticket_url = 
+		"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
 	// 菜单创建（POST） 限100（次/天）
 	public static String menu_create_url = 
 		"https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
@@ -112,7 +114,33 @@ public class AklkWeiXinIFUtil {
 		}
 		return accessToken;
 	}
+	/**
+	 * 获取access_token
+	 * 
+	 * @param appid
+	 *            凭证
+	 * @param appsecret
+	 *            密钥
+	 * @return
+	 */
+	public static JsApiTicket getJsApiTicket(String accessToken) {
+		JsApiTicket jsApiTicket = null;
 
+		String requestUrl = jsapi_ticket_url.replace("ACCESS_TOKEN", accessToken);
+		JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
+		// 如果请求成功
+		if (null != jsonObject) {
+			try {
+				jsApiTicket = new JsApiTicket();
+				jsApiTicket.setTicket(jsonObject.getString("ticket"));
+				jsApiTicket.setExpiresIn(jsonObject.getInt("expires_in"));
+			} catch (JSONException e) {
+				jsApiTicket = null;
+				System.err.println("JSAPI_TICKET取得失败");
+			}
+		}
+		return jsApiTicket;
+	}
 	/**
 	 * 发起https请求并获取结果
 	 * 

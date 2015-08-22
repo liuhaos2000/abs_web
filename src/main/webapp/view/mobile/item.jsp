@@ -28,7 +28,7 @@
         </div>
         <div class="container">
             <div class="row detail-name">
-                <p class="detail-name-p">${result.item.itemName}</p>
+                <p class="detail-name-p">${result.item.item_name}</p>
             </div>
             <div class="row detail-price">
             			<p class="detail-price-p">价额：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
@@ -157,9 +157,6 @@
              
              
              
-
-             
-             
              
     </div>
     <footer class="tool_foot">
@@ -182,6 +179,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -216,7 +214,7 @@ $(document).ready(function() {
     });
     // 加入购物车
     $("#addCart_bt").click(function(){
-    	var itemId = '${result.item.itemId}';
+    	var itemId = '${result.item.item_id}';
 		var xinghao=0;
 		var yanse=0;
     	var shuliang= $("#shuliang").text();
@@ -268,7 +266,7 @@ $(document).ready(function() {
     }); 
     
     $(":radio").change(function(){
-        var itemId = '${result.item.itemId}';
+        var itemId = '${result.item.item_id}';
         var xinghao=0;
         var yanse=0;
         if("${result.itemDetail.size()}" > 1){
@@ -287,6 +285,8 @@ $(document).ready(function() {
             }
         }
     }); 
+    
+
 });
 
 function addItemToCart(itemId,xinghao,yanse,shuliang) {
@@ -343,6 +343,34 @@ function getItemSalePrice(itemId,guige,yanse) {
           }
      }); 
 }
+
+//微信分享JDK--------------------<
+  wx.config({
+      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: '${result.signInfo.appId}', // 必填，公众号的唯一标识
+      timestamp:'${result.signInfo.timestamp}', // 必填，生成签名的时间戳
+      nonceStr: '${result.signInfo.nonceStr}', // 必填，生成签名的随机串
+      signature: '${result.signInfo.signature}',// 必填，签名，见附录1
+      jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+  });
+  wx.ready(function(){
+      wx.onMenuShareAppMessage({
+          title: '${result.item.frend_title}', // 分享标题
+          desc: '${result.item.frend_text}', // 分享描述
+          link: '${result.signInfo.url}', // 分享链接
+          imgUrl: '${result.item.path}', // 分享图标
+          success: function () { 
+          	alert('success');
+          },
+          cancel: function () { 
+              alert('cancel');
+          }
+        });
+  });
+  wx.error(function(){
+  });
+
+  //微信分享JDK-------------------->
 </script>
 </body>
 </html>

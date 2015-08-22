@@ -73,4 +73,18 @@ public class UserAdressController extends BaseController {
         request.setData(resultMap);
         return request;
     }
+    
+    /**
+     * 删除地址
+     * @return
+     * @throws BusinessException 
+     */
+    @RequestMapping("/deleteAddress")
+    @ResponseBody
+    public Result deleteAddress(String addressid) {
+        Result request = new Result();
+        Map<String,Object> resultMap = userAdderssService.deleteAddress(addressid);
+        request.setData(resultMap);
+        return request;
+    }
 }

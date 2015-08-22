@@ -20,6 +20,7 @@ import com.abs.mobile.domain.TItemDetail;
 import com.abs.mobile.domain.TItemPicture;
 import com.abs.mobile.domain.TItemXiaoliang;
 import com.abs.mobile.service.ItemService;
+import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsTool;
 
 @Service
@@ -35,24 +36,27 @@ public class ItemServiceImpl implements ItemService {
 	private TItemPingjiaMapper tItemPingjiaMapper;
 	@Resource
 	private TItemXiaoliangMapper tItemXiaoliangMapper;
-
+	@Resource
+	private SessionService sessionService;
 
 	@Override
 	public Map<String, Object> getItem(String itemId) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		// 商品基本信息取得
-		TItem item = tItemMapper.selectByPrimaryKey(Integer.valueOf(itemId));
-		// 是否下架 或者逻辑删除
-		if ("1".equals(item.getShangjiaFlg()) || "1".equals(item.getDelFlg())) {
-			resultMap.put("item", item);
-			String itemParm = item.getParm();
-			resultMap.put("itemParm", AbsTool.changeItemParm(itemParm));
-		} else {
+		List<Map<String, String>>  mapList = tItemMapper.getItemInfo(itemId, "3");
+		if(mapList.size()<1){
 			return null;
 		}
+		Map<String, String> itemMap = mapList.get(0); 
+		resultMap.put("item", itemMap);
+		// 产品参数转换
+		String itemParm = itemMap.get("parm");
+		resultMap.put("itemParm", AbsTool.changeItemParm(itemParm));
 		// 取得商品图片
-		List<TItemPicture> tupianList = tItemPictureMapper.getItemPictures(itemId);
+		List<TItemPicture> tupianList = tItemPictureMapper.getItemPictures(itemId,"2");
 		resultMap.put("tupianList", tupianList);
+		List<TItemPicture> tupianList3 = tItemPictureMapper.getItemPictures(itemId,"3");
+		resultMap.put("tupianList3", tupianList3);
 
 		// 取得详细信息
 		List<TItemDetail> itemDetail = tItemDetailMapper.getItemDetail(itemId);
@@ -79,7 +83,10 @@ public class ItemServiceImpl implements ItemService {
 		// 销量信息
 		TItemXiaoliang xiaoliang = tItemXiaoliangMapper.selectByPrimaryKey(Integer.valueOf(itemId));
 		resultMap.put("xiaoliang", xiaoliang);
-
+		
+		// JSAPI 签名信息
+		resultMap.put("signInfo", sessionService.getSignInfo("/mobile/page/item"));
+	
 		return resultMap;
 	}
 

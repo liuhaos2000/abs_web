@@ -80,6 +80,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button id="delete_ad_bt" type="button" class="btn btn-primary delete-ad-bt">删除</button>
                       <button id="save_bt" type="button" class="btn btn-primary">保存</button>
                     </div>
                 </div>
@@ -141,7 +142,12 @@
    													<div class="container" name="head-address">
                                                 		<div class="row">
                                                 			<div class="col-md-12 col-sm-12 col-xs-12 new-ad">
-                                                       			 <button id="adnew_bt2" class="btn btn-default btn-block btn-lg address-new" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增地址</button>
+                                                       			 <button id="adnew_bt2" 
+                                                       			 		 class="btn btn-default btn-block btn-lg address-new" 
+                                                       			 		 type="button" data-toggle="modal" 
+                                                       			 		 data-target="#myModal">
+                                                       			 		 <span class="glyphicon glyphicon-plus" aria-hidden="true">
+                                                       			 		 </span>新增地址</button>
                                                     		</div>
                                                 		</div>
                                                 	</div>
@@ -347,7 +353,8 @@ var UrlConfig = {
         getRegion:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel1',
         getRegion2:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel2',
         saveAd:'<%=request.getContextPath() %>/app/mobile/useradress/saveAddress',
-        loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress'
+        loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
+        deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress'
     };
 //更新用
 var modal;
@@ -391,7 +398,9 @@ $(document).ready(function() {
     $('#save_bt').click(function(){
     	saveAddress();
     });
-    
+    $('#delete_ad_bt').click(function(){
+    	deleteAddress();
+    });
 });
 function getRegion(){
     $.ajax({    
@@ -459,9 +468,6 @@ function saveAddress(){
         dataType:'json',    
         success:function(result) {
             if(result.successful == true ){
-            	if(result.data.mode=='UPD'){
-            	}else if(result.data.mode=='ADD'){
-            	}
             	//刷新
             	refreshHead(result.data.udMap[0]);
             	refreshList(result.data.uadList);
@@ -477,6 +483,27 @@ function saveAddress(){
             }
          }
     }); 
+}
+function deleteAddress(){
+    $.ajax({    
+        url:UrlConfig.deleteAddress, 
+        data:{addressid:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	refreshHead(result.data.uadList[0]);
+            	refreshList(result.data.uadList);
+                // 绑定单击事件
+				bindEvent();
+                // 关闭模态窗口
+                $('#myModal').modal('hide');
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    });
 }
 function loadUpdAddress(addressid){
     $.ajax({    
@@ -533,22 +560,39 @@ function bindEvent(){
     });
     $('button[name="upd_adress"]').bind("click",function(){
     	modal="UPD";
+    	$('#delete_ad_bt').show();
     	addressid=$(this).attr("addressid");
     	loadUpdAddress($(this).attr("addressid"));
     	$('#myModal').modal('show');
+    	
     });
     $('#adnew_bt2').bind("click",function(event){
     	modal="ADD";
+    	$('#delete_ad_bt').hide();
     	clearModal();
     	//阻止事件冒泡
     	//event.stopPropagation(); 
     });
     $('#adnew_bt1').bind("click",function(){
     	modal="ADD";
+    	$('#delete_ad_bt').hide();
     	clearModal();
     });
 }
 function refreshHead(item){
+	if(item==null){
+		$('div[name="head-address"]').html('<div class="row">                                                             '+
+        		'	<div class="col-md-12 col-sm-12 col-xs-12 new-ad">                         '+
+               	'		 <button id="adnew_bt2"                                                '+
+               	'		 		 class="btn btn-default btn-block btn-lg address-new"          '+
+               	'		 		 type="button" data-toggle="modal"                             '+
+               	'		 		 data-target="#myModal">                                       '+
+               	'		 		 <span class="glyphicon glyphicon-plus" aria-hidden="true">    '+
+               	'		 		 </span>新增地址</button>                                      '+
+            	'	</div>                                                                     '+
+        		'</div>                                                                        ');
+		return;
+	}
 	// 
 	$('div[name="head-address"]').html('<div class="row">                                                                 '+
             '	<input type="hidden" id="head-adid" value="'+item.address_id+'">               '+

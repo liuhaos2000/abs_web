@@ -30,4 +30,8 @@ public interface TItemMapper {
      * List用
      */
     Page<Map<String, String>> getItemList(Map<String, Object> pMap,PageInfo pageInfo);
+    /**
+     * Item用
+     */
+    List<Map<String, String>> getItemInfo(String itemId,String pictureType);
 }

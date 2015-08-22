@@ -18,6 +18,9 @@
     <result column="shouhou_flg" property="shouhouFlg" jdbcType="CHAR" />
     <result column="shouhou_miaoshu" property="shouhouMiaoshu" jdbcType="VARCHAR" />
     <result column="shangjia_flg" property="shangjiaFlg" jdbcType="CHAR" />
+    <result column="from_area" property="fromArea" jdbcType="INTEGER" />
+    <result column="frend_title" property="frendTitle" jdbcType="VARCHAR" />
+    <result column="frend_text" property="frendText" jdbcType="VARCHAR" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
     <result column="c_user" property="cUser" jdbcType="VARCHAR" />
@@ -30,7 +33,8 @@
   <sql id="Base_Column_List" >
     item_id, item_name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, 
     xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, 
-    shangjia_flg, del_flg, c_date, c_user, u_date, u_user
+    shangjia_flg, from_area, frend_title, frend_text, del_flg, c_date, c_user, u_date, 
+    u_user
   </sql>
   <sql id="Blob_Column_List" >
     fu_text
@@ -53,7 +57,8 @@
       parm, xiangou_flg, xiangou_shuliang, 
       baoyou_flg, wuliu_id, fapiao_flg, 
       fapiao_title, shouhou_flg, shouhou_miaoshu, 
-      shangjia_flg, del_flg, c_date, 
+      shangjia_flg, from_area, frend_title, 
+      frend_text, del_flg, c_date, 
       c_user, u_date, u_user, 
       fu_text)
     values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
@@ -61,7 +66,8 @@
       #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
       #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
       #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, #{shouhouMiaoshu,jdbcType=VARCHAR}, 
-      #{shangjiaFlg,jdbcType=CHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{shangjiaFlg,jdbcType=CHAR}, #{fromArea,jdbcType=INTEGER}, #{frendTitle,jdbcType=VARCHAR}, 
+      #{frendText,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
       #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}, 
       #{fuText,jdbcType=LONGVARCHAR})
   </insert>
@@ -115,6 +121,15 @@
       </if>
       <if test="shangjiaFlg != null" >
         shangjia_flg,
+      </if>
+      <if test="fromArea != null" >
+        from_area,
+      </if>
+      <if test="frendTitle != null" >
+        frend_title,
+      </if>
+      <if test="frendText != null" >
+        frend_text,
       </if>
       <if test="delFlg != null" >
         del_flg,
@@ -184,6 +199,15 @@
       <if test="shangjiaFlg != null" >
         #{shangjiaFlg,jdbcType=CHAR},
       </if>
+      <if test="fromArea != null" >
+        #{fromArea,jdbcType=INTEGER},
+      </if>
+      <if test="frendTitle != null" >
+        #{frendTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="frendText != null" >
+        #{frendText,jdbcType=VARCHAR},
+      </if>
       <if test="delFlg != null" >
         #{delFlg,jdbcType=CHAR},
       </if>
@@ -252,6 +276,15 @@
       <if test="shangjiaFlg != null" >
         shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
       </if>
+      <if test="fromArea != null" >
+        from_area = #{fromArea,jdbcType=INTEGER},
+      </if>
+      <if test="frendTitle != null" >
+        frend_title = #{frendTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="frendText != null" >
+        frend_text = #{frendText,jdbcType=VARCHAR},
+      </if>
       <if test="delFlg != null" >
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
@@ -290,6 +323,9 @@
       shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
       shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
       shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      from_area = #{fromArea,jdbcType=INTEGER},
+      frend_title = #{frendTitle,jdbcType=VARCHAR},
+      frend_text = #{frendText,jdbcType=VARCHAR},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -315,6 +351,9 @@
       shouhou_flg = #{shouhouFlg,jdbcType=CHAR},
       shouhou_miaoshu = #{shouhouMiaoshu,jdbcType=VARCHAR},
       shangjia_flg = #{shangjiaFlg,jdbcType=CHAR},
+      from_area = #{fromArea,jdbcType=INTEGER},
+      frend_title = #{frendTitle,jdbcType=VARCHAR},
+      frend_text = #{frendText,jdbcType=VARCHAR},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -442,6 +481,20 @@
               <if test="param1.typeId != null and param1.typeId != ''"> 
                 AND t1.type=#{param1.typeId}
               </if>
-  </select>
+    </select>
+    <select id="getItemInfo" resultType="map">
+        SELECT
+            t1.item_id,t1.item_name,t1.manufacturer,t1.owner,t1.type,t1.prent_item_id,t1.parm,
+            t1.xiangou_flg,t1.xiangou_shuliang,t1.baoyou_flg,t1.wuliu_id,t1.fapiao_flg,
+            t1.fapiao_title,t1.shouhou_flg,t1.shouhou_miaoshu,t1.
+            shangjia_flg,t1.from_area,t1.frend_title,t1.frend_text,
+        	  t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user,t1.fu_text,
+            t2.region_name,t3.path
+        from t_item t1 LEFT OUTER JOIN t_region t2 on t1.from_area = t2.region_id
+        							 LEFT OUTER JOIN t_item_picture t3 ON t1.item_id = t3.item_id
+        where t1.item_id=#{param1}
+        			and t3.picture_type=#{param2}
+        			and t1.shangjia_flg='1'
+    </select>
 
 </mapper>

@@ -7,6 +7,8 @@ public class AbsConst {
     public static final String LOGIN_USER = "LOGIN_USER";
     
     public static String access_token = "";
+    public static String jsapi_ticket = "";
+    
     
     public static final String TOKEN = "abs_web_ruihegouwu";
 

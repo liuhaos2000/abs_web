@@ -1,5 +1,7 @@
 package com.abs.mobile.service;
 
+import java.util.Map;
+
 import com.abs.mobile.domain.TUser;
 
 public interface SessionService {
@@ -12,4 +14,8 @@ public interface SessionService {
 	 * 设置Session中的User
 	 */
 	public void setLoginUser(TUser user);
+	/**
+	 * 获取微信JS用的 签名信息
+	 */
+	public Map<String, String> getSignInfo(String requestmap);
 }

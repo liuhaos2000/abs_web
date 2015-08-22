@@ -161,5 +161,22 @@ public class UserAddressServiceImpl implements UserAdderssService {
 		
 		return resultMap;
 	}
+    /**
+     * 删除地址
+     * @return
+     */
+	@Override
+	public Map<String, Object> deleteAddress(String addressid) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		TUser user =  sessionService.getLoginUser();
+		TUserAddressKey key=new TUserAddressKey();
+		key.setAddressId(Integer.valueOf(addressid));
+		key.setOpenId(user.getOpenId());
+		tUserAddressMapper.deleteByPrimaryKey(key);
+		// 取得最新数据返回
+        List<Map<String,String>> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
+        resultMap.put("uadList", uadList);
+		return resultMap;
+	}
 
 }

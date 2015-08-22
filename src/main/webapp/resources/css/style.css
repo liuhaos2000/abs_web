@@ -1625,6 +1625,9 @@ img{
     border-left:1px solid #e1e1e8;
     border-radius:0 12px 0 0
 }
+.delete-ad-bt{
+	display: none;
+}
 .maindiv{
 	background-color:#EEEEEE;
 }
