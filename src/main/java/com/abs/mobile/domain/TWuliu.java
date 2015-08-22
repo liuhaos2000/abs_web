@@ -1,13 +1,26 @@
 package com.abs.mobile.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TWuliu {
     private Integer wuliuId;
 
-    private String name;
+    private Integer fromArea;
 
-    private String owner;
+    private String fromText;
+
+    private Integer toArea;
+
+    private String toText;
+
+    private BigDecimal price;
+
+    private BigDecimal pricePlus;
+
+    private String unitId;
+
+    private String unitName;
 
     private String delFlg;
 
@@ -27,20 +40,68 @@ public class TWuliu {
         this.wuliuId = wuliuId;
     }
 
-    public String getName() {
-        return name;
+    public Integer getFromArea() {
+        return fromArea;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setFromArea(Integer fromArea) {
+        this.fromArea = fromArea;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getFromText() {
+        return fromText;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner == null ? null : owner.trim();
+    public void setFromText(String fromText) {
+        this.fromText = fromText == null ? null : fromText.trim();
+    }
+
+    public Integer getToArea() {
+        return toArea;
+    }
+
+    public void setToArea(Integer toArea) {
+        this.toArea = toArea;
+    }
+
+    public String getToText() {
+        return toText;
+    }
+
+    public void setToText(String toText) {
+        this.toText = toText == null ? null : toText.trim();
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPricePlus() {
+        return pricePlus;
+    }
+
+    public void setPricePlus(BigDecimal pricePlus) {
+        this.pricePlus = pricePlus;
+    }
+
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(String unitId) {
+        this.unitId = unitId == null ? null : unitId.trim();
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName == null ? null : unitName.trim();
     }
 
     public String getDelFlg() {
