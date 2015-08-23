@@ -14,7 +14,7 @@ import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.util.commom.AbsConst;
 import com.abs.weixin.pojo.OpenId;
 import com.abs.weixin.pojo.WeixinUserInfo;
-import com.abs.weixin.utils.AklkWeiXinIFUtil;
+import com.abs.weixin.utils.WeiXinIFUtil;
 
 @Service
 public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
@@ -32,7 +32,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	public void executeGetUserInfo(String code) {
 
 		// 取得OpenId
-		OpenId openId = AklkWeiXinIFUtil.getOpenId(code);
+		OpenId openId = WeiXinIFUtil.getOpenId(code);
 		// 获取系统时间
 		Date date = new Date();
 		// 取得数据库的用户信息
@@ -65,7 +65,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	@Transactional
 	public void executeGetUserAllInfo(String openId) {
 
-		WeixinUserInfo wxUserInfo = AklkWeiXinIFUtil.getUserinfo(AbsConst.access_token, openId);
+		WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(AbsConst.access_token, openId);
 
 		// 获取系统时间
 		Date date = new Date();

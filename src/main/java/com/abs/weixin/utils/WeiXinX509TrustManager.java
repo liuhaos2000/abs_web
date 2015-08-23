@@ -11,7 +11,7 @@ import javax.net.ssl.X509TrustManager;
  * @date 2014/04/05
  * Ŀǰ����������֤��
  */
-public class AklkX509TrustManager implements X509TrustManager{
+public class WeiXinX509TrustManager implements X509TrustManager{
 
 	@Override
 	public void checkClientTrusted(X509Certificate[] arg0, String arg1)

@@ -5,7 +5,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
 import java.util.UUID;  
 
 public class Sign {
@@ -71,11 +74,107 @@ public class Sign {
         return result;
     }
 
-    private static String create_nonce_str() {
+    public static String create_nonce_str() {
         return UUID.randomUUID().toString();
     }
 
-    private static String create_timestamp() {
+    public static String create_timestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
+    
+	/**
+	 * 统一接口签名
+	 * 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
+	 */
+	public static String createPaySign(SortedMap<String, String> packageParams) {
+		StringBuffer sb = new StringBuffer();
+		Set es = packageParams.entrySet();
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if (null != v && !"".equals(v) && !"sign".equals(k)
+					&& !"key".equals(k)) {
+				sb.append(k + "=" + v + "&");
+			}
+		}
+		sb.append("key=" + WeixinConst.KEY);
+		String sign = MD5Util.MD5Encode(sb.toString(), "UTF-8")
+				.toUpperCase();
+		
+		System.out.println(sb.toString());
+		System.out.println(sign);
+		
+		return sign;
+
+	}
+	
+	/**
+	 * JSAPI 支付接口 签名 MD5
+	 * 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
+	 */
+	public static String createPaySign2(SortedMap<String, String> packageParams) {
+		StringBuffer sb = new StringBuffer();
+		Set es = packageParams.entrySet();
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if (null != v && !"".equals(v) && !"sign".equals(k)
+					&& !"key".equals(k)) {
+				sb.append(k + "=" + v + "&");
+			}
+		}
+		String temp = sb.toString();
+		temp = temp.substring(0, temp.length()-1);
+		String sign = MD5Util.MD5Encode(temp, "UTF-8")
+				.toUpperCase();
+		System.out.println(temp);
+		System.out.println(sign);
+		return sign;
+
+	}
+	/**
+	 * 
+	 * @param packageParams
+	 * @return
+	 */
+	public static String createPaySign3(SortedMap<String, String> packageParams) {
+		StringBuffer sb = new StringBuffer();
+		Set es = packageParams.entrySet();
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if (null != v && !"".equals(v) && !"sign".equals(k)
+					&& !"key".equals(k)) {
+				sb.append(k + "=" + v + "&");
+			}
+		}
+		String temp = sb.toString();
+		temp = temp.substring(0, temp.length()-1);
+		
+		//SHA-1
+		String signature="";
+        try
+        {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(temp.getBytes("UTF-8"));
+            signature = byteToHex(crypt.digest());
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+		return signature;
+
+	}
 }

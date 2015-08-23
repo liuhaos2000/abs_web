@@ -9,7 +9,7 @@ import com.abs.weixin.pojo.CommonButton;
 import com.abs.weixin.pojo.ComplexButton;
 import com.abs.weixin.pojo.Menu;
 import com.abs.weixin.pojo.ViewButton;
-import com.abs.weixin.utils.AklkWeiXinIFUtil;
+import com.abs.weixin.utils.WeiXinIFUtil;
 import com.abs.weixin.utils.WeixinConst;
 
 /**
@@ -28,11 +28,11 @@ public class MenuManager {
 		String appSecret = WeixinConst.APPSECRET;
 
 		// 调用接口获取access_token
-		AccessToken at = AklkWeiXinIFUtil.getAccessToken(appId, appSecret);
+		AccessToken at = WeiXinIFUtil.getAccessToken(appId, appSecret);
 
 		if (null != at) {
 			// 调用接口创建菜单
-			int result = AklkWeiXinIFUtil.createMenu(getMenu(), at.getToken());
+			int result = WeiXinIFUtil.createMenu(getMenu(), at.getToken());
 
 			// 判断菜单创建结果
 			if (0 == result)
