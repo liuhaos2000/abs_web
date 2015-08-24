@@ -33,7 +33,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 cart-col-box cart-col-info">
-                        <p class="cart_item_name p-no-bottom">${item.item_name}_${item.guige_text}_${item.yanse_text}</p>
+                        <p class="cart_item_name p-no-bottom">${item.item_name} ${item.guige_text} ${item.yanse_text}</p>
                         <p class="cart_item_price p-no-bottom">￥${item.sale_price}</p>
                             <div class="btn-group" role="group" >
                                 <button type="button" name="jian_bt" class="btn btn-default btn-xs">-</button>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </c:forEach>
-            <form id="cartForm" action="/abs_web/app/mobile/page/order?showwxpaytitle=1" method="post">
+            <form id="cartForm" action="/abs_web/app/mobile/page/order" method="post">
                 <input type="hidden" id="cartItem" name="cartItem" >
             </form>
 		</div>
@@ -151,7 +151,7 @@ function countTotal() {
         }else{
         }
      }); 
-    $("#total").html(total);
+    $("#total").html(total.toFixed(2));
 }
 function delectItem(itemId,guige,yanse){
     $.ajax({    

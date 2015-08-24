@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
@@ -15,12 +17,17 @@ import com.abs.mobile.dao.TRegionMapper;
 import com.abs.mobile.dao.TUserAddressMapper;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TCartKey;
+import com.abs.mobile.domain.TOrder;
+import com.abs.mobile.domain.TOrderDetail;
 import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
-import com.abs.mobile.domain.TUserAddress;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
-import com.abs.mobile.service.UserAdderssService;
+import com.abs.weixin.pojo.PayParm;
+import com.abs.weixin.utils.MessageUtil;
+import com.abs.weixin.utils.Sign;
+import com.abs.weixin.utils.WeiXinIFUtil;
+import com.abs.weixin.utils.WeixinConst;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -83,11 +90,124 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("regionList", regionList);
         //tUserAddressMapper
         //3邮件模板
-        //4积分 TODO
+        //4可用积分
+        resultMap.put("jifen", user.getJifen());
         
         return resultMap;
     }
 
+    /**
+     * 提交订单，返回支付结果
+     */
+    @Override
+    public Map<String, Object> orderSubmit(TOrder order, 
+            List<TOrderDetail> orderDetailList) {
+        
+        TUser user =sessionService.getLoginUser();
+        // 一.生成订单
+        //1.CHECK 
+        checkOrder(order,orderDetailList);
+        //2.采集订单号
+        //3.订单插入
+        
+        
+        
+        
+        
+        
+        
+        
+        // 二.先做签名
+        String nonce_str = Sign.create_nonce_str();
+        nonce_str = nonce_str.substring(0, 32);
+        SortedMap<String, String> packageParams = new TreeMap<String, String>();
+        
+        packageParams.put("appid", WeixinConst.APPID);
+        packageParams.put("mch_id", WeixinConst.MCHID);
+        packageParams.put("nonce_str", nonce_str);
+        // TODO 商品描述，商户订单号,金额  暂定TEST
+        packageParams.put("body", "雅斯兰黛");
+        packageParams.put("out_trade_no", "201508220000003");
+        packageParams.put("total_fee", "100");
+        packageParams.put("spbill_create_ip", "192.168.1.1");
+        packageParams.put("spbill_create_ip", sessionService.getUserIp());
+        packageParams.put("notify_url", WeixinConst.NOTIFY_URL);
+        packageParams.put("trade_type", "JSAPI");
+        packageParams.put("openid", user.getOpenId());
+        
+        String sign = Sign.createPaySign(packageParams);
+        
+        // 做成XML
+        PayParm payParm = new PayParm();
+        payParm.setAppid(WeixinConst.APPID);
+        payParm.setMch_id(WeixinConst.MCHID);
+        payParm.setNonce_str(nonce_str);
+        payParm.setSign(sign);
+        
+        // TODO 商品描述，商户订单号,金额  暂定TEST
+        payParm.setBody("雅斯兰黛");
+        payParm.setOut_trade_no("201508220000003");
+        payParm.setTotal_fee("100");
 
+        payParm.setSpbill_create_ip("192.168.1.1");
+        payParm.setSpbill_create_ip(sessionService.getUserIp());
+        payParm.setNotify_url(WeixinConst.NOTIFY_URL);
+        payParm.setTrade_type("JSAPI");
+        payParm.setOpenid(user.getOpenId());
+        
+        String xmlParm = MessageUtil.payParmToXml(payParm);
+        xmlParm = xmlParm.replaceAll("__", "_");
+        
+        Map<String,String> rMap = WeiXinIFUtil.httpRequestXML(WeixinConst.UNIFIEDORDER, "GET", xmlParm);
+        
+        String packageid = "prepay_id="+rMap.get("prepay_id");
+        SortedMap<String, String> parm = new TreeMap<String, String>();
+        parm.put("appId", WeixinConst.APPID);
+        parm.put("timeStamp", Sign.create_timestamp());
+        parm.put("nonceStr", nonce_str);
+        parm.put("package", packageid);
+        parm.put("signType", "MD5");
+        // 支付信息生产
+        String sign2 = Sign.createPaySign(parm);
+        parm.put("sign", sign2);
+        
+        Map<String, Object> resultMap =  new HashMap<String, Object>();
+        
+        resultMap.put("appId", parm.get("appId"));
+        resultMap.put("timeStamp", parm.get("timeStamp"));
+        resultMap.put("nonceStr", parm.get("nonceStr"));
+        resultMap.put("prepay_id", parm.get("package"));
+        resultMap.put("signType", parm.get("signType"));
+        resultMap.put("sign", parm.get("sign"));
+        
+        // JSAPI 签名信息
+        resultMap.put("signInfo", sessionService.getSignInfo("/mobile/pay/unifiedorder"));
+        
+        return resultMap;
+    }
+
+    /**
+     * 用户传来的数据 和 后台计算的数据核对
+     * @param order
+     * @param orderDetailList
+     */
+    private void checkOrder(TOrder order, 
+            List<TOrderDetail> orderDetailList) {
+        // 1.商品价格计算 check
+        
+        
+        
+        // 2.邮费计算 check
+        
+        
+        
+        // 3.积分 check
+        
+        
+        
+        // 4.总价 check
+        
+        
+    }
 
 }

@@ -39,6 +39,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		    
 		    TUser user = new TUser();
 		    user.setOpenId("o2otnwBhGfsMWTKeOyB5uA9zf9xA");
+		    user.setJifen(23);
 		    session.setAttribute(AbsConst.LOGIN_USER, user);
 
 		}

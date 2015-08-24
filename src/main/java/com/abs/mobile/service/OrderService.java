@@ -4,11 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import com.abs.mobile.domain.TCart;
+import com.abs.mobile.domain.TOrder;
+import com.abs.mobile.domain.TOrderDetail;
 
 public interface OrderService {
     /**
      * 订单初始化
      */
     public Map<String, Object> initOrder(List<TCart> cartList);
+    
+    /**
+     * 订单提交
+     * @param orderDetailList 
+     * @param order 
+     */
+    public Map<String, Object> orderSubmit(TOrder order, List<TOrderDetail> orderDetailList);
 
 }
