@@ -18,4 +18,8 @@ public interface SessionService {
 	 * 获取微信JS用的 签名信息
 	 */
 	public Map<String, String> getSignInfo(String requestmap);
+	   /**
+     * 获取微信JS用的 签名信息
+     */
+	public String getUserIp();
 }

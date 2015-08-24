@@ -10,5 +10,10 @@ public interface OrderService {
      * 订单初始化
      */
     public Map<String, Object> initOrder(List<TCart> cartList);
+    
+    /**
+     * 订单提交
+     */
+    public Map<String, Object> orderSubmit();
 
 }

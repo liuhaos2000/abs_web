@@ -245,7 +245,12 @@
                             <div id="accordion-element-906172" class="accordion-body collapse in">
                                 <div class="accordion-inner">
                                 	<c:forEach items="${result.itemlist}" var="item"  varStatus="status">
-										<div class="row order-item-row">
+										<div class="row order-item-row" 
+										      name="itemqingdan"
+										      itemId="${item.item_id}"
+										      itemGuige="${item.item_guige}" 
+										      itemYanse="${item.item_yanse}" 
+										      shuliang="${item.shuliang}" >
                                         	<div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">
                                           	  <img class="order-item-img" src="${item.path}" alt="">
                                        		</div>
@@ -290,7 +295,7 @@
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10 order-container">
                                             <div class="order-p">
-                                                    <p class="p-no-bottom order-ad-left">可用积分：20</p>
+                                                    <p class="p-no-bottom order-ad-left">可用积分：<span id="canuseJifen">${result.jifen}</span></p>
                                             </div>
                                         </div>
                                       </a>
@@ -298,7 +303,14 @@
                             </div>
                             <div id="accordion-element-906174" class="accordion-body collapse">
                                 <div class="accordion-inner">
-                                    功能块...
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5 col-xs-5">
+                                            <input id="jifenFlg" type="checkbox"> 使用积分
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <input id="jifen" type="text" size="5" maxlength="5">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -309,14 +321,14 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <p class="p-no-bottom order-ad-left">商品总价：</p>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2">100.00</div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2"><span id="itemTotal">100.00</span></div>
                                 </div>
                                 <div class="row  order-totle-row">
                                     <div class="col-md-1 col-sm-1 col-xs-1"></div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                       <p class="p-no-bottom order-ad-left">运费：</p>
+                                       <p class="p-no-bottom order-ad-left">运费总价：</p>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2">100.00</div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2"><span id="yunfeiTotal">100.00</span></div>
                                 </div>
                             </div>
                         </div>
@@ -354,7 +366,8 @@ var UrlConfig = {
         getRegion2:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel2',
         saveAd:'<%=request.getContextPath() %>/app/mobile/useradress/saveAddress',
         loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
-        deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress'
+        deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress',
+        orderSubmit:'<%=request.getContextPath() %>/app/mobile/order/orderSubmit'
     };
 //更新用
 var modal;
@@ -377,8 +390,8 @@ $(document).ready(function() {
         bindEvent();
     });
     //
-    $("#queding").click(function(){
-        location.href ="order_submit.html";
+    $("#zhifu_bt").click(function(){
+        dosubmit();
     });
 	// 取一级地址
     //$('#myModal').on('show.bs.modal', function (e) {
@@ -579,6 +592,68 @@ function bindEvent(){
     	clearModal();
     });
 }
+
+function dosubmit(){
+	//check
+	if($("#head-adid").val()==null){
+		myalert("没有收货地址",'main_div');
+		return;
+	}
+	
+	if(isNaN($("#jifen").val())||($("#jifen").val()*1 > $("#canuseJifen").text()*1)){
+		myalert("积分输入不正确",'main_div');
+		return;
+	}
+
+	//是否使用积分
+	var jifenFlg;
+    if($('#jifenFlg').prop("checked")==true){
+    	jifenFlg='1';
+    }else{
+    	jifenFlg='0';
+    }
+    //明细商品数据取得
+    var list = new Array();
+    $('div[name="itemqingdan"]').each(function(){
+        list.push({itemId: $(this).attr("itemId"),
+            itemGuige: $(this).attr("itemGuige"),
+            itemYanse: $(this).attr("itemYanse"),
+            shuliang: $(this).attr("shuliang")}); 
+    });
+    if(list.length==0){
+    	myalert("没有购买商品！",'main_div');
+    	return;
+    }
+    var orderItems=JSON.stringify(list);
+    // 提交
+    $.ajax({    
+        url:UrlConfig.orderSubmit,
+        data:{
+        	   totlePrice:$("#itemTotal").text(),
+        	   wuliuYunfei:$("#yunfeiTotal").text(),
+        	   shijiPrice:$("#total").text(),
+        	   jifenDixiao:$("#jifen").val(),
+        	   jifenFlg:jifenFlg,
+        	   addressId:$("#head-adid").val(),
+        	   orderItems:orderItems
+            },
+        type:'post',    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	//发起支付
+            }else{
+                myalert(result.msg,'myModal');
+            }
+         }
+    });
+}
+
+
+
+
+
+
 function refreshHead(item){
 	if(item==null){
 		$('div[name="head-address"]').html('<div class="row">                                                             '+
