@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </c:forEach>
-            <form id="cartForm" action="/abs_web/app/mobile/page/order?showwxpaytitle=1" method="post">
+            <form id="cartForm" action="/abs_web/app/mobile/page/order" method="post">
                 <input type="hidden" id="cartItem" name="cartItem" >
             </form>
 		</div>

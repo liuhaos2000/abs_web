@@ -45,4 +45,9 @@ public class SessionServiceImpl implements SessionService {
 		Map<String,String> reult =  Sign.sign(AbsConst.jsapi_ticket, url);
 		return reult;
 	}
+
+    @Override
+    public String getUserIp() {
+        return request.getRemoteAddr();
+    }
 }
