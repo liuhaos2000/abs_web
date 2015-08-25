@@ -248,10 +248,10 @@
   <select id="getNewOrderId" resultType="java.lang.String">
     select 
       case 
-        when date_format(CURDATE(),'%Y%m%d')> left(MAX(order_id),8)
-                THEN CONAT(date_format(CURDATE(),'%Y%m%d') ,'000001')
-        ELSE  MAX(order_id) + 1
+        when date_format(CURDATE(),'%Y%m%d')> left(ifnull(MAX(order_id),0),8)
+                THEN CONCAT(date_format(CURDATE(),'%Y%m%d') ,'000001')
+        ELSE  ifnull(MAX(order_id),0) + 1
       END as orderId
-    from t_order
+    from t_order 
   </select>
 </mapper>

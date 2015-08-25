@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class TOrderDetail extends TOrderDetailKey {
-    private Integer itemYanse;
-
     private String guigeText;
 
     private String yanseText;
@@ -33,14 +31,6 @@ public class TOrderDetail extends TOrderDetailKey {
     private Date uDate;
 
     private String uUser;
-
-    public Integer getItemYanse() {
-        return itemYanse;
-    }
-
-    public void setItemYanse(Integer itemYanse) {
-        this.itemYanse = itemYanse;
-    }
 
     public String getGuigeText() {
         return guigeText;

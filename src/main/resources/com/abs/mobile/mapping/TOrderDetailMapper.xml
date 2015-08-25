@@ -5,7 +5,7 @@
     <id column="order_id" property="orderId" jdbcType="VARCHAR" />
     <id column="item_id" property="itemId" jdbcType="INTEGER" />
     <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
-    <result column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
+    <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
     <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
     <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
     <result column="owner" property="owner" jdbcType="VARCHAR" />
@@ -33,12 +33,14 @@
     where order_id = #{orderId,jdbcType=VARCHAR}
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
     delete from t_order_detail
     where order_id = #{orderId,jdbcType=VARCHAR}
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TOrderDetail" >
     insert into t_order_detail (order_id, item_id, item_guige, 
@@ -174,9 +176,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TOrderDetail" >
     update t_order_detail
     <set >
-      <if test="itemYanse != null" >
-        item_yanse = #{itemYanse,jdbcType=INTEGER},
-      </if>
       <if test="guigeText != null" >
         guige_text = #{guigeText,jdbcType=VARCHAR},
       </if>
@@ -223,11 +222,11 @@
     where order_id = #{orderId,jdbcType=VARCHAR}
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetail" >
     update t_order_detail
-    set item_yanse = #{itemYanse,jdbcType=INTEGER},
-      guige_text = #{guigeText,jdbcType=VARCHAR},
+    set guige_text = #{guigeText,jdbcType=VARCHAR},
       yanse_text = #{yanseText,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
       shuliang = #{shuliang,jdbcType=INTEGER},
@@ -244,5 +243,6 @@
     where order_id = #{orderId,jdbcType=VARCHAR}
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
 </mapper>

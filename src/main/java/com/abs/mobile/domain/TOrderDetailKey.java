@@ -7,6 +7,8 @@ public class TOrderDetailKey {
 
     private Integer itemGuige;
 
+    private Integer itemYanse;
+
     public String getOrderId() {
         return orderId;
     }
@@ -29,5 +31,13 @@ public class TOrderDetailKey {
 
     public void setItemGuige(Integer itemGuige) {
         this.itemGuige = itemGuige;
+    }
+
+    public Integer getItemYanse() {
+        return itemYanse;
+    }
+
+    public void setItemYanse(Integer itemYanse) {
+        this.itemYanse = itemYanse;
     }
 }

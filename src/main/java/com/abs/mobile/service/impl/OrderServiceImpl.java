@@ -117,6 +117,7 @@ public class OrderServiceImpl implements OrderService {
      * @throws BusinessException 
      */
     @Override
+    @Transactional(rollbackFor=Exception.class) 
     public Map<String, Object> orderSubmit(TOrder order, 
             List<TOrderDetail> orderDetailList) throws BusinessException {
         
@@ -168,7 +169,8 @@ public class OrderServiceImpl implements OrderService {
             // huodong_flg
             tOrderDetail.setHuodongFlg(detail.get("end_price_type"));
             // price
-            tOrderDetail.setPrice(new BigDecimal(detail.get("sale_price")));
+            Object o = detail.get("sale_price");
+            tOrderDetail.setPrice((BigDecimal)o);
             // status
             tOrderDetail.setStatus("1");
             // 公共
@@ -189,8 +191,8 @@ public class OrderServiceImpl implements OrderService {
         // TODO 商品描述，商户订单号,金额  暂定TEST
         packageParams.put("body", "瑞和商城购物");
         packageParams.put("out_trade_no", order.getOrderId());
-        packageParams.put("total_fee", order.getShijiPrice().subtract(
-                                        new BigDecimal(100)).toString());
+        packageParams.put("total_fee", String.valueOf(order.getShijiPrice().multiply(
+                                        new BigDecimal(100)).intValue()));
         //packageParams.put("spbill_create_ip", "192.168.1.1");
         packageParams.put("spbill_create_ip", sessionService.getUserIp());
         packageParams.put("notify_url", WeixinConst.NOTIFY_URL);
@@ -209,8 +211,8 @@ public class OrderServiceImpl implements OrderService {
         // TODO 商品描述，商户订单号,金额  暂定TEST
         payParm.setBody("瑞和商城购物");
         payParm.setOut_trade_no(order.getOrderId());
-        payParm.setTotal_fee(order.getShijiPrice().subtract(
-                            new BigDecimal(100)).toString());
+        payParm.setTotal_fee(String.valueOf(order.getShijiPrice().multiply(
+                new BigDecimal(100)).intValue()));
 
         //payParm.setSpbill_create_ip("192.168.1.1");
         payParm.setSpbill_create_ip(sessionService.getUserIp());
@@ -223,13 +225,14 @@ public class OrderServiceImpl implements OrderService {
         
         Map<String,String> rMap = WeiXinIFUtil.httpRequestXML(WeixinConst.UNIFIEDORDER, "GET", xmlParm);
        
-        if(rMap==null || "SUCCESS".equals(rMap.get("return_code"))){
+        if(rMap==null || !("SUCCESS".equals(rMap.get("return_code")))){
             throw new BusinessException("ordersubmit.weixin.getpayid");
         }else{
             // DB 写入
             order.setOrderZhifuId(rMap.get("prepay_id"));
             tOrderMapper.insert(order);
             for (TOrderDetail tOrderDetail : orderDetailList) {
+            	System.out.println("KEY:"+tOrderDetail.getItemId());
                 tOrderDetailMapper.insert(tOrderDetail);
             }
         }
