@@ -14,17 +14,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abs.mobile.dao.TCartMapper;
+import com.abs.mobile.dao.TItemDetailMapper;
+import com.abs.mobile.dao.TItemMapper;
+import com.abs.mobile.dao.TOrderDetailMapper;
 import com.abs.mobile.dao.TOrderMapper;
 import com.abs.mobile.dao.TRegionMapper;
 import com.abs.mobile.dao.TUserAddressMapper;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TCartKey;
+import com.abs.mobile.domain.TItem;
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
 import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
+import com.abs.util.commom.AbsConst;
 import com.abs.util.exception.BusinessException;
 import com.abs.weixin.pojo.PayParm;
 import com.abs.weixin.utils.MessageUtil;
@@ -45,6 +50,12 @@ public class OrderServiceImpl implements OrderService {
     private TRegionMapper tRegionMapper;
     @Resource
     private TOrderMapper tOrderMapper;
+    @Resource
+    private TOrderDetailMapper tOrderDetailMapper;
+    @Resource
+    private TItemDetailMapper tItemDetailMapper;
+    @Resource
+    private TItemMapper tItemMapper;
     /**
      * 订单初始化
      */
@@ -110,15 +121,64 @@ public class OrderServiceImpl implements OrderService {
             List<TOrderDetail> orderDetailList) throws BusinessException {
         
         TUser user =sessionService.getLoginUser();
+        Date date = new Date();
         // 一.生成订单
         //1.CHECK 
         //checkOrder(order,orderDetailList,user);
         //2.采集订单号
         String orderId = getNewOrderId();
         //3.订单插入
+        //3.1 order 就绪
+        order.setOrderId(orderId);
+        // TODO
+        //order.setOrderZhifuId(orderZhifuId);
+        order.setOrderDate(date);
+        order.setStatus(AbsConst.ORDER_WAIT_PAY);
+        order.setOpenId(user.getOpenId());
+        if(!("1".equals(order.getJifenFlg()))){
+            //未使用积分
+            order.setJifenDixiao(null);
+        }
+        order.setcDate(date);
+        order.setcUser("ORDERSUBMIT");
+        order.setuDate(date);
+        order.setuUser("ORDERSUBMIT");
+        // 3.2 明细就绪
+        //String orderName = null;
+        for (TOrderDetail tOrderDetail : orderDetailList) {
+            
+            Map<String, String> detail = tItemDetailMapper.getItemSalePrice(String.valueOf(tOrderDetail.getItemId()),
+                    String.valueOf(tOrderDetail.getItemGuige()), 
+                    String.valueOf(tOrderDetail.getItemYanse()));
+            
+            TItem tItem= tItemMapper.selectByPrimaryKey(tOrderDetail.getItemId());
+
+            // if(orderName==null){
+            // orderName=tItem.getItemName();
+            // }
+            
+            // order_id
+            tOrderDetail.setOrderId(orderId);
+            // guige_text
+            tOrderDetail.setGuigeText(detail.get("guige_text"));
+            // yanse_text
+            tOrderDetail.setYanseText(detail.get("yanse_text"));
+            // owner
+            tOrderDetail.setOwner(tItem.getOwner());
+            // huodong_flg
+            tOrderDetail.setHuodongFlg(detail.get("end_price_type"));
+            // price
+            tOrderDetail.setPrice(new BigDecimal(detail.get("sale_price")));
+            // status
+            tOrderDetail.setStatus("1");
+            // 公共
+            tOrderDetail.setcDate(date);
+            tOrderDetail.setcUser("ORDERSUBMIT");
+            tOrderDetail.setuDate(date);
+            tOrderDetail.setuUser("ORDERSUBMIT");
+        }
         
-        
-        // 二.先做签名
+        // 二.先做订单号签名
         String nonce_str = Sign.create_nonce_str();
         nonce_str = nonce_str.substring(0, 32);
         SortedMap<String, String> packageParams = new TreeMap<String, String>();
@@ -127,9 +187,10 @@ public class OrderServiceImpl implements OrderService {
         packageParams.put("mch_id", WeixinConst.MCHID);
         packageParams.put("nonce_str", nonce_str);
         // TODO 商品描述，商户订单号,金额  暂定TEST
-        packageParams.put("body", "雅斯兰黛");
-        packageParams.put("out_trade_no", "201508220000003");
-        packageParams.put("total_fee", "100");
+        packageParams.put("body", "瑞和商城购物");
+        packageParams.put("out_trade_no", order.getOrderId());
+        packageParams.put("total_fee", order.getShijiPrice().subtract(
+                                        new BigDecimal(100)).toString());
         //packageParams.put("spbill_create_ip", "192.168.1.1");
         packageParams.put("spbill_create_ip", sessionService.getUserIp());
         packageParams.put("notify_url", WeixinConst.NOTIFY_URL);
@@ -146,9 +207,10 @@ public class OrderServiceImpl implements OrderService {
         payParm.setSign(sign);
         
         // TODO 商品描述，商户订单号,金额  暂定TEST
-        payParm.setBody("雅斯兰黛");
-        payParm.setOut_trade_no("201508220000003");
-        payParm.setTotal_fee("100");
+        payParm.setBody("瑞和商城购物");
+        payParm.setOut_trade_no(order.getOrderId());
+        payParm.setTotal_fee(order.getShijiPrice().subtract(
+                            new BigDecimal(100)).toString());
 
         //payParm.setSpbill_create_ip("192.168.1.1");
         payParm.setSpbill_create_ip(sessionService.getUserIp());
@@ -160,7 +222,19 @@ public class OrderServiceImpl implements OrderService {
         xmlParm = xmlParm.replaceAll("__", "_");
         
         Map<String,String> rMap = WeiXinIFUtil.httpRequestXML(WeixinConst.UNIFIEDORDER, "GET", xmlParm);
+       
+        if(rMap==null || "SUCCESS".equals(rMap.get("return_code"))){
+            throw new BusinessException("ordersubmit.weixin.getpayid");
+        }else{
+            // DB 写入
+            order.setOrderZhifuId(rMap.get("prepay_id"));
+            tOrderMapper.insert(order);
+            for (TOrderDetail tOrderDetail : orderDetailList) {
+                tOrderDetailMapper.insert(tOrderDetail);
+            }
+        }
         
+        // 生成支付签名
         String packageid = "prepay_id="+rMap.get("prepay_id");
         SortedMap<String, String> parm = new TreeMap<String, String>();
         parm.put("appId", WeixinConst.APPID);

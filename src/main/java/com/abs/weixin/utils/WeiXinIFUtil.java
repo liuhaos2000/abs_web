@@ -320,7 +320,7 @@ public class WeiXinIFUtil {
 	public static Map<String,String> httpRequestXML(String requestUrl,
 			String requestMethod, String outputStr) {
         log.debug("------------>httpRequest---Start:"+requestUrl);
-        Map<String,String> resultMap = new HashMap<String,String>();
+        Map<String,String> resultMap = null;
 		StringBuffer buffer = new StringBuffer();
 		try {
 			// 创建SSLContext对象，并使用我们指定的信任管理器初始化
