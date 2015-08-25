@@ -255,7 +255,7 @@
                                           	  <img class="order-item-img" src="${item.path}" alt="">
                                        		</div>
                                         	<div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">
-                                         	  <p class="order-ad-right p-no-bottom">${item.item_name} ${item.guige_text} ${item.yanse_text}</p>
+                                         	  <p class="order-ad-right p-no-bottom">${item.item_name}_${item.guige_text}_${item.yanse_text}</p>
                                           	  <p class="cart_item_price p-no-bottom f-left">￥${item.sale_price}</p>
                                           	  <p class="order-ad-right p-no-bottom f-left">&nbsp;x${item.shuliang}</p>
                                           	  <c:set var="heji" value="${heji+(item.sale_price*item.shuliang)}"></c:set>

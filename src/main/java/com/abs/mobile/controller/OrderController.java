@@ -39,11 +39,7 @@ public class OrderController extends BaseController {
         
         orderService.orderSubmit(order,orderDetailList);
         
-        
-        Result request = new Result();
-        
-        request.setData("");
-        return request;
+        return null;
     }
     
 }
