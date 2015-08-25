@@ -1,5 +1,6 @@
 package com.abs.mobile.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abs.mobile.dao.TCartMapper;
+import com.abs.mobile.dao.TOrderMapper;
 import com.abs.mobile.dao.TRegionMapper;
 import com.abs.mobile.dao.TUserAddressMapper;
 import com.abs.mobile.domain.TCart;
@@ -23,6 +25,7 @@ import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
+import com.abs.util.exception.BusinessException;
 import com.abs.weixin.pojo.PayParm;
 import com.abs.weixin.utils.MessageUtil;
 import com.abs.weixin.utils.Sign;
@@ -40,7 +43,8 @@ public class OrderServiceImpl implements OrderService {
     private TUserAddressMapper tUserAddressMapper;
     @Resource
     private TRegionMapper tRegionMapper;
-    
+    @Resource
+    private TOrderMapper tOrderMapper;
     /**
      * 订单初始化
      */
@@ -99,23 +103,19 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 提交订单，返回支付结果
+     * @throws BusinessException 
      */
     @Override
     public Map<String, Object> orderSubmit(TOrder order, 
-            List<TOrderDetail> orderDetailList) {
+            List<TOrderDetail> orderDetailList) throws BusinessException {
         
         TUser user =sessionService.getLoginUser();
         // 一.生成订单
         //1.CHECK 
-        checkOrder(order,orderDetailList);
+        //checkOrder(order,orderDetailList,user);
         //2.采集订单号
+        String orderId = getNewOrderId();
         //3.订单插入
-        
-        
-        
-        
-        
-        
         
         
         // 二.先做签名
@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
         packageParams.put("body", "雅斯兰黛");
         packageParams.put("out_trade_no", "201508220000003");
         packageParams.put("total_fee", "100");
-        packageParams.put("spbill_create_ip", "192.168.1.1");
+        //packageParams.put("spbill_create_ip", "192.168.1.1");
         packageParams.put("spbill_create_ip", sessionService.getUserIp());
         packageParams.put("notify_url", WeixinConst.NOTIFY_URL);
         packageParams.put("trade_type", "JSAPI");
@@ -150,7 +150,7 @@ public class OrderServiceImpl implements OrderService {
         payParm.setOut_trade_no("201508220000003");
         payParm.setTotal_fee("100");
 
-        payParm.setSpbill_create_ip("192.168.1.1");
+        //payParm.setSpbill_create_ip("192.168.1.1");
         payParm.setSpbill_create_ip(sessionService.getUserIp());
         payParm.setNotify_url(WeixinConst.NOTIFY_URL);
         payParm.setTrade_type("JSAPI");
@@ -182,7 +182,7 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("sign", parm.get("sign"));
         
         // JSAPI 签名信息
-        resultMap.put("signInfo", sessionService.getSignInfo("/mobile/pay/unifiedorder"));
+        //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/pay/unifiedorder"));
         
         return resultMap;
     }
@@ -191,24 +191,65 @@ public class OrderServiceImpl implements OrderService {
      * 用户传来的数据 和 后台计算的数据核对
      * @param order
      * @param orderDetailList
+     * @throws BusinessException 
      */
     private void checkOrder(TOrder order, 
-            List<TOrderDetail> orderDetailList) {
-        // 1.商品价格计算 check
+            List<TOrderDetail> orderDetailList,TUser user) throws BusinessException {
+        // 1.库存 check 
+        List<Map<String, String>> list = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),"5");
+        for(Map map:list){
+            Integer kucun = (Integer)map.get("kucun");
+            Integer shuliang = (Integer)map.get("shuliang");
+            if(kucun<shuliang){
+                throw new BusinessException("ordersubmit.kucun.error");
+            }
+        }
+        // 1.1 cart check
+        if(orderDetailList!=null){
+            for(TOrderDetail itemDetail : orderDetailList){
+                
+                TCartKey key = new TCartKey();
+                key.setOpenId(user.getOpenId());
+                key.setItemId(itemDetail.getItemId());
+                key.setItemGuige(itemDetail.getItemGuige());
+                key.setItemYanse(itemDetail.getItemYanse());
+                TCart  tCart = tCartMapper.selectByPrimaryKey(key );
+                if(tCart==null){
+                    throw new BusinessException("ordersubmit.cart.error");
+                }
+            }
+        }
+        // 2.商品价格计算 check
+        Map priceMap = tCartMapper.getItemFromCartTotalPrice(user.getOpenId(),"5");
+        BigDecimal p = (BigDecimal)priceMap.get("item_total_price");
+        if(p.compareTo(order.getTotlePrice())!=0){
+            throw new BusinessException("ordersubmit.itemprice.error");
+        }
+        // 3.邮费计算 check
+        Map youfeiMap = tCartMapper.getItemFromCartTotalYoufei(user.getOpenId(),"5");
+        BigDecimal y = (BigDecimal)youfeiMap.get("youfei_total");
+        if(y.compareTo(order.getWuliuYunfei())!=0){
+            throw new BusinessException("ordersubmit.yunfei.error");
+        }
+        // 4.积分 check
+        if("1".equals(order.getJifenFlg())){
+            if(order.getJifenDixiao().compareTo(new BigDecimal(user.getJifen()))>1){
+                throw new BusinessException("ordersubmit.jifen.error");
+            }
+        }
+        // 5.总价 check
+        BigDecimal t= p.add(y);
+        if(t.compareTo(order.getShijiPrice())!=0){
+            throw new BusinessException("ordersubmit.zongjia.error");
+        }
+    }
+    /**
+     * 采番订单ID
+     * @return
+     */
+    private String getNewOrderId(){
         
-        
-        
-        // 2.邮费计算 check
-        
-        
-        
-        // 3.积分 check
-        
-        
-        
-        // 4.总价 check
-        
+        return tOrderMapper.getNewOrderId();
         
     }
-
 }

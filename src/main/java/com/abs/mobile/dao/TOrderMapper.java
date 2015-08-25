@@ -15,4 +15,9 @@ public interface TOrderMapper {
     int updateByPrimaryKeySelective(TOrder record);
 
     int updateByPrimaryKey(TOrder record);
+    /**
+     * 菜番
+     * @return
+     */
+    String getNewOrderId();
 }

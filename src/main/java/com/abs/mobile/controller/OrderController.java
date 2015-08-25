@@ -1,6 +1,7 @@
 package com.abs.mobile.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.OrderService;
+import com.abs.util.exception.BusinessException;
 
 @Controller
 @RequestMapping("/mobile/order")
@@ -28,18 +30,22 @@ public class OrderController extends BaseController {
     /**
      * 取得购物车中商品数量
      * @return
+     * @throws BusinessException 
      */
     @RequestMapping("/orderSubmit")
     @ResponseBody
-    public Result orderSubmit(TOrder order,String orderItems) {
+    public Result orderSubmit(TOrder order,String orderItems) throws BusinessException {
         JSONArray json = JSONArray.fromObject(orderItems);
         @SuppressWarnings("unchecked")
         List<TOrderDetail> orderDetailList = 
             (List<TOrderDetail>)JSONArray.toList(json, TOrderDetail.class);
         
-        orderService.orderSubmit(order,orderDetailList);
+        Result request = new Result();
         
-        return null;
+        Map<String, Object> resultMap = orderService.orderSubmit(order,orderDetailList);
+       
+        request.setData(resultMap);
+        return request;
     }
     
 }

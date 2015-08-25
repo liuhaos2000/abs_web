@@ -31,4 +31,22 @@ public interface TCartMapper {
      * @return
      */
     List<Map<String, String>> getItemFromCart(String openId);
+    /**
+     * 取得购车商品信息(带运费)
+     * @param openId
+     * @return
+     */
+    List<Map<String, String>> getItemFromCartWhitYoufei(String openId,String toArea);
+    /**
+     * 取得购车商品总价
+     * @param openId
+     * @return
+     */
+    Map<String, String> getItemFromCartTotalPrice(String openId,String toArea);
+    /**
+     * 取得购车商品邮费总价
+     * @param openId
+     * @return
+     */
+    Map<String, String> getItemFromCartTotalYoufei(String openId,String toArea);
 }

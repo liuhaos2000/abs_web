@@ -6,6 +6,7 @@ import java.util.Map;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
+import com.abs.util.exception.BusinessException;
 
 public interface OrderService {
     /**
@@ -17,7 +18,8 @@ public interface OrderService {
      * 订单提交
      * @param orderDetailList 
      * @param order 
+     * @throws BusinessException 
      */
-    public Map<String, Object> orderSubmit(TOrder order, List<TOrderDetail> orderDetailList);
+    public Map<String, Object> orderSubmit(TOrder order, List<TOrderDetail> orderDetailList) throws BusinessException;
 
 }
