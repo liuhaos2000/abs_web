@@ -641,7 +641,25 @@ function dosubmit(){
         dataType:'json',    
         success:function(result) {
             if(result.successful == true ){
+            	alert(result.data.appId);
             	//发起支付
+            	WeixinJSBridge.invoke('getBrandWCPayRequest',{
+ 		 											"appId" : result.data.appId,
+ 		 											"timeStamp" : result.data.timeStamp, 
+ 		 											"nonceStr" : result.data.nonceStr, 
+ 		 											"signType" : "MD5",
+ 		 											"package" : result.data.prepay_id,
+ 		 											"paySign" : result.data.sign 
+  									},function(res){
+  						  				WeixinJSBridge.log(res.err_msg);
+	    				          		if(res.err_msg == "get_brand_wcpay_request:ok"){  
+	    				  					 alert("微信支付成功!");  
+	    				  		 		 }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+	    				  					 alert("用户取消支付!");  
+	    				  				  }else{  
+	    				  					 alert("支付失败!");  
+	    				  		  		  }  
+	    			  				})
             }else{
                 myalert(result.msg,'main_div');
             }
@@ -762,6 +780,11 @@ function refreshList(list){
             '    </div>                                                          '+
             '</div>                                                              ');
 }
+
+
+
+
+
         </script>
 </body>
 </html>

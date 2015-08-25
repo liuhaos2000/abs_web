@@ -108,6 +108,10 @@ public class OrderServiceImpl implements OrderService {
         //4可用积分
         resultMap.put("jifen", user.getJifen());
         
+        // JSAPI 签名信息
+        //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/page/order"));
+        
+        
         return resultMap;
     }
 
@@ -259,7 +263,7 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("sign", parm.get("sign"));
         
         // JSAPI 签名信息
-        //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/pay/unifiedorder"));
+        //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/order/orderSubmit"));
         
         return resultMap;
     }
