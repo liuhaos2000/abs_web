@@ -77,7 +77,15 @@ public class MobilePageController {
     public String toHuiyuan() {
         return "mobile/huiyuan";
     }
-    
+    // huiyuan
+    @RequestMapping("/myorder")
+    public String toMyOrder() {
+        return "mobile/my_order";
+    }    // huiyuan
+    @RequestMapping("/myaddress")
+    public String toMyAddress() {
+        return "mobile/my_address";
+    }
     // itemlist
     @RequestMapping("/itemlist")
     public String getItemList(

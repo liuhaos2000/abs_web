@@ -45,13 +45,13 @@
                     <li>
                         <p>
                             <a href="#">新生报到 IN越惠</a>
-                            <span>5月25日</span>
+                            <span>8月25日</span>
                         </p>
                     </li>
                     <li>
                         <p>
                             <a href="#">妆艺术·饰生活</a>
-                            <span>5月18日</span>
+                            <span>8月18日</span>
                         </p>
                     </li>
                 </ul>
@@ -59,22 +59,23 @@
         </div>
         <div class="panel p2">
             <div class="panel-heading">
-                <a href="jifenjiangli.html">
+                <a href='<%=request.getContextPath() %>/app/mobile/page/myorder'>
                     <p>我的订单</p>
                 </a>
             </div>
         </div>
         <div class="panel p3">
             <div class="panel-heading">
-                <a href="#">
+                <a href='<%=request.getContextPath() %>/app/mobile/page/myaddress'>
+                
                     <p>地址管理</p>
                 </a>
             </div>
         </div>
-                <div class="panel p2">
+        <div class="panel p2">
             <div class="panel-heading">
                 <a href="#">
-                    <p>地址管理</p>
+                    <p>关于我们</p>
                 </a>
             </div>
         </div>
