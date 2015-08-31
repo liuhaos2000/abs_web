@@ -22,4 +22,11 @@ public interface OrderService {
      */
     public Map<String, Object> orderSubmit(TOrder order, List<TOrderDetail> orderDetailList) throws BusinessException;
 
+    /**
+     * 跟新订单状态为已支付
+     * @param orderId 
+     * @param payId 
+     */
+    public Map<String, Object> updOrderToPayed(String orderId, String payId);
+
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.data.domain.Page;
@@ -20,6 +19,7 @@ import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
+import com.abs.mobile.service.HuiyuanService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.OrderService;
@@ -42,6 +42,8 @@ public class MobilePageController {
     private CartService cartService;
     @Resource
     private OrderService orderService;
+    @Resource
+    private HuiyuanService huiyuanService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex() {
@@ -74,14 +76,23 @@ public class MobilePageController {
     }
     // huiyuan
     @RequestMapping("/huiyuan")
-    public String toHuiyuan() {
+    public String toHuiyuan(String orderId, String payId,ModelMap map) {
+
+        Map<String, Object> resultMap =  huiyuanService.huiyuanInit(
+                orderId, payId);
+      
+        map.put("result", resultMap);
+
         return "mobile/huiyuan";
     }
-    // huiyuan
+   
+    // my order
     @RequestMapping("/myorder")
     public String toMyOrder() {
         return "mobile/my_order";
-    }    // huiyuan
+    }    
+    
+    // my address
     @RequestMapping("/myaddress")
     public String toMyAddress() {
         return "mobile/my_address";
@@ -117,6 +128,7 @@ public class MobilePageController {
         map.put("typeId", typeId);
         return "mobile/itemlist";
     }
+    
     // item
     @RequestMapping("/item")
     public String toItem(String itemId,ModelMap map) {

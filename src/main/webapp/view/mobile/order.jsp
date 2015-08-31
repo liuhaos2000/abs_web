@@ -367,7 +367,8 @@ var UrlConfig = {
         saveAd:'<%=request.getContextPath() %>/app/mobile/useradress/saveAddress',
         loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
         deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress',
-        orderSubmit:'<%=request.getContextPath() %>/app/mobile/order/orderSubmit'
+        orderSubmit:'<%=request.getContextPath() %>/app/mobile/order/orderSubmit',
+        updOrderToPayed:'<%=request.getContextPath() %>/app/mobile/order/updOrderToPayed'
     };
 //更新用
 var modal;
@@ -641,7 +642,7 @@ function dosubmit(){
         dataType:'json',    
         success:function(result) {
             if(result.successful == true ){
-            	alert(result.data.appId);
+            	//alert(result.data.appId);
             	//发起支付
             	WeixinJSBridge.invoke('getBrandWCPayRequest',{
  		 											"appId" : result.data.appId,
@@ -653,13 +654,43 @@ function dosubmit(){
   									},function(res){
   						  				WeixinJSBridge.log(res.err_msg);
 	    				          		if(res.err_msg == "get_brand_wcpay_request:ok"){  
-	    				  					 alert("微信支付成功!");  
-	    				  		 		 }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
-	    				  					 alert("用户取消支付!");  
-	    				  				  }else{  
-	    				  					 alert("支付失败!");  
-	    				  		  		  }  
-	    			  				})
+	    				  					//alert("微信支付成功!");  
+	    				  					updOrderToPayed(result.data.orderId,result.data.payId);
+	    				  		 		}else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+	    				  					//alert("用户取消支付!");  
+	    				  				}else{  
+	    				  					alert("支付失败!");  
+	    				  		  		}
+                                        // 跳转
+                                        window.location.href='<%=request.getContextPath() %>'+
+                                        '/app/mobile/page/huiyuan?'+
+                                        'orderId='+result.data.orderId,+
+                                        '&payId='+result.data.payId; 
+	    			  				});
+            }else{
+                myalert(result.msg,'main_div');
+            }
+         }
+    });
+}
+function updOrderToPayed(orderId,payId){
+	if(orderId==null){
+		// 跳转
+		window.location.href='<%=request.getContextPath() %>'+
+                             '/app/mobile/page/huiyuan'; 
+		return;
+	}
+    $.ajax({    
+        url:UrlConfig.updOrderToPayed, 
+        data:{orderId:orderId},
+        type:'post',
+        //cache:false,
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+                // 跳转
+                window.location.href='<%=request.getContextPath() %>'+
+                                     '/app/mobile/page/huiyuan'; 
             }else{
                 myalert(result.msg,'main_div');
             }
@@ -670,8 +701,7 @@ function dosubmit(){
 
 
 
-
-
+// 刷新
 function refreshHead(item){
 	if(item==null){
 		$('div[name="head-address"]').html('<div class="row">                                                             '+

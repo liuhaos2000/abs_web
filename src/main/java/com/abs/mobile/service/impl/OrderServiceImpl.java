@@ -25,6 +25,7 @@ import com.abs.mobile.domain.TCartKey;
 import com.abs.mobile.domain.TItem;
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
+import com.abs.mobile.domain.TOrderKey;
 import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.OrderService;
@@ -238,6 +239,13 @@ public class OrderServiceImpl implements OrderService {
             for (TOrderDetail tOrderDetail : orderDetailList) {
             	System.out.println("KEY:"+tOrderDetail.getItemId());
                 tOrderDetailMapper.insert(tOrderDetail);
+                //删除CART
+                TCartKey key = new TCartKey();
+                key.setOpenId(user.getOpenId());
+                key.setItemId(tOrderDetail.getItemId());
+                key.setItemGuige(tOrderDetail.getItemGuige());
+                key.setItemYanse(tOrderDetail.getItemYanse());
+                tCartMapper.deleteByPrimaryKey(key);
             }
         }
         
@@ -262,6 +270,8 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("signType", parm.get("signType"));
         resultMap.put("sign", parm.get("sign"));
         
+        resultMap.put("orderId", order.getOpenId());
+        resultMap.put("payId", rMap.get("prepay_id"));
         // JSAPI 签名信息
         //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/order/orderSubmit"));
         
@@ -331,6 +341,30 @@ public class OrderServiceImpl implements OrderService {
     private String getNewOrderId(){
         
         return tOrderMapper.getNewOrderId();
+        
+    }
+
+
+    /**
+     * 更新支付状态
+     */
+    @Override
+    @Transactional(rollbackFor=Exception.class) 
+    public Map<String, Object> updOrderToPayed(String orderId,String payId) {
+        
+        Date date = new Date();
+        
+        TOrderKey key = new TOrderKey();
+        key.setOrderId(orderId);
+        key.setOrderZhifuId(payId);
+        TOrder record = tOrderMapper.selectByPrimaryKey(key );
+        record.setStatus(AbsConst.ORDER_PAYED);
+        record.setuDate(date);
+        record.setuUser("UPD_ORDER_PAYED");
+        tOrderMapper.updateByPrimaryKey(record);
+        
+        Map<String, Object> resultMap =  new HashMap<String, Object>();
+        return resultMap;
         
     }
 }

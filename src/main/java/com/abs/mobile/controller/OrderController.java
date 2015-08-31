@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
 import com.abs.mobile.service.CartService;
@@ -44,6 +43,23 @@ public class OrderController extends BaseController {
         
         Map<String, Object> resultMap = orderService.orderSubmit(order,orderDetailList);
        
+        request.setData(resultMap);
+        return request;
+    }
+    
+    /**
+     * 更新订单为已经支付状态
+     * @return
+     * @throws BusinessException 
+     */
+    @RequestMapping("/orderSubmit")
+    @ResponseBody
+    public Result updOrderToPayed(String orderId,String payId) throws BusinessException {
+        
+        Result request = new Result();
+        
+        Map<String, Object> resultMap = orderService.updOrderToPayed(orderId,payId);
+        
         request.setData(resultMap);
         return request;
     }
