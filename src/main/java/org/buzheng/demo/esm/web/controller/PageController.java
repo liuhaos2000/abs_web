@@ -42,4 +42,35 @@ public class PageController {
     public String sysType() {
         return "system/type";
     }
+    
+    
+    /**
+     * 商品
+     * 商品类型
+     */
+    // 修改密码页面
+    @RequestMapping("/itemtype")
+    public String itemtype() {
+        return "item/itemtype";
+    }
+    /**
+     * 店铺设置
+     * 主业轮播
+     */
+    // 修改密码页面
+    @RequestMapping("/lunbo")
+    public String lunbo() {
+        return "shop/lunbo";
+    }
+    /**
+     * 店铺设置
+     * 物流设置
+     */
+    @RequestMapping("/wuliu")
+    public String wuliu() {
+        return "shop/wuliu";
+    }
+    
+    
+    
 }
