@@ -1,6 +1,7 @@
 package com.abs.mobile.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,6 @@ import com.abs.mobile.domain.TCartKey;
 import com.abs.mobile.domain.TItem;
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
-import com.abs.mobile.domain.TOrderKey;
 import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.OrderService;
@@ -86,28 +86,53 @@ public class OrderServiceImpl implements OrderService {
             dbCart.setuUser("TOORDER");
             tCartMapper.updateByPrimaryKey(dbCart);
         }
-        //1.1返回商品清单
-        List<Map<String, String>> itemlist = tCartMapper.getItemFromCart(user.getOpenId());
-        if(itemlist.size()>0){
-        	for(int i=0;i<itemlist.size();i++){
-        		// list中删除未选中的商品
-        		if(!("1".equals(itemlist.get(i).get("del_flg")))){  
-        			itemlist.remove(i);  
-        			i=i-1;
-                }  
-        	}
-        }
-        resultMap.put("itemlist", itemlist);
+        
         //2取得用户地址
         List<Map<String,String>> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
         resultMap.put("uadList", uadList);
+        String toArea = "";
+        if(uadList!=null && uadList.size()>=1){
+        	toArea = uadList.get(0).get("region_name1");
+        }
         
+        //3返回商品清单
+        List<Map<String, Object>> itemlist = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),toArea);
+        List<Map<String, Object>> itemlistGrouped = groupItem(itemlist);
+        Map<String, String> priceTotal = sumPrice(itemlist);
+        resultMap.put("itemlistGrouped", itemlistGrouped);
+        resultMap.put("priceTotal", priceTotal);
+        resultMap.put("itemlist", itemlist);
+        // 画面结构组装
+        // owner
+        //    1 名称 金额
+        //    2 名称  金额
+        //        发货地：XX，运费：00.00
+        //    1 名称 金额
+        //    2 名称  金额
+        //        发货地：XX，运费：00.00
+        
+        //        if(itemlist.size()>0){
+//        	for(int i=0;i<itemlist.size();i++){
+//        		// list中删除未选中的商品
+//        		if(!("1".equals(itemlist.get(i).get("del_flg")))){  
+//        			itemlist.remove(i);  
+//        			i=i-1;
+//                }  
+//        	}
+//        }
+
+
+        // 4一级地址
         List<TRegion> regionList= tRegionMapper.getRegion1();
         resultMap.put("regionList", regionList);
-        //tUserAddressMapper
-        //3邮件模板
-        //4可用积分
+        //5可用积分
         resultMap.put("jifen", user.getJifen());
+        //6商品总价
+//        Map priceMap = tCartMapper.getItemFromCartTotalPrice(user.getOpenId(),"5");
+//        BigDecimal p = (BigDecimal)priceMap.get("item_total_price");
+//        Map youfeiMap = tCartMapper.getItemFromCartTotalYoufei(user.getOpenId(),"5");
+//        BigDecimal y = (BigDecimal)youfeiMap.get("youfei_total");
+        //7
         
         // JSAPI 签名信息
         //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/page/order"));
@@ -117,7 +142,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    /**
+
+
+	/**
      * 提交订单，返回支付结果
      * @throws BusinessException 
      */
@@ -246,6 +273,8 @@ public class OrderServiceImpl implements OrderService {
                 key.setItemGuige(tOrderDetail.getItemGuige());
                 key.setItemYanse(tOrderDetail.getItemYanse());
                 tCartMapper.deleteByPrimaryKey(key);
+                
+                //扣减库存 TODO
             }
         }
         
@@ -287,7 +316,7 @@ public class OrderServiceImpl implements OrderService {
     private void checkOrder(TOrder order, 
             List<TOrderDetail> orderDetailList,TUser user) throws BusinessException {
         // 1.库存 check 
-        List<Map<String, String>> list = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),"5");
+        List<Map<String, Object>> list = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),"5");
         for(Map map:list){
             Integer kucun = (Integer)map.get("kucun");
             Integer shuliang = (Integer)map.get("shuliang");
@@ -350,14 +379,11 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     @Transactional(rollbackFor=Exception.class) 
-    public Map<String, Object> updOrderToPayed(String orderId,String payId) {
+    public Map<String, Object> updOrderToPayed(String orderId) {
         
         Date date = new Date();
         
-        TOrderKey key = new TOrderKey();
-        key.setOrderId(orderId);
-        key.setOrderZhifuId(payId);
-        TOrder record = tOrderMapper.selectByPrimaryKey(key );
+        TOrder record = tOrderMapper.selectByPrimaryKey(orderId );
         record.setStatus(AbsConst.ORDER_PAYED);
         record.setuDate(date);
         record.setuUser("UPD_ORDER_PAYED");
@@ -367,4 +393,132 @@ public class OrderServiceImpl implements OrderService {
         return resultMap;
         
     }
+    /**
+     * 按照Owner和fromarea进行分组
+     * @param itemList
+     * @return
+     */
+    private List<Map<String,Object>> groupItem(List<Map<String,Object>> itemList){
+        // owner1
+        //    1 名称a  金额
+        //    2 名称b  金额
+        //        发货地：aaa，运费：00.00
+        //    1 名称c  金额
+        //    2 名称d  金额
+        //        发货地：bbb，运费：00.00
+        // owner2
+        //    1 名称e 金额
+        //    2 名称f  金额
+        //        发货地：xxx，运费：00.00
+        //    1 名称g 金额
+        //    2 名称h  金额
+        //        发货地：yyy，运费：00.00
+    	List<Map<String,Object>> resultmap = new ArrayList<Map<String,Object>>();
+    	
+    	String workOwner="";
+    	String workFromArea="";
+    	
+    	Map<String,Object> ownerMap = null;
+    	List<Map<String,Object>> ownerList = null;
+    	Map<String,Object> ownerItemMap = null;
+    	List<Map<String,Object>> ownerItemList = null;
+    	
+    	for(Map<String,Object> item : itemList){
+    		if(workOwner.equals(item.get("owner"))){
+    			
+    			if(workFromArea.equals(item.get("from_area").toString())){
+    				ownerItemList.add(item);
+    			}else{
+    				// 如果Fromarea改变
+        			ownerItemMap = new HashMap<String,Object>();
+        			ownerItemList = new ArrayList<Map<String,Object>>();
+        			ownerItemMap.put("fromArea", item.get("from_name"));
+           			ownerItemMap.put("toArea", item.get("to_name"));
+           			ownerItemMap.put("fromToYoufei", item.get("group_youfei"));
+        			ownerItemMap.put("ownerItemList", ownerItemList);
+
+        			ownerItemList.add(item);
+        			
+        			ownerList.add(ownerItemMap);
+        			
+        			// 保存
+        			workFromArea=item.get("from_area").toString();
+    			}
+    		}else{
+    			// 如果Owner改变
+    			ownerMap = new HashMap<String,Object>();
+    			ownerList = new ArrayList<Map<String,Object>>();
+    			ownerMap.put("owner", item.get("owner"));
+    			ownerMap.put("ownerList", ownerList);
+    			resultmap.add(ownerMap);
+    			// 装入第一条
+    			ownerItemMap = new HashMap<String,Object>();
+    			ownerItemList = new ArrayList<Map<String,Object>>();
+    			ownerItemMap.put("fromArea", item.get("from_name"));
+       			ownerItemMap.put("toArea", item.get("to_name"));
+       			ownerItemMap.put("fromToYoufei", item.get("group_youfei"));
+    			ownerItemMap.put("ownerItemList", ownerItemList);
+
+    			ownerItemList.add(item);
+    			
+    			ownerList.add(ownerItemMap);
+    			
+    			// 保存
+    			workOwner=(String)item.get("owner");
+    			workFromArea=item.get("from_area").toString();
+    		}
+    	}
+    	
+    	
+		return resultmap;
+    }
+    /**
+     * 计算商品总价，邮费总价，和所有总价
+     * @param itemlist
+     * @return
+     */
+    private Map<String, String> sumPrice(List<Map<String, Object>> itemList) {
+    	
+    	
+    	String workOwner="";
+    	String workFromArea="";
+    	BigDecimal itemTotalPrice=new BigDecimal(0);
+    	BigDecimal yunfeiTotalPrice=new BigDecimal(0);
+    	BigDecimal totalPrice=new BigDecimal(0);
+    	
+    	for(Map<String,Object> item : itemList){
+    		BigDecimal salePrice = (BigDecimal)item.get("sale_price");
+    		Integer shuliang = (Integer)item.get("shuliang");
+    		itemTotalPrice = itemTotalPrice.add(salePrice.multiply(new BigDecimal(shuliang)));
+    		
+    		if(workOwner.equals(item.get("owner"))){
+    			
+    			if(workFromArea.equals(item.get("from_area").toString())){
+    				
+    			}else{
+    				// 如果Fromarea改变
+    				yunfeiTotalPrice = yunfeiTotalPrice.add((BigDecimal)item.get("group_youfei"));
+        			// 保存
+        			workFromArea=item.get("from_area").toString();
+    			}
+    		}else{
+    			// 如果Owner改变
+    			yunfeiTotalPrice = yunfeiTotalPrice.add((BigDecimal)item.get("group_youfei"));
+    			// 保存
+    			workOwner=(String)item.get("owner");
+    			workFromArea=item.get("from_area").toString();
+    		}
+    	}
+    	
+    	
+    	totalPrice = itemTotalPrice.add(yunfeiTotalPrice);
+    	
+
+    	
+    	Map<String,String> sumPriceMap =new HashMap<String,String>();
+    	sumPriceMap.put("itemTotalPrice", itemTotalPrice.toString());
+    	sumPriceMap.put("yunfeiTotalPrice", yunfeiTotalPrice.toString());
+    	sumPriceMap.put("totalPrice", totalPrice.toString());
+		return sumPriceMap;
+	}
 }

@@ -243,8 +243,16 @@
                                     </div>
                             </div>
                             <div id="accordion-element-906172" class="accordion-body collapse in">
-                                <div class="accordion-inner">
-                                	<c:forEach items="${result.itemlist}" var="item"  varStatus="status">
+                                <div class="accordion-inner order-item-box">
+                                	<c:forEach items="${result.itemlistGrouped}" var="ownerMap"  varStatus="status">
+
+                                		<div class="row order-item-head">
+                                        	<div class="col-md-12 col-sm-12 col-xs-12">
+                                        		<p class="order-ad-right p-no-bottom">由${ownerMap.owner}发货</p>
+                                        	</div>
+                                		</div>
+                                	  <c:forEach items="${ownerMap.ownerList}" var="ownerItemMap"  varStatus="status">
+										<c:forEach items="${ownerItemMap.ownerItemList}" var="item"  varStatus="status">
 										<div class="row order-item-row" 
 										      name="itemqingdan"
 										      itemId="${item.item_id}"
@@ -261,31 +269,23 @@
                                           	  <c:set var="heji" value="${heji+(item.sale_price*item.shuliang)}"></c:set>
                                        		 </div>
                                    	    </div>
-                                	</c:forEach>
+										</c:forEach>
+                               
+                                   	    <div class="row order-item-food">
+                                        	<div class="col-md-6 col-sm-6 col-xs-6">
+                                        		<p class="order-ad-right p-no-bottom">从${ownerItemMap.fromArea}发往${ownerItemMap.toArea}</p>
+                                        	</div>
+                                        	<div class="col-md-6 col-sm-6 col-xs-6">
+                                        		<p class="order-ad-right p-no-bottom">邮费：￥${ownerItemMap.fromToYoufei}</p>
+                                        	</div>
+                                		</div>
+                                      </c:forEach>
+                                    </c:forEach>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-group">
-                            <div class="accordion-inner">
-                                    <div class="row">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906173">
-                                        <div class="col-md-2 col-sm-2 col-xs-2 order-icon-col-2">
-                                            <span class="glyphicon glyphicon-chevron-down order-icon" aria-hidden="true"></span>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10 order-container">
-                                            <div class="order-p">
-                                                    <p class="p-no-bottom order-ad-left">送货方式：圆通快递(10.00元)</p>
-                                            </div>
-                                        </div>
-                                      </a>  
-                                    </div>
-                            </div>
-                            <div id="accordion-element-906173" class="accordion-body collapse">
-                                <div class="accordion-inner">
-                                    功能块...
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="accordion-group">
                             <div class="accordion-inner">
                                     <div class="row">
@@ -386,7 +386,9 @@ $(document).ready(function() {
         $("#main_div").height($(window).height()-52);
         $("#main_div").css({"overflow":"auto"});
         // 合计
-        $("#total").html("${heji}");
+        $("#itemTotal").html("${result.priceTotal.itemTotalPrice}");
+        $("#yunfeiTotal").html("${result.priceTotal.yunfeiTotalPrice}");
+        $("#total").html("${result.priceTotal.totalPrice}");
         // 绑定单击事件
         bindEvent();
     });
@@ -655,17 +657,17 @@ function dosubmit(){
   						  				WeixinJSBridge.log(res.err_msg);
 	    				          		if(res.err_msg == "get_brand_wcpay_request:ok"){  
 	    				  					//alert("微信支付成功!");  
-	    				  					updOrderToPayed(result.data.orderId,result.data.payId);
+	    				  					updOrderToPayed(result.data.orderId);
 	    				  		 		}else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
 	    				  					//alert("用户取消支付!");  
 	    				  				}else{  
 	    				  					alert("支付失败!");  
 	    				  		  		}
-                                        // 跳转
+                                        // 跳转Index,并且加载会员页面
                                         window.location.href='<%=request.getContextPath() %>'+
-                                        '/app/mobile/page/huiyuan?'+
-                                        'orderId='+result.data.orderId,+
-                                        '&payId='+result.data.payId; 
+                                        '/app/mobile/page/index?'+
+                                        'loadId=huiyuan',+
+                                        'orderId='+result.data.orderId; 
 	    			  				});
             }else{
                 myalert(result.msg,'main_div');
@@ -673,14 +675,8 @@ function dosubmit(){
          }
     });
 }
-function updOrderToPayed(orderId,payId){
-	if(orderId==null){
-		// 跳转
-		window.location.href='<%=request.getContextPath() %>'+
-                             '/app/mobile/page/huiyuan'; 
-		return;
-	}
-    $.ajax({    
+function updOrderToPayed(orderId){
+    $.ajax({
         url:UrlConfig.updOrderToPayed, 
         data:{orderId:orderId},
         type:'post',
@@ -689,8 +685,8 @@ function updOrderToPayed(orderId,payId){
         success:function(result) {
             if(result.successful == true ){
                 // 跳转
-                window.location.href='<%=request.getContextPath() %>'+
-                                     '/app/mobile/page/huiyuan'; 
+                //window.location.href='<%=request.getContextPath() %>'+
+                //                   '/app/mobile/page/huiyuan'; 
             }else{
                 myalert(result.msg,'main_div');
             }

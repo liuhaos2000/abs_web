@@ -27,6 +27,6 @@ public interface OrderService {
      * @param orderId 
      * @param payId 
      */
-    public Map<String, Object> updOrderToPayed(String orderId, String payId);
+    public Map<String, Object> updOrderToPayed(String orderId);
 
 }

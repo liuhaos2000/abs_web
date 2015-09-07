@@ -3,7 +3,11 @@ package com.abs.mobile.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TOrder extends TOrderKey {
+public class TOrder {
+    private String orderId;
+
+    private String orderZhifuId;
+
     private Date orderDate;
 
     private String status;
@@ -35,6 +39,22 @@ public class TOrder extends TOrderKey {
     private Date uDate;
 
     private String uUser;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
+    }
+
+    public String getOrderZhifuId() {
+        return orderZhifuId;
+    }
+
+    public void setOrderZhifuId(String orderZhifuId) {
+        this.orderZhifuId = orderZhifuId == null ? null : orderZhifuId.trim();
+    }
 
     public Date getOrderDate() {
         return orderDate;

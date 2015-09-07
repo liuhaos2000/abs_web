@@ -1,16 +1,15 @@
 package com.abs.mobile.dao;
 
 import com.abs.mobile.domain.TOrder;
-import com.abs.mobile.domain.TOrderKey;
 
 public interface TOrderMapper {
-    int deleteByPrimaryKey(TOrderKey key);
+    int deleteByPrimaryKey(String orderId);
 
     int insert(TOrder record);
 
     int insertSelective(TOrder record);
 
-    TOrder selectByPrimaryKey(TOrderKey key);
+    TOrder selectByPrimaryKey(String orderId);
 
     int updateByPrimaryKeySelective(TOrder record);
 

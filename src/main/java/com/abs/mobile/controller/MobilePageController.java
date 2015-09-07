@@ -46,8 +46,12 @@ public class MobilePageController {
     private HuiyuanService huiyuanService;
 	// index
 	@RequestMapping("/index")
-	public String toIndex() {
-
+	public String toIndex(String loadId,String orderId,ModelMap map) {
+		
+		map.put("loadId", loadId);
+		//支付完成后，调转会员页面用
+		map.put("orderId", orderId);
+		
 		return "mobile/index";
 	}
     // home

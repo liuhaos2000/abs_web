@@ -3,7 +3,7 @@
 <mapper namespace="com.abs.mobile.dao.TOrderMapper" >
   <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TOrder" >
     <id column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <id column="order_zhifu_id" property="orderZhifuId" jdbcType="VARCHAR" />
+    <result column="order_zhifu_id" property="orderZhifuId" jdbcType="VARCHAR" />
     <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="open_id" property="openId" jdbcType="VARCHAR" />
@@ -26,17 +26,15 @@
     yhq_flg, yhq_code, jifen_flg, jifen_dixiao, shiji_price, del_flg, c_date, c_user, 
     u_date, u_user
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TOrderKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_order
     where order_id = #{orderId,jdbcType=VARCHAR}
-      and order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_order
     where order_id = #{orderId,jdbcType=VARCHAR}
-      and order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TOrder" >
     insert into t_order (order_id, order_zhifu_id, order_date, 
@@ -172,6 +170,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TOrder" >
     update t_order
     <set >
+      <if test="orderZhifuId != null" >
+        order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR},
+      </if>
       <if test="orderDate != null" >
         order_date = #{orderDate,jdbcType=TIMESTAMP},
       </if>
@@ -222,11 +223,11 @@
       </if>
     </set>
     where order_id = #{orderId,jdbcType=VARCHAR}
-      and order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TOrder" >
     update t_order
-    set order_date = #{orderDate,jdbcType=TIMESTAMP},
+    set order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=VARCHAR},
       open_id = #{openId,jdbcType=VARCHAR},
       address_id = #{addressId,jdbcType=INTEGER},
@@ -243,7 +244,6 @@
       u_date = #{uDate,jdbcType=TIMESTAMP},
       u_user = #{uUser,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=VARCHAR}
-      and order_zhifu_id = #{orderZhifuId,jdbcType=VARCHAR}
   </update>
   <select id="getNewOrderId" resultType="java.lang.String">
     select 

@@ -154,7 +154,17 @@ var UrlConfig = {
 			    	$("#main_div").height($(window).height()-$("header").height()-52);
 			    	$("#main_div").css({"overflow":"auto"});
 
-			    	$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home');
+			    	if('${loadId}'=='huiyuan'){
+			    		$('#main_div').load('<%=request.getContextPath() %>' + 
+			    				'/app/mobile/page/huiyuan'+
+			    				'?orderId="${orderId}"');
+			    		 //样式修改
+	                	 $('.footer-block a').removeClass("active");
+	                	 $('huiyuan-bt').addClass("active");
+			    	}else{
+			    		$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home');
+			    	}
+			    	
 			    });
 			    
 

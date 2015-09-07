@@ -1543,12 +1543,27 @@ img{
 .f-left{
 	float: left;
 }
+.order-item-box{
+	padding:10px 20px 10px 20px;
+}
+.order-item-head{
+	padding:5px 0 5px 0;
+	border-top: 1px solid #B7B7B7;
+	border-left: 1px solid #B7B7B7;
+	border-right: 1px solid #B7B7B7;
+	background-color: #D5C6FF;
+}
+.order-item-food{
+	padding:5px 0 5px 0;
+	border: 1px solid #B7B7B7;
+	margin-bottom: 15px;
+}
 .order-item-row{
 	overflow:hidden;
 	padding:10px 0 10px 0;
-	border-bottom: 1px solid #B7B7B7;
 	border-top: 1px solid #B7B7B7;
-	margin-top: -1px;
+	border-left: 1px solid #B7B7B7;
+	border-right: 1px solid #B7B7B7;
 }
 .order-totle-row{
 	margin-left:0px !important;

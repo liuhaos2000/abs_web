@@ -52,13 +52,13 @@ public class OrderController extends BaseController {
      * @return
      * @throws BusinessException 
      */
-    @RequestMapping("/orderSubmit")
+    @RequestMapping("/updOrderToPayed")
     @ResponseBody
-    public Result updOrderToPayed(String orderId,String payId) throws BusinessException {
+    public Result updOrderToPayed(String orderId) throws BusinessException {
         
         Result request = new Result();
         
-        Map<String, Object> resultMap = orderService.updOrderToPayed(orderId,payId);
+        Map<String, Object> resultMap = orderService.updOrderToPayed(orderId);
         
         request.setData(resultMap);
         return request;

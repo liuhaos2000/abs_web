@@ -207,10 +207,8 @@
                                         #{param2} as to_area,t7.region_name as to_name,t5.price as youfei,t5.price_plus as youfei_plus,
                                         t8.zhongliangTotal,
 
-                                               CASE
-                                                            WHEN t2.baoyou_flg='1' THEN 0
-                                                            ELSE t5.price + ceil((t8.zhongliangTotal-1))*t5.price_plus
-                                                     END AS group_youfei
+                                        IFNULL(t5.price + ceil((t8.zhongliangTotal-1))*t5.price_plus,0)
+                                              AS group_youfei
             from t_cart t1 
                             INNER JOIN t_item t2 
                                 on t1.item_id=t2.item_id 
@@ -266,6 +264,7 @@
   </sql>
   <select id="getItemFromCartWhitYoufei" resultType="map" >
         <include refid="getItemFromCartWhitYoufeiSQL" />
+        order by t2.`owner`,t2.from_area
    </select>
      <select id="getItemFromCartTotalPrice" resultType="map" >
         select 
