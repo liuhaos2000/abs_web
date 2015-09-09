@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,8 @@ import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderDetail;
 import com.abs.mobile.domain.TRegion;
 import com.abs.mobile.domain.TUser;
+import com.abs.mobile.domain.TUserAddress;
+import com.abs.mobile.domain.TUserAddressKey;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsConst;
@@ -520,5 +523,36 @@ public class OrderServiceImpl implements OrderService {
     	sumPriceMap.put("yunfeiTotalPrice", yunfeiTotalPrice.toString());
     	sumPriceMap.put("totalPrice", totalPrice.toString());
 		return sumPriceMap;
+	}
+
+
+
+    /**
+     * 由于收货人地址发生改变：刷新商品价格
+     * @return
+     * @throws BusinessException 
+     */
+	@Override
+	public Map<String, Object> reItemPrice(String addId) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String toArea = "";
+		TUser user=sessionService.getLoginUser();
+		if(StringUtils.isNotEmpty(addId)){
+			TUserAddressKey key = new TUserAddressKey();
+			key.setOpenId(user.getOpenId());
+			key.setAddressId(Integer.valueOf(addId));
+			TUserAddress ua =  tUserAddressMapper.selectByPrimaryKey(key);
+			toArea=ua.getRegionName1();
+		}
+
+        //3返回商品清单
+        List<Map<String, Object>> itemlist = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),toArea);
+        List<Map<String, Object>> itemlistGrouped = groupItem(itemlist);
+        Map<String, String> priceTotal = sumPrice(itemlist);
+        resultMap.put("itemlistGrouped", itemlistGrouped);
+        resultMap.put("priceTotal", priceTotal);
+        resultMap.put("itemlist", itemlist);
+		
+		return resultMap;
 	}
 }

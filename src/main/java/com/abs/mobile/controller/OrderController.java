@@ -27,7 +27,7 @@ public class OrderController extends BaseController {
     @Resource
     private OrderService orderService;
     /**
-     * 取得购物车中商品数量
+     * 提交订单
      * @return
      * @throws BusinessException 
      */
@@ -59,6 +59,23 @@ public class OrderController extends BaseController {
         Result request = new Result();
         
         Map<String, Object> resultMap = orderService.updOrderToPayed(orderId);
+        
+        request.setData(resultMap);
+        return request;
+    }
+    
+    /**
+     * 由于收货人地址发生改变：刷新商品价格
+     * @return
+     * @throws BusinessException 
+     */
+    @RequestMapping("/reItemPrice")
+    @ResponseBody
+    public Result reItemPrice(String addId) throws BusinessException {
+        
+        Result request = new Result();
+        
+        Map<String, Object> resultMap = orderService.reItemPrice(addId);
         
         request.setData(resultMap);
         return request;

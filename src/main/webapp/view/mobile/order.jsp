@@ -243,7 +243,7 @@
                                     </div>
                             </div>
                             <div id="accordion-element-906172" class="accordion-body collapse in">
-                                <div class="accordion-inner order-item-box">
+                                <div class="accordion-inner order-item-box" id="item_list">
                                 	<c:forEach items="${result.itemlistGrouped}" var="ownerMap"  varStatus="status">
 
                                 		<div class="row order-item-head">
@@ -368,7 +368,8 @@ var UrlConfig = {
         loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
         deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress',
         orderSubmit:'<%=request.getContextPath() %>/app/mobile/order/orderSubmit',
-        updOrderToPayed:'<%=request.getContextPath() %>/app/mobile/order/updOrderToPayed'
+        updOrderToPayed:'<%=request.getContextPath() %>/app/mobile/order/updOrderToPayed',
+        reItemPrice:'<%=request.getContextPath() %>/app/mobile/order/reItemPrice'
     };
 //更新用
 var modal;
@@ -487,6 +488,7 @@ function saveAddress(){
             	//刷新
             	refreshHead(result.data.udMap[0]);
             	refreshList(result.data.uadList);
+            	refreshPrice();
             	//收缩页面
             	$("#accordion-element-588573").collapse('hide');
                 $("#main_div").scrollTop(0);
@@ -511,6 +513,7 @@ function deleteAddress(){
             if(result.successful == true ){
             	refreshHead(result.data.uadList[0]);
             	refreshList(result.data.uadList);
+            	refreshPrice();
                 // 绑定单击事件
 				bindEvent();
                 // 关闭模态窗口
@@ -573,6 +576,8 @@ function bindEvent(){
     	$("#head-adid").val($(this).attr("adid"));
     	$("#accordion-element-588573").collapse('hide');
     	$("#main_div").scrollTop(0);
+    	// 刷新价格
+    	refreshPrice();
     });
     $('button[name="upd_adress"]').bind("click",function(){
     	modal="UPD";
@@ -807,8 +812,71 @@ function refreshList(list){
             '</div>                                                              ');
 }
 
-
-
+function refreshPrice(){
+    $.ajax({
+        url:UrlConfig.reItemPrice, 
+        data:{addId:$("#head-adid").val()},
+        type:'post',
+        //cache:false,
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	refreshPriceHtml(result.data.itemlistGrouped);
+                // 合计
+                $("#itemTotal").html(result.data.priceTotal.itemTotalPrice);
+                $("#yunfeiTotal").html(result.data.priceTotal.yunfeiTotalPrice);
+                $("#total").html(result.data.priceTotal.totalPrice);
+            	
+            }else{
+                myalert(result.msg,'main_div');
+            }
+         }
+    });
+}
+function refreshPriceHtml(data){
+	$('#item_list').html('');
+	for(var i=0;i<data.length;i++){
+		$('#item_list').append('<div class="row order-item-head">                                         '+
+                '	<div class="col-md-12 col-sm-12 col-xs-12">                            '+
+                '		<p class="order-ad-right p-no-bottom">由'+data[i].owner+'发货</p>  '+
+                '	</div>                                                                 '+
+        		'</div>                                                                    '
+		);
+		var ownerList=data[i].ownerList;
+		for(var j=0;j<ownerList.length;j++){
+			var ownerItemList = ownerList[j].ownerItemList;
+			for(var k=0;k<ownerItemList.length;k++){
+				var item = ownerItemList[k];
+				$('#item_list').append('<div class="row order-item-row"    '+
+						'      name="itemqingdan"                                                                                '+
+						'      itemId="'+item.item_id+'"                                                                          '+
+						'      itemGuige="'+item.item_guige+'"                                                                    '+
+						'      itemYanse="'+item.item_yanse+'"                                                                    '+
+						'      shuliang="'+item.shuliang+'" >                                                                     '+
+                        '	<div class="col-md-3 col-sm-3 col-xs-3 cart-item-col">                                               '+
+                        '  	  <img class="order-item-img" src="'+item.path+'" alt="">                                             '+
+                       	'	</div>                                                                                               '+
+                        '	<div class="col-md-9 col-sm-9 col-xs-9 cart-item-col">                                               '+
+                        ' 	  <p class="order-ad-right p-no-bottom">'+item.item_name+' '+item.guige_text+' '+item.yanse_text+'</p>  '+
+                        '  	  <p class="cart_item_price p-no-bottom f-left">￥'+item.sale_price+'</p>                             '+
+                        '  	  <p class="order-ad-right p-no-bottom f-left">&nbsp;x'+item.shuliang+'</p>                           '+
+                        '  	  <c:set var="heji" value="'+heji+(item.sale_price*item.shuliang)+'"></c:set>                         '+
+                       	'	 </div>                                                                                              '+
+                   	    '</div>                                                                                                  ');
+			}
+			
+			
+			$('#item_list').append('<div class="row order-item-food">                                                                       '+
+                    '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
+                    '		<p class="order-ad-right p-no-bottom">从'+ownerList[j].fromArea+'发往'+ownerList[j].toArea+'</p>   '+
+                    '	</div>                                                                                               '+
+                    '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
+                    '		<p class="order-ad-right p-no-bottom">邮费：￥'+ownerList[j].fromToYoufei+'</p>                   '+
+                    '	</div>                                                                                               '+
+            		'</div>');
+		}
+	}
+}
 
 
         </script>

@@ -130,23 +130,34 @@
                          </div>
                          <div class="tab-pane" id="panel-2">
                        		 <div class="text-edit">
-                                                                                      图片文字说明
-                                 <img  src="${path}/resources/images/awj1.jpg" alt="">
-                                 <img  src="${path}/resources/images/er.png" alt="">
-                                 <img  src="${path}/resources/images/er1.webp" alt="">
+                       		 		<table>
+                       		 		  <thead>
+                       		 		  	<tr><td width="40%"></td><td></td></tr>
+                       		 		  </thead>
+                       		 		  <c:forEach items="${result.itemParm}" var="pm">
+                       		 			<tr>
+                       		 				<td valign="top">${pm.key}:</td>
+                       		 				<td>${pm.value}</td>
+                       		 			</tr>
+                       		 		  </c:forEach>
+                       		 		</table>
                              </div>
                     	</div>
                     	<div class="tab-pane" id="panel-3">
                        		 <div class="container">
                        		 	<div class="row">
-                       		 		<c:forEach items="${result.itemParm}" var="pm">
-                       		 			<div class="col-md-4 col-sm-4 col-xs-4 ">
-                       		 				<p class="pl-name">${pm.key}:</p>
-                       		 			</div>
-                       		 			<div class="col-md-8 col-sm-8 col-xs-8 ">
-                       		 				<p class="pl-name">${pm.value}</p>
-                       		 			</div>
-                       		 		</c:forEach>
+
+                       		 		<table>
+                       		 		  <thead>
+                       		 		  	<tr><td width="40%"></td><td></td></tr>
+                       		 		  </thead>
+                       		 		  <c:forEach items="${result.itemParm}" var="pm">
+                       		 			<tr>
+                       		 				<td valign="top">${pm.key}:</td>
+                       		 				<td>${pm.value}</td>
+                       		 			</tr>
+                       		 		  </c:forEach>
+                       		 		</table>
                        		 	</div>
                        		 </div>
                     	</div>
@@ -346,7 +357,7 @@ function getItemSalePrice(itemId,guige,yanse) {
 
 //微信分享JDK--------------------<
   wx.config({
-      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: '${result.signInfo.appId}', // 必填，公众号的唯一标识
       timestamp:'${result.signInfo.timestamp}', // 必填，生成签名的时间戳
       nonceStr: '${result.signInfo.nonceStr}', // 必填，生成签名的随机串

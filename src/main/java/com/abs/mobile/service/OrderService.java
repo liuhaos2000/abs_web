@@ -28,5 +28,11 @@ public interface OrderService {
      * @param payId 
      */
     public Map<String, Object> updOrderToPayed(String orderId);
+    /**
+     * 由于收货人地址发生改变：刷新商品价格
+     * @return
+     * @throws BusinessException 
+     */
+	public Map<String, Object> reItemPrice(String addId);
 
 }
