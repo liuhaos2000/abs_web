@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
     <div class="icon-center">
@@ -25,7 +26,7 @@
 	</div>
 	<div class="container today_miaosha">
         <div class="panel panel-default my-panel">
-            <div class="panel-heading">特价商品</div>
+            <div class="panel-heading">热卖商品</div>
             <div class="panel-body">
                 <div class="container">
                 <!--  -->
@@ -55,6 +56,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>  
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>  
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -69,6 +71,9 @@ $(document).ready(function() {
         window.location.href='<%=request.getContextPath() %>'+
         '/app/mobile/page/item?itemId='+$(this).attr("itemId"); 
     });
+    
+	$(".popupshadow").hideLoading();
+	$(".popupshadow").hide();
 });
 
 function getLunboList() {

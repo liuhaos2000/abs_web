@@ -234,7 +234,6 @@ img{
 	top:0;
 	height:100%;
 	width:100%;
-	background:rgba(101,101,101,0.1);
 	display:none;
 }
 /* 底部部分 比较多页面会使用到 */
@@ -1783,13 +1782,4 @@ img{
 	background:rgba(255,254,79,1) ;
 	color:red;
 }
-.zhezhao{
-	position:absolute;
-	left:0;
-	right:0;
-	bottom:0;
-	top:0;
-	height:100%;
-	width:100%;
-	background:rgba(101,101,101,1);
-}
+

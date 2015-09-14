@@ -6,16 +6,8 @@ function myalert(message,dom){
 	
 }
 
-function loadshow(path){
-	$(document.body).append('<div class="zhezhao">'+
-			'<div class="icon-center">'+
-			'<img class="icon-spin" src="'+path+'/resources/images/loading.png">'+
-			'</div>'+
-			'</div>');
-}
 
-$(document).ready(function() {
-	$(".zhezhao").remove();
-});
+
+
 
 

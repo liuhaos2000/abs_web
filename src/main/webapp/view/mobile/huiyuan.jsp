@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
     <div class="container huiyuan">
@@ -84,12 +85,13 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>
 <script type="text/javascript">
-	if ("${pageCode}" == '1') {
-		window.location.href = "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=1&showwxpaytitle=1#wechat_redirect"
-	} else if ("${pageCode}" == '2') {
-		window.location.href = "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzIyODAxMTQ4Mg==&shelf_id=2&showwxpaytitle=1#wechat_redirect"
-	}
+$(document).ready(function() {
+	$(".popupshadow").hideLoading();
+	$(".popupshadow").hide();
+});
+
 </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>瑞和商城</title>
+	<title>灵动微商</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -14,16 +14,16 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
-
 	<header class="navbar top" role="navigation">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-2 col-sm-2 col-xs-3 top_logo">
 					<p class="navbar-text">
 						<a href="<%=request.getContextPath() %>">
-							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo1.png" alt="瑞和商城"></a>
+							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo2.png" alt="瑞和商城"></a>
 					</p>
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-9 top_search">
@@ -41,7 +41,6 @@
 		</div>
 		<!-- 探出窗口 -->
         <div class="popupshadow">
-
         </div>
         <div class="popup">
             <img src="<%=request.getContextPath() %>/resources/images/popup_icon.png">
@@ -102,41 +101,42 @@
 		</div>
 	</footer>
 
-
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>	
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>	
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>		
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
         getCartCount: '<%=request.getContextPath() %>/app/mobile/cart/getCount',
-    };
+};
     
             $(document).ready(function() {
+            	
                  $("#home-bt").click(function(){
-                	 loadshow('${path}');
+                	 showLoding();
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
-                			'/app/mobile/page/home');
+                			'/app/mobile/page/home', loadback());
                 	 $('.footer-block a').removeClass("active");
                 	 $(this).addClass("active");
                  }); 
                  $("#type-bt").click(function(){
-                	 loadshow('${path}');
+                	 showLoding();
                      $('#main_div').load('<%=request.getContextPath() %>' +
-                             '/app/mobile/page/type'); 
+                             '/app/mobile/page/type',loadback()); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
                  $("#huiyuan-bt").click(function(){
-                	 loadshow('${path}');
+                	 showLoding();
                      $('#main_div').load('<%=request.getContextPath() %>' +
-                             '/app/mobile/page/huiyuan'); 
+                             '/app/mobile/page/huiyuan',loadback()); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
                  $("#cart-bt").click(function(){
-                	 loadshow('${path}');
+                	 showLoding();
                 	 window.location.href='<%=request.getContextPath() %>'+
                 	         '/app/mobile/page/cart'; 
                  });
@@ -153,16 +153,18 @@ var UrlConfig = {
 			    $(function(){
 			    	$("#main_div").height($(window).height()-$("header").height()-52);
 			    	$("#main_div").css({"overflow":"auto"});
-
+		    		
+			    	showLoding();
 			    	if('${loadId}'=='huiyuan'){
 			    		$('#main_div').load('<%=request.getContextPath() %>' + 
 			    				'/app/mobile/page/huiyuan'+
-			    				'?orderId="${orderId}"');
+			    				'?orderId="${orderId}"',loadback());
 			    		 //样式修改
 	                	 $('.footer-block a').removeClass("active");
 	                	 $('huiyuan-bt').addClass("active");
 			    	}else{
-			    		$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home');
+			    		//alert(1);
+			    		$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home',loadback());
 			    	}
 			    	
 			    });
@@ -195,6 +197,15 @@ var UrlConfig = {
             	         }
 
             	    }); 
+            }
+            
+            function showLoding(){
+            	$(".popupshadow").show();
+            	$(".popupshadow").showLoading();
+            }
+            function loadback(){
+            	//$(".popupshadow").hideLoading();
+            	//$(".popupshadow").hide();
             }
         </script>
 </body>

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/css/media.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
     <!-- 
@@ -70,6 +71,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>  
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	init();
@@ -78,6 +80,9 @@ $(document).ready(function() {
         getSubtype(typeId);
     });
 
+    
+	$(".popupshadow").hideLoading();
+	$(".popupshadow").hide();
     
 });
 function init(){
