@@ -21,7 +21,7 @@
                 <div class="col-md-2 col-sm-2 col-xs-3 top_logo">
                     <p class="navbar-text">
                         <a href="<%=request.getContextPath() %>">
-                            <img class="img-responsive" src="${path}/resources/images/logo2.png" alt="瑞和商城"></a>
+                            <img class="img-responsive" src="${path}/resources/images/logo1.png" alt="瑞和商城"></a>
                     </p>
                 </div>
                 <div class="col-md-10 col-sm-10 col-xs-9 top_search">
