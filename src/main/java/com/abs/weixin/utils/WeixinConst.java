@@ -14,7 +14,8 @@ public class WeixinConst {
 
 	public static final String APPSECRET = "562cbd9ff4298c150b78da63e34a2d89";
 
-	public static final String SEVERPATH = "http://qbctest.wicp.net/";
+	public static final String SEVERPATH = "http://ruihegouwu.cn/";
+	//public static final String SEVERPATH = "http://qbctest.wicp.net/";
 
 	public static String AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 	// 统一下单
@@ -25,7 +26,7 @@ public class WeixinConst {
 	// 商户支付密钥Key。审核通过后，在微信发送的邮件中查看
 	public static String KEY = "zaq12wsxzaq12wsxzaq12wsxzaq12wsx";
 	// 异步回调地址
-	public static String NOTIFY_URL = "http://qbctest.wicp.net/abs_web/app/mobile/pay/notify";
+	public static String NOTIFY_URL = "http://ruihegouwu.cn/abs_web/app/mobile/pay/notify";
 	
 	
 	

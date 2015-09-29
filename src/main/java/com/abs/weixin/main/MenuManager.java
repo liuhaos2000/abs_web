@@ -52,12 +52,12 @@ public class MenuManager {
         ViewButton btn11 = new ViewButton();
         btn11.setName("进入店铺");
         btn11.setType("view");
-        btn11.setUrl("http://qbctest.wicp.net/abs_web/app/mobile/page/toWinXinShop?pageCode=1");
+        btn11.setUrl("http://ruihegouwu.cn/abs_web/app/mobile/page/toWinXinShop?pageCode=1");
         
         ViewButton btn12 = new ViewButton();
         btn12.setName("商品分类");
         btn12.setType("view");
-        btn12.setUrl("http://qbctest.wicp.net/abs_web/app/mobile/page/toWinXinShop?pageCode=2");
+        btn12.setUrl("http://ruihegouwu.cn/abs_web/app/mobile/page/toWinXinShop?pageCode=2");
         
         CommonButton btn21 = new CommonButton();
         btn21.setName("进入店铺");
@@ -67,7 +67,7 @@ public class MenuManager {
         ViewButton btn22 = new ViewButton();
         btn22.setName("进入店铺");
         btn22.setType("view");
-        btn22.setUrl("http://qbctest.wicp.net/abs_web");
+        btn22.setUrl("http://ruihegouwu.cn/abs_web");
         
 		ComplexButton mainBtn1 = new ComplexButton();
 		mainBtn1.setName("微信小店");
