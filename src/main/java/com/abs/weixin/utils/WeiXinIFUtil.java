@@ -174,9 +174,11 @@ public class WeiXinIFUtil {
 			} catch (JSONException e) {
 				openId = null;
 				// 获取失败
-//				log.error("获取OpenId失败 errcode:{} errmsg:{}",
-//						jsonObject.getInt("errcode"),
-//						jsonObject.getString("errmsg"));
+				log.error("获取OpenId失败 errcode:{} errmsg:{}");
+				log.error(jsonObject.getInt("errcode"));
+				log.error(jsonObject.getString("errmsg"));
+				
+				e.printStackTrace();
 			}
 		}
 		return openId;
