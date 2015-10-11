@@ -18,14 +18,14 @@
             <div class="col-md-12 col-sm-12 col-xs-12 huiyuan_xinxi">
                 <div class="user_head">
                     <a href="#">
-                        <img src="<%=request.getContextPath() %>/resources/images/head_icon.png"></a>
+                        <img src="${result.loginUser.weixinImageUrl }"></a>
                 </div>
                 <div>
                     <a href="#" class="user_name">
-                        <p>missyy0927</p>
+                        <p>${result.loginUser.nickname }</p>
                     </a>
                     <a href="#" class="user_count">
-                        <p>现有积分 1010</p>
+                        <p>现有积分： ${result.loginUser.jifen }</p>
                     </a>
                 </div>
                 <img src="<%=request.getContextPath() %>/resources/images/rate.png" class="user_rate"></div>

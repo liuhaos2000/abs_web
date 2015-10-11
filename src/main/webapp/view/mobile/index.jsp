@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>灵动智远</title>
+	<title>瑞和购物</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -23,7 +23,7 @@
 				<div class="col-md-2 col-sm-2 col-xs-3 top_logo">
 					<p class="navbar-text">
 						<a href="<%=request.getContextPath() %>">
-							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo2.png" alt="瑞和商城"></a>
+							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo1.png" alt="瑞和商城"></a>
 					</p>
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-9 top_search">

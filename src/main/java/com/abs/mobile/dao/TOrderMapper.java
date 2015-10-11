@@ -19,4 +19,9 @@ public interface TOrderMapper {
      * @return
      */
     String getNewOrderId();
+    /**
+     * 取得用户订单数
+     * @return
+     */
+    long getUserOrderCount(String openId);
 }

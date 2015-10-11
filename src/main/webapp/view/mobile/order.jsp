@@ -826,6 +826,7 @@ function refreshPrice(){
                 $("#itemTotal").html(result.data.priceTotal.itemTotalPrice);
                 $("#yunfeiTotal").html(result.data.priceTotal.yunfeiTotalPrice);
                 $("#total").html(result.data.priceTotal.totalPrice);
+                // TODO 积分
             	
             }else{
                 myalert(result.msg,'main_div');
