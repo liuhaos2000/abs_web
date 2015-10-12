@@ -634,6 +634,7 @@ function dosubmit(){
     }
     var orderItems=JSON.stringify(list);
     // 提交
+    $('#zhifu_bt').attr('disabled',"true");
     $.ajax({    
         url:UrlConfig.orderSubmit,
         data:{
@@ -676,6 +677,7 @@ function dosubmit(){
 	    			  				});
             }else{
                 myalert(result.msg,'main_div');
+                $('#zhifu_bt').removeAttr('disabled');
             }
          }
     });
