@@ -39,7 +39,7 @@
                            				 <a href="#">
                                 		 <img src="${item_2.path}">
                                			  <p class="daojishi_name">${item_2.item_name}</p>
-                               			  <p class="daojishi_price">特价: ￥${item_2.price_huiyuan}</p>
+                               			  <p class="daojishi_price">售价: ￥${item_2.price_huiyuan}</p>
                             			</a>
                          			 </div>
                          			</c:forEach>	
