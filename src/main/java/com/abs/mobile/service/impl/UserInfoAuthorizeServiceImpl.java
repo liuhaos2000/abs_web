@@ -33,6 +33,8 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 
 		// 取得OpenId
 		OpenId openId = WeiXinIFUtil.getOpenId(code);
+		// 拉取用户信息 TODO
+		WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(openId.getAccess_token(), openId.getOpenid());
 		// 获取系统时间
 		Date date = new Date();
 		// 取得数据库的用户信息
@@ -65,6 +67,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	@Transactional
 	public void executeGetUserAllInfo(String openId) {
 
+	    // TODO TOKEN
 		WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(AbsConst.access_token, openId);
 
 		// 获取系统时间
