@@ -21,7 +21,7 @@
         <img class="icon-spin"
             src="<%=request.getContextPath()%>/resources/images/loading.png">
     </div>
-	<div class="container pic_show">
+	<div class="container pic_show1" >
 		<div id="owl-demo1" class="owl-carousel owl-theme"></div>
 	</div>
 	<div class="container today_miaosha">
@@ -57,6 +57,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>  
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>  
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.lazyload.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -74,6 +75,10 @@ $(document).ready(function() {
     
 	$(".popupshadow").hideLoading();
 	$(".popupshadow").hide();
+	
+	$('img').lazyload({ 
+		  effect:'fadeIn' 
+	});
 });
 
 function getLunboList() {

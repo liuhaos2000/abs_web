@@ -18,11 +18,13 @@
 <body>
 
     <div id="main_div" class="maindiv">
-        <div class="container pic_show">
+        <div class="container pic_show2">
             <div id="owl-demo1" class="owl-carousel owl-theme">
                     <c:forEach items="${result.tupianList}" var="item">
                         <div class="item">
-                        <img src="${item.path}" class="img-responsive img-lunbo"></div>
+                            <img src="<%=request.getContextPath() %>/resources/images/grey.gif" 
+                                 data-original="${item.path}" class="img-responsive img-lunbo">
+                        </div>
                     </c:forEach>
             </div>
         </div>
@@ -191,6 +193,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/jweixin-1.0.0.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/jquery.lazyload.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -221,6 +224,11 @@ $(document).ready(function() {
             autoplay: true,
             autoplayTimeout: 4000,
         });
+        
+        $('img').lazyload({ 
+            effect:'fadeIn' 
+        });
+        
         getCartCount();
     });
     // 加入购物车
