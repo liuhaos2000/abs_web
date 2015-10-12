@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,19 +17,40 @@
     <div class="container huiyuan">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 huiyuan_xinxi">
-                <div class="user_head">
-                    <a href="#">
-                        <img src="${result.loginUser.weixinImageUrl }"></a>
-                </div>
-                <div>
-                    <a href="#" class="user_name">
-                        <p>${result.loginUser.nickname }</p>
-                    </a>
-                    <a href="#" class="user_count">
-                        <p>现有积分： ${result.loginUser.jifen }</p>
-                    </a>
-                </div>
-                <img src="<%=request.getContextPath() %>/resources/images/rate.png" class="user_rate"></div>
+                <c:choose>
+                    <c:when test="${result.loginUser.nickname!=null}">
+                        <div class="user_head">
+                            <a href="#">
+                                <img src="${result.loginUser.weixinImageUrl }"></a>
+                        </div>
+                        <div>
+                                    <a href="#" class="user_name">
+                                        <p>${result.loginUser.nickname }</p>
+                                    </a>
+                                    <a href="#" class="user_count">
+                                        <p>现有积分： ${result.loginUser.jifen }</p>
+                                    </a>
+                        </div>
+                        <img src="<%=request.getContextPath() %>/resources/images/rate.png" class="user_rate">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="user_head">
+                            <a href="#">
+                                <img src="<%=request.getContextPath() %>/resources/images/unloginuser.png"></a>
+                        </div>
+                        <div>
+                            <a href="#" class="user_name">
+                                <p>未关注用户</p>
+                            </a>
+                            <a href="#" class="user_count">
+                                <p>长按二维码进行关注</p>
+                            </a>
+                        </div>
+                        <img src="<%=request.getContextPath() %>/resources/images/erweima.jpg" class="guanzhuerweima" width="100" height="100"> 
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-5 col-md-offset-9 col-sm-offset-9 col-xs-offset-7 get_wifi">
@@ -51,7 +73,7 @@
                     </li>
                     <li>
                         <p>
-                            <a href="#">妆艺术·饰生活</a>
+                            <a href="#">超级团购，折扣到底</a>
                             <span>8月18日</span>
                         </p>
                     </li>
@@ -63,6 +85,9 @@
                 <a href='<%=request.getContextPath() %>/app/mobile/page/myorder'>
                     <p>我的订单</p>
                 </a>
+                <c:if test="${result.orderCount>0}">
+                    <span class="ordercount">${result.orderCount}</span>
+                </c:if>
             </div>
         </div>
         <div class="panel p3">

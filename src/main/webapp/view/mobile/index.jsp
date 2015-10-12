@@ -117,21 +117,21 @@ var UrlConfig = {
                  $("#home-bt").click(function(){
                 	 showLoding();
                 	 $('#main_div').load('<%=request.getContextPath() %>' +
-                			'/app/mobile/page/home', loadback());
+                			'/app/mobile/page/home', {},loadback());
                 	 $('.footer-block a').removeClass("active");
                 	 $(this).addClass("active");
                  }); 
                  $("#type-bt").click(function(){
                 	 showLoding();
                      $('#main_div').load('<%=request.getContextPath() %>' +
-                             '/app/mobile/page/type',loadback()); 
+                             '/app/mobile/page/type',{},loadback()); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
                  $("#huiyuan-bt").click(function(){
                 	 showLoding();
                      $('#main_div').load('<%=request.getContextPath() %>' +
-                             '/app/mobile/page/huiyuan',loadback()); 
+                             '/app/mobile/page/huiyuan',{},loadback()); 
                      $('.footer-block a').removeClass("active");
                      $(this).addClass("active");
                  }); 
@@ -168,9 +168,6 @@ var UrlConfig = {
 			    	}
 			    	
 			    });
-			    
-
-							
             });
             
             getCartCount();
@@ -204,8 +201,8 @@ var UrlConfig = {
             	$(".popupshadow").showLoading();
             }
             function loadback(){
-            	//$(".popupshadow").hideLoading();
-            	//$(".popupshadow").hide();
+            	$(".popupshadow").hideLoading();
+            	$(".popupshadow").hide();
             }
         </script>
 </body>

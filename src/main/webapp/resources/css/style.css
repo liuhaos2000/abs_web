@@ -1790,4 +1790,20 @@ img{
 	background:rgba(255,254,79,1) ;
 	color:red;
 }
-
+/*huiyuan*/
+.ordercount{
+    background-color:#ff4444;
+    position:absolute;
+    top:25%;
+    right:15%;
+    width:20px;
+    height:20px;
+    z-index:10;
+    border-radius:50px;
+    border:1px solid #FFFFFF;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
