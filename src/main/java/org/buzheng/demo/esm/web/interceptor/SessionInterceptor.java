@@ -38,17 +38,17 @@ public class SessionInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		// 测试
-		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
-			// 未登录
-		    HttpSession session = request.getSession();
-		    
-		    TUser user = new TUser();
-		    user.setOpenId("o2otnwBhGfsMWTKeOyB5uA9zf9xA");
-		    user.setNickname("胖子牛");
-		    user.setJifen(23);
-		    session.setAttribute(AbsConst.LOGIN_USER, user);
-
-		}
+//		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
+//			// 未登录
+//		    HttpSession session = request.getSession();
+//		    
+//		    TUser user = new TUser();
+//		    user.setOpenId("o2otnwBhGfsMWTKeOyB5uA9zf9xA");
+//		    user.setNickname("胖子牛");
+//		    user.setJifen(23);
+//		    session.setAttribute(AbsConst.LOGIN_USER, user);
+//
+//		}
 		// 运行
 		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
 			// 未登录

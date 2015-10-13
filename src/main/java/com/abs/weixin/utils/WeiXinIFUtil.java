@@ -166,10 +166,6 @@ public class WeiXinIFUtil {
         // 如果请求成功
         if (null != jsonObject) {
             try {
-                //不合法的oauth_code,返回err的场合
-                if("40029".equals(jsonObject.getString("errcode"))){
-                    return null;
-                }
                 refreshToken = new RefreshToken();
                 refreshToken.setAccessToken(jsonObject.getString("access_token"));
                 refreshToken.setRefreshToken(jsonObject.getString("refresh_token"));
@@ -244,10 +240,6 @@ public class WeiXinIFUtil {
 		if (null != jsonObject) {
 			try {
                 //非关注用户，返回err的场合
-                if("40003".equals(jsonObject.getString("errcode"))){
-                    return null;
-                }
-				
 				UserInfo = new WeixinUserInfo();
 				
                 UserInfo.setOpenid(jsonObject.getString("openid"));
