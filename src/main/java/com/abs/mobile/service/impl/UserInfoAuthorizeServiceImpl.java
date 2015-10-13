@@ -43,7 +43,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 		if (tUser == null) {
 			tUser = new TUser();
 			tUser.setOpenId(openId.getOpenid());
-            // TODO TOKEN
+			tUser.setRefreshToken(openId.getRefresh_token());
 			tUser.setJifen(0);
 			tUser.setDelFlg("0");
 			tUser.setcDate(date);
@@ -80,7 +80,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
                 tUser.setCountry(wxUserInfo.getCountry());
                 tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
             }
-            // TODO TOKEN
+            tUser.setRefreshToken(openId.getRefresh_token());
             tUser.setDelFlg("0");
             tUser.setcDate(date);
             tUser.setcUser("GETUSER");
@@ -127,9 +127,8 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUserMapper.insert(tUser);
 		} else {
 
-		    // TODO 参数
             RefreshToken refreshToken = 
-                   WeiXinIFUtil.getAccessTokenByRefreshToken("");
+                   WeiXinIFUtil.getAccessTokenByRefreshToken(tUser.getRefreshToken());
             WeixinUserInfo wxUserInfo = 
                    WeiXinIFUtil.getUserinfo(refreshToken.getAccessToken(), openId);
 

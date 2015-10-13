@@ -25,6 +25,8 @@ public class TUser {
 
     private String parent;
 
+    private String refreshToken;
+
     private String delFlg;
 
     private Date cDate;
@@ -121,6 +123,14 @@ public class TUser {
 
     public void setParent(String parent) {
         this.parent = parent == null ? null : parent.trim();
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken == null ? null : refreshToken.trim();
     }
 
     public String getDelFlg() {
