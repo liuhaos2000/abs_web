@@ -22,6 +22,7 @@ import com.abs.weixin.pojo.AccessToken;
 import com.abs.weixin.pojo.JsApiTicket;
 import com.abs.weixin.pojo.Menu;
 import com.abs.weixin.pojo.OpenId;
+import com.abs.weixin.pojo.RefreshToken;
 import com.abs.weixin.pojo.WeixinUserInfo;
 
 import net.sf.json.JSONException;
@@ -41,6 +42,9 @@ public class WeiXinIFUtil {
 		"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	public static String jsapi_ticket_url = 
 		"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
+	public static String refresh_token_url = 
+	    "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN";
+	
 	// 菜单创建（POST） 限100（次/天）
 	public static String menu_create_url = 
 		"https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
@@ -55,7 +59,9 @@ public class WeiXinIFUtil {
     // 删除菜单
     public static String menu_del_url =
         "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
-	/**
+	
+    
+    /**
 	 * 创建菜单
 	 * 
 	 * @param menu
@@ -143,7 +149,41 @@ public class WeiXinIFUtil {
 		}
 		return jsApiTicket;
 	}
+	
+    /**
+     * 通过refresh_token获取用户access_token
+     * 
+     * @param appid
+     *            凭证
+     * @param appsecret
+     *            密钥
+     * @return
+     */
+    public static RefreshToken getAccessTokenByRefreshToken(String reToken) {
+        RefreshToken refreshToken = null;
 
+        String requestUrl = refresh_token_url.replace("APPID", WeixinConst.APPID).replace("REFRESH_TOKEN", reToken);
+        JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
+        // 如果请求成功
+        if (null != jsonObject) {
+            try {
+                //不合法的oauth_code,返回err的场合
+                if("40029".equals(jsonObject.getString("errcode"))){
+                    return null;
+                }
+                refreshToken = new RefreshToken();
+                refreshToken.setAccessToken(jsonObject.getString("access_token"));
+                refreshToken.setRefreshToken(jsonObject.getString("refresh_token"));
+                refreshToken.setOpenid(jsonObject.getString("openid"));
+                refreshToken.setExpiresIn(jsonObject.getInt("expires_in"));
+                refreshToken.setScope("");
+            } catch (JSONException e) {
+                System.err.println("通过refresh_token获取用户access_token取得失败");
+                return null;
+            }
+        }
+        return refreshToken;
+    }
 	
 	/**
 	 * 获取OpenId
