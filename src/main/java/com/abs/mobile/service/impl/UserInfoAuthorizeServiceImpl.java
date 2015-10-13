@@ -13,6 +13,7 @@ import com.abs.mobile.service.SessionService;
 import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.util.commom.AbsConst;
 import com.abs.weixin.pojo.OpenId;
+import com.abs.weixin.pojo.RefreshToken;
 import com.abs.weixin.pojo.WeixinUserInfo;
 import com.abs.weixin.utils.WeiXinIFUtil;
 
@@ -43,6 +44,16 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 		if (tUser == null) {
 			tUser = new TUser();
 			tUser.setOpenId(openId.getOpenid());
+            if(wxUserInfo!=null){
+                tUser.setNickname(wxUserInfo.getNickname());
+                tUser.setWeixinSex(wxUserInfo.getSex());
+                tUser.setCity(wxUserInfo.getCity());
+                tUser.setProvince(wxUserInfo.getProvince());
+                tUser.setCountry(wxUserInfo.getCountry());
+                tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
+            }
+            // TODO TOKEN
+            
 			tUser.setJifen(0);
 			tUser.setDelFlg("0");
 			tUser.setcDate(date);
@@ -51,7 +62,24 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setuUser("GETUSER");
 			// 插入数据库
 			tUserMapper.insert(tUser);
-		}
+        } else {
+            // 每次登录时，更新用户信息
+            if(wxUserInfo!=null){
+                tUser.setNickname(wxUserInfo.getNickname());
+                tUser.setWeixinSex(wxUserInfo.getSex());
+                tUser.setCity(wxUserInfo.getCity());
+                tUser.setProvince(wxUserInfo.getProvince());
+                tUser.setCountry(wxUserInfo.getCountry());
+                tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
+            }
+            // TODO TOKEN
+            tUser.setDelFlg("0");
+            tUser.setcDate(date);
+            tUser.setcUser("GETUSER");
+            tUser.setuDate(date);
+            tUser.setuUser("GETUSER");
+            tUserMapper.updateByPrimaryKey(tUser);
+        }
 
 		// 写入Session
 		sessionService.setLoginUser(tUser);
@@ -67,23 +95,20 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	@Transactional
 	public void executeGetUserAllInfo(String openId) {
 
-	    // TODO TOKEN
-		WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(AbsConst.access_token, openId);
-
 		// 获取系统时间
 		Date date = new Date();
 		// 取得数据库的用户信息
 		TUser tUser = tUserMapper.selectByPrimaryKey(openId);
-		// 如果不存在
+		// 如果不存在,不用去获取用户信息（访问页面时获取）
 		if (tUser == null) {
 			tUser = new TUser();
 			tUser.setOpenId(openId);
-			tUser.setNickname(wxUserInfo.getNickname());
-			tUser.setWeixinSex(wxUserInfo.getSex());
-			tUser.setCity(wxUserInfo.getCity());
-			tUser.setProvince(wxUserInfo.getProvince());
-			tUser.setCountry(wxUserInfo.getCountry());
-			tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
+//			tUser.setNickname(wxUserInfo.getNickname());
+//			tUser.setWeixinSex(wxUserInfo.getSex());
+//			tUser.setCity(wxUserInfo.getCity());
+//			tUser.setProvince(wxUserInfo.getProvince());
+//			tUser.setCountry(wxUserInfo.getCountry());
+//			tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
 			tUser.setJifen(0);
 			tUser.setDelFlg("0");
 			tUser.setcDate(date);
@@ -93,6 +118,13 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			// 插入数据库
 			tUserMapper.insert(tUser);
 		} else {
+
+		    // TODO 参数
+            RefreshToken refreshToken = 
+                   WeiXinIFUtil.getAccessTokenByRefreshToken("");
+            WeixinUserInfo wxUserInfo = 
+                   WeiXinIFUtil.getUserinfo(refreshToken.getAccessToken(), openId);
+
 			tUser.setNickname(wxUserInfo.getNickname());
 			tUser.setWeixinSex(wxUserInfo.getSex());
 			tUser.setCity(wxUserInfo.getCity());

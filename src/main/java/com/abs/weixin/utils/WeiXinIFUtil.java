@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -244,30 +243,27 @@ public class WeiXinIFUtil {
 		// 如果请求成功
 		if (null != jsonObject) {
 			try {
+                //非关注用户，返回err的场合
+                if("40003".equals(jsonObject.getString("errcode"))){
+                    return null;
+                }
 				
 				UserInfo = new WeixinUserInfo();
-				UserInfo.setSubscribe(jsonObject.getString("subscribe"));
+				
                 UserInfo.setOpenid(jsonObject.getString("openid"));
-                if ("1".equals(jsonObject.getString("subscribe"))) {
-                    UserInfo.setNickname(EmojiFilter.filterEmoji(jsonObject
-                            .getString("nickname")));
-                    log.debug("nickname-----------:" + UserInfo.getNickname());
-                    UserInfo.setSex(jsonObject.getString("sex"));
-                    UserInfo.setLanguage(jsonObject.getString("language"));
-                    UserInfo.setCity(jsonObject.getString("city"));
-                    UserInfo.setProvince(jsonObject.getString("province"));
-                    UserInfo.setCountry(jsonObject.getString("country"));
-                    UserInfo.setHeadimgurl(jsonObject.getString("headimgurl"));
-                    UserInfo.setSubscribe_time(jsonObject
-                            .getString("subscribe_time"));
-                }
-				return UserInfo;
+                UserInfo.setNickname(EmojiFilter.filterEmoji(jsonObject
+                        .getString("nickname")));
+                UserInfo.setSex(jsonObject.getString("sex"));
+                UserInfo.setCity(jsonObject.getString("city"));
+                UserInfo.setProvince(jsonObject.getString("province"));
+                UserInfo.setCountry(jsonObject.getString("country"));
+                UserInfo.setHeadimgurl(jsonObject.getString("headimgurl"));
+
+                return UserInfo;
 				
 			} catch (JSONException e) {
-				openId = null;
-				log.debug("getUserinfo-------Err----");
-				// 获取失败
 				log.debug(jsonObject.getInt("errcode")+" MSG:"+jsonObject.getString("errmsg"));
+				return null;
 			}
 		}
 		log.debug("nickname-----userinfo no data---");
@@ -359,7 +355,8 @@ public class WeiXinIFUtil {
 	 *            提交的数据
 	 * @return Map(通过JSONObject.get(key)的方式获取json对象的属性值)
 	 */
-	public static Map<String,String> httpRequestXML(String requestUrl,
+	@SuppressWarnings("unchecked")
+    public static Map<String,String> httpRequestXML(String requestUrl,
 			String requestMethod, String outputStr) {
         log.debug("------------>httpRequest---Start:"+requestUrl);
         Map<String,String> resultMap = null;
