@@ -178,5 +178,22 @@ public class UserAddressServiceImpl implements UserAdderssService {
         resultMap.put("uadList", uadList);
 		return resultMap;
 	}
+	
+    /**
+     * 初始化用户地址页面
+     * @return
+     */
+    @Override
+    public Map<String, Object> initUserAddress() {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        TUser user=sessionService.getLoginUser();
+        //1取得用户地址
+        List<Map<String,String>> uadList = tUserAddressMapper.getUserAddress(user.getOpenId());
+        resultMap.put("uadList", uadList);
+        //2一级地址
+        List<TRegion> regionList= tRegionMapper.getRegion1();
+        resultMap.put("regionList", regionList);
+        return resultMap;
+    }
 
 }

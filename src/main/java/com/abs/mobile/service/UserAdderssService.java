@@ -8,7 +8,12 @@ import com.abs.mobile.domain.TUserAddress;
 import com.abs.util.exception.BusinessException;
 
 public interface UserAdderssService {
-	
+    
+    /**
+     * 初始化用户地址页面
+     * @return
+     */
+    public Map<String, Object> initUserAddress();
 	/**
 	 * 取得一级地址
 	 * @param request
