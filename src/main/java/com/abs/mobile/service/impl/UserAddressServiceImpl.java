@@ -134,7 +134,7 @@ public class UserAddressServiceImpl implements UserAdderssService {
 			throw new BusinessException("useraddress.error");
 		}
 		if (!AbsTool.checkTel(tUserAddress.getTel())) {
-			throw new BusinessException("useraddress.name.required");
+			throw new BusinessException("useraddress.tel.required");
 		}
 
 	}

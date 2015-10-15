@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-    <!-- Modal End -->
+    <!-- Modal End 
         
         
         
@@ -98,22 +98,33 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header>-->
 
 	
 	<div id="main_div">
-	    <div class="container ">
+	    <div id="adressdiv" class="container">
 	      <c:forEach items="${result.uadList}" var="item" varStatus="status">
             <div class="row cart-item-row">
                 <div class="col-md-2 col-sm-2 col-xs-2  cart-col-box cart-col-checkbox">
-                   <button class="btn btn-mini" type="button"  data-toggle="modal" data-target="#myModal">改</button>
+                    <button class="btn btn-mini btn-default" 
+                        type="button"
+                        name="upd_adress"
+                        addressid="${item.address_id}"
+                        adname="${item.name}"
+                        ad1="${item.adname1}"
+                        ad2="${item.adname2}"
+                        ad3="${item.adname3}"
+                        ad4="${item.address_detail}"
+                        tel="${item.tel}">改</button>
                 </div>
                 <div class="col-md-10 col-sm-10 col-xs-10 cart-col-box cart-col-info">
                     <p class="adderss_name">收件人:${item.name}</p>
                     <p class="adderss_name">地址:${item.adname1}${item.adname2}${item.adname3}${item.address_detail}</p>
                     <p class="adderss_name">电话:${item.tel}</p>
-                    <span class="label label-info">默认</span>
-                    <span class="btn-clipboard">x</span>
+                     <c:if test="${item.del_flg=='1'}">
+                     	<span class="label label-info">默认</span>
+                     </c:if>
+                    <span class="btn-clipboard" addressid="${item.address_id}">x</span>
                 </div>
             </div>
           </c:forEach>
@@ -137,26 +148,260 @@
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/icheck.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript">
-            $(document).ready(function() {
-				//选择框
-				$('input').iCheck({
-					checkboxClass: 'icheckbox_square-red',
-					radioClass: 'iradio_square-red',
-					increaseArea: '20%' // optional
-				});	
-				//设置高度			
-			    $(function(){
-			    	$("#main_div").height($(window).height()-$("header").height()-52);
-			    	$("#main_div").css({"overflow":"auto"});
-			    });
+var UrlConfig = {
+        path:'<%=request.getContextPath() %>',
+        getRegion:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel1',
+        getRegion2:'<%=request.getContextPath() %>/app/mobile/useradress/getAddressLevel2',
+        saveAd:'<%=request.getContextPath() %>/app/mobile/useradress/saveAddress',
+        loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
+        deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress'
+};
+//更新用
+var modal;
+var addressid;
+$(document).ready(function() {
+	//选择框
+	$('input').iCheck({
+		checkboxClass: 'icheckbox_square-red',
+		radioClass: 'iradio_square-red',
+		increaseArea: '20%' // optional
+	});	
+	//设置高度			
+    $(function(){
+    	//$("#main_div").height($(window).height()-$("header").height()-52);
+    	    	$("#main_div").height($(window).height()-52);
+    	$("#main_div").css({"overflow":"auto"});
+    	
+    	bindEvent();
+    });
 
-                $("#goback").click(function(){
-                	window.location.href='<%=request.getContextPath() %>'+
-                    '/app/mobile/page/index?'+
-                    'loadId=huiyuan';
-                });
-            });
-        </script>
+    $("#goback").click(function(){
+    	window.location.href='<%=request.getContextPath() %>'+
+        '/app/mobile/page/index?'+
+        'loadId=huiyuan';
+    });
+    
+    $('#newaddress_bt').click(function(){
+    	modal="ADD";
+    	$('#delete_ad_bt').hide();
+    	clearModal();
+    });
+    // 取二级地址
+    $('#ad1').change(function(){
+    	$('#ad2').html('<option  value="">请选择</option>');
+    	$('#ad3').html('<option  value="">请选择</option>');
+    	getRegion2($(this).val(),'ad2');
+    });
+    // 取三级地址
+    $('#ad2').change(function(){
+    	$('#ad3').html('<option  value="">请选择</option>');
+    	getRegion2($(this).val(),'ad3');
+    });
+    //保存地址
+    $('#save_bt').click(function(){
+    	saveAddress();
+    });
+});
+
+function clearModal(){
+	$('#mailName').val("");
+	$('#mailTel').val("");
+	$('#ad4').val("");
+	$('#ad2').html('<option  value="">请选择</option>');
+	$('#ad3').html('<option  value="">请选择</option>');
+	$('#morenFlg').iCheck('uncheck');
+	$('#ad1 option:first').attr('selected','selected');
+}
+
+function getRegion2(parent,o){
+    $.ajax({    
+        url:UrlConfig.getRegion2, 
+        data:{parent:parent},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	for (var i = 0; i < result.data.length; i++) {
+            		$('#'+o).append('<option value="'+result.data[i].regionId+'">'+result.data[i].regionName+'</option>');
+            	}
+            }else{
+            }
+         }
+    }); 
+}
+function saveAddress(){
+	var checkflg;
+	if($('#morenFlg').prop("checked")==true){
+		checkflg='1';
+	}else{
+		checkflg='0';
+	}
+    $.ajax({
+        url:UrlConfig.saveAd, 
+        data:{regionName1:$('#ad1').val(),
+        	  regionName2:$('#ad2').val(),
+        	  regionName3:$('#ad3').val(),
+        	  addressDetail:$('#ad4').val(),
+        	  name:$('#mailName').val(),
+        	  tel:$('#mailTel').val(),
+        	  delFlg:checkflg,
+        	  mode:modal,
+        	  addressId:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	//刷新
+            	refreshList(result.data.uadList);
+                // 绑定单击事件
+				bindEvent();
+                // 关闭模态窗口
+                $('#myModal').modal('hide');
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    }); 
+}
+function deleteAddress(){
+    $.ajax({    
+        url:UrlConfig.deleteAddress, 
+        data:{addressid:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	refreshList(result.data.uadList);
+                // 绑定单击事件
+				bindEvent();
+                // 关闭模态窗口
+                $('#myModal').modal('hide');
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    });
+}
+function loadUpdAddress(addressid){
+    $.ajax({    
+        url:UrlConfig.loadUpdAdress, 
+        data:{addressid:addressid},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	var userAddress = result.data.userAddress;
+            	
+            	$('#ad1').val(userAddress.regionName1);
+            	//$('#ad2').val(userAddress.regionName2);
+            	//$('#ad3').val(userAddress.regionName3);
+            	$('#ad4').val(userAddress.addressDetail);
+            	$('#mailName').val(userAddress.name);
+            	$('#mailTel').val(userAddress.tel);
+            	
+            	var region2 = result.data.region2;
+            	var region3 = result.data.region3;
+            	//二级地址
+            	for (var i = 0; i < region2.length; i++) {
+            		$("#ad2").append('<option value="'+region2[i].regionId+'">'+region2[i].regionName+'</option>');
+            	}
+            	$('#ad2').val(userAddress.regionName2);
+            	// 三级地址
+            	for (var i = 0; i < region3.length; i++) {
+            		$("#ad3").append('<option value="'+region3[i].regionId+'">'+region3[i].regionName+'</option>');
+            	}
+            	$('#ad3').val(userAddress.regionName3);
+            	// 默认
+            	if(userAddress.delFlg=='1'){
+            		$('#morenFlg').iCheck('check');
+            	}else{
+            		$('#morenFlg').iCheck('uncheck');
+            	}
+            }else{
+            	myalert(result.msg,'myModal');
+            }
+         }
+    }); 
+}
+
+function bindEvent(){
+    $('button[name="upd_adress"]').bind("click",function(){
+    	modal="UPD";
+    	$('#delete_ad_bt').hide();
+    	addressid=$(this).attr("addressid");
+    	loadUpdAddress($(this).attr("addressid"));
+    	$('#myModal').modal('show');
+    	
+    });
+    $('.btn-clipboard').bind("click",function(){
+    	addressid=$(this).attr("addressid");
+    	deleteAddress();
+    });
+    
+}
+function refreshList(list){
+	$('#adressdiv').html('');
+	for(var i=0;i<list.length;i++){
+		if(list[i].del_flg=="1"){
+			$('#adressdiv').append(
+		            '<div class="row cart-item-row">                                                                              '+
+		            '    <div class="col-md-2 col-sm-2 col-xs-2  cart-col-box cart-col-checkbox">                                 '+
+		            '        <button class="btn btn-mini btn-default"                                                             '+
+		            '            type="button"                                                                                    '+
+		            '            name="upd_adress"                                                                                '+
+		            '            addressid="'+list[i].address_id+'"                                                                   '+
+		            '            adname="'+list[i].name+'"                                                                            '+
+		            '            ad1="'+list[i].adname1+'"                                                                            '+
+		            '            ad2="'+list[i].adname2+'"                                                                            '+
+		            '            ad3="'+list[i].adname3+'"                                                                            '+
+		            '            ad4="'+list[i].address_detail+'"                                                                     '+
+		            '            tel="'+list[i].tel+'">改</button>                                                                    '+
+		            '    </div>                                                                                                   '+
+		            '    <div class="col-md-10 col-sm-10 col-xs-10 cart-col-box cart-col-info">                                   '+
+		            '        <p class="adderss_name">收件人:'+list[i].name+'</p>                                                      '+
+		            '        <p class="adderss_name">地址:'+list[i].adname1+''+list[i].adname2+''+list[i].adname3+''+list[i].address_detail+'</p> '+
+		            '        <p class="adderss_name">电话:'+list[i].tel+'</p>                                                         '+
+		            '         <span class="label label-info">默认</span>                                                        '+
+		            '        <span class="btn-clipboard" addressid="'+list[i].address_id+'">x</span>                                  '+
+		            '    </div>                                                                                                   '+
+		            '</div>                                                                                                       '
+			
+
+			);
+		}else{
+			$('#adressdiv').append(
+		            '<div class="row cart-item-row">                                                                              '+
+		            '    <div class="col-md-2 col-sm-2 col-xs-2  cart-col-box cart-col-checkbox">                                 '+
+		            '        <button class="btn btn-mini btn-default"                                                             '+
+		            '            type="button"                                                                                    '+
+		            '            name="upd_adress"                                                                                '+
+		            '            addressid="'+list[i].address_id+'"                                                                   '+
+		            '            adname="'+list[i].name+'"                                                                            '+
+		            '            ad1="'+list[i].adname1+'"                                                                            '+
+		            '            ad2="'+list[i].adname2+'"                                                                            '+
+		            '            ad3="'+list[i].adname3+'"                                                                            '+
+		            '            ad4="'+list[i].address_detail+'"                                                                     '+
+		            '            tel="'+list[i].tel+'">改</button>                                                                    '+
+		            '    </div>                                                                                                   '+
+		            '    <div class="col-md-10 col-sm-10 col-xs-10 cart-col-box cart-col-info">                                   '+
+		            '        <p class="adderss_name">收件人:'+list[i].name+'</p>                                                      '+
+		            '        <p class="adderss_name">地址:'+list[i].adname1+''+list[i].adname2+''+list[i].adname3+''+list[i].address_detail+'</p> '+
+		            '        <p class="adderss_name">电话:'+list[i].tel+'</p>                                                         '+
+		            '        <span class="btn-clipboard" addressid="'+list[i].address_id+'">x</span>                                  '+
+		            '    </div>                                                                                                   '+
+		            '</div>                                                                                                       '
+			
+
+			);
+		}
+	}
+}
+</script>
 </body>
 </html>

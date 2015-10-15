@@ -411,7 +411,7 @@ $(document).ready(function() {
     	$('#ad3').html('<option  value="">请选择</option>');
     	getRegion2($(this).val(),'ad3');
     });
-    //adnew_bt1
+    //保存地址
     $('#save_bt').click(function(){
     	saveAddress();
     });
