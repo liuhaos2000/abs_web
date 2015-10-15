@@ -161,7 +161,7 @@ var UrlConfig = {
 			    				'?orderId="${orderId}"',{},loadback());
 			    		 //样式修改
 	                	 $('.footer-block a').removeClass("active");
-	                	 $('huiyuan-bt').addClass("active");
+	                	 $('#huiyuan-bt').addClass("active");
 			    	}else{
 			    		//alert(1);
 			    		$('#main_div').load('<%=request.getContextPath() %>' + '/app/mobile/page/home',loadback());

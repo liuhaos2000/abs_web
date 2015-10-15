@@ -24,6 +24,7 @@ import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.TypeService;
+import com.abs.mobile.service.UserAdderssService;
 import com.abs.util.commom.AbsTool;
 
 @Controller
@@ -44,6 +45,8 @@ public class MobilePageController {
     private OrderService orderService;
     @Resource
     private HuiyuanService huiyuanService;
+    @Resource
+    private UserAdderssService userAdderssService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex(String loadId,String orderId,ModelMap map) {
@@ -98,7 +101,9 @@ public class MobilePageController {
     
     // my address
     @RequestMapping("/myaddress")
-    public String toMyAddress() {
+    public String toMyAddress(ModelMap map) {
+        Map<String, Object> result = userAdderssService.initUserAddress();
+        map.put("result", result);
         return "mobile/my_address";
     }
     // itemlist
