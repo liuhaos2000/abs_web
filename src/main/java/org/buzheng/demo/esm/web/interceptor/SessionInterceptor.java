@@ -47,7 +47,6 @@ public class SessionInterceptor implements HandlerInterceptor {
 //		    user.setNickname("胖子牛");
 //		    user.setJifen(23);
 //		    session.setAttribute(AbsConst.LOGIN_USER, user);
-//
 //		}
 		// 运行
 		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {

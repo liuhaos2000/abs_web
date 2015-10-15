@@ -158,7 +158,7 @@ var UrlConfig = {
 			    	if('${loadId}'=='huiyuan'){
 			    		$('#main_div').load('<%=request.getContextPath() %>' + 
 			    				'/app/mobile/page/huiyuan'+
-			    				'?orderId="${orderId}"',loadback());
+			    				'?orderId="${orderId}"',{},loadback());
 			    		 //样式修改
 	                	 $('.footer-block a').removeClass("active");
 	                	 $('huiyuan-bt').addClass("active");
@@ -201,8 +201,8 @@ var UrlConfig = {
             	$(".popupshadow").showLoading();
             }
             function loadback(){
-            	$(".popupshadow").hideLoading();
-            	$(".popupshadow").hide();
+            	//$(".popupshadow").hideLoading();
+            	//$(".popupshadow").hide();
             }
         </script>
 </body>

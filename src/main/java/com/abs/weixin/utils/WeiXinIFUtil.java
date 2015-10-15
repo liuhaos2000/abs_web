@@ -239,18 +239,20 @@ public class WeiXinIFUtil {
 		// 如果请求成功
 		if (null != jsonObject) {
 			try {
-                //非关注用户，返回err的场合
 				UserInfo = new WeixinUserInfo();
-				
+				UserInfo.setSubscribe(jsonObject.getString("subscribe"));
                 UserInfo.setOpenid(jsonObject.getString("openid"));
-                UserInfo.setNickname(EmojiFilter.filterEmoji(jsonObject
-                        .getString("nickname")));
-                UserInfo.setSex(jsonObject.getString("sex"));
-                UserInfo.setCity(jsonObject.getString("city"));
-                UserInfo.setProvince(jsonObject.getString("province"));
-                UserInfo.setCountry(jsonObject.getString("country"));
-                UserInfo.setHeadimgurl(jsonObject.getString("headimgurl"));
-
+                if ("1".equals(jsonObject.getString("subscribe"))) {
+                    UserInfo.setNickname(jsonObject.getString("nickname"));
+                    UserInfo.setSex(jsonObject.getString("sex"));
+                    UserInfo.setLanguage(jsonObject.getString("language"));
+                    UserInfo.setCity(jsonObject.getString("city"));
+                    UserInfo.setProvince(jsonObject.getString("province"));
+                    UserInfo.setCountry(jsonObject.getString("country"));
+                    UserInfo.setHeadimgurl(jsonObject.getString("headimgurl"));
+                    UserInfo.setSubscribe_time(jsonObject
+                            .getString("subscribe_time"));
+                }
                 return UserInfo;
 				
 			} catch (JSONException e) {
