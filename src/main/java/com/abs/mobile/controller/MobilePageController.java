@@ -95,7 +95,9 @@ public class MobilePageController {
    
     // my order
     @RequestMapping("/myorder")
-    public String toMyOrder() {
+    public String toMyOrder(ModelMap map) {
+        Map<String, Object> result = orderService.getUserOrder();
+        map.put("result", result);
         return "mobile/my_order";
     }    
     

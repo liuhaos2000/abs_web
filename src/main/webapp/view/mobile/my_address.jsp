@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-    <!-- Modal End 
+    <!-- Modal End -->
         
         
         
@@ -94,11 +94,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 top_logo">
-                    <p class="navbar-text">收货地址</p>
+                    <p class="navbar-text">收货地址管理</p>
                 </div>
             </div>
         </div>
-    </header>-->
+    </header>
 
 	
 	<div id="main_div">
@@ -170,8 +170,8 @@ $(document).ready(function() {
 	});	
 	//设置高度			
     $(function(){
-    	//$("#main_div").height($(window).height()-$("header").height()-52);
-    	    	$("#main_div").height($(window).height()-52);
+    	$("#main_div").height($(window).height()-$("header").height()-52);
+    	//$("#main_div").height($(window).height()-52);
     	$("#main_div").css({"overflow":"auto"});
     	
     	bindEvent();

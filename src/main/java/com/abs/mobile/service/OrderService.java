@@ -35,4 +35,15 @@ public interface OrderService {
      */
 	public Map<String, Object> reItemPrice(String addId);
 	
+    /**
+     * 用户订单察看
+     * @return
+     */
+    public Map<String, Object> getUserOrder();
+    
+    /**
+     * 用户订单察看  然后支付
+     * @return
+     */
+    public Map<String, Object> doPayFromUserOrder(String orderId);
 }

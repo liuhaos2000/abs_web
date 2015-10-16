@@ -555,4 +555,67 @@ public class OrderServiceImpl implements OrderService {
 		
 		return resultMap;
 	}
+
+
+    /**
+     * 用户订单察看
+     * @return
+     */
+    @Override
+    public Map<String, Object> getUserOrder() {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        TUser user=sessionService.getLoginUser();
+        List<Map<String, Object>> orderList = 
+                tOrderMapper.getUserOrderList(user.getOpenId());
+        for(Map<String, Object> order:orderList){
+            List<Map<String, Object>> detailList = 
+                    tOrderDetailMapper.getOrderDetailList((String)order.get("order_id"));
+            order.put("detailList", detailList);
+        }
+        resultMap.put("orderList", orderList);
+        return resultMap;
+    }
+
+
+
+    /**
+     * 用户订单察看  然后支付
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor=Exception.class) 
+    public Map<String, Object> doPayFromUserOrder(String orderId) {
+        
+        TOrder tOrder = tOrderMapper.selectByPrimaryKey(orderId);
+        
+        String nonce_str = Sign.create_nonce_str();
+        nonce_str = nonce_str.substring(0, 32);
+        // 生成支付签名
+        String packageid = "prepay_id="+tOrder.getOrderZhifuId();
+        SortedMap<String, String> parm = new TreeMap<String, String>();
+        parm.put("appId", WeixinConst.APPID);
+        parm.put("timeStamp", Sign.create_timestamp());
+        parm.put("nonceStr", nonce_str);
+        parm.put("package", packageid);
+        parm.put("signType", "MD5");
+        // 支付信息生产
+        String sign2 = Sign.createPaySign(parm);
+        parm.put("sign", sign2);
+        
+        Map<String, Object> resultMap =  new HashMap<String, Object>();
+        
+        resultMap.put("appId", parm.get("appId"));
+        resultMap.put("timeStamp", parm.get("timeStamp"));
+        resultMap.put("nonceStr", parm.get("nonceStr"));
+        resultMap.put("prepay_id", parm.get("package"));
+        resultMap.put("signType", parm.get("signType"));
+        resultMap.put("sign", parm.get("sign"));
+        
+        resultMap.put("orderId", tOrder.getOpenId());
+        resultMap.put("payId", tOrder.getOrderZhifuId());
+        // JSAPI 签名信息
+        //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/order/orderSubmit"));
+        
+        return resultMap;
+    }
 }

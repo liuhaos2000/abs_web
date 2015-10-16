@@ -44,7 +44,7 @@ public class AbsConst {
      */
     public static final String ORDER_SIGN = "4";
     /**
-     * 订单状态 已评（关闭） ：5
+     * 订单状态 已评（关闭） ：9
      */
     public static final String ORDER_CLOSE = "9";
 

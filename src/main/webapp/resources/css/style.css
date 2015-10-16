@@ -1611,9 +1611,12 @@ img{
 	background-color:white;
 }
 .order-title{
-	border: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+	border-left: 1px solid #e5e5e5;
 	background-color:white;
+	padding: 5px 0 5px 0;
 }
+
 .order-total{
 	border: 1px solid #e5e5e5;
 	margin-bottom:5px;
