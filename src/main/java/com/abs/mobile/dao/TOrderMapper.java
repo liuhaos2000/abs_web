@@ -1,5 +1,8 @@
 package com.abs.mobile.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.abs.mobile.domain.TOrder;
 
 public interface TOrderMapper {
@@ -24,4 +27,9 @@ public interface TOrderMapper {
      * @return
      */
     long getUserOrderCount(String openId);
+    /**
+     * 取得用户订
+     * @return
+     */
+    List<Map<String, Object>> getUserOrderList(String openId);
 }
