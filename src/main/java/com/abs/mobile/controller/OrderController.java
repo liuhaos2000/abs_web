@@ -81,4 +81,21 @@ public class OrderController extends BaseController {
         return request;
     }
     
+    
+    /**
+     * 从用户订单支付
+     * @return
+     * @throws BusinessException 
+     */
+    @RequestMapping("/userOrderToPay")
+    @ResponseBody
+    public Result userOrderToPay(String orderId) throws BusinessException {
+        
+        Result request = new Result();
+        
+        Map<String, Object> resultMap = orderService.doPayFromUserOrder(orderId);
+       
+        request.setData(resultMap);
+        return request;
+    }
 }

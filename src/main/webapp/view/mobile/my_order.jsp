@@ -50,7 +50,9 @@
                     <p class="order-num-position ">实支付：${item.shiji_price}</p>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
-                    <button type="button" class="btn btn-danger btn-xs order-num-position order-num-bt to-pay-bt">去付款</button>
+                    <button type="button" 
+                            class="btn btn-danger btn-xs order-num-position order-num-bt to-pay-bt"
+                            orderId="${item.order_id}">去付款</button>
                 </div>
             </div>
           </div>
@@ -72,6 +74,10 @@
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/icheck.min.js"></script>
 <script type="text/javascript">
+var UrlConfig = {
+	userOrderToPay:'<%=request.getContextPath() %>/app/mobile/order/userOrderToPay',
+    updOrderToPayed:'<%=request.getContextPath() %>/app/mobile/order/updOrderToPayed'
+};
 $(document).ready(function() {
     //选择框
     $('input').iCheck({
@@ -99,13 +105,70 @@ $(document).ready(function() {
 // to-pay-bt
 function bindEvent(){
     $('.to-pay-bt').bind("click",function(){
-        //addressid=$(this).attr("addressid");
-        doPay();
+        var orderId=$(this).attr("orderId");
+        doPay(orderId);
     });
     
 }
-function doPay(){
-    alert("pay");
+function doPay(orderId){
+	//
+	$('.to-pay-bt').attr('disabled',"true");
+    $.ajax({    
+        url:UrlConfig.userOrderToPay,
+        data:{
+               orderId:orderId,
+            },
+        type:'post',    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+                //alert(result.data.appId);
+                //发起支付
+                WeixinJSBridge.invoke('getBrandWCPayRequest',{
+                                                    "appId" : result.data.appId,
+                                                    "timeStamp" : result.data.timeStamp, 
+                                                    "nonceStr" : result.data.nonceStr, 
+                                                    "signType" : "MD5",
+                                                    "package" : result.data.prepay_id,
+                                                    "paySign" : result.data.sign 
+                                    },function(res){
+                                        WeixinJSBridge.log(res.err_msg);
+                                        if(res.err_msg == "get_brand_wcpay_request:ok"){  
+                                            //alert("微信支付成功!");  
+                                            updOrderToPayed(result.data.orderId);
+                                            myalert("支付成功！",'main_div');
+                                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+                                            //alert("用户取消支付!");  
+                                        }else{  
+                                            alert("支付失败!");  
+                                        }
+                                        // 刷新
+                                        window.location.href='<%=request.getContextPath() %>/app/mobile/page/myorder'; 
+                                    });
+            }else{
+                myalert(result.msg,'main_div');
+                $('.to-pay-bt').removeAttr('disabled');
+            }
+         }
+    });
+}
+function updOrderToPayed(orderId){
+    $.ajax({
+        url:UrlConfig.updOrderToPayed, 
+        data:{orderId:orderId},
+        type:'post',
+        //cache:false,
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+                // 跳转
+                //window.location.href='<%=request.getContextPath() %>'+
+                //                   '/app/mobile/page/huiyuan'; 
+            }else{
+                myalert(result.msg,'main_div');
+            }
+         }
+    });
 }
         </script>
 </body>
