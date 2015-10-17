@@ -286,7 +286,7 @@
                             </div>
                         </div>
 
-                        <div class="accordion-group">
+                        <div class="accordion-group" style="display: none;">
                             <div class="accordion-inner">
                                     <div class="row">
                                       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-483788" href="#accordion-element-906174">

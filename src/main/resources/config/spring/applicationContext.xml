@@ -46,7 +46,10 @@
 		<property name="prefix" value="/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-
+	<!--  -->
+    <!-- 错误路径和错误页面，注意指定viewResolver 
+    <mvc:resources mapping="/html/**" location="/resources/html/" /> -->
+    
     <!-- 验证框架S -->
     <!-- 默认的注解映射的支持 -->  
     <mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
@@ -66,4 +69,6 @@
     
     
 	<import resource="applicationContext-*.xml" />
+	
+	
 </beans>
