@@ -302,7 +302,7 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("signType", parm.get("signType"));
         resultMap.put("sign", parm.get("sign"));
         
-        resultMap.put("orderId", order.getOpenId());
+        resultMap.put("orderId", order.getOrderId());
         resultMap.put("payId", rMap.get("prepay_id"));
         // JSAPI 签名信息
         //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/order/orderSubmit"));
@@ -611,7 +611,7 @@ public class OrderServiceImpl implements OrderService {
         resultMap.put("signType", parm.get("signType"));
         resultMap.put("sign", parm.get("sign"));
         
-        resultMap.put("orderId", tOrder.getOpenId());
+        resultMap.put("orderId", tOrder.getOrderId());
         resultMap.put("payId", tOrder.getOrderZhifuId());
         // JSAPI 签名信息
         //resultMap.put("signInfo", sessionService.getSignInfo("/mobile/order/orderSubmit"));

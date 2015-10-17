@@ -276,5 +276,6 @@
                 end as status_text
     from t_order t1
     where t1.open_id=#{openId}
+    order by t1.order_date desc
   </select>
 </mapper>

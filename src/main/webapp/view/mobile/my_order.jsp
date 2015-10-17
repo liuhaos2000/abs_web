@@ -50,9 +50,17 @@
                     <p class="order-num-position ">实支付：${item.shiji_price}</p>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
-                    <button type="button" 
+                    <c:choose>
+   					  <c:when test="${item.status=='1'}">
+   					  	  <button type="button" 
                             class="btn btn-danger btn-xs order-num-position order-num-bt to-pay-bt"
                             orderId="${item.order_id}">去付款</button>
+   					  </c:when>
+   					  <c:otherwise> 
+   					  </c:otherwise>
+   					</c:choose>
+
+                     
                 </div>
             </div>
           </div>
@@ -73,6 +81,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/icheck.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
 	userOrderToPay:'<%=request.getContextPath() %>/app/mobile/order/userOrderToPay',
@@ -135,7 +144,7 @@ function doPay(orderId){
                                         WeixinJSBridge.log(res.err_msg);
                                         if(res.err_msg == "get_brand_wcpay_request:ok"){  
                                             //alert("微信支付成功!");  
-                                            updOrderToPayed(result.data.orderId);
+                                            updOrderToPayed(orderId);
                                             myalert("支付成功！",'main_div');
                                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
                                             //alert("用户取消支付!");  
