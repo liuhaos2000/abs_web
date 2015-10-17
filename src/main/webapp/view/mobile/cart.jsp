@@ -18,6 +18,8 @@
 
 	<div id="main_div">
 	    <div class="container ">
+         <c:choose>
+   		  <c:when test="${result.itemList.size()>0}">
             <c:forEach items="${result.itemList}" var="item"  varStatus="status">
                 <div class="row cart-item-row" recordkey="cartitem${status.index}">
                     <div class="col-md-2 col-sm-2 col-xs-2 cart-col-box cart-col-checkbox">
@@ -48,6 +50,21 @@
                     </div>
                 </div>
             </c:forEach>
+ 		  </c:when>
+ 		  <c:otherwise> 
+ 		  	<div class="row ">
+ 		  		<div class="col-md-12 col-sm-12 col-xs-12 cart-null">
+ 		  			<img class="" src="<%=request.getContextPath() %>/resources/images/cart_big.png">
+ 		  		</div>
+ 		  	</div>
+ 		  	<div class="row ">
+ 		  		<div class="col-md-12 col-sm-12 col-xs-12 cart-null-text">
+ 		  			购物车还是空的，您再去逛逛吧
+ 		  		</div>
+ 		  	</div>
+ 		  </c:otherwise>
+ 		</c:choose>
+
             <form id="cartForm" action="/abs_web/app/mobile/page/order" method="post">
                 <input type="hidden" id="cartItem" name="cartItem" >
             </form>
@@ -95,6 +112,7 @@ $(document).ready(function() {
     	var parm = getSubmitItem();
     	if(parm==0){
     		alert("购物车是空的!");
+    		return;
     	}
     	$("#cartItem").val(parm);
     	$("#cartForm").submit();

@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <div id="main_div" class="maindiv">
+    <div id="main_div" class="">
         <div class="container pic_show2">
             <div id="owl-demo1" class="owl-carousel owl-theme">
                     <c:forEach items="${result.tupianList}" var="item">
@@ -132,17 +132,7 @@
                          </div>
                          <div class="tab-pane" id="panel-2">
                        		 <div class="text-edit">
-                       		 		<table>
-                       		 		  <thead>
-                       		 		  	<tr><td width="40%"></td><td></td></tr>
-                       		 		  </thead>
-                       		 		  <c:forEach items="${result.itemParm}" var="pm">
-                       		 			<tr>
-                       		 				<td valign="top">${pm.key}:</td>
-                       		 				<td>${pm.value}</td>
-                       		 			</tr>
-                       		 		  </c:forEach>
-                       		 		</table>
+                       		 		${result.item.fu_text}
                              </div>
                     	</div>
                     	<div class="tab-pane" id="panel-3">
@@ -167,10 +157,6 @@
                   </div>
           </div>
              </div>
-             
-             
-             
-             
     </div>
     <footer class="tool_foot">
         <div class="container footer itme_detail_top">
@@ -305,7 +291,6 @@ $(document).ready(function() {
         }
     }); 
     
-
 });
 
 function addItemToCart(itemId,xinghao,yanse,shuliang) {

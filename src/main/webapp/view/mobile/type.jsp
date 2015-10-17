@@ -106,7 +106,7 @@ function getSubtype(id){
                     		if(i==(result.data.length-1)){
                     			$("#subtype_tb").append('<tr class="type-tr"><td typeid="'+result.data[i].typeId+'" colspan="2" class="type-td"><a href="#">'+result.data[i].name+'</a></td></tr>');
                     		}else{
-                    			$("#subtype_tb").append('<tr class="type-tr"><td typeid="'+result.data[i].typeId+'"class="type-td"><a href="#">'+result.data[i].name+'</a></td><td typeid="'+result.data[i+1].typeId+'" class="type-td"><a href="#">'+result.data[i+1].name+result.data[i+1].typeId+' </a></td></tr>');
+                    			$("#subtype_tb").append('<tr class="type-tr"><td typeid="'+result.data[i].typeId+'" class="type-td"><a href="#">'+result.data[i].name+'</a></td><td typeid="'+result.data[i+1].typeId+'" class="type-td"><a href="#">'+result.data[i+1].name+' </a></td></tr>');
                     		}
                    			i=i+1;
                     	}
