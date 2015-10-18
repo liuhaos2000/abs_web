@@ -48,7 +48,12 @@
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>/coreServlet</url-pattern>
 	</servlet-mapping>
-  
+  	<servlet-mapping>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/paynotify</url-pattern>
+	</servlet-mapping>
+	
+	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

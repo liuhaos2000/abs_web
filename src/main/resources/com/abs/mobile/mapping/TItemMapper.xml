@@ -407,6 +407,7 @@
         
         WHERE
             t1.del_flg='0'
+            and t2.shangjia_flg='1' 
 			and t1.huodong_flg='5'
 			and t1.huodong_date<![CDATA[<=]]>CURDATE()
         	and not EXISTS(

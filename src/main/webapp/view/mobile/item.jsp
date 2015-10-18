@@ -85,30 +85,34 @@
             	<div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
             		<p class="">数量：</p>
                 </div>
-                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                <div class="col-md-6 col-sm-6 col-xs-6 ">
                 		<div class="btn-group detail-xinghao-bt" role="group">
                             <button id="jian_bt" type="button" class="btn btn-default btn-xs">-</button>
                             <button id="shuliang" type="button" class="btn btn-default btn-xs" >1</button>
                             <button id="add_bt" type="button" class="btn btn-default btn-xs">+</button>
                         </div>
                 </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 ">
+                	<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
+                </div>                
 
             </div>
 <div class="row">
             <div class="tabbable tab-all" id="tabs-792036">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#panel-1" data-toggle="tab">评价</a>
-                    </li>
-                    <li>
                         <a href="#panel-2" data-toggle="tab">商品详情</a>
                     </li>
                     <li>
                         <a href="#panel-3" data-toggle="tab">参数</a>
                     </li>
+                    <li >
+                        <a href="#panel-1" data-toggle="tab">评价</a>
+                    </li>
+
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="panel-1">
+                    <div class="tab-pane " id="panel-1">
                     		<c:forEach items="${result.TItemPingjia}" var="pj">
                     		     <div class="media pinlun-one">
                                     <div class="media-left">
@@ -130,7 +134,7 @@
                                  </div>
                     		</c:forEach>
                          </div>
-                         <div class="tab-pane" id="panel-2">
+                         <div class="tab-pane active" id="panel-2">
                        		 <div class="text-edit">
                        		 		${result.item.fu_text}
                              </div>
@@ -307,6 +311,8 @@ function addItemToCart(itemId,xinghao,yanse,shuliang) {
             if(result.successful == true ){
                 if (result.data > 0) {
                 }
+            }else{
+            	myalert("你选择的产品数量不足","main_div");
             }
             getCartCount();
          }

@@ -46,7 +46,7 @@
                         <div>
                                     <p class="item_list_name p-no-bottom">${item.item_name}</p>
                                     <p class="item_list_price p-no-bottom">￥${item.price}</p>
-                                    <p class="item_list_hpd p-no-bottom">销量：${item.haopingdu}</p>
+                                    <p class="item_list_hpd p-no-bottom">销量：${item.xiaoliang}</p>
                                     <p class="item_list_hpd p-no-bottom">好评度：${item.haopingdu} (${item.pingjia_zongshu}人)</p>
                          </div>
                     </td>

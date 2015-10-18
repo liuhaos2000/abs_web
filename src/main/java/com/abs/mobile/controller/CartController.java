@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.ItemService;
+import com.abs.util.exception.BusinessException;
 
 @Controller
 @RequestMapping("/mobile/cart")
@@ -32,11 +33,12 @@ public class CartController extends BaseController {
     /**
      * 取得购物车中商品数量
      * @return
+     * @throws BusinessException 
      */
     @RequestMapping("/addItem")
     @ResponseBody
     public Result addItem(String itemId,String xinghao,
-    				String yanse,String shuliang) {
+    				String yanse,String shuliang) throws BusinessException {
         Result request = new Result();
         cartService.addItem(itemId, xinghao, yanse, shuliang);
         return request;

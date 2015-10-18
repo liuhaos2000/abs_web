@@ -1,5 +1,6 @@
 package com.abs.mobile.service.impl;
 
+import java.nio.ByteOrder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +11,18 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.abs.mobile.dao.TCartMapper;
+import com.abs.mobile.dao.TItemDetailMapper;
+import com.abs.mobile.dao.TItemMapper;
+import com.abs.mobile.dao.TItemPictureMapper;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TCartKey;
+import com.abs.mobile.domain.TItem;
+import com.abs.mobile.domain.TItemDetail;
+import com.abs.mobile.domain.TItemDetailKey;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.SessionService;
+import com.abs.util.exception.BusinessException;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -22,12 +30,25 @@ public class CartServiceImpl implements CartService {
 	private TCartMapper tCartMapper;
 	@Resource
 	private SessionService sessionService;
+	@Resource
+	private TItemMapper tItemMapper;
+	@Resource
+	private TItemDetailMapper tItemDetailMapper;
 
 	/**
 	 * 添加购物车
+	 * @throws BusinessException 
 	 */
 	@Override
-	public int addItem(String itemId, String xinghao, String yanse, String shuliang) {
+	public int addItem(String itemId, String xinghao, String yanse, String shuliang) throws BusinessException {
+		
+		// DO CHECK  
+		//1是否是下架，删除产品
+		//2库存数量是否足够
+		boolean checkFlg = checkItem(itemId, xinghao, yanse, shuliang);
+		if(true==checkFlg){
+			throw new BusinessException("ordersubmit.kucun.error");
+		}
 
 		int result = 0;
 		// 获取OpenId
@@ -101,5 +122,40 @@ public class CartServiceImpl implements CartService {
     	key.setOpenId(user.getOpenId());
     	return tCartMapper.deleteByPrimaryKey(key);
     }
+    
+    
+    /**
+     * check商品是否有足够的数量，下架，
+     * 删除，等不可购买原因
+     * @param itemId
+     * @param xinghao
+     * @param yanse
+     * @param shuliang
+     * @return true : 错误
+     */
+	@Override
+	public boolean checkItem(String itemId, String xinghao, String yanse, String shuliang) {
+		try {
+			TItem tItem =tItemMapper.selectByPrimaryKey(Integer.valueOf(itemId));
+			if(!("1".equals(tItem.getShangjiaFlg()))){
+				return true;
+			}
+			
+			TItemDetailKey key = new TItemDetailKey();
+			key.setItemId(Integer.valueOf(itemId));
+			key.setItemGuige(Integer.valueOf(xinghao));
+			key.setItemYanse(Integer.valueOf(yanse));
+			TItemDetail tItemDetail  = tItemDetailMapper.selectByPrimaryKey(key);
+			
+			if(Integer.valueOf(shuliang) > tItemDetail.getShuliang()){
+				return true;
+			}
+			
+		} catch (Exception e) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }
