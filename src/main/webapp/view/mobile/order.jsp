@@ -368,7 +368,6 @@ var UrlConfig = {
         loadUpdAdress:'<%=request.getContextPath() %>/app/mobile/useradress/loadUpdAdress',
         deleteAddress:'<%=request.getContextPath() %>/app/mobile/useradress/deleteAddress',
         orderSubmit:'<%=request.getContextPath() %>/app/mobile/order/orderSubmit',
-        updOrderToPayed:'<%=request.getContextPath() %>/app/mobile/order/updOrderToPayed',
         reItemPrice:'<%=request.getContextPath() %>/app/mobile/order/reItemPrice'
     };
 //更新用
@@ -663,8 +662,9 @@ function dosubmit(){
   						  				WeixinJSBridge.log(res.err_msg);
 	    				          		if(res.err_msg == "get_brand_wcpay_request:ok"){  
 	    				  					//alert("微信支付成功!");  
-	    				  					updOrderToPayed(result.data.orderId);
-	    				  		 		}else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+	    				          			myalert("支付成功！",'main_div');
+	    				  		 		}else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
+	    				  		 		    myalert("您的订单已经生成！",'main_div');
 	    				  					//alert("用户取消支付!");  
 	    				  				}else{  
 	    				  					alert("支付失败!");  
@@ -678,24 +678,6 @@ function dosubmit(){
             }else{
                 myalert(result.msg,'main_div');
                 $('#zhifu_bt').removeAttr('disabled');
-            }
-         }
-    });
-}
-function updOrderToPayed(orderId){
-    $.ajax({
-        url:UrlConfig.updOrderToPayed, 
-        data:{orderId:orderId},
-        type:'post',
-        //cache:false,
-        dataType:'json',    
-        success:function(result) {
-            if(result.successful == true ){
-                // 跳转
-                //window.location.href='<%=request.getContextPath() %>'+
-                //                   '/app/mobile/page/huiyuan'; 
-            }else{
-                myalert(result.msg,'main_div');
             }
          }
     });

@@ -16,6 +16,7 @@ import com.abs.weixin.message.model.Article;
 import com.abs.weixin.message.resp.MusicMessage;
 import com.abs.weixin.message.resp.NewsMessage;
 import com.abs.weixin.message.resp.TextMessage;
+import com.abs.weixin.pojo.PayNotifyParm;
 import com.abs.weixin.pojo.PayParm;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
@@ -174,7 +175,13 @@ public class MessageUtil {
 		xstream.alias("xml", payParm.getClass());
 		return xstream.toXML(payParm);
 	}
-	
+	/**
+	 * 支付回调参数转换成XML
+	 */
+	public static String payNotifyParmToXml(PayNotifyParm payNotifyParm) {
+		xstream.alias("xml", payNotifyParm.getClass());
+		return xstream.toXML(payNotifyParm);
+	}
 	/**
 	 * 扩展xstream，使其支持CDATA块
 	 * 

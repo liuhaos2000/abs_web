@@ -26,7 +26,7 @@ public class WeixinConst {
 	// 商户支付密钥Key。审核通过后，在微信发送的邮件中查看
 	public static String KEY = "zaq12wsxzaq12wsxzaq12wsxzaq12wsx";
 	// 异步回调地址
-	public static String NOTIFY_URL = "http://ruihegouwu.cn/abs_web/app/mobile/pay/notify";
+	public static String NOTIFY_URL = SEVERPATH+"paynotify";
 	
 	
 	

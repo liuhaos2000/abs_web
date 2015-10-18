@@ -10,5 +10,10 @@ public interface WXCoreService {
 	 * @return
 	 */
 	public String processRequest(HttpServletRequest request);
-	
+	/**
+	 * 支付回调
+	 * @param request
+	 * @return
+	 */
+	public String paynotify(HttpServletRequest request);
 }

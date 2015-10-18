@@ -52,17 +52,17 @@ public class OrderController extends BaseController {
      * @return
      * @throws BusinessException 
      */
-    @RequestMapping("/updOrderToPayed")
-    @ResponseBody
-    public Result updOrderToPayed(String orderId) throws BusinessException {
-        
-        Result request = new Result();
-        
-        Map<String, Object> resultMap = orderService.updOrderToPayed(orderId);
-        
-        request.setData(resultMap);
-        return request;
-    }
+//    @RequestMapping("/updOrderToPayed")
+//    @ResponseBody
+//    public Result updOrderToPayed(String orderId) throws BusinessException {
+//        
+//        Result request = new Result();
+//        
+//        Map<String, Object> resultMap = orderService.updOrderToPayed(orderId);
+//        
+//        request.setData(resultMap);
+//        return request;
+//    }
     
     /**
      * 由于收货人地址发生改变：刷新商品价格
@@ -98,4 +98,7 @@ public class OrderController extends BaseController {
         request.setData(resultMap);
         return request;
     }
+    
+    
+    
 }

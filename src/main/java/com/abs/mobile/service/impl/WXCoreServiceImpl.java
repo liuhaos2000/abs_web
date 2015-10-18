@@ -13,12 +13,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Service;
 
 import com.abs.mobile.dao.TUserMapper;
+import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.mobile.service.WXCoreService;
 import com.abs.util.Log4jUtil;
 import com.abs.weixin.message.model.Article;
 import com.abs.weixin.message.resp.NewsMessage;
 import com.abs.weixin.message.resp.TextMessage;
+import com.abs.weixin.pojo.PayNotifyParm;
 import com.abs.weixin.utils.MessageUtil;
 
 @Service
@@ -26,6 +28,8 @@ public class WXCoreServiceImpl implements WXCoreService {
 
 	@Resource
 	private UserInfoAuthorizeService userInfoAuthorizeService;
+	@Resource
+	private OrderService orderService;
 
 	@Override
 	public String processRequest(HttpServletRequest request) {
@@ -266,6 +270,52 @@ public class WXCoreServiceImpl implements WXCoreService {
 			e.printStackTrace();
 		}
 
+		return respMessage;
+	}
+
+	/**
+	 * 支付回调
+	 * @param request
+	 * @return
+	 */
+	@Override
+	public String paynotify(HttpServletRequest request) {
+		String respMessage = null;
+		try {
+			// xml请求解析
+			Map<String, String> requestMap = MessageUtil.parseXml(request);
+
+			// 发送方帐号（open_id）
+			String returnCode = requestMap.get("return_code");
+			
+			if("SUCCESS".equals(returnCode)){
+				
+				String orderId=requestMap.get("out_trade_no");
+				// 更新为已支付
+				orderService.updOrderToPayed(orderId);
+				
+				// 成功
+		        PayNotifyParm payNotifyParm = new PayNotifyParm();
+		        payNotifyParm.setReturn_code("SUCCESS");
+		        payNotifyParm.setReturn_msg("OK");
+		        respMessage = MessageUtil.payNotifyParmToXml(payNotifyParm);
+		        respMessage = respMessage.replaceAll("__", "_");
+		        return respMessage;
+				
+			}else{
+				Logger log = Log4jUtil.getLogger();
+				log.error("ERR:----->"+requestMap.get("return_msg"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 失败
+	        PayNotifyParm payNotifyParm = new PayNotifyParm();
+	        payNotifyParm.setReturn_code("FAIL");
+	        payNotifyParm.setReturn_msg("NO OK");
+	        respMessage = MessageUtil.payNotifyParmToXml(payNotifyParm);
+	        respMessage = respMessage.replaceAll("__", "_");
+	        return respMessage;
+		}
 		return respMessage;
 	}
 
