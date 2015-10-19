@@ -88,18 +88,21 @@
         </div>
     <!-- Modal End -->
         
-        
-        
-    <header class="navbar top" role="navigation">
+    <header class="" role="navigation">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 top_logo">
-                    <p class="navbar-text">收货地址管理</p>
+            <div class="row row-head">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
+                    <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 col-head">
+                    <p class="row-head-text">地址管理</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
+                    <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
     </header>
-
 	
 	<div id="main_div">
 	    <div id="adressdiv" class="container">

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>购物车</title>
+	<title>瑞和购物</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -15,7 +15,22 @@
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/skins/square/red.css" >
 </head>
 <body>
-
+    <header class="" role="navigation">
+        <div class="container">
+            <div class="row row-head">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
+                    <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 col-head">
+                    <p class="row-head-text">购物车</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
+                    <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
 	<div id="main_div">
 	    <div class="container ">
          <c:choose>
@@ -101,7 +116,7 @@ $(document).ready(function() {
     });         
     //      
     $(function(){
-        $("#main_div").height($(window).height()-52);
+        $("#main_div").height($(window).height()-$("header").height()-52);
         $("#main_div").css({"overflow":"auto"});
         // 自动全选
         autoCheck();

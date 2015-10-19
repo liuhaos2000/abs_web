@@ -1344,7 +1344,7 @@ img{
 	color:#000000;
 	font-size:1.5em;
 	padding:3px 0px 3px 10px;
-	border-top: 5px solid #35a2fb;
+	border-top: 5px solid #00bdec;
 	margin-bottom: 0;
 }
 .detail-price{
@@ -1364,7 +1364,7 @@ img{
 	margin-top:5px !important;
 }
 .tab-all{
-	border-top: 5px solid #35a2fb;
+	border-top: 5px solid #00bdec;
 	background-color: #FFFFFF
 }
 .img-pinglun{
@@ -1615,7 +1615,7 @@ img{
 }
 .order-num{
 	border: 1px solid #e5e5e5;
-	margin-top:5px;
+	margin-top:10px;
 	border-radius: 12px 12px 0px 0px;
 	background-color:white;
 }
@@ -1628,7 +1628,6 @@ img{
 
 .order-total{
 	border: 1px solid #e5e5e5;
-	margin-bottom:5px;
 	border-radius: 0px 0px 12px 12px;
 	background-color:white;
 }
@@ -1815,4 +1814,36 @@ img{
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
+}
+/*head*/
+.row-head {
+	background-color: #00bdec;
+	height: 52px;
+	text-align: center;
+}
+.row-head-text {
+	font-family:'SimHei',sans-serif;
+	font-size:1.3em;
+	margin:0 0 0 0;
+	color:#FFFFFF;
+	position: absolute;
+	left: 50%;
+	top:50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	
+}
+.col-head{
+	height: 52px;
+}
+.head-back{
+    position: absolute;
+	left: 50%;
+	top:50%;
+	-webkit-transform: translateX(-50%) translateY(-45%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	color:#FFFFFF;
+	font-size:1.6em;
 }
