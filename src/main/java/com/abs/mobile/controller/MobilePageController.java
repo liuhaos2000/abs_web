@@ -108,6 +108,13 @@ public class MobilePageController {
         map.put("result", result);
         return "mobile/my_address";
     }
+    // my about
+    @RequestMapping("/myabout")
+    public String toMyAbout(ModelMap map) {
+        return "mobile/my_about";
+    }
+    
+    
     // itemlist
     @RequestMapping("/itemlist")
     public String getItemList(

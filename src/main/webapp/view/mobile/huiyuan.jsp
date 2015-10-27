@@ -100,7 +100,7 @@
         </div>
         <div class="panel p2">
             <div class="panel-heading">
-                <a href="#">
+                <a href='<%=request.getContextPath() %>/app/mobile/page/myabout'>
                     <p>关于我们</p>
                 </a>
             </div>

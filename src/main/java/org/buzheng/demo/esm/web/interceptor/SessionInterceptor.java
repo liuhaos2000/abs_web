@@ -17,7 +17,7 @@ import com.abs.mobile.domain.TUser;
 import com.abs.util.commom.AbsConst;
 import com.abs.weixin.utils.WeixinConst;
 
-public class SessionInterceptor implements HandlerInterceptor {
+public class SessionInterceptor implements HandlerInterceptor { 
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Override
