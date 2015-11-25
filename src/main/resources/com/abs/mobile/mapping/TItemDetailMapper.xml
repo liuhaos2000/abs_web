@@ -288,7 +288,8 @@
             CASE
                 WHEN min(t11.sale_price) = max(t11.sale_price)  then min(t11.sale_price) 
                 ELSE concat(min(t11.sale_price),' - ',max(t11.sale_price))
-            END as price_from_to
+            END as price_from_to,
+            sum(t11.shuliang) as shuliang
         from
             (
                 SELECT 

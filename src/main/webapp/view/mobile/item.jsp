@@ -48,7 +48,12 @@
                 <p class="detail-name-p">${result.item.item_name}</p>
             </div>
             <div class="row detail-price">
-            			<p class="detail-price-p">价额：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
+            	<div class="col-md-8 col-sm-8 col-xs-8 detail-price-col">
+            	    <p class="detail-price-p">价额：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
+            	</div>
+            	<div class="col-md-4 col-sm-4 col-xs-4 detail-kucun">
+            		<p class="pl-date">库存:<span id="kucun">${result.mmPrice.shuliang}</span></p>
+            	</div>
             </div>
             <c:choose>
             	<c:when test="${result.itemDetail.size()> 1}">
@@ -107,7 +112,7 @@
                             <button id="add_bt" type="button" class="btn btn-default btn-xs">+</button>
                         </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 ">
+                <div class="col-md-4 col-sm-4 col-xs-4 detail-xinghao">
                 	<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
                 </div>                
 
@@ -327,7 +332,7 @@ function addItemToCart(itemId,xinghao,yanse,shuliang) {
                 if (result.data > 0) {
                 }
             }else{
-            	myalert("你选择的产品数量不足","main_div");
+            	myalert("产品数量不足","main_div");
             }
             getCartCount();
          }
@@ -363,6 +368,7 @@ function getItemSalePrice(itemId,guige,yanse) {
          success:function(result) {
              if(result.successful == true ){
             	 $('#itemPrice').html(result.data.sale_price);
+            	 $('#kucun').html(result.data.shuliang);
              }else{
              }
           }

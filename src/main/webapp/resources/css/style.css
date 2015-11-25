@@ -1356,8 +1356,14 @@ img{
 	font-size:1.3em;
 	margin: 0 0 0 !important;
 }
+.detail-price-col{
+	padding:0 0 0 0;
+}
+.detail-kucun{
+	padding:2px 0px 3px 8px;
+}
 .detail-xinghao{
-	padding:3px 0px 3px 10px;
+	padding:7px 0px 3px 10px;
 }
 .detail-xinghao-bt{
 	margin-left:6px !important;
