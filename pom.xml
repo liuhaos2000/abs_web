@@ -146,11 +146,6 @@
 		<!-- JSON END -->
 
 
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-        </dependency>
         <!-- maven打包编译的异常 ：sun.misc.BASE64Decoder 是 Sun 的专用 API，可能会在未来版本中删除的解决方法 -->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
