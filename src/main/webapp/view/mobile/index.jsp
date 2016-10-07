@@ -10,62 +10,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.carousel.min.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/owl.theme.default.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/style.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/media.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
-	<header class="navbar top" role="navigation">
+	<header>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-2 col-sm-2 col-xs-3 top_logo">
-					<p class="navbar-text">
+			<div class="row index-row-head">
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
 						<a href="<%=request.getContextPath() %>">
-							<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/logo1.png" alt="瑞和商城"></a>
-					</p>
+						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/novo_logo.png"></a>
 				</div>
-				<div class="col-md-10 col-sm-10 col-xs-9 top_search">
-					<p class="navbar-text input-group">
-						<input id="searchparm" name="searchparm" type="text" class="form-control" 
-						        data-container="body" 
-						        data-toggle="popover" 
-						        data-placement="bottom" 
-						        data-content="要点啥！">
-						<span id="search-bt" class="input-group-addon">
-							<img src="<%=request.getContextPath() %>/resources/images/search.png"></span>
-					</p>
+				<div class="col-md-10 col-sm-10 col-xs-9 no-padding-left">
+					<div class="input-group index-col-head">
+						<input type="text" id="searchparm" name="searchparm" class="form-control">
+						<span class="input-group-btn">
+							<button id="search-bt" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 探出窗口 -->
         <div class="popupshadow">
         </div>
-        <div class="popup">
-            <img src="<%=request.getContextPath() %>/resources/images/popup_icon.png">
-            <ul>
-                <li>
-                    <a href="item_list.html">主力店铺</a>
-                </li>
-                <li>
-                    <a href="item_list.html">女装</a>
-                </li>
-                <li>
-                    <a href="item_list.html">男装</a>
-                </li>
-                <li>
-                    <a href="item_list.html">鞋/包</a>
-                </li>
-                <li>
-                    <a href="item_list.html">餐饮</a>
-                </li>
-                <li>
-                    <a href="item_list.html">钟表/珠宝/饰品</a>
-                </li>
-            </ul>
-        </div>
-
 	</header>
 
 	<div id="main_div">
@@ -103,7 +71,6 @@
 
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>	
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>		
 <script type="text/javascript">

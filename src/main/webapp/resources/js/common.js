@@ -5,9 +5,3 @@ function myalert(message,dom){
 	setTimeout("$('.my-alert').remove()",1500);
 	
 }
-
-
-
-
-
-
