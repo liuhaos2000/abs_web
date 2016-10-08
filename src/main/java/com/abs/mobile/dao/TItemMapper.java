@@ -23,7 +23,7 @@ public interface TItemMapper {
 
     int updateByPrimaryKey(TItem record);
     /**
-     * Home用
+     * Home用 热卖
      */
     List<Map<String, String>> getItemTejia();
     /**
@@ -34,4 +34,12 @@ public interface TItemMapper {
      * Item用
      */
     List<Map<String, String>> getItemInfo(String itemId,String pictureType);
+    /**
+     * Home用 团购
+     */
+	List<Map<String, String>> getItemTungou();
+    /**
+     * Home用 一元购
+     */
+	List<Map<String, String>> getItemYiyuangou();
 }

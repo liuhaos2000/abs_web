@@ -15,7 +15,7 @@ public interface HomeService {
 	public List<TIndexLunbo> getLunBoList();
 	
     /**
-     * 取得商品
+     * 取得商品5 热卖
      * @param request
      * @return
      */

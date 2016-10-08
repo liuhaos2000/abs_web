@@ -45,8 +45,8 @@ public class ImageController extends BaseController {
         Map<String, Object> resultMap =  new HashMap<String, Object>();
         
         // 配置Tomcat 参考tomcat.cfg
-        String projectPath = "/yyyy/userImg";
-        String realPathString = "c:\\yyyy\\userImg";
+        String projectPath = "/abs/img";
+        String realPathString = "c:\\abs\\img";
         
         String imgPath = uploadFile(formFile,projectPath,realPathString);//进行文件上传操作，上传到服务器中存放（这里是上传到服务器项目文件夹中存到）  
         

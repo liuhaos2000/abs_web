@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abs.mobile.domain.TCart;
+import com.abs.mobile.domain.TIndexLunbo;
 import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
@@ -61,7 +62,9 @@ public class MobilePageController {
     @RequestMapping("/home")
     public String toHome(ModelMap map) {
     	Map<String, Object> resultmap = homeService.getItem();
+    	List<TIndexLunbo> LunboList= homeService.getLunBoList();
         map.put("data", resultmap);
+        map.put("lblist", LunboList);
         return "mobile/home";
     }
     // type

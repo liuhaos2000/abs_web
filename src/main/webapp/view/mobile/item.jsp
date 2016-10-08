@@ -33,16 +33,43 @@
     </header>
     
     <div id="main_div" class="">
-        <div class="container pic_show2">
-            <div id="owl-demo1" class="owl-carousel owl-theme">
-                    <c:forEach items="${result.tupianList}" var="item">
-                        <div class="item">
-                            <img src="<%=request.getContextPath() %>/resources/images/grey.gif" 
-                                 data-original="${item.path}" class="img-responsive img-lunbo">
-                        </div>
-                    </c:forEach>
-            </div>
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column no-padding">
+					<div class="carousel slide " id="carousel-7342">
+						<ol class="carousel-indicators">
+							<c:forEach items="${result.tupianList}" var="item" varStatus="status">
+								<li data-slide-to="${status.index}" data-target="#carousel-7342"></li>
+							</c:forEach>
+						</ol>
+						<div class="carousel-inner">
+							<c:forEach items="${result.tupianList}" var="item" varStatus="status">
+								<c:choose>
+									<c:when test="${status.index eq 0}"> 
+										<div class="item  active">
+												<img class="" src="${item.path}" />
+										</div>
+									</c:when>
+									<c:otherwise> 
+										<div class="item ">
+												<img class="" src="${item.path}" />
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</div>
+						<a class="left carousel-control" href="#carousel-7342"
+							data-slide="prev"><span
+							class="glyphicon glyphicon-chevron-left"></span></a> 
+							<a
+							class="right carousel-control" href="#carousel-7342"
+							data-slide="next"><span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+					</div>
+				</div>
+			</div>
         </div>
+        
         <div class="container">
             <div class="row detail-name">
                 <p class="detail-name-p">${result.item.item_name}</p>
@@ -226,15 +253,10 @@ $(document).ready(function() {
         $("#main_div").height($(window).height()-$("header").height()-52);
         $("#main_div").css({"overflow":"auto"});
         
-        $("#owl-demo1").owlCarousel({
-            items: 1,
-            loop: true,
-            margin: 10,
-            smartSpeed: 450,
-            autoplay: true,
-            autoplayTimeout: 4000,
-        });
-        
+  	    $('.carousel').carousel({
+		  interval: 2000
+		});
+
         $('img').lazyload({ 
             effect:'fadeIn' 
         });
@@ -248,7 +270,6 @@ $(document).ready(function() {
 		var yanse=0;
     	var shuliang= $("#shuliang").text();
     	if("${result.itemDetail.size()}" > 1){
-
     		if("${result.xinghao.size()}" > 1){
     	    	var val=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
     	    	if(val==null){

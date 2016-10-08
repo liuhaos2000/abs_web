@@ -26,42 +26,37 @@
 		</div>
 		<div class="row clearfix">
 			<div class="col-md-12 column no-padding">
-				<div class="carousel slide" id="carousel-7342">
+				<div class="carousel slide " id="carousel-7342">
 					<ol class="carousel-indicators">
-						<li class="active" data-slide-to="0" data-target="#carousel-7342">
-						</li>
-						<li data-slide-to="1" data-target="#carousel-7342"></li>
-						<li data-slide-to="2" data-target="#carousel-7342"></li>
+					    <c:forEach items="${lblist}" var="tlunbo" varStatus="status">
+					    	<li data-slide-to="${status.index}" data-target="#carousel-7342"></li>
+					    </c:forEach>
 					</ol>
 					<div class="carousel-inner">
-						<div class="item active">
-							<img alt=""
-								src="<%=request.getContextPath()%>/resources/images/pic1.png" />
-							<div class="carousel-caption">
-								<h4>First Thumbnail label</h4>
-								<p>Cras justo odio</p>
-							</div>
-						</div>
-						<div class="item">
-							<img alt=""
-								src="<%=request.getContextPath()%>/resources/images/pic2.jpg" />
-							<div class="carousel-caption">
-								<h4>Second Thumbnail label</h4>
-								<p>Cras justo odio</p>
-							</div>
-						</div>
-						<div class="item">
-							<img alt=""
-								src="<%=request.getContextPath()%>/resources/images/pic1.png" />
-							<div class="carousel-caption">
-								<h4>Third Thumbnail label</h4>
-								<p>Cras justo odio</p>
-							</div>
-						</div>
+					    <c:forEach items="${lblist}" var="tlunbo" varStatus="status">
+					    	<c:choose>
+					    		<c:when test="${status.index eq 0}"> 
+					    			<div class="item active">
+					    				<a href="<%=request.getContextPath()%>${tlunbo.action}">
+											<img src="${tlunbo.imgPath}" />
+										</a>
+									</div>
+					    		</c:when>
+					    		<c:otherwise> 
+					    			<div class="item">
+					    				<a href="<%=request.getContextPath()%>${tlunbo.action}">
+											<img src="${tlunbo.imgPath}" />
+										</a>
+									</div>
+					    		</c:otherwise>
+					    	</c:choose>
+
+					    </c:forEach>
 					</div>
 					<a class="left carousel-control" href="#carousel-7342"
 						data-slide="prev"><span
-						class="glyphicon glyphicon-chevron-left"></span></a> <a
+						class="glyphicon glyphicon-chevron-left"></span></a> 
+						<a
 						class="right carousel-control" href="#carousel-7342"
 						data-slide="next"><span
 						class="glyphicon glyphicon-chevron-right"></span></a>
@@ -72,6 +67,46 @@
 		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<div class="row clearfix">
+					<!--一元购S-->
+					<div class="col-md-12 column">
+						<div class="row clearfix home_groupheade">
+							<div class="col-md-12 column home_grouphead_col">
+								<h4 class="myh4">一元购</h4>
+							</div>
+						</div>
+						<div class="row clearfix home_item_div">
+                         	<div class="col-md-6 col-sm-6 col-xs-6 home_item_body">
+                           		<a href="#">
+                                	<img src="image/1.jpg">
+									<p class="home_item_name">碧欧全香水香水香水</p>
+									<p class="home_item_wcdo">完成度 60%</p>
+									<div class="progress home_progress">
+  										<div class="progress-bar progress-bar-warning progress-bar-striped active" 
+  										     role="progressbar" aria-valuenow="60" 
+  										     aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+  										</div>
+									</div>
+                            	</a>
+                         	</div>
+                         	<div class="col-md-6 col-sm-6 col-xs-6 home_item_body">
+                           		<a href="#">
+                                	<img src="image/1.jpg">
+									<p class="home_item_name">碧欧全香水香水香水</p>
+									<p class="home_item_wcdo">完成度 90%</p>
+									<div class="progress home_progress">
+  										<div class="progress-bar progress-bar-warning progress-bar-striped active" 
+  										     role="progressbar" aria-valuenow="90" aria-valuemin="0" 
+  										     aria-valuemax="100" style="width: 90%;">
+  										</div>
+									</div>
+                            	</a>
+                         	</div>
+					</div>
+
+						
+					</div>
+					<!--一元购E-->
+					<!--热卖S-->
 					<div class="col-md-12 column">
 						<div class="row clearfix home_groupheade">
 							<div class="col-md-12 column home_grouphead_col">
@@ -79,7 +114,7 @@
 							</div>
 						</div>
 						
-                	<c:forEach items="${data['HDFLG_5']}" var="item" varStatus="status">
+                		<c:forEach items="${data['HDFLG_5']}" var="item" varStatus="status">
                     		<c:if test="${status.index % 2 eq 0}">
                     			<div class="row clearfix home_item_div">
                     				<c:forEach items="${data['HDFLG_5']}" var="item_2" varStatus="status_2"
@@ -94,14 +129,10 @@
                          			</c:forEach>	
 								</div>
 							</c:if>
-                    </c:forEach>	
-						
-						
-						
-						
-						
+                    	</c:forEach>	
 						
 					</div>
+					<!--热卖E-->
 				</div>
 			</div>
 		</div>

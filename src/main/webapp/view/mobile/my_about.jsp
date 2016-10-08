@@ -93,13 +93,13 @@ $(document).ready(function() {
                 type: "POST",
                 data:{formFile:result.clearBase64},
                 dataType: "json",
-                timeout: 1000,
+                timeout: 10000,
                 error: function(){
                     alert("Error loading PHP document");
                 },
                 success: function(result){
                 	var attstr= '<img src="'+result.data.imgPath+'" class="img-thumbnail myp">'; 
-                    $("#uploadp").html(attstr);
+                	$("#uploadp").html(attstr);
                     $("#umessage").html("上传成功");
                 }
             }); 
