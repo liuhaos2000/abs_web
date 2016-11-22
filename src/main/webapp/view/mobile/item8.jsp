@@ -23,7 +23,7 @@
                     <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 col-head">
-                    <p class="row-head-text">商品详情</p>
+                    <p class="row-head-text">幸运购</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
                     <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
@@ -79,7 +79,6 @@
             	    <p class="detail-price-p">价格：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
             	</div>
             	<div class="col-md-4 col-sm-4 col-xs-4 detail-kucun">
-            		<p class="pl-date">库存:<span id="kucun">${result.mmPrice.shuliang}</span></p>
             	</div>
             </div>
             <c:choose>
@@ -94,7 +93,7 @@
                                       <div class="btn-group" data-toggle="buttons">
                                       	<c:forEach items="${result.xinghao}" var="xh">
                                       		<label class="btn btn-info btn-xs detail-xinghao-bt">
-    			                    			<input type="radio" 
+    			                    			<input  type="radio" 
     			                    					name="xinghao" 
     			                    					xianghaoId="${xh.item_guige}" 
     			                    					autocomplete="off"> ${xh.guige_text}
@@ -140,68 +139,186 @@
                         </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 detail-xinghao">
-                	<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
                 </div>                
 
+            </div>
+            <div class="row">
+            	<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="progress item_progress">
+  						<div class="progress-bar progress-bar-warning  progress-bar-striped active" 
+  							role="progressbar" aria-valuenow="${groupbyuInfo.groupbuyInfo.jindu}" 
+  							aria-valuemin="0" aria-valuemax="100" style="width: ${groupbyuInfo.groupbuyInfo.jindu}%;">
+  						</div>
+					</div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-6 col-sm-6 col-xs-6 detail-xinghao">
+            		<p class="item_huise">第${groupbyuInfo.groupbuyInfo.phase_num}期 总须${groupbyuInfo.groupbuyInfo.group_zongshu}人次</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 detail-shenyu">
+            		<p class="item_huise">剩余:<span style="color: #00bdec">${groupbyuInfo.groupbuyInfo.group_zongshu-groupbyuInfo.groupbuyInfo.maichu_shuliang}</span></p>
+                </div>
             </div>
 <div class="row">
             <div class="tabbable tab-all" id="tabs-792036">
                 <ul class="nav nav-tabs " role="tablist">
                     <li class="vt active">
-                        <a href="#panel-2" data-toggle="tab">商品详情</a>
+                        <a href="#panel-1" data-toggle="tab">幸运号码</a>
                     </li>
                     <li class="vt1">
-                        <a href="#panel-3" data-toggle="tab">参数</a>
+                        <a href="#panel-2" data-toggle="tab">参与记录</a>
                     </li>
                     <li class="vt">
-                        <a href="#panel-1" data-toggle="tab">评价</a>
+                        <a href="#panel-3" data-toggle="tab">查看往期</a>
                     </li>
 
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane " id="panel-1">
-                    		<c:forEach items="${result.TItemPingjia}" var="pj">
-                    		     <div class="media pinlun-one">
-                                    <div class="media-left">
-                                       <a href="#">
-                                            <img class="media-object img-circle img-pinglun" 
-                                            	src="${pj.weixin_image_url}" alt="">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="pl-name">${pj.nickname}</p>
-                                        <div class=pl-star>
-                                            <c:forEach begin="1" end="${pj.pingjia_level}" step="1">
-                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                            </c:forEach>
-                                        </div>
-                                        <p class="pl-neirong">${pj.pingjia_text}</p>
-                                        <p class="pl-date">${pj.pingjia_date}</p>
-                                    </div>
-                                 </div>
-                    		</c:forEach>
-                         </div>
-                         <div class="tab-pane active" id="panel-2">
-                       		 <div class="text-edit">
-                       		 		${result.item.fu_text}
-                             </div>
+						<div class="tab-pane active" id="panel-1">
+							<div class="alert alert-info tab-one" role="alert">
+								<p class="detail-price-p">千位数号码</p>
+								<p>2016年8月13日，NBA火箭VS灰熊，灰熊队得得分{1}，个位数{2}，为本次中奖号码的个位数{3}。</p>
+							</div>
+							<div class="alert alert-info tab-one" role="alert">
+								<p class="detail-price-p">百位数号码</p>
+								<p>2016年8月13日，NBA火箭VS灰熊，灰熊队得得分{1}，个位数{2}，为本次中奖号码的个位数{3}。</p>
+							</div>
+							<div class="alert alert-info tab-one" role="alert">
+								<p class="detail-price-p">十位数号码</p>
+								<p>2016年8月13日，NBA火箭VS灰熊，灰熊队得得分{1}，个位数{2}，为本次中奖号码的个位数{3}。</p>
+							</div>
+							<div class="alert alert-info tab-one" role="alert">
+								<p class="detail-price-p">个位数号码</p>
+								<p>2016年8月13日，NBA火箭VS灰熊，灰熊队得得分{1}，个位数{2}，为本次中奖号码的个位数{3}。</p>
+							</div>
+							<div class="alert alert-warning tab-one" role="alert">
+								<p class="detail-price-p">个位位数号码：待揭晓</p>
+								<p>中奖会员：待揭晓</p>
+							</div>
+						</div>
+						<div class="tab-pane " id="panel-2">
+							<div class="container">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<div class="media">
+                 			   			    <div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\u=3570439078,2365335313&fm=15&gp=0.jpg" alt="">
+                            			            </a>
+                                			    </div>
+                                			    <div class="media-body">
+                                			        <p class="pl-name">王小二<span class="pl-date">(北京市)</span></p>
+                                			        <p class="pl-name-left pl-date">2016/10/02 21:11:23</p>
+                                			 		<div class="pl-clear"></div>
+                                			 		<p class="pl-name pl-date">参与了N人次</p>
+                                			    </div>
+                                			 </div>
+                 			   			    <div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\d38953fb-52e4-4857-8031-4083b4d76538.jpg" alt="">
+                            			            </a>
+                                			    </div>
+                                			    <div class="media-body">
+                                			        <p class="pl-name">王小二<span class="pl-date">(北京市)</span></p>
+                                			        <p class="pl-name-left pl-date">2016/10/02 21:11:23</p>
+                                			 		<div class="pl-clear"></div>
+                                			 		<p class="pl-name pl-date">参与了N人次</p>
+                                			    </div>
+                                			 </div>
+                 			   			    <div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\2000.jpg" alt="">
+                            			            </a>
+                                			    </div>
+                                			    <div class="media-body">
+                                			        <p class="pl-name">王小二<span class="pl-date">(北京市)</span></p>
+                                			        <p class="pl-name-left pl-date">2016/10/02 21:11:23</p>
+                                			 		<div class="pl-clear"></div>
+                                			 		<p class="pl-name pl-date">参与了N人次</p>
+                                			    </div>
+                                			 </div>
+										</div>
+									</div>
+								</div>
+							</div>
                     	</div>
                     	<div class="tab-pane" id="panel-3">
-                       		 <div class="container">
-                       		 	<div class="row">
-                       		 		<table>
-                       		 		  <thead>
-                       		 		  	<tr><td width="40%"></td><td></td></tr>
-                       		 		  </thead>
-                       		 		  <c:forEach items="${result.itemParm}" var="pm">
-                       		 			<tr>
-                       		 				<td valign="top">${pm.key}:</td>
-                       		 				<td>${pm.value}</td>
-                       		 			</tr>
-                       		 		  </c:forEach>
-                       		 		</table>
-                       		 	</div>
-                       		 </div>
+							<div class="container">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<div class="media">
+											<div class="wq-one">
+												<div class="media wq-two">
+													<p class="detail-price-p wq-p">第3期</p>
+												</div>
+												<div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\u=3570439078,2365335313&fm=15&gp=0.jpg" alt="">
+                            			            </a>
+                                			    </div>
+													<div class="media-body">
+														<p class="pl-name">
+															获奖者：<span class="wq-p2">王小二</span>   (北京市)
+														</p>
+														<div class="pl-clear"></div>
+														<p class="pl-name">
+															获奖号码：<span class="wq-p2">0122</span></p>
+														<div class="pl-clear"></div>
+														<p class="pl-name pl-date">本次参与了N人次</p>
+													</div>
+												</div>
+                                			 </div>
+                                			 <div class="wq-one">
+                                			<div class="media wq-two">
+										    	<p class="detail-price-p wq-p">第2期</p>
+										    </div>
+                 			   			    <div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\d38953fb-52e4-4857-8031-4083b4d76538.jpg" alt="">
+                            			            </a>
+                                			    </div>
+                                			    <div class="media-body">
+                                			        <p class="pl-name">王小二<span class="pl-date">(北京市)</span></p>
+                                			        <p class="pl-name-left pl-date">2016/10/02 21:11:23</p>
+                                			 		<div class="pl-clear"></div>
+                                			 		<p class="pl-name pl-date">参与了N人次</p>
+                                			    </div>
+                                			 </div>
+                                			 </div>
+                                			 											<div class="wq-one">
+                                			<div class="media wq-two">
+										    	<p class="detail-price-p wq-p">第1期</p>
+										    </div>
+                 			   			    <div class="media pinlun-one">
+                                			    <div class="media-left">
+                               				        <a href="#">
+                              			              <img class="media-object img-circle img-pinglun" 
+                              				              	src="\abs\img\2000.jpg" alt="">
+                            			            </a>
+                                			    </div>
+                                			    <div class="media-body">
+                                			        <p class="pl-name">王小二<span class="pl-date">(北京市)</span></p>
+                                			        <p class="pl-name-left pl-date">2016/10/02 21:11:23</p>
+                                			 		<div class="pl-clear"></div>
+                                			 		<p class="pl-name pl-date">参与了N人次</p>
+                                			    </div>
+                                			 </div>
+                                			 </div>
+										</div>
+									</div>
+								</div>
+							</div>
                     	</div>
                       </div>
                   </div>
@@ -214,7 +331,6 @@
                 <div class="col-md-8 col-sm-8 col-xs-8">
                     <button id="addCart_bt" class="btn btn-success a-btn" type="button">加入购物车</button>
                 </div>
-
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <button id="cart_bt" class="btn btn-info b-btn" type="button"><span class="glyphicon glyphicon-shopping-cart my-cart" aria-hidden="true"></span></button>
                     <span class="item-cartcount">3</span>

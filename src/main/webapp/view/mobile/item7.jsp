@@ -23,7 +23,7 @@
                     <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 col-head">
-                    <p class="row-head-text">商品详情</p>
+                    <p class="row-head-text">团购</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
                     <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
@@ -79,7 +79,6 @@
             	    <p class="detail-price-p">价格：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
             	</div>
             	<div class="col-md-4 col-sm-4 col-xs-4 detail-kucun">
-            		<p class="pl-date">库存:<span id="kucun">${result.mmPrice.shuliang}</span></p>
             	</div>
             </div>
             <c:choose>
@@ -140,20 +139,37 @@
                         </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 detail-xinghao">
-                	<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
                 </div>                
 
             </div>
+            <div class="row">
+            	<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="progress item_progress">
+  						<div class="progress-bar progress-bar-warning  progress-bar-striped active" 
+  							role="progressbar" aria-valuenow="${groupbyuInfo.groupbuyInfo.jindu}" 
+  							aria-valuemin="0" aria-valuemax="100" style="width: ${groupbyuInfo.groupbuyInfo.jindu}%;">
+  						</div>
+					</div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-6 col-sm-6 col-xs-6 detail-xinghao">
+            		<p class="item_huise">第${groupbyuInfo.groupbuyInfo.phase_num}期 总须${groupbyuInfo.groupbuyInfo.group_zongshu}人次</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 detail-shenyu">
+            		<p class="item_huise">剩余:<span style="color: #00bdec">${groupbyuInfo.groupbuyInfo.group_zongshu-groupbyuInfo.groupbuyInfo.maichu_shuliang}</span></p>
+                </div>
+            </div>
 <div class="row">
             <div class="tabbable tab-all" id="tabs-792036">
-                <ul class="nav nav-tabs " role="tablist">
-                    <li class="vt active">
+                <ul class="nav nav-tabs">
+                    <li class="active">
                         <a href="#panel-2" data-toggle="tab">商品详情</a>
                     </li>
-                    <li class="vt1">
+                    <li>
                         <a href="#panel-3" data-toggle="tab">参数</a>
                     </li>
-                    <li class="vt">
+                    <li >
                         <a href="#panel-1" data-toggle="tab">评价</a>
                     </li>
 
@@ -189,6 +205,7 @@
                     	<div class="tab-pane" id="panel-3">
                        		 <div class="container">
                        		 	<div class="row">
+
                        		 		<table>
                        		 		  <thead>
                        		 		  	<tr><td width="40%"></td><td></td></tr>

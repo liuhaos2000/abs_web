@@ -26,7 +26,7 @@
 		</div>
 		<div class="row clearfix">
 			<div class="col-md-12 column no-padding">
-				<div class="carousel slide " id="carousel-7342">
+				<div class="carousel slide pic_show" id="carousel-7342">
 					<ol class="carousel-indicators">
 					    <c:forEach items="${lblist}" var="tlunbo" varStatus="status">
 					    	<li data-slide-to="${status.index}" data-target="#carousel-7342"></li>
@@ -74,37 +74,32 @@
 								<h4 class="myh4">一元购</h4>
 							</div>
 						</div>
-						<div class="row clearfix home_item_div">
-                         	<div class="col-md-6 col-sm-6 col-xs-6 home_item_body">
-                           		<a href="#">
-                                	<img src="image/1.jpg">
-									<p class="home_item_name">碧欧全香水香水香水</p>
-									<p class="home_item_wcdo">完成度 60%</p>
-									<div class="progress home_progress">
-  										<div class="progress-bar progress-bar-warning progress-bar-striped active" 
-  										     role="progressbar" aria-valuenow="60" 
-  										     aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-  										</div>
-									</div>
-                            	</a>
-                         	</div>
-                         	<div class="col-md-6 col-sm-6 col-xs-6 home_item_body">
-                           		<a href="#">
-                                	<img src="image/1.jpg">
-									<p class="home_item_name">碧欧全香水香水香水</p>
-									<p class="home_item_wcdo">完成度 90%</p>
-									<div class="progress home_progress">
-  										<div class="progress-bar progress-bar-warning progress-bar-striped active" 
-  										     role="progressbar" aria-valuenow="90" aria-valuemin="0" 
-  										     aria-valuemax="100" style="width: 90%;">
-  										</div>
-									</div>
-                            	</a>
-                         	</div>
-					</div>
-
 						
-					</div>
+						<c:forEach items="${data['HDFLG_8']}" var="item" varStatus="status">
+                    		<c:if test="${status.index % 2 eq 0}">
+                    			<div class="row clearfix home_item_div">
+                    				<c:forEach items="${data['HDFLG_8']}" var="item_2" varStatus="status_2"
+                    							begin="${status.index}" end="${status.index + 1}">
+                         				<div class="col-md-6 col-sm-6 col-xs-6 home_item_body"  
+                         				     itemid="${item_2.item_id}"
+                         				     phaseNum="${item_2.phase_num}">
+                           					<a href="#">
+                                				<img src="${item_2.path}">
+												<p class="home_item_name">${item_2.item_name}</p>
+												<p class="home_item_wcdo">第${item_2.phase_num}期 完成度 ${item_2.jindu}%</p>
+												<div class="progress home_progress">
+  													<div class="progress-bar progress-bar-warning progress-bar-striped active" 
+  													     role="progressbar" aria-valuenow="${item_2.jindu}" 
+  													     aria-valuemin="0" aria-valuemax="100" style="width: ${item_2.jindu}%;">
+  													</div>
+												</div>
+                            				</a>
+                         				</div>
+                    				</c:forEach>
+                    			</div>
+							</c:if>
+						</c:forEach>
+				</div>
 					<!--一元购E-->
 					<!--热卖S-->
 					<div class="col-md-12 column">
@@ -164,7 +159,8 @@ $(document).ready(function() {
 	
 	    $("div[itemId]").bind("click",function(){
 	        window.location.href='<%=request.getContextPath() %>'+
-	        '/app/mobile/page/item?itemId='+$(this).attr("itemId"); 
+	        '/app/mobile/page/item?itemId='+$(this).attr("itemId")+
+	        '&phaseNum='+$(this).attr("phaseNum"); 
 	    });
 	    
 		$(".popupshadow").hideLoading();
@@ -174,38 +170,6 @@ $(document).ready(function() {
 			  effect:'fadeIn' 
 		});
 });
-function getLunboList() {
-    $.ajax({    
-        url:UrlConfig.getLunboList,// 跳转到 action    
-        data:{},    
-        type:'post',    
-        //cache:false,    
-        dataType:'json',    
-        success:function(result) {
-            if(result.successful == true ){
-                for (var i = 0; i < result.data.length; i++) {
-                    var lunbo = result.data[i];
-                    var link;
-                    if(lunbo.action=='#'||lunbo.action==''||lunbo.action==null){
-                        link='#';
-                    }else{
-                        link=UrlConfig.path+lunbo.action
-                    }
-                    $("#owl-demo1").append('<div class="item"><a href="'+link+'"><img src="'+lunbo.imgPath +'" class="img-responsive img-lunbo"></a></div>');
-                }
-                $("#owl-demo1").owlCarousel({
-                    items: 1,
-                    loop: true,
-                    margin: 10,
-                    smartSpeed: 450,
-                    autoplay: true,
-                    autoplayTimeout: 4000,
-                });
-            }else{
-            }
-         }
-    }); 
-}
 	</script>
 </body>
 </html>

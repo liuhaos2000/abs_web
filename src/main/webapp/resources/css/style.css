@@ -17,6 +17,14 @@ img{
 .no-padding-left{
 	padding-left:0;
 }
+.vt{
+	width: 33%;
+	text-align: center;
+}
+.vt1{
+	width: 34%;
+	text-align: center;
+}
 /*  主页部 */
 .home_groupheade{
 	border-top:2px solid #ebebef;
@@ -67,7 +75,7 @@ img{
 }
 .home_item_div .home_item_wcdo{
 	font-family:'SimHei',sans-serif;
-	color:#ab9a9a;
+	color:#a3a3a3;
 	font-size:0.8em;
 	margin:0 0 0;
 	padding-left:10px;
@@ -80,6 +88,10 @@ img{
 }
 .home_progress{
 	margin:0 10px 0 10px;
+	height:6px;
+}
+.item_progress{
+	margin:0 0 0 -3px;
 	height:6px;
 }
 /* 头部部分 比较多页面会使用到 */
@@ -191,9 +203,11 @@ img{
 .pic_show2{
 	height: 240px;
 }
-.pic_show .item img{
+.pic_show img{
 	margin:0 auto;
-	width:auto;
+	width:100%;
+	height:100%;
+	max-height: 200px;
 }
 
 /* 品牌 按分类的*/
@@ -907,21 +921,29 @@ img{
 	margin: 10px 10px 10px 0px ;
 	width:90%;
 }
-
+/* 商品详情*/
 .detail-name{
 }
+
 .detail-name .detail-name-p{
 	font-family:'SimHei',sans-serif;
 	color:#000000;
 	font-size:1.5em;
 	padding:3px 0px 3px 10px;
-	border-top: 3px solid #00bdec;
+	border-top: 2px solid #00bdec;
 	margin-bottom: 0;
 }
-.detail-price{
-	padding:3px 0px 3px 10px;
+.tab-all{
+	border-top: 2px solid #00bdec;
+	background-color: #FFFFFF
 }
-.detail-price .detail-price-p{
+.tab-one{
+	margin: 5px 0px 5px 0px;
+}
+.detail-price{
+	padding:3px 10px 3px 10px;
+}
+.detail-price-p{
 	font-family:'SimHei',sans-serif;
 	color:#ff4444;
 	font-size:1.3em;
@@ -936,23 +958,50 @@ img{
 .detail-xinghao{
 	padding:7px 0px 3px 10px;
 }
+.item_huise{
+	font-family:'SimHei',sans-serif;
+	color:#a3a3a3;
+	font-size:0.9em;
+	margin:0 0 0;
+}
+.detail-shenyu{
+	text-align:right;
+	padding:7px 15px 3px 0px;
+}
 .detail-xinghao-bt{
 	margin-left:6px !important;
 	margin-top:5px !important;
 }
-.tab-all{
-	border-top: 3px solid #00bdec;
-	background-color: #FFFFFF
-}
+
 .img-pinglun{
 	display: inline;
 	width: 50px;
 	height: 50px;
 }
 .pinlun-one{
-	padding-top: 10px;
+	padding: 8px 0 8px 15px;
 	border-bottom: 1px solid #e5e5e5;
 	margin-top:0;
+}
+.wq-one{
+	border-bottom: 3px solid #e5e5e5;
+}
+.wq-two{
+	padding: 2px 0 2px 15px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-top:0;
+}
+.wq-p{
+	border-left: 5px solid #129bf0;
+	padding-left: 8px;
+	font-family:'SimHei',sans-serif;
+	color:#129bf0;
+	font-size:1.3em;
+	margin: 0 0 0 !important;
+}
+.wq-p2{
+	font-family:'SimHei',sans-serif;
+	color:#ff4444;
 }
 .pl-name{
 	float:left;
@@ -960,6 +1009,16 @@ img{
 	color:#000000;
 	padding:0 0 3px 10px;
 	margin-bottom: 0;
+}
+.pl-name-left{
+	float:right;
+	font-family:'SimHei',sans-serif;
+	color:#000000;
+	padding:0 0 3px 10px;
+	margin-bottom: 0;
+}
+.pl-clear{
+	clear:both;
 }
 .pl-neirong{
 	clear:both;

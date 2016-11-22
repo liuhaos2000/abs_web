@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TGroupbuyMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TGroupbuy" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="phase_num" property="phaseNum" jdbcType="INTEGER" />
+    <result column="group_zongshu" property="groupZongshu" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="zhongjiang_que" property="zhongjiangQue" jdbcType="INTEGER" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, phase_num, group_zongshu, status, open_id, zhongjiang_que, del_flg, c_date, 
+    c_user, u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TGroupbuyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_groupbuy
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and phase_num = #{phaseNum,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TGroupbuyKey" >
+    delete from t_groupbuy
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and phase_num = #{phaseNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TGroupbuy" >
+    insert into t_groupbuy (item_id, phase_num, group_zongshu, 
+      status, open_id, zhongjiang_que, 
+      del_flg, c_date, c_user, 
+      u_date, u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{phaseNum,jdbcType=INTEGER}, #{groupZongshu,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{zhongjiangQue,jdbcType=INTEGER}, 
+      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
+      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TGroupbuy" >
+    insert into t_groupbuy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="phaseNum != null" >
+        phase_num,
+      </if>
+      <if test="groupZongshu != null" >
+        group_zongshu,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="zhongjiangQue != null" >
+        zhongjiang_que,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="phaseNum != null" >
+        #{phaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupZongshu != null" >
+        #{groupZongshu,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongjiangQue != null" >
+        #{zhongjiangQue,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TGroupbuy" >
+    update t_groupbuy
+    <set >
+      <if test="groupZongshu != null" >
+        group_zongshu = #{groupZongshu,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongjiangQue != null" >
+        zhongjiang_que = #{zhongjiangQue,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and phase_num = #{phaseNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TGroupbuy" >
+    update t_groupbuy
+    set group_zongshu = #{groupZongshu,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      zhongjiang_que = #{zhongjiangQue,jdbcType=INTEGER},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and phase_num = #{phaseNum,jdbcType=INTEGER}
+  </update>
+  <!-- 取得详细信息 -->
+  <select id="getGroupbuyInfo" resultType="map">
+        SELECT
+        	t51.item_id,
+        	t51.phase_num,
+        	t51.group_zongshu,
+        	t51.STATUS,
+        	t51.open_id,
+        	count(1) AS maichu_shuliang,
+        	truncate(ifnull(count(1),0)/t51.group_zongshu*100,0) as jindu
+        FROM
+        	t_groupbuy t51,
+        	t_groupbuy_detail t52
+        WHERE
+        	t51.item_id = t52.item_id
+        AND t51.phase_num = t52.phase_num
+        AND t52.order_id IS NOT NULL
+        AND t52.order_id != ''
+        AND t51.item_id = #{param1}
+        AND t51.phase_num = #{param2}
+        GROUP BY
+        	t51.item_id,
+        	t51.phase_num
+  </select>
+  
+  
+</mapper>

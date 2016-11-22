@@ -12,6 +12,7 @@ import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,7 @@ import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.HuiyuanService;
+import com.abs.mobile.service.ItemGroupBuyService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.OrderService;
@@ -40,6 +42,8 @@ public class MobilePageController {
     private ItemListService itemListService;
     @Resource
     private ItemService itemService;
+    @Resource
+    private ItemGroupBuyService itemGroupBuyService;
     @Resource
     private CartService cartService;
     @Resource
@@ -152,9 +156,10 @@ public class MobilePageController {
     
     // item
     @RequestMapping("/item")
-    public String toItem(String itemId,ModelMap map) {
+    public String toItem(String itemId,String phaseNum,ModelMap map) {
         
         Map<String, Object> resultMap =  itemService.getItem(itemId);
+        
         if(resultMap==null){
         	map.put("resultFlg", false);
         	map.put("resultMessage", "该产品已经下架！");
@@ -162,6 +167,19 @@ public class MobilePageController {
         map.put("resultFlg", true);
         map.put("result", resultMap);  
         
+        //如果是团购，取得团购信息
+        if(!StringUtils.isEmpty(phaseNum)&&!"undefined".equals(phaseNum)){
+            String hdFlg = itemGroupBuyService.checkGryupbuyItem(itemId, phaseNum);
+            if(hdFlg!=null){
+            	Map<String, Object> groupbyuInfo=itemGroupBuyService.getItemGryupbuyInfo(itemId, phaseNum);
+            	map.put("groupbyuInfo", groupbyuInfo); 
+            	if("7".equals(hdFlg)){
+                    return "mobile/item7";
+            	}else if("8".equals(hdFlg)){
+                    return "mobile/item8";
+            	}
+            }
+        }
         return "mobile/item";
     }
 

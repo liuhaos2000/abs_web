@@ -17,11 +17,11 @@
 	<header>
 		<div class="container">
 			<div class="row index-row-head">
-				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
 						<a href="<%=request.getContextPath() %>">
 						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/novo_logo.png"></a>
 				</div>
-				<div class="col-md-10 col-sm-10 col-xs-9 no-padding-left">
+				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
 					<div class="input-group index-col-head">
 						<input type="text" id="searchparm" name="searchparm" class="form-control">
 						<span class="input-group-btn">
