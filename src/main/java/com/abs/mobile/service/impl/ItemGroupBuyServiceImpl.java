@@ -1,12 +1,14 @@
 package com.abs.mobile.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.abs.mobile.dao.TGroupbuyJiangMapper;
 import com.abs.mobile.dao.TGroupbuyMapper;
 import com.abs.mobile.dao.TItemDetailMapper;
 import com.abs.mobile.domain.TGroupbuy;
@@ -22,6 +24,9 @@ public class ItemGroupBuyServiceImpl implements ItemGroupBuyService {
 	private TItemDetailMapper tItemDetailMapper;
 	@Resource
 	private TGroupbuyMapper tGroupbuyMapper;
+	@Resource
+	private TGroupbuyJiangMapper tGroupbuyJiangMapper;
+	
 
 	@Override
 	public String checkGryupbuyItem(String itemId, String phaseNum) {
@@ -53,6 +58,16 @@ public class ItemGroupBuyServiceImpl implements ItemGroupBuyService {
 		
 		Map<String,String> groupbuyInfo = tGroupbuyMapper.getGroupbuyInfo(itemId, phaseNum);
 		resultMap.put("groupbuyInfo", groupbuyInfo);
+		
+		//获取对将信息
+		List<Map<String, String>> duijiangInfo = tGroupbuyJiangMapper.getYYGouDuijiangInfo();
+		resultMap.put("duijiangInfo", duijiangInfo);
+		
+		//获取参与记录
+		
+		
+		//获取往期信息
+		
 		
 		return resultMap;
 	}

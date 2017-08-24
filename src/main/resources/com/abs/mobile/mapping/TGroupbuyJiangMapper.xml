@@ -209,4 +209,14 @@
       and phase_num = #{phaseNum,jdbcType=INTEGER}
       and kaijiang_que = #{kaijiangQue,jdbcType=INTEGER}
   </update>
+  
+  <select id="getYYGouDuijiangInfo" resultType="map">
+  	  select 
+        <include refid="Base_Column_List" />
+      from t_groupbuy_jiang
+        where item_id = #{itemId,jdbcType=INTEGER}
+          and phase_num = #{phaseNum,jdbcType=INTEGER}
+  </select>
+  
+  
 </mapper>

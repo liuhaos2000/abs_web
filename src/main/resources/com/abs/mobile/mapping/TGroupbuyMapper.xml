@@ -169,6 +169,7 @@
         	t51.group_zongshu,
         	t51.STATUS,
         	t51.open_id,
+        	t51.zhongjiang_que,
         	count(1) AS maichu_shuliang,
         	truncate(ifnull(count(1),0)/t51.group_zongshu*100,0) as jindu
         FROM
