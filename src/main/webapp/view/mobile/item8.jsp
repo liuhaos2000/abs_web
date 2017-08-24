@@ -193,7 +193,7 @@
 								<p>2016年8月13日，NBA火箭VS灰熊，灰熊队得得分{1}，个位数{2}，为本次中奖号码的个位数{3}。</p>
 							</div>
 							<div class="alert alert-warning tab-one" role="alert">
-								<p class="detail-price-p">个位位数号码：待揭晓</p>
+								<p class="detail-price-p">中奖号码：待揭晓</p>
 								<p>中奖会员：待揭晓</p>
 							</div>
 						</div>
