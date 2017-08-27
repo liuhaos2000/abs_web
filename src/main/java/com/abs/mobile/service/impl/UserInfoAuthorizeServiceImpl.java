@@ -32,7 +32,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	 */
 	@Override
 	@Transactional
-	public void executeGetUserInfo(String code) {
+	public void executeGetUserInfo(String code,String state) {
 
 		// 取得OpenId
 		OpenId openId = WeiXinIFUtil.getOpenId(code);
@@ -53,7 +53,14 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setuUser("GETUSER");
 			//用户等级,新规的时候
 			tUser.setLever("99");
-			tUser.setParent("");
+			String parent= getJiexiCanshu(state);
+			if(StringUtils.isNotEmpty(parent)){
+				tUser.setParent(parent);
+			}else{
+				tUser.setParent("MASTER");
+			}
+			
+
 			// 插入数据库
 			tUserMapper.insert(tUser);
         } else {
@@ -133,7 +140,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setuUser("GUANZHU");
 			//用户等级,新规的时候
 			tUser.setLever("99");
-			tUser.setParent("");
+			tUser.setParent("MASTER");
 			// 插入数据库
 			tUserMapper.insert(tUser);
 		} else {
@@ -156,4 +163,16 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 
 	}
 
+	private String getJiexiCanshu(String state){
+		String[] parms = state.split("&");
+		for (String  parm: parms) {
+			if(StringUtils.isNotEmpty(parm)){
+				String[] str = parm.split("=");
+				if("parent".equals(str[0])){
+					return str[1];
+				}
+			}
+		}
+		return null;
+	}
 }

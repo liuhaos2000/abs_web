@@ -36,7 +36,7 @@ public class UserInfoAuthorizeController {
             e.printStackTrace();
         }
 	
-        userInfoAuthorizeService.executeGetUserInfo(code);
+        userInfoAuthorizeService.executeGetUserInfo(code,state);
         
 		return "redirect:" + state;
 	}
