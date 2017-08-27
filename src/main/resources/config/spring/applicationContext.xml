@@ -36,7 +36,7 @@
 	
 	<!-- 拦截器,session check -->
 	<mvc:interceptors>
-		<bean class="org.buzheng.demo.esm.web.interceptor.SessionInterceptor" />
+		<bean class="com.abs.mobile.interceptor.SessionInterceptor" />
 	</mvc:interceptors>
 	
 	

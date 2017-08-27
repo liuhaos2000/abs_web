@@ -51,6 +51,9 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setcUser("GETUSER");
 			tUser.setuDate(date);
 			tUser.setuUser("GETUSER");
+			//用户等级,新规的时候
+			tUser.setLever("99");
+			tUser.setParent("");
 			// 插入数据库
 			tUserMapper.insert(tUser);
         } else {
@@ -128,6 +131,9 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setcUser("GUANZHU");
 			tUser.setuDate(date);
 			tUser.setuUser("GUANZHU");
+			//用户等级,新规的时候
+			tUser.setLever("99");
+			tUser.setParent("");
 			// 插入数据库
 			tUserMapper.insert(tUser);
 		} else {

@@ -168,18 +168,18 @@ public class MobilePageController {
         map.put("result", resultMap);  
         
         //如果是团购，取得团购信息
-        if(!StringUtils.isEmpty(phaseNum)&&!"undefined".equals(phaseNum)){
-            String hdFlg = itemGroupBuyService.checkGryupbuyItem(itemId, phaseNum);
-            if(hdFlg!=null){
-            	Map<String, Object> groupbyuInfo=itemGroupBuyService.getItemGryupbuyInfo(itemId, phaseNum);
-            	map.put("groupbyuInfo", groupbyuInfo); 
-            	if("7".equals(hdFlg)){
-                    return "mobile/item7";
-            	}else if("8".equals(hdFlg)){
-                    return "mobile/item8";
-            	}
-            }
-        }
+//        if(!StringUtils.isEmpty(phaseNum)&&!"undefined".equals(phaseNum)){
+//            String hdFlg = itemGroupBuyService.checkGryupbuyItem(itemId, phaseNum);
+//            if(hdFlg!=null){
+//            	Map<String, Object> groupbyuInfo=itemGroupBuyService.getItemGryupbuyInfo(itemId, phaseNum);
+//            	map.put("groupbyuInfo", groupbyuInfo); 
+//            	if("7".equals(hdFlg)){
+//                    return "mobile/item7";
+//            	}else if("8".equals(hdFlg)){
+//                    return "mobile/item8";
+//            	}
+//            }
+//        }
         return "mobile/item";
     }
 
