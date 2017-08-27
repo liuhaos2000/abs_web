@@ -44,23 +44,18 @@
 	<footer>
 		<div class="container footer">
 			<div class="row">
-				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
+				<div class="col-md-4 col-sm-4 col-xs-4 footer-block">
 					<a href="#" class="active" id="home-bt">
                         <p class="footer_index">首页</p>
 					</a>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
-					<a href="#" id="type-bt">
-                        <p class="footer_huodong">分类</p>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
+				<div class="col-md-4 col-sm-4 col-xs-4 footer-block">
 					<a href="#" id="cart-bt">
                         <p class="footer_pinpai">购物车</p>
 					</a>
-					<span class="cartcount">3</span>
+					<span class="cartcount">90</span>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 footer-block">
+				<div class="col-md-4 col-sm-4 col-xs-4 footer-block">
 					<a href="#" id="huiyuan-bt">
                         <p class="footer_huiyuan">会员</p>
 					</a>

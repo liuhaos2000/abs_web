@@ -67,7 +67,7 @@
 		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<div class="row clearfix">
-					<!--一元购S-->
+					<!--一元购S
 					<div class="col-md-12 column">
 						<div class="row clearfix home_groupheade">
 							<div class="col-md-12 column home_grouphead_col">
@@ -100,12 +100,12 @@
 							</c:if>
 						</c:forEach>
 				</div>
-					<!--一元购E-->
+					一元购E-->
 					<!--热卖S-->
 					<div class="col-md-12 column">
 						<div class="row clearfix home_groupheade">
 							<div class="col-md-12 column home_grouphead_col">
-								<h4 class="myh4">热卖商品</h4>
+								<h4 class="myh4">我的商品</h4>
 							</div>
 						</div>
 						

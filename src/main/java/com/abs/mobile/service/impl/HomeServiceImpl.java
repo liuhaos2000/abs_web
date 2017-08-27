@@ -37,12 +37,12 @@ public class HomeServiceImpl implements HomeService {
         Map<String, Object> group = new HashMap<String, Object>();
         
         List<Map<String, String>> itemList5 = tItemMapper.getItemTejia();
-        List<Map<String, String>> itemList7 = tItemMapper.getItemTungou();
-        List<Map<String, String>> itemList8 = tItemMapper.getItemYiyuangou();
+        //List<Map<String, String>> itemList7 = tItemMapper.getItemTungou();
+        //List<Map<String, String>> itemList8 = tItemMapper.getItemYiyuangou();
         
         group.put("HDFLG_5", itemList5);
-        group.put("HDFLG_7", itemList7);
-        group.put("HDFLG_8", itemList8);
+        //group.put("HDFLG_7", itemList7);
+        //group.put("HDFLG_8", itemList8);
         
         return group;
     }
