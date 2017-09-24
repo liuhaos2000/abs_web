@@ -28,7 +28,7 @@ import com.abs.weixin.utils.WeixinConst;
 
 /**
  * 认证用户信息取得
- * 
+ * >>没用了
  * @author Liu
  * @date 2014/04/14
  */

@@ -21,7 +21,7 @@ import net.sf.json.JSONObject;
 
 /**
  * 测试用
- * 
+ * >>没用了
  * @author Liu
  * @date 2014/04/14
  */

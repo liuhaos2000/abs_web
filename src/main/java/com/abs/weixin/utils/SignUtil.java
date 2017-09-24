@@ -12,7 +12,6 @@ import java.util.Arrays;
  */
 public class SignUtil {
 	// ��ӿ�������Ϣ�е�TokenҪһ��
-	private static String token = "abs_web_ruihegouwu";
 
 	/**
 	 * ��֤ǩ��
@@ -23,7 +22,7 @@ public class SignUtil {
 	 * @return
 	 */
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
-		String[] arr = new String[] { token, timestamp, nonce };
+		String[] arr = new String[] { WeixinConst.TOKEN, timestamp, nonce };
 		// ��token��timestamp��nonce�����������ֵ�������
 		Arrays.sort(arr);
 		StringBuilder content = new StringBuilder();

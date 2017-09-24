@@ -30,7 +30,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		uri = uri.replaceFirst(request.getContextPath(), "");
 
 		if (! uri.startsWith("/app/mobile/")) {
-			return true;
+			return true;  
 		}
 		
 		// 用户验证时放行

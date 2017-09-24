@@ -8,11 +8,11 @@ package com.abs.weixin.utils;
  */
 public class WeixinConst {
 
-	public static final String TOKEN = "abs_web_ruihegouwu";
+	public static final String TOKEN= "abs_web_yuedongkeji";
 
-	public static final String APPID = "wx9e5e703df0bcd7c7";
+	public static final String APPID = "wxe6f7ad732dcc0e34";
 
-	public static final String APPSECRET = "562cbd9ff4298c150b78da63e34a2d89";
+	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
 
 	public static final String SEVERPATH = "http://ruihegouwu.cn/";
 	//public static final String SEVERPATH = "http://qbctest.wicp.net/";
