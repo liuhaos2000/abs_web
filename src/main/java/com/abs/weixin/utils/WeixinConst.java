@@ -14,17 +14,19 @@ public class WeixinConst {
 
 	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
 
-	public static final String SEVERPATH = "http://ruihegouwu.cn/";
-	//public static final String SEVERPATH = "http://qbctest.wicp.net/";
+	//public static final String SEVERPATH = "http://ruihegouwu.cn/";
+	public static final String SEVERPATH = "http://abstest.51vip.biz/";
 
 	public static String AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 	// 统一下单
+	//public static String UNIFIEDORDER="https://api.mch.weixin.qq.com/pay/unifiedorder";
+	//sandboxnew
 	public static String UNIFIEDORDER="https://api.mch.weixin.qq.com/pay/unifiedorder";
 	
-	// 受理商ID，身份标识
-	public static String MCHID = "1261114101";
+	// 微信支付商户号    受理商ID，身份标识
+	public static String MCHID = "1489164292";
 	// 商户支付密钥Key。审核通过后，在微信发送的邮件中查看
-	public static String KEY = "zaq12wsxzaq12wsxzaq12wsxzaq12wsx";
+	public static String KEY = "liuhaos2000liuhaos2000liuhaos200";
 	// 异步回调地址
 	public static String NOTIFY_URL = SEVERPATH+"abs_web/paynotify";
 	

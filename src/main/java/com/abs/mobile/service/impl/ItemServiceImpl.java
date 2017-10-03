@@ -72,12 +72,12 @@ public class ItemServiceImpl implements ItemService {
 		resultMap.put("yanse", yanse);
 		
 		// 取得评价信息
-		PageInfo pageInfo = new PageInfo(0, 10, "pingjia_date desc");
-		Page<Map<String,String>> page = tItemPingjiaMapper.getPingjia(itemId, pageInfo);
-		List<Map<String,String>> TItemPingjia = page.getContent();
-		Long pingjiaTotle = page.getTotalElements();
-		resultMap.put("TItemPingjia", TItemPingjia);
-		resultMap.put("pingjiaTotle", pingjiaTotle);
+//		PageInfo pageInfo = new PageInfo(0, 10, "pingjia_date desc");
+//		Page<Map<String,String>> page = tItemPingjiaMapper.getPingjia(itemId, pageInfo);
+//		List<Map<String,String>> TItemPingjia = page.getContent();
+//		Long pingjiaTotle = page.getTotalElements();
+//		resultMap.put("TItemPingjia", TItemPingjia);
+//		resultMap.put("pingjiaTotle", pingjiaTotle);
 
 		// List<TItemPingjia> list= tItemPingjiaMapper.getPingjia(itemId);
 		// 销量信息

@@ -76,10 +76,9 @@
             </div>
             <div class="row detail-price">
             	<div class="col-md-8 col-sm-8 col-xs-8 detail-price-col">
-            	    <p class="detail-price-p">价格：<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
+            	    <p class="detail-price-p">价格：￥<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
             	</div>
             	<div class="col-md-4 col-sm-4 col-xs-4 detail-kucun">
-            		<p class="pl-date">库存:<span id="kucun">${result.mmPrice.shuliang}</span></p>
             	</div>
             </div>
             <c:choose>
@@ -153,12 +152,14 @@
                     <li class="vt1">
                         <a href="#panel-3" data-toggle="tab">参数</a>
                     </li>
+                    <!--
                     <li class="vt">
                         <a href="#panel-1" data-toggle="tab">评价</a>
                     </li>
-
+                    -->
                 </ul>
                 <div class="tab-content">
+                <!--
                     <div class="tab-pane " id="panel-1">
                     		<c:forEach items="${result.TItemPingjia}" var="pj">
                     		     <div class="media pinlun-one">
@@ -181,6 +182,7 @@
                                  </div>
                     		</c:forEach>
                          </div>
+                    -->
                          <div class="tab-pane active" id="panel-2">
                        		 <div class="text-edit">
                        		 		${result.item.fu_text}
@@ -191,12 +193,15 @@
                        		 	<div class="row">
                        		 		<table>
                        		 		  <thead>
-                       		 		  	<tr><td width="40%"></td><td></td></tr>
+                       		 		  	<tr>
+                       		 		  	  <td width="200"></td>
+                       		 		  	  <td width="400"></td>
+                       		 		  	</tr>
                        		 		  </thead>
                        		 		  <c:forEach items="${result.itemParm}" var="pm">
                        		 			<tr>
-                       		 				<td valign="top">${pm.key}:</td>
-                       		 				<td>${pm.value}</td>
+                       		 				<td class="tb-left">${pm.key}:</td>
+                       		 				<td class="tb-right">${pm.value}</td>
                        		 			</tr>
                        		 		  </c:forEach>
                        		 		</table>

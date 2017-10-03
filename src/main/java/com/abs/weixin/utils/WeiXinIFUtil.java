@@ -54,7 +54,7 @@ public class WeiXinIFUtil {
 
 	// 获取UserInfo
 	public static String user_info_url =
-	    "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID";
+	    "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
     // 删除菜单
     public static String menu_del_url =
         "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";

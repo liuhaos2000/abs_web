@@ -32,7 +32,7 @@
         </div>
     </header>
 
-	<div id="main_div">
+	<div id="main_div" class="maindiv">
 	    <c:forEach items="${result.orderList}" var="item" varStatus="status">
           <div class="container order-group">
             <div class="row order-num">
@@ -156,12 +156,8 @@ function doPay(orderId){
                                             alert("支付失败!");  
                                         }
                                         // 刷新
-                                        //window.location.href='<%=request.getContextPath() %>/app/mobile/page/myorder'; 
-                                        // 跳转Index,并且加载会员页面
-                                        window.location.href='<%=request.getContextPath() %>'+
-                                        '/app/mobile/page/index?'+
-                                        'loadId=huiyuan',+
-                                        'orderId='+orderId; 
+                                   	 window.location.href='<%=request.getContextPath() %>'+
+                        	         '/app/mobile/page/myorder'; 
                                     });
             }else{
                 myalert(result.msg,'main_div');

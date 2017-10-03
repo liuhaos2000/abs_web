@@ -2,6 +2,7 @@ package com.abs.mobile.interceptor;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,28 +33,49 @@ public class SessionInterceptor implements HandlerInterceptor {
 		if (! uri.startsWith("/app/mobile/")) {
 			return true;  
 		}
+
 		
 		// 用户验证时放行
 		if (uri.startsWith("/app/mobile/authorize/")) {
 			return true;
 		}
+		
+		//=================check start===========================
+//		String sessionUri=(String)request.getSession().getAttribute("URI");
+//		Date sessionDate=(Date)request.getSession().getAttribute("TIMEST");
+//		if(sessionUri!=null && sessionDate!=null){
+//			Date sysDate=new Date();
+//			long cha=sysDate.getTime()-sessionDate.getTime();
+//			//重複請求
+//			if(sessionUri.equals(uri)&&cha<2000){
+//				
+//				return true;
+//			}
+//		} 
+//		request.getSession().setAttribute("URI", uri);
+//		request.getSession().setAttribute("TIMEST", new Date());
+ 
+		//==================check end  ==========================
+		System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB： "+ request.getRemoteAddr()+ uri);
 		// 测试 
 		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
 			// 未登录
-		    HttpSession session = request.getSession();
+		    HttpSession session = request.getSession(); 
 		    
 		    TUser user = new TUser();
-		    user.setOpenId("o2otnwBhGfsMWTKeOyB5uA9zf9xA");
+		    user.setOpenId("oWQDLwyAbu_D2mu05eCLf7Ec4Ctc");
 		    user.setNickname("胖子牛");
 		    user.setJifen(23); 
 		    session.setAttribute(AbsConst.LOGIN_USER, user);
 		} 
+
 		// 运行
 		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
 			// 未登录
 			
 			String redirecturi = WeixinConst.SEVERPATH + "abs_web/app/mobile/authorize/base";
-	        // 参数
+			redirecturi=URLEncoder.encode(redirecturi, "UTF-8");
+	        // 参数 
 			//String url = request.getServletPath();
 	        String state = null;
 	        String queryString = request.getQueryString();
@@ -74,6 +96,7 @@ public class SessionInterceptor implements HandlerInterceptor {
                     .replace("REDIRECT_URI", redirecturi)
                     .replace("STATE", state);
             response.sendRedirect(rurl);
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             return false;
 
 		}

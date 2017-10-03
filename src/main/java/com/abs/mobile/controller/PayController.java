@@ -51,7 +51,7 @@ public class PayController {
     	packageParams.put("body", "雅斯兰黛");
     	packageParams.put("out_trade_no", "201508220000003");
     	packageParams.put("total_fee", "100");
-    	packageParams.put("spbill_create_ip", "192.168.1.1");
+    	packageParams.put("spbill_create_ip", "112.74.170.217");
     	packageParams.put("spbill_create_ip", result.getRemoteAddr());
     	packageParams.put("notify_url", WeixinConst.NOTIFY_URL);
     	packageParams.put("trade_type", "JSAPI");
@@ -71,7 +71,7 @@ public class PayController {
     	payParm.setOut_trade_no("201508220000003");
     	payParm.setTotal_fee("100");
 
-    	payParm.setSpbill_create_ip("192.168.1.1");
+    	payParm.setSpbill_create_ip("112.74.170.217");
     	payParm.setSpbill_create_ip(result.getRemoteAddr());
     	payParm.setNotify_url(WeixinConst.NOTIFY_URL);
     	payParm.setTrade_type("JSAPI");

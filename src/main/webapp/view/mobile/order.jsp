@@ -273,7 +273,7 @@
                                
                                    	    <div class="row order-item-food">
                                         	<div class="col-md-6 col-sm-6 col-xs-6">
-                                        		<p class="order-ad-right p-no-bottom">从${ownerItemMap.fromArea}发往${ownerItemMap.toArea}</p>
+                                        		<p class="order-ad-right p-no-bottom" style="display: none;">从${ownerItemMap.fromArea}发往${ownerItemMap.toArea}</p>
                                         	</div>
                                         	<div class="col-md-6 col-sm-6 col-xs-6">
                                         		<p class="order-ad-right p-no-bottom">邮费：￥${ownerItemMap.fromToYoufei}</p>
@@ -317,18 +317,16 @@
                         <div class="accordion-group">
                             <div class="accordion-heading">
                                 <div class="row order-totle-row">
-                                    <div class="col-md-1 col-sm-1 col-xs-1"></div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <p class="p-no-bottom order-ad-left">商品总价：</p>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2"><span id="itemTotal">100.00</span></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">￥<span id="itemTotal">100.00</span></div>
                                 </div>
                                 <div class="row  order-totle-row">
-                                    <div class="col-md-1 col-sm-1 col-xs-1"></div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                        <p class="p-no-bottom order-ad-left">运费总价：</p>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2"><span id="yunfeiTotal">100.00</span></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">￥<span id="yunfeiTotal">100.00</span></div>
                                 </div>
                             </div>
                         </div>
@@ -346,7 +344,7 @@
         <div class="container footer itme_detail_top">
             <div class="row footer-row">
                 <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-                    <p class="foot-text">总价：<span id="total">0</span>元</p>
+                    <p class="foot-text">总价：￥<span id="total">0</span>元</p>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
                     <button id="zhifu_bt" class="btn btn-success a-btn" type="button">支付</button>
@@ -670,10 +668,8 @@ function dosubmit(){
 	    				  					alert("支付失败!");  
 	    				  		  		}
                                         // 跳转Index,并且加载会员页面
-                                        window.location.href='<%=request.getContextPath() %>'+
-                                        '/app/mobile/page/index?'+
-                                        'loadId=huiyuan',+
-                                        'orderId='+result.data.orderId; 
+	    			                	 window.location.href='<%=request.getContextPath() %>'+
+	    			        	         '/app/mobile/page/myorder'; 
 	    			  				});
             }else{
                 myalert(result.msg,'main_div');

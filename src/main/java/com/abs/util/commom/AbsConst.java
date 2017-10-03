@@ -7,7 +7,9 @@ public class AbsConst {
 
     public static String access_token = "";
     public static String jsapi_ticket = "";
-
+    //缓存
+    public static Object HOME_ITEM_LIST = null;
+    public static Object LUNBO_LIST = null;
     // public static final String TOKEN = "abs_web_ruihegouwu";
 
     // public static final String APPID = "wx9c7713176c68cf82";

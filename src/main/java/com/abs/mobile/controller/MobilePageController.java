@@ -28,6 +28,7 @@ import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.TypeService;
 import com.abs.mobile.service.UserAdderssService;
+import com.abs.util.commom.AbsConst;
 import com.abs.util.commom.AbsTool;
 
 @Controller
@@ -65,8 +66,27 @@ public class MobilePageController {
     // home
     @RequestMapping("/home")
     public String toHome(ModelMap map) {
-    	Map<String, Object> resultmap = homeService.getItem();
-    	List<TIndexLunbo> LunboList= homeService.getLunBoList();
+    	
+    	//====性能提高 Start====
+    	Map<String, Object> resultmap=null;
+    	List<TIndexLunbo> LunboList=null;
+    	if(AbsConst.HOME_ITEM_LIST==null){
+        	resultmap = homeService.getItem();
+        	AbsConst.HOME_ITEM_LIST=resultmap;
+        	System.out.println("1111");
+    	}else{
+    		resultmap=(Map<String, Object>)AbsConst.HOME_ITEM_LIST;
+    		System.out.println("2222");
+    	}
+    	if(AbsConst.LUNBO_LIST==null){
+        	LunboList= homeService.getLunBoList();
+        	AbsConst.LUNBO_LIST=LunboList;
+        	System.out.println("3333");
+    	}else{
+    		LunboList=(List<TIndexLunbo>)AbsConst.LUNBO_LIST;
+    		System.out.println("4444");
+    	}
+    	//====性能提高 End====
         map.put("data", resultmap);
         map.put("lblist", LunboList);
         return "mobile/home";

@@ -90,7 +90,7 @@
 		<div class="container footer itme_detail_top">
 			<div class="row footer-row">
 				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-					<p class="foot-text">总价：<span id="total">210</span>元</p>
+					<p class="foot-text">总价：￥<span id="total">210</span>元</p>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
 					<button id="jiesuan_bt" class="btn btn-success a-btn" type="button">结算</button>

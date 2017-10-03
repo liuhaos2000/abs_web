@@ -92,10 +92,8 @@ var UrlConfig = {
                  }); 
                  $("#huiyuan-bt").click(function(){
                 	 showLoding();
-                     $('#main_div').load('<%=request.getContextPath() %>' +
-                             '/app/mobile/page/huiyuan',{},loadback()); 
-                     $('.footer-block a').removeClass("active");
-                     $(this).addClass("active");
+                	 window.location.href='<%=request.getContextPath() %>'+
+        	         '/app/mobile/page/myorder'; 
                  }); 
                  $("#cart-bt").click(function(){
                 	 showLoding();
