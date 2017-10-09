@@ -56,18 +56,18 @@ public class SessionInterceptor implements HandlerInterceptor {
 //		request.getSession().setAttribute("TIMEST", new Date());
  
 		//==================check end  ==========================
-		System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB： "+ request.getRemoteAddr()+ uri);
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB： "+ request.getRemoteAddr()+ uri);
 		// 测试 
-		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
-			// 未登录
-		    HttpSession session = request.getSession(); 
-		    
-		    TUser user = new TUser();
-		    user.setOpenId("oWQDLwyAbu_D2mu05eCLf7Ec4Ctc");
-		    user.setNickname("胖子牛");
-		    user.setJifen(23); 
-		    session.setAttribute(AbsConst.LOGIN_USER, user);
-		} 
+//		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
+//			// 未登录
+//		    HttpSession session = request.getSession(); 
+//		    
+//		    TUser user = new TUser();
+//		    user.setOpenId("oWQDLwyAbu_D2mu05eCLf7Ec4Ctc");
+//		    user.setNickname("胖子牛");
+//		    user.setJifen(23); 
+//		    session.setAttribute(AbsConst.LOGIN_USER, user);
+//		} 
 
 		// 运行
 		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {

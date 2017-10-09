@@ -26,7 +26,7 @@
                     <p class="row-head-text">我的订单</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                    <a class="head-back" href="/abs_web/app/mobile/page/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
@@ -74,15 +74,7 @@
     </div>
 
 
-    <footer class="tool_foot">
-        <div class="container footer itme_detail_top">
-            <div class="row footer-row">
-                <div class="col-md-12 col-sm-12 col-xs-12 footer-col">
-                    <button id="goback" class="btn btn-default a-btn" type="button">返回</button>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 	
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>

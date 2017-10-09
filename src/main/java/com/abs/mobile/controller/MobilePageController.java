@@ -22,6 +22,7 @@ import com.abs.mobile.domain.TItemType;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.HuiyuanService;
+import com.abs.mobile.service.IndexService;
 import com.abs.mobile.service.ItemGroupBuyService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
@@ -53,14 +54,18 @@ public class MobilePageController {
     private HuiyuanService huiyuanService;
     @Resource
     private UserAdderssService userAdderssService;
+    @Resource
+    private IndexService indexService;
 	// index
 	@RequestMapping("/index")
 	public String toIndex(String loadId,String orderId,ModelMap map) {
 		
-		map.put("loadId", loadId);
-		//支付完成后，调转会员页面用
-		map.put("orderId", orderId);
-		
+//		map.put("loadId", loadId);
+//		//支付完成后，调转会员页面用
+//		map.put("orderId", orderId);
+		// 获取分享信息
+		Map<String, Object> resultMap =  indexService.getShearInfo();
+		map.put("result", resultMap); 
 		return "mobile/index";
 	}
     // home

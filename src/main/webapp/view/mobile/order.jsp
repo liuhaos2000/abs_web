@@ -849,7 +849,7 @@ function refreshPriceHtml(data){
 			
 			$('#item_list').append('<div class="row order-item-food">                                                                       '+
                     '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
-                    '		<p class="order-ad-right p-no-bottom">从'+ownerList[j].fromArea+'发往'+ownerList[j].toArea+'</p>   '+
+                    '		  '+
                     '	</div>                                                                                               '+
                     '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
                     '		<p class="order-ad-right p-no-bottom">邮费：￥'+ownerList[j].fromToYoufei+'</p>                   '+

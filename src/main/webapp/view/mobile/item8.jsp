@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>悦购</title>
+	<title>西域果品优选</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -26,7 +26,7 @@
                     <p class="row-head-text">幸运购</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                    <a class="head-back" href="/abs_web/app/mobile/page/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>

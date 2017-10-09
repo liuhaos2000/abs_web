@@ -10,12 +10,19 @@ public class WeixinConst {
 
 	public static final String TOKEN= "abs_web_yuedongkeji";
 
+	//运行
 	public static final String APPID = "wxe6f7ad732dcc0e34";
 
 	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
 
-	//public static final String SEVERPATH = "http://ruihegouwu.cn/";
-	public static final String SEVERPATH = "http://abstest.51vip.biz/";
+	public static final String SEVERPATH = "http://ruihegouwu.cn/";
+	
+	//测试
+//	public static final String APPID = "wx5d3a57699afdcf6d";
+//
+//	public static final String APPSECRET = "f82a5314bdcdb704e588cfb8ff1ac497";
+//
+//	public static final String SEVERPATH = "http://abstest.51vip.biz/";
 
 	public static String AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 	// 统一下单

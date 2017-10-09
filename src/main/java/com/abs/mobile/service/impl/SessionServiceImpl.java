@@ -35,6 +35,7 @@ public class SessionServiceImpl implements SessionService {
 
 	@Override
 	public Map<String, String> getSignInfo(String requestmap) {
+		String uri = request.getRequestURI();
 		String url="http://"+request.getServerName()+
 				request.getContextPath()+
 				request.getServletPath()+

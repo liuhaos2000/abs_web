@@ -31,12 +31,12 @@ img{
 	border-bottom:1px solid #ebebef;
 }
 .home_grouphead_col{
-	border-left:5px solid #129bf0;
+	border-left:5px solid #00bdec;
 }
 .home_groupheade .myh4{
 	font-family:'SimHei',sans-serif;
 	margin:8px 0 8px;
-	color:#129bf0;
+	color:#00bdec;
 }
 .home_item_div{
 	text-align:center;
@@ -96,7 +96,7 @@ img{
 }
 /* 头部部分 比较多页面会使用到 */
 .index-row-head {
-	background-color: #129bf0;
+	background-color: #00bdec;
 	text-align: center;
 	padding:5px 0 5px 0;
 }
@@ -145,10 +145,10 @@ img{
     color:#999999;
 }
 .footer a.active p{
-    color:#129bf0;
+    color:#00bdec;
 }
 .footer a.active i{
-    color:#129bf0;
+    color:#00bdec;
 }
 .footer a p.footer_index{
     background:url(../images/home.png) no-repeat center 4px;
@@ -1000,10 +1000,10 @@ img{
 	margin-top:0;
 }
 .wq-p{
-	border-left: 5px solid #129bf0;
+	border-left: 5px solid #00bdec;
 	padding-left: 8px;
 	font-family:'SimHei',sans-serif;
-	color:#129bf0;
+	color:#00bdec;
 	font-size:1.3em;
 	margin: 0 0 0 !important;
 }

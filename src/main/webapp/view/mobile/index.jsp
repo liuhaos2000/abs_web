@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>悦购</title>
+	<title>西域果品优选</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -18,8 +18,7 @@
 		<div class="container">
 			<div class="row index-row-head">
 				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
-						<a href="<%=request.getContextPath() %>">
-						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/novo_logo.png"></a>
+						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
 					<div class="input-group index-col-head">
@@ -68,6 +67,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/showloading/jquery.showLoading.js"></script>		
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
         path:'<%=request.getContextPath() %>',
@@ -164,6 +164,46 @@ var UrlConfig = {
             	//$(".popupshadow").hideLoading();
             	//$(".popupshadow").hide();
             }
+          //微信分享JDK--------------------<
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: '${result.signInfo.appId}', // 必填，公众号的唯一标识
+                timestamp:'${result.signInfo.timestamp}', // 必填，生成签名的时间戳
+                nonceStr: '${result.signInfo.nonceStr}', // 必填，生成签名的随机串
+                signature: '${result.signInfo.signature}',// 必填，签名，见附录1
+                jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            wx.ready(function(){
+                wx.onMenuShareAppMessage({
+                    title: "西域果品优选", // 分享标题
+                    desc: '来自新疆的特色水果，新鲜快捷送到家。赶快收藏吧。', // 分享描述
+                    link: '${result.signInfo.url}', // 分享链接
+                    imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
+                    success: function () { 
+                    	 //alert('success');
+                    },
+                    cancel: function () { 
+                       //alert('<%=request.getContextPath() %>'+'/resources/images/tang_logo.jpg');
+                    }
+                  });
+                
+                wx.onMenuShareTimeline({
+              	    title: "西域果品优选", // 分享标题
+              	    link: '${result.signInfo.url}', // 分享链接
+              	    imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
+              	    success: function () { 
+              	        // 用户确认分享后执行的回调函数
+              	    },
+              	    cancel: function () { 
+              	        // 用户取消分享后执行的回调函数
+              	    	//alert('${request.getContextPath()}'+'/resources/images/tang_logo.jpg');
+              	    }
+              	});
+            });
+            wx.error(function(){
+            });
+
+            //微信分享JDK-------------------->
         </script>
 </body>
 </html>
