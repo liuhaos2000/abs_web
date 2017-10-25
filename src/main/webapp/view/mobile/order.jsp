@@ -147,7 +147,7 @@
                                                        			 		 type="button" data-toggle="modal" 
                                                        			 		 data-target="#myModal">
                                                        			 		 <span class="glyphicon glyphicon-plus" aria-hidden="true">
-                                                       			 		 </span>新增地址</button>
+                                                       			 		 </span>收货地址</button>
                                                     		</div>
                                                 		</div>
                                                 	</div>
@@ -273,7 +273,7 @@
                                
                                    	    <div class="row order-item-food">
                                         	<div class="col-md-6 col-sm-6 col-xs-6">
-                                        		<p class="order-ad-right p-no-bottom" style="display: none;">从${ownerItemMap.fromArea}发往${ownerItemMap.toArea}</p>
+                                        		<p class="order-ad-right p-no-bottom">从${ownerItemMap.fromArea}发往${ownerItemMap.toArea}</p>
                                         	</div>
                                         	<div class="col-md-6 col-sm-6 col-xs-6">
                                         		<p class="order-ad-right p-no-bottom">邮费：￥${ownerItemMap.fromToYoufei}</p>
@@ -849,7 +849,7 @@ function refreshPriceHtml(data){
 			
 			$('#item_list').append('<div class="row order-item-food">                                                                       '+
                     '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
-                    '		  '+
+                    '	<p class="order-ad-right p-no-bottom">从'+ownerList[j].fromArea+'发往'+ownerList[j].toArea+'</p>	  '+
                     '	</div>                                                                                               '+
                     '	<div class="col-md-6 col-sm-6 col-xs-6">                                                             '+
                     '		<p class="order-ad-right p-no-bottom">邮费：￥'+ownerList[j].fromToYoufei+'</p>                   '+

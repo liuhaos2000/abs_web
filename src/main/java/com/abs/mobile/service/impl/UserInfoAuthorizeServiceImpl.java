@@ -13,6 +13,7 @@ import com.abs.mobile.dao.TUserMapper;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.SessionService;
 import com.abs.mobile.service.UserInfoAuthorizeService;
+import com.abs.util.EmojiFilter;
 import com.abs.util.commom.AbsConst;
 import com.abs.weixin.pojo.OpenId;
 import com.abs.weixin.pojo.RefreshToken;
@@ -84,7 +85,8 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
                     AbsConst.access_token, openId.getOpenid());
             // 每次登录时，更新用户信息
             if(wxUserInfo!=null){
-                tUser.setNickname(wxUserInfo.getNickname());
+                tUser.setNickname(
+                		EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
                 tUser.setWeixinSex(wxUserInfo.getSex());
                 tUser.setCity(wxUserInfo.getCity());
                 tUser.setProvince(wxUserInfo.getProvince());
@@ -98,6 +100,8 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
             tUser.setuDate(date);
             tUser.setuUser("GETUSER");
             tUserMapper.updateByPrimaryKey(tUser);
+            // 把帶有emoji的名字放回session
+            tUser.setNickname(wxUserInfo.getNickname());
         }
 
 		// 写入Session
@@ -145,7 +149,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUserMapper.insert(tUser);
 		} else {
 			if(wxUserInfo!=null){
-				tUser.setNickname(wxUserInfo.getNickname());
+				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());

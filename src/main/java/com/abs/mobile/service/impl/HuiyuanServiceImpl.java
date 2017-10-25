@@ -34,7 +34,7 @@ public class HuiyuanServiceImpl implements HuiyuanService {
 		// 取得当前用户有效订单数量（状态不为 关闭的 订单数量）
 		long orderCount = tOrderMapper.getUserOrderCount(tUser.getOpenId());
 
-		resultMap.put("loginUser", tUserDb);
+		resultMap.put("loginUser", tUser);
 		resultMap.put("orderCount", orderCount);
 		return resultMap;
 	}

@@ -224,7 +224,7 @@ public class OrderServiceImpl implements OrderService {
         packageParams.put("mch_id", WeixinConst.MCHID);
         packageParams.put("nonce_str", nonce_str);
         // TODO 商品描述，商户订单号,金额  暂定TEST
-        packageParams.put("body", "瑞和商城购物");
+        packageParams.put("body", "西域果品优选");
         packageParams.put("out_trade_no", order.getOrderId());
         packageParams.put("total_fee", String.valueOf(order.getShijiPrice().multiply(
                                         new BigDecimal(100)).intValue()));
@@ -244,7 +244,7 @@ public class OrderServiceImpl implements OrderService {
         payParm.setSign(sign);
         
         // TODO 商品描述，商户订单号,金额  暂定TEST
-        payParm.setBody("瑞和商城购物");
+        payParm.setBody("西域果品优选");
         payParm.setOut_trade_no(order.getOrderId());
         payParm.setTotal_fee(String.valueOf(order.getShijiPrice().multiply(
                 new BigDecimal(100)).intValue()));

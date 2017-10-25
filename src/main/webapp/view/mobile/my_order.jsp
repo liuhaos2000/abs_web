@@ -93,7 +93,7 @@ $(document).ready(function() {
     }); 
     //设置高度          
     $(function(){
-        $("#main_div").height($(window).height()-$("header").height()-52);
+        $("#main_div").height($(window).height()-$("header").height());
         $("#main_div").css({"overflow":"auto"});
         
         bindEvent();
