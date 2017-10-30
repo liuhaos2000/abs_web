@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.SessionService;
+import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.pojo.PayParm;
 import com.abs.weixin.utils.WeiXinIFUtil;
 import com.abs.weixin.utils.MessageUtil;
 import com.abs.weixin.utils.Sign;
-import com.abs.weixin.utils.WeixinConst;
 
 import net.sf.json.JSONObject;
 

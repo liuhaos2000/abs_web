@@ -144,8 +144,14 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<!-- JSON END -->
+		<!-- WEIXIN SDK START -->
+		 <dependency>
+   			<groupId>cn.com.riversoft</groupId>
+   			<artifactId>weixin-mp</artifactId>
+   			<version>0.9.6</version>
+ 		 </dependency>
 
-
+        <!-- WEIXIN SDK END -->
         <!-- maven打包编译的异常 ：sun.misc.BASE64Decoder 是 Sun 的专用 API，可能会在未来版本中删除的解决方法 -->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>

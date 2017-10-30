@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.abs.mobile.domain.TUser;
 import com.abs.util.commom.AbsConst;
-import com.abs.weixin.utils.WeixinConst;
+import com.abs.util.commom.WeixinConst;
 
 public class SessionInterceptor implements HandlerInterceptor { 
 

@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import com.abs.util.EmojiFilter;
 import com.abs.util.Log4jUtil;
+import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.pojo.AccessToken;
 import com.abs.weixin.pojo.JsApiTicket;
 import com.abs.weixin.pojo.Menu;

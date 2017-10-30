@@ -34,12 +34,12 @@ import com.abs.mobile.domain.TUserAddressKey;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsConst;
+import com.abs.util.commom.WeixinConst;
 import com.abs.util.exception.BusinessException;
 import com.abs.weixin.pojo.PayParm;
 import com.abs.weixin.utils.MessageUtil;
 import com.abs.weixin.utils.Sign;
 import com.abs.weixin.utils.WeiXinIFUtil;
-import com.abs.weixin.utils.WeixinConst;
 
 @Service
 public class OrderServiceImpl implements OrderService {

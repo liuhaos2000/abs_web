@@ -10,7 +10,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
-import java.util.UUID;  
+import java.util.UUID;
+
+import com.abs.util.commom.WeixinConst;  
 
 public class Sign {
 //    public static void main(String[] args) {

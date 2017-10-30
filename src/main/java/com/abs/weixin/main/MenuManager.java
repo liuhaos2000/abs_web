@@ -3,6 +3,7 @@ package com.abs.weixin.main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.pojo.AccessToken;
 import com.abs.weixin.pojo.Button;
 import com.abs.weixin.pojo.CommonButton;
@@ -10,7 +11,6 @@ import com.abs.weixin.pojo.ComplexButton;
 import com.abs.weixin.pojo.Menu;
 import com.abs.weixin.pojo.ViewButton;
 import com.abs.weixin.utils.WeiXinIFUtil;
-import com.abs.weixin.utils.WeixinConst;
 
 /**
  * 菜单管理器类

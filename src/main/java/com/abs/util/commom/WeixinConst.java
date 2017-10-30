@@ -1,4 +1,4 @@
-package com.abs.weixin.utils;
+package com.abs.util.commom;
 
 /**
  * 常量定义

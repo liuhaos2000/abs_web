@@ -16,11 +16,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.util.Log4jUtil;
+import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.message.model.Article;
 import com.abs.weixin.message.resp.NewsMessage;
 import com.abs.weixin.message.resp.TextMessage;
 import com.abs.weixin.utils.MessageUtil;
-import com.abs.weixin.utils.WeixinConst;
 
 /**
  * 核心服务类

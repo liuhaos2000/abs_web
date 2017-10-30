@@ -22,8 +22,7 @@ import org.apache.log4j.Logger;
 import net.sf.json.JSONObject;
 
 import com.abs.util.Log4jUtil;
-import com.abs.weixin.utils.WeixinConst;
-//import com.aklk.beans.c2.pojoBean.UserInfo;
+import com.abs.util.commom.WeixinConst;
 
 
 /**
