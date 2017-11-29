@@ -17,8 +17,10 @@
 			">
  
 	<!-- 0 1 * * * ? --> 
+	<!-- <task:scheduled ref="sendTempletMsg" method="runJobSendMsg" cron="0 0/1 * * * ?" /> -->
 	<task:scheduled-tasks>
 		<task:scheduled ref="accessTokenBatch" method="job1" cron="0 1 * * * ?" />
+		
 	</task:scheduled-tasks>
 
 </beans>

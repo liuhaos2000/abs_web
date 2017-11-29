@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/page")
-public class PageController {
+public class PageMController {
 	
 	// 用户管理页面
 	@RequestMapping("/sysuser")

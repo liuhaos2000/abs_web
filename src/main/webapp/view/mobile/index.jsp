@@ -14,19 +14,27 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showloading/showLoading.css">
 </head>
 <body>
+    <div class="share">
+    	<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/shouzhi.png">
+    	    <p>帮助好友<Strong>${SHOP_USER.nickname}</Strong>分享他的小店</p>
+    </div>
 	<header>
 		<div class="container">
 			<div class="row index-row-head">
 				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+				    <a href="/abs_web/app/mobile/page/index">
 						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
+					</a>
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
 					<div class="input-group index-col-head">
-						<input type="text" id="searchparm" name="searchparm" class="form-control">
-						<span class="input-group-btn">
-							<button id="search-bt" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
+						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的小店&nbsp;&nbsp;&nbsp;
+							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
+								<button style="margin-bottom: 2px;" class="btn btn-warning btn-xs" type="submit">切换我的店铺</button>
+							</c:if>
+						</h4>
 					</div>
+					<div></div>
 				</div>
 			</div>
 		</div>

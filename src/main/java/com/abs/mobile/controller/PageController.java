@@ -34,7 +34,7 @@ import com.abs.util.commom.AbsTool;
 
 @Controller
 @RequestMapping("/mobile/page")
-public class MobilePageController {
+public class PageController {
 
     @Resource
     private HomeService homeService;

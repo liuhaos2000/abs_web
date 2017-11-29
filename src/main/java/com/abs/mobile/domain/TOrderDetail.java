@@ -18,7 +18,9 @@ public class TOrderDetail extends TOrderDetailKey {
 
     private String status;
 
-    private Integer wuliuId;
+    private String msgStatus;
+
+    private String gongsiId;
 
     private String wuliuCode;
 
@@ -88,12 +90,20 @@ public class TOrderDetail extends TOrderDetailKey {
         this.status = status == null ? null : status.trim();
     }
 
-    public Integer getWuliuId() {
-        return wuliuId;
+    public String getMsgStatus() {
+        return msgStatus;
     }
 
-    public void setWuliuId(Integer wuliuId) {
-        this.wuliuId = wuliuId;
+    public void setMsgStatus(String msgStatus) {
+        this.msgStatus = msgStatus == null ? null : msgStatus.trim();
+    }
+
+    public String getGongsiId() {
+        return gongsiId;
+    }
+
+    public void setGongsiId(String gongsiId) {
+        this.gongsiId = gongsiId == null ? null : gongsiId.trim();
     }
 
     public String getWuliuCode() {

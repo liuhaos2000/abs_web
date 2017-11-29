@@ -6,6 +6,7 @@
     <result column="item_name" property="itemName" jdbcType="VARCHAR" />
     <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
     <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="owner_open_id" property="ownerOpenId" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="prent_item_id" property="prentItemId" jdbcType="INTEGER" />
     <result column="parm" property="parm" jdbcType="VARCHAR" />
@@ -31,10 +32,10 @@
     <result column="fu_text" property="fuText" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    item_id, item_name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, 
-    xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, 
-    shangjia_flg, from_area, frend_title, frend_text, del_flg, c_date, c_user, u_date, 
-    u_user
+    item_id, item_name, manufacturer, owner, owner_open_id, type, prent_item_id, parm, 
+    xiangou_flg, xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, 
+    shouhou_miaoshu, shangjia_flg, from_area, frend_title, frend_text, del_flg, c_date, 
+    c_user, u_date, u_user
   </sql>
   <sql id="Blob_Column_List" >
     fu_text
@@ -53,23 +54,23 @@
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TItem" >
     insert into t_item (item_id, item_name, manufacturer, 
-      owner, type, prent_item_id, 
-      parm, xiangou_flg, xiangou_shuliang, 
-      baoyou_flg, wuliu_id, fapiao_flg, 
-      fapiao_title, shouhou_flg, shouhou_miaoshu, 
-      shangjia_flg, from_area, frend_title, 
-      frend_text, del_flg, c_date, 
-      c_user, u_date, u_user, 
-      fu_text)
+      owner, owner_open_id, type, 
+      prent_item_id, parm, xiangou_flg, 
+      xiangou_shuliang, baoyou_flg, wuliu_id, 
+      fapiao_flg, fapiao_title, shouhou_flg, 
+      shouhou_miaoshu, shangjia_flg, from_area, 
+      frend_title, frend_text, del_flg, 
+      c_date, c_user, u_date, 
+      u_user, fu_text)
     values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
-      #{owner,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{prentItemId,jdbcType=INTEGER}, 
-      #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
-      #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
-      #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, #{shouhouMiaoshu,jdbcType=VARCHAR}, 
-      #{shangjiaFlg,jdbcType=CHAR}, #{fromArea,jdbcType=INTEGER}, #{frendTitle,jdbcType=VARCHAR}, 
-      #{frendText,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
-      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}, 
-      #{fuText,jdbcType=LONGVARCHAR})
+      #{owner,jdbcType=VARCHAR}, #{ownerOpenId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{prentItemId,jdbcType=INTEGER}, #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, 
+      #{xiangouShuliang,jdbcType=INTEGER}, #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, 
+      #{fapiaoFlg,jdbcType=CHAR}, #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, 
+      #{shouhouMiaoshu,jdbcType=VARCHAR}, #{shangjiaFlg,jdbcType=CHAR}, #{fromArea,jdbcType=INTEGER}, 
+      #{frendTitle,jdbcType=VARCHAR}, #{frendText,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR}, #{fuText,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem" >
     insert into t_item
@@ -85,6 +86,9 @@
       </if>
       <if test="owner != null" >
         owner,
+      </if>
+      <if test="ownerOpenId != null" >
+        owner_open_id,
       </if>
       <if test="type != null" >
         type,
@@ -163,6 +167,9 @@
       <if test="owner != null" >
         #{owner,jdbcType=VARCHAR},
       </if>
+      <if test="ownerOpenId != null" >
+        #{ownerOpenId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
@@ -240,6 +247,9 @@
       <if test="owner != null" >
         owner = #{owner,jdbcType=VARCHAR},
       </if>
+      <if test="ownerOpenId != null" >
+        owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
@@ -311,6 +321,7 @@
     set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
+      owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       prent_item_id = #{prentItemId,jdbcType=INTEGER},
       parm = #{parm,jdbcType=VARCHAR},
@@ -339,6 +350,7 @@
     set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
+      owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       prent_item_id = #{prentItemId,jdbcType=INTEGER},
       parm = #{parm,jdbcType=VARCHAR},
@@ -361,7 +373,7 @@
       u_user = #{uUser,jdbcType=VARCHAR}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <!-- 自定义 -->
+  <!-- 自定-->
   <select id="getItemTejia" resultType="map">
         select 
             t2.item_name

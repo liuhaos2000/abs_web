@@ -14,6 +14,8 @@ public class TOrder {
 
     private String openId;
 
+    private String userLv;
+
     private Integer addressId;
 
     private BigDecimal totlePrice;
@@ -29,6 +31,10 @@ public class TOrder {
     private BigDecimal jifenDixiao;
 
     private BigDecimal shijiPrice;
+
+    private String pOpenId;
+
+    private String pUserLv;
 
     private String delFlg;
 
@@ -78,6 +84,14 @@ public class TOrder {
 
     public void setOpenId(String openId) {
         this.openId = openId == null ? null : openId.trim();
+    }
+
+    public String getUserLv() {
+        return userLv;
+    }
+
+    public void setUserLv(String userLv) {
+        this.userLv = userLv == null ? null : userLv.trim();
     }
 
     public Integer getAddressId() {
@@ -142,6 +156,22 @@ public class TOrder {
 
     public void setShijiPrice(BigDecimal shijiPrice) {
         this.shijiPrice = shijiPrice;
+    }
+
+    public String getpOpenId() {
+        return pOpenId;
+    }
+
+    public void setpOpenId(String pOpenId) {
+        this.pOpenId = pOpenId == null ? null : pOpenId.trim();
+    }
+
+    public String getpUserLv() {
+        return pUserLv;
+    }
+
+    public void setpUserLv(String pUserLv) {
+        this.pUserLv = pUserLv == null ? null : pUserLv.trim();
     }
 
     public String getDelFlg() {

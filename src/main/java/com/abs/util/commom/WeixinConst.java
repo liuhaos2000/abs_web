@@ -16,6 +16,9 @@ public class WeixinConst {
 //	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
 //
 //	public static final String SEVERPATH = "http://ruihegouwu.cn/";
+//	
+//	public static final String SHOPMAST_USER_OPENID = "oWQDLwyAbu_D2mu05eCLf7Ec4Ctc";
+	
 	
 	//测试
 	public static final String APPID = "wx5d3a57699afdcf6d";
@@ -23,6 +26,9 @@ public class WeixinConst {
 	public static final String APPSECRET = "f82a5314bdcdb704e588cfb8ff1ac497";
 
 	public static final String SEVERPATH = "http://abstest.51vip.biz/";
+	
+	public static final String SHOPMAST_USER_OPENID = "o__evuKaM6-MCC3tKvxdWs64SZkI";
+
 
 	public static String AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 	// 统一下单

@@ -43,6 +43,9 @@ public class SessionServiceImpl implements SessionService {
 				if(request.getQueryString()!=null){
 					url+="?"+request.getQueryString();
 				}
+
+				
+				
 		Map<String,String> reult =  Sign.sign(AbsConst.jsapi_ticket, url);
 		return reult;
 	}
@@ -51,4 +54,17 @@ public class SessionServiceImpl implements SessionService {
     public String getUserIp() {
         return request.getRemoteAddr();
     }
+
+	@Override
+	public TUser getShopUser() {
+        HttpSession session =request.getSession();
+        TUser user = (TUser)session.getAttribute(AbsConst.SHOP_USER);
+        return user;
+	}
+
+	@Override
+	public void setShopUser(TUser user) {
+		HttpSession session =request.getSession();
+		session.setAttribute(AbsConst.SHOP_USER, user);
+	}
 }

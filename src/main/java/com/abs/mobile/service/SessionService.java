@@ -15,6 +15,14 @@ public interface SessionService {
 	 */
 	public void setLoginUser(TUser user);
 	/**
+	 * 获取Session中的User
+	 */
+	public TUser getShopUser();
+	/**
+	 * 设置Session中的User
+	 */
+	public void setShopUser(TUser user);
+	/**
 	 * 获取微信JS用的 签名信息
 	 */
 	public Map<String, String> getSignInfo(String requestmap);

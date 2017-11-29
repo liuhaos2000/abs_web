@@ -1,6 +1,5 @@
 package com.abs.mobile.service.impl;
 
-
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -15,8 +14,9 @@ import com.abs.mobile.service.SessionService;
 import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.util.EmojiFilter;
 import com.abs.util.commom.AbsConst;
+import com.abs.util.commom.AbsTool;
+import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.pojo.OpenId;
-import com.abs.weixin.pojo.RefreshToken;
 import com.abs.weixin.pojo.WeixinUserInfo;
 import com.abs.weixin.utils.WeiXinIFUtil;
 
@@ -27,13 +27,15 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	private SessionService sessionService;
 	@Resource
 	private TUserMapper tUserMapper;
+
 	/**
 	 * 当用户访问时执行
+	 * 
 	 * @param Openid
 	 */
 	@Override
 	@Transactional
-	public void executeGetUserInfo(String code,String state) {
+	public void executeGetUserInfo(String code, String state) {
 
 		// 取得OpenId
 		OpenId openId = WeiXinIFUtil.getOpenId(code);
@@ -52,66 +54,65 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setcUser("GETUSER");
 			tUser.setuDate(date);
 			tUser.setuUser("GETUSER");
-			//用户等级,新规的时候
+			// 用户等级,新规的时候
 			tUser.setLever("99");
-			String parent= getJiexiCanshu(state);
-			if(StringUtils.isNotEmpty(parent)){
+			String parent = AbsTool.getJiexiCanshu(state, "parent");
+			if (StringUtils.isNotEmpty(parent)) {
 				tUser.setParent(parent);
-			}else{
+			} else {
 				tUser.setParent("MASTER");
 			}
-			
 
 			// 插入数据库
 			tUserMapper.insert(tUser);
-        } else {
-            
-//            if(StringUtils.isNotEmpty(tUser.getNickname())){
-//                //已经有用户信息
-//                //启动多线程更新用户信息
-//                Thread thread = new Thread(){
-//                    public void run(){
-//                      System.out.println("Thread Running");
-//                    }
-//                 };
-//                 thread.start();
-//            }else{
-//                //还没有用户信息
-//                //不启动多线程序
-//            }
-            
-            // 拉取用户信息 TODO
-            WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(
-                    AbsConst.access_token, openId.getOpenid());
-            // 每次登录时，更新用户信息
-            if(wxUserInfo!=null){
-                tUser.setNickname(
-                		EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
-                tUser.setWeixinSex(wxUserInfo.getSex());
-                tUser.setCity(wxUserInfo.getCity());
-                tUser.setProvince(wxUserInfo.getProvince());
-                tUser.setCountry(wxUserInfo.getCountry());
-                tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
-            }
-            tUser.setRefreshToken(openId.getRefresh_token());
-            tUser.setDelFlg("0");
-            tUser.setcDate(date);
-            tUser.setcUser("GETUSER");
-            tUser.setuDate(date);
-            tUser.setuUser("GETUSER");
-            tUserMapper.updateByPrimaryKey(tUser);
-            // 把帶有emoji的名字放回session
-            tUser.setNickname(wxUserInfo.getNickname());
-        }
+		} else {
+
+			// if(StringUtils.isNotEmpty(tUser.getNickname())){
+			// //已经有用户信息
+			// //启动多线程更新用户信息
+			// Thread thread = new Thread(){
+			// public void run(){
+			// System.out.println("Thread Running");
+			// }
+			// };
+			// thread.start();
+			// }else{
+			// //还没有用户信息
+			// //不启动多线程序
+			// }
+
+			// 拉取用户信息 TODO
+			WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(AbsConst.access_token, openId.getOpenid());
+			// 每次登录时，更新用户信息
+			if (wxUserInfo != null) {
+				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				tUser.setWeixinSex(wxUserInfo.getSex());
+				tUser.setCity(wxUserInfo.getCity());
+				tUser.setProvince(wxUserInfo.getProvince());
+				tUser.setCountry(wxUserInfo.getCountry());
+				tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
+			}
+			tUser.setRefreshToken(openId.getRefresh_token());
+			tUser.setDelFlg("0");
+			tUser.setcDate(date);
+			tUser.setcUser("GETUSER");
+			tUser.setuDate(date);
+			tUser.setuUser("GETUSER");
+			tUserMapper.updateByPrimaryKey(tUser);
+			// 把帶有emoji的名字放回session
+			tUser.setNickname(wxUserInfo.getNickname());
+		}
 
 		// 写入Session
 		sessionService.setLoginUser(tUser);
-
+		sessionService.setShopUser(getShopUser2(tUser,AbsTool.getJiexiCanshu(state, "parent")));
 		return;
 
 	}
+
 	/**
 	 * 当用户关注时执行
+	 * 
 	 * @param Openid
 	 */
 	@Override
@@ -128,8 +129,8 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 		if (tUser == null) {
 			tUser = new TUser();
 			tUser.setOpenId(openId);
-			if(wxUserInfo!=null){
-				tUser.setNickname(wxUserInfo.getNickname());
+			if (wxUserInfo != null) {
+				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -142,13 +143,13 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser.setcUser("GUANZHU");
 			tUser.setuDate(date);
 			tUser.setuUser("GUANZHU");
-			//用户等级,新规的时候
+			// 用户等级,新规的时候
 			tUser.setLever("99");
 			tUser.setParent("MASTER");
 			// 插入数据库
 			tUserMapper.insert(tUser);
 		} else {
-			if(wxUserInfo!=null){
+			if (wxUserInfo != null) {
 				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
@@ -156,7 +157,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 				tUser.setCountry(wxUserInfo.getCountry());
 				tUser.setWeixinImageUrl(wxUserInfo.getHeadimgurl());
 			}
-			
+
 			tUser.setDelFlg("0");
 			tUser.setcDate(date);
 			tUser.setcUser("GUANZHU");
@@ -167,16 +168,67 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 
 	}
 
-	private String getJiexiCanshu(String state){
-		String[] parms = state.split("&");
-		for (String  parm: parms) {
-			if(StringUtils.isNotEmpty(parm)){
-				String[] str = parm.split("=");
-				if("parent".equals(str[0])){
-					return str[1];
+
+	/**
+	 * 获取店铺的用户信息
+	 * 
+	 * @param tUser
+	 * @param state
+	 * @return
+	 */
+	private TUser getShopUser(TUser tUser, String parentCanShuOpenId) {
+		TUser shopUser = null;
+		if ("00".equals(tUser.getLever()) || "01".equals(tUser.getLever()) || "02".equals(tUser.getLever())) {
+			return tUser;
+		} else if ("99".equals(tUser.getLever())) {
+			// 参数
+			if(StringUtils.isNotEmpty(parentCanShuOpenId)){
+				shopUser = tUserMapper.selectByPrimaryKey(parentCanShuOpenId);
+				// 如果不存在
+				if (shopUser != null) {
+					return shopUser;
 				}
+			}else if(StringUtils.isNotEmpty(tUser.getParent())){
+				shopUser = tUserMapper.selectByPrimaryKey(tUser.getParent());
+				// 如果不存在
+				if (shopUser != null) {
+					return shopUser;
+				}
+			}				
+		} 
+		//返回可能为空，为空则表示总店
+		shopUser = tUserMapper.selectByPrimaryKey(WeixinConst.SHOPMAST_USER_OPENID);
+		return shopUser;
+	}
+	
+	/**
+	 * 获取店铺的用户信息
+	 * 参数优先
+	 * @param tUser
+	 * @param state
+	 * @return
+	 */
+	private TUser getShopUser2(TUser tUser, String parentCanShuOpenId) {
+		TUser shopUser = null;
+		if(StringUtils.isNotEmpty(parentCanShuOpenId)){
+			shopUser = tUserMapper.selectByPrimaryKey(parentCanShuOpenId);
+			// 如果不存在
+			if (shopUser != null) {
+				return shopUser;
+			}
+		} else if("00".equals(tUser.getLever()) || "01".equals(tUser.getLever()) || "02".equals(tUser.getLever())){
+			return tUser;
+		} else if("99".equals(tUser.getLever()) &&
+				StringUtils.isNotEmpty(tUser.getParent())){
+			shopUser = tUserMapper.selectByPrimaryKey(tUser.getParent());
+			// 如果不存在
+			if (shopUser != null) {
+				return shopUser;
 			}
 		}
-		return null;
+		
+		//返回可能为空，为空则表示总店
+		shopUser = tUserMapper.selectByPrimaryKey(WeixinConst.SHOPMAST_USER_OPENID);
+		return shopUser;
 	}
 }

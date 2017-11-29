@@ -13,7 +13,8 @@
     <result column="huodong_flg" property="huodongFlg" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="wuliu_id" property="wuliuId" jdbcType="INTEGER" />
+    <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
+    <result column="gongsi_id" property="gongsiId" jdbcType="VARCHAR" />
     <result column="wuliu_code" property="wuliuCode" jdbcType="VARCHAR" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
@@ -23,8 +24,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, item_id, item_guige, item_yanse, guige_text, yanse_text, owner, shuliang, 
-    huodong_flg, price, status, wuliu_id, wuliu_code, del_flg, c_date, c_user, u_date, 
-    u_user
+    huodong_flg, price, status, msg_status, gongsi_id, wuliu_code, del_flg, c_date, c_user, 
+    u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
     select 
@@ -46,17 +47,17 @@
     insert into t_order_detail (order_id, item_id, item_guige, 
       item_yanse, guige_text, yanse_text, 
       owner, shuliang, huodong_flg, 
-      price, status, wuliu_id, 
-      wuliu_code, del_flg, c_date, 
-      c_user, u_date, u_user
-      )
+      price, status, msg_status, 
+      gongsi_id, wuliu_code, del_flg, 
+      c_date, c_user, u_date, 
+      u_user)
     values (#{orderId,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, 
       #{itemYanse,jdbcType=INTEGER}, #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, 
       #{owner,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, #{huodongFlg,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{wuliuId,jdbcType=INTEGER}, 
-      #{wuliuCode,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
-      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
-      )
+      #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{msgStatus,jdbcType=VARCHAR}, 
+      #{gongsiId,jdbcType=VARCHAR}, #{wuliuCode,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TOrderDetail" >
     insert into t_order_detail
@@ -94,8 +95,11 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="wuliuId != null" >
-        wuliu_id,
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="gongsiId != null" >
+        gongsi_id,
       </if>
       <if test="wuliuCode != null" >
         wuliu_code,
@@ -150,8 +154,11 @@
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="wuliuId != null" >
-        #{wuliuId,jdbcType=INTEGER},
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiId != null" >
+        #{gongsiId,jdbcType=VARCHAR},
       </if>
       <if test="wuliuCode != null" >
         #{wuliuCode,jdbcType=VARCHAR},
@@ -197,8 +204,11 @@
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="wuliuId != null" >
-        wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiId != null" >
+        gongsi_id = #{gongsiId,jdbcType=VARCHAR},
       </if>
       <if test="wuliuCode != null" >
         wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
@@ -233,7 +243,8 @@
       huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       status = #{status,jdbcType=VARCHAR},
-      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      msg_status = #{msgStatus,jdbcType=VARCHAR},
+      gongsi_id = #{gongsiId,jdbcType=VARCHAR},
       wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},

@@ -23,6 +23,7 @@ import com.abs.weixin.pojo.JsApiTicket;
 import com.abs.weixin.pojo.Menu;
 import com.abs.weixin.pojo.OpenId;
 import com.abs.weixin.pojo.RefreshToken;
+import com.abs.weixin.pojo.Template;
 import com.abs.weixin.pojo.WeixinUserInfo;
 
 import net.sf.json.JSONException;
@@ -59,7 +60,9 @@ public class WeiXinIFUtil {
     // 删除菜单
     public static String menu_del_url =
         "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
-	
+	// 发送模板消息
+    public static String send_template_msg_url=
+    		"https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
     
     /**
 	 * 创建菜单
@@ -414,4 +417,47 @@ public class WeiXinIFUtil {
         log.debug("------------>httpRequest---end:"+requestUrl);
 		return resultMap;
 	}
+	
+	
+	/**
+	 * 发消息模板
+	 * @param token
+	 * @param template
+	 * @return
+	 */
+//	Template tem=new Template();
+//	tem.setTemplateId("LhEDNAdkTcax7gzPetV1hnAmbSoXuo22OEJ8eix1iAw");
+//	tem.setTopColor("#00DD00");
+//	tem.setToUser("oWOHzsm8htRGTadf14eDdcnLsAjM");
+//	tem.setUrl("");
+//			
+//	List<TemplateParam> paras=new ArrayList<TemplateParam>();
+//	paras.add(new TemplateParam("first","我们已收到您的货款，开始为您打包商品，请耐心等待: )","#FF3333"));
+//	paras.add(new TemplateParam("orderMoneySum","¥20.00","#0044BB"));
+//	paras.add(new TemplateParam("orderProductName","火烧牛干巴","#0044BB"));
+//	paras.add(new TemplateParam("Remark","感谢你对我们商城的支持!!!!","#AAAAAA"));
+//			
+//	tem.setTemplateParamList(paras);
+//			
+//	boolean result=sendTemplateMsg(token,tem);
+	public static boolean sendTemplateMsg(String token,Template template){
+		
+		boolean flag=false;
+		
+		String requestUrl=send_template_msg_url.replace("ACCESS_TOKEN", token);
+	
+		JSONObject jsonResult=CommonUtil.httpsRequest(requestUrl, "POST", template.toJSON());
+		if(jsonResult!=null){
+			int errorCode=jsonResult.getInt("errcode");
+			String errorMessage=jsonResult.getString("errmsg");
+			if(errorCode==0){
+				flag=true;
+			}else{
+				System.out.println("模板消息发送失败:"+errorCode+","+errorMessage);
+				flag=false;
+			}
+		}
+		return flag;
+	}
+	
 }

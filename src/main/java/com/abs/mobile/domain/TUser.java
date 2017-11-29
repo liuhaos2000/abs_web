@@ -2,7 +2,7 @@ package com.abs.mobile.domain;
 
 import java.util.Date;
 
-public class TUser {
+public class TUser implements Cloneable {
     private String openId;
 
     private String nickname;

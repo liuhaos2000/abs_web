@@ -4,7 +4,8 @@ public class AbsConst {
 
     // LoginUser Session KEY
     public static final String LOGIN_USER = "LOGIN_USER";
-
+    public static final String SHOP_USER = "SHOP_USER";
+    //缓存
     public static String access_token = "";
     public static String jsapi_ticket = "";
     //缓存

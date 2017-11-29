@@ -16,21 +16,32 @@
     <link rel="stylesheet" href="${path}/resources/css/owl.theme.default.min.css">
 </head>
 <body>
-    <header class="" role="navigation">
-        <div class="container">
-            <div class="row row-head">
-                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 col-head">
-                    <p class="row-head-text">商品详情</p>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web/app/mobile/page/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
-                </div>
-            </div>
+    <div class="share">
+    	<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/shouzhi.png">
+    	    <p>帮助好友<Strong>${SHOP_USER.nickname}</Strong>分享他的商品</p>
+    </div>
+	<header>
+		<div class="container">
+			<div class="row index-row-head">
+				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+				    <a href="/abs_web/app/mobile/page/index">
+						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
+					</a>
+				</div>
+				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
+					<div class="input-group index-col-head">
+						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的商品&nbsp;&nbsp;&nbsp;
+							<button style="margin-bottom: 2px;" class="btn btn-warning btn-xs" type="submit">切换我的店铺</button>
+						</h4>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		<!-- 探出窗口 -->
+        <div class="popupshadow">
         </div>
-    </header>
+	</header>
     
     <div id="main_div" class="">
 		<div class="container">
