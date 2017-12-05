@@ -160,7 +160,8 @@ $(document).ready(function() {
 	    $("div[itemId]").bind("click",function(){
 	        window.location.href='<%=request.getContextPath() %>'+
 	        '/app/mobile/page/item?itemId='+$(this).attr("itemId")+
-	        '&phaseNum='+$(this).attr("phaseNum"); 
+	        '&phaseNum='+$(this).attr("phaseNum")+
+	        '&parent=${SHOP_USER.openId}'; 
 	    });
 	    
 		$(".popupshadow").hideLoading();

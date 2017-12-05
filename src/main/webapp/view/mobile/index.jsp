@@ -22,7 +22,7 @@
 		<div class="container">
 			<div class="row index-row-head">
 				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
-				    <a href="/abs_web/app/mobile/page/index">
+				    <a href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}">
 						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
 					</a>
 				</div>
@@ -30,7 +30,7 @@
 					<div class="input-group index-col-head">
 						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的小店&nbsp;&nbsp;&nbsp;
 							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
-								<button style="margin-bottom: 2px;" class="btn btn-warning btn-xs" type="submit">切换我的店铺</button>
+								<a style="margin-bottom: 2px;" class="btn btn-warning btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店铺</a>
 							</c:if>
 						</h4>
 					</div>

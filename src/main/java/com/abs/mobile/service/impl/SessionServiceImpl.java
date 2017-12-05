@@ -67,4 +67,8 @@ public class SessionServiceImpl implements SessionService {
 		HttpSession session =request.getSession();
 		session.setAttribute(AbsConst.SHOP_USER, user);
 	}
+	
+	
+	
+	
 }

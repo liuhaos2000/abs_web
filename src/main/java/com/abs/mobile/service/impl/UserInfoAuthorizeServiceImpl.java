@@ -105,7 +105,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 
 		// 写入Session
 		sessionService.setLoginUser(tUser);
-		sessionService.setShopUser(getShopUser2(tUser,AbsTool.getJiexiCanshu(state, "parent")));
+		sessionService.setShopUser(getShopUser3(tUser,AbsTool.getJiexiCanshu(state, "parent")));
 		return;
 
 	}
@@ -227,6 +227,26 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			}
 		}
 		
+		//返回可能为空，为空则表示总店
+		shopUser = tUserMapper.selectByPrimaryKey(WeixinConst.SHOPMAST_USER_OPENID);
+		return shopUser;
+	}
+	/**
+	 * 获取店铺的用户信息
+	 * 只认参数
+	 * @param tUser
+	 * @param state
+	 * @return
+	 */
+	private TUser getShopUser3(TUser tUser, String parentCanShuOpenId) {
+		TUser shopUser = null;
+		if(StringUtils.isNotEmpty(parentCanShuOpenId)){
+			shopUser = tUserMapper.selectByPrimaryKey(parentCanShuOpenId);
+			// 如果不存在
+			if (shopUser != null) {
+				return shopUser;
+			}
+		} 		
 		//返回可能为空，为空则表示总店
 		shopUser = tUserMapper.selectByPrimaryKey(WeixinConst.SHOPMAST_USER_OPENID);
 		return shopUser;

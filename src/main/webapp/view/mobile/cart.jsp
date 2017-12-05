@@ -25,7 +25,7 @@
                     <p class="row-head-text">购物车</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web/app/mobile/page/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                    <a class="head-back" href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 cart-col-box">
-                    	<a href="${path}/app/mobile/page/item?itemId=${item.item_id}">
+                    	<a href="${path}/app/mobile/page/item?itemId=${item.item_id}&parent=${SHOP_USER.openId}">
                         	<img class="cart-img" src="${item.path}" alt="">
                         </a>
                     </div>

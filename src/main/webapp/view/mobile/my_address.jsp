@@ -98,7 +98,7 @@
                     <p class="row-head-text">地址管理</p>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web/app/mobile/page/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                    <a class="head-back" href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>

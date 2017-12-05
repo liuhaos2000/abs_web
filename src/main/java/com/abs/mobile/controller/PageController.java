@@ -16,9 +16,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.abs.mobile.dao.TUserMapper;
 import com.abs.mobile.domain.TCart;
 import com.abs.mobile.domain.TIndexLunbo;
 import com.abs.mobile.domain.TItemType;
+import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.CartService;
 import com.abs.mobile.service.HomeService;
 import com.abs.mobile.service.HuiyuanService;
@@ -27,6 +29,7 @@ import com.abs.mobile.service.ItemGroupBuyService;
 import com.abs.mobile.service.ItemListService;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.OrderService;
+import com.abs.mobile.service.SessionService;
 import com.abs.mobile.service.TypeService;
 import com.abs.mobile.service.UserAdderssService;
 import com.abs.util.commom.AbsConst;
@@ -56,13 +59,21 @@ public class PageController {
     private UserAdderssService userAdderssService;
     @Resource
     private IndexService indexService;
+	@Resource
+	private SessionService sessionService;
+	@Resource
+	private TUserMapper tUserMapper;
 	// index
 	@RequestMapping("/index")
-	public String toIndex(String loadId,String orderId,ModelMap map) {
+	public String toIndex(String parent,String change,ModelMap map) {
 		
-//		map.put("loadId", loadId);
-//		//支付完成后，调转会员页面用
-//		map.put("orderId", orderId);
+	// map.put("loadId", loadId);
+		if("1".equals(change) && !StringUtils.isEmpty(parent)){
+			TUser shopUser = tUserMapper.selectByPrimaryKey(parent);
+			sessionService.setShopUser(shopUser);
+		}
+		
+
 		// 获取分享信息
 		Map<String, Object> resultMap =  indexService.getShearInfo();
 		map.put("result", resultMap); 

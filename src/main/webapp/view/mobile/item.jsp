@@ -24,14 +24,14 @@
 		<div class="container">
 			<div class="row index-row-head">
 				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
-				    <a href="/abs_web/app/mobile/page/index">
+				    <a href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}">
 						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
 					</a>
 				</div>
 				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
 					<div class="input-group index-col-head">
 						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的商品&nbsp;&nbsp;&nbsp;
-							<button style="margin-bottom: 2px;" class="btn btn-warning btn-xs" type="submit">切换我的店铺</button>
+							<a style="margin-bottom: 2px;" class="btn btn-warning btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店铺</a>
 						</h4>
 					</div>
 					<div></div>
