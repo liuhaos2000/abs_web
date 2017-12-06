@@ -31,7 +31,9 @@
 				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
 					<div class="input-group index-col-head">
 						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的商品&nbsp;&nbsp;&nbsp;
-							<a style="margin-bottom: 2px;" class="btn btn-warning btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店铺</a>
+							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
+								<a style="margin-bottom: 2px;" class="btn btn-warning btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店铺</a>
+							</c:if>
 						</h4>
 					</div>
 					<div></div>

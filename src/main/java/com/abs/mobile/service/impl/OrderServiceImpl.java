@@ -34,6 +34,7 @@ import com.abs.mobile.domain.TUserAddressKey;
 import com.abs.mobile.service.OrderService;
 import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsConst;
+import com.abs.util.commom.AbsTool;
 import com.abs.util.commom.WeixinConst;
 import com.abs.util.exception.BusinessException;
 import com.abs.weixin.pojo.PayParm;
@@ -157,9 +158,10 @@ public class OrderServiceImpl implements OrderService {
             List<TOrderDetail> orderDetailList) throws BusinessException {
         
         TUser user =sessionService.getLoginUser();
+        TUser shopUser =sessionService.getShopUser();
         Date date = new Date();
         // 一.生成订单
-        //1.CHECK 
+        //1.CHECK TODO 订单的生成有问题，从前台获取金额。。。。
         //checkOrder(order,orderDetailList,user);
         //2.采集订单号
         String orderId = getNewOrderId();
@@ -171,16 +173,26 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderDate(date);
         order.setStatus(AbsConst.ORDER_WAIT_PAY);
         order.setOpenId(user.getOpenId());
+        order.setUserLv(user.getLever());
         if(!("1".equals(order.getJifenFlg()))){
             //未使用积分
             order.setJifenDixiao(null);
         }
+        order.setpOpenId(shopUser.getOpenId());
+        order.setpUserLv(shopUser.getLever());
+        
         order.setcDate(date);
         order.setcUser("ORDERSUBMIT");
         order.setuDate(date);
         order.setuUser("ORDERSUBMIT");
         // 3.2 明细就绪
         //String orderName = null;
+        
+        
+        BigDecimal cost = new BigDecimal(0);
+        BigDecimal lv00Lirun = new BigDecimal(0);
+        BigDecimal lv01Lirun = new BigDecimal(0);
+        BigDecimal lv02Lirun = new BigDecimal(0);
         for (TOrderDetail tOrderDetail : orderDetailList) {
             
             Map<String, String> detail = tItemDetailMapper.getItemSalePrice(String.valueOf(tOrderDetail.getItemId()),
@@ -207,13 +219,29 @@ public class OrderServiceImpl implements OrderService {
             Object o = detail.get("sale_price");
             tOrderDetail.setPrice((BigDecimal)o);
             // status
-            tOrderDetail.setStatus("1");
+            tOrderDetail.setStatus(AbsConst.ORDER_WAIT_PAY);
+            
+            tOrderDetail.setTuihuoFlg("0");
+            tOrderDetail.setCost(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("cost"))));
+            tOrderDetail.setLv00Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv00_lirun"))));
+            tOrderDetail.setLv01Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv01_lirun"))));
+            tOrderDetail.setLv02Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv02_lirun"))));
+            
+            cost.add(tOrderDetail.getCost());
+            lv00Lirun.add(tOrderDetail.getLv00Lirun());
+            lv01Lirun.add(tOrderDetail.getLv01Lirun());
+            lv02Lirun.add(tOrderDetail.getLv02Lirun());
+
             // 公共
             tOrderDetail.setcDate(date);
             tOrderDetail.setcUser("ORDERSUBMIT");
             tOrderDetail.setuDate(date);
             tOrderDetail.setuUser("ORDERSUBMIT");
         }
+        order.setCost(cost);
+        order.setLv00Lirun(lv00Lirun);
+        order.setLv01Lirun(lv01Lirun);
+        order.setLv02Lirun(lv02Lirun);
         
         // 二.先做订单号签名
         String nonce_str = Sign.create_nonce_str();
@@ -385,12 +413,23 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, Object> updOrderToPayed(String orderId) {
         
         Date date = new Date();
-        
+        // 主订单
         TOrder record = tOrderMapper.selectByPrimaryKey(orderId );
         record.setStatus(AbsConst.ORDER_PAYED);
         record.setuDate(date);
         record.setuUser("UPD_ORDER_PAYED");
         tOrderMapper.updateByPrimaryKey(record);
+        // 详细订单
+        List<TOrderDetail> orderDetailList = tOrderDetailMapper.getOrderDetailListObj(orderId);
+        for(TOrderDetail od:orderDetailList){
+        	od.setStatus(AbsConst.ORDER_PAYED);
+        	od.setuDate(date);
+        	od.setuUser("UPD_ORDER_PAYED");
+        }
+        // 送信
+        
+        
+        
         
         Map<String, Object> resultMap =  new HashMap<String, Object>();
         return resultMap;

@@ -20,4 +20,6 @@ public interface TOrderDetailMapper {
     int updateByPrimaryKey(TOrderDetail record);
     
     List<Map<String, Object>> getOrderDetailList(String orderId);
+    
+    List<TOrderDetail> getOrderDetailListObj(String orderId);
 }

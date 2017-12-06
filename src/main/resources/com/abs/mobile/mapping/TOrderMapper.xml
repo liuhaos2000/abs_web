@@ -18,6 +18,10 @@
     <result column="shiji_price" property="shijiPrice" jdbcType="DECIMAL" />
     <result column="p_open_id" property="pOpenId" jdbcType="VARCHAR" />
     <result column="p_user_lv" property="pUserLv" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="lv00_lirun" property="lv00Lirun" jdbcType="DECIMAL" />
+    <result column="lv01_lirun" property="lv01Lirun" jdbcType="DECIMAL" />
+    <result column="lv02_lirun" property="lv02Lirun" jdbcType="DECIMAL" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
     <result column="c_user" property="cUser" jdbcType="VARCHAR" />
@@ -27,7 +31,8 @@
   <sql id="Base_Column_List" >
     order_id, order_zhifu_id, order_date, status, open_id, user_lv, address_id, totle_price, 
     wuliu_yunfei, yhq_flg, yhq_code, jifen_flg, jifen_dixiao, shiji_price, p_open_id, 
-    p_user_lv, del_flg, c_date, c_user, u_date, u_user
+    p_user_lv, cost, lv00_lirun, lv01_lirun, lv02_lirun, del_flg, c_date, c_user, u_date, 
+    u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -45,17 +50,19 @@
       address_id, totle_price, wuliu_yunfei, 
       yhq_flg, yhq_code, jifen_flg, 
       jifen_dixiao, shiji_price, p_open_id, 
-      p_user_lv, del_flg, c_date, 
-      c_user, u_date, u_user
-      )
+      p_user_lv, cost, lv00_lirun, 
+      lv01_lirun, lv02_lirun, del_flg, 
+      c_date, c_user, u_date, 
+      u_user)
     values (#{orderId,jdbcType=VARCHAR}, #{orderZhifuId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{userLv,jdbcType=VARCHAR}, 
       #{addressId,jdbcType=INTEGER}, #{totlePrice,jdbcType=DECIMAL}, #{wuliuYunfei,jdbcType=DECIMAL}, 
       #{yhqFlg,jdbcType=CHAR}, #{yhqCode,jdbcType=INTEGER}, #{jifenFlg,jdbcType=CHAR}, 
       #{jifenDixiao,jdbcType=DECIMAL}, #{shijiPrice,jdbcType=DECIMAL}, #{pOpenId,jdbcType=VARCHAR}, 
-      #{pUserLv,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
-      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
-      )
+      #{pUserLv,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, #{lv00Lirun,jdbcType=DECIMAL}, 
+      #{lv01Lirun,jdbcType=DECIMAL}, #{lv02Lirun,jdbcType=DECIMAL}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TOrder" >
     insert into t_order
@@ -107,6 +114,18 @@
       </if>
       <if test="pUserLv != null" >
         p_user_lv,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun,
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun,
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun,
       </if>
       <if test="delFlg != null" >
         del_flg,
@@ -173,6 +192,18 @@
       <if test="pUserLv != null" >
         #{pUserLv,jdbcType=VARCHAR},
       </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        #{lv02Lirun,jdbcType=DECIMAL},
+      </if>
       <if test="delFlg != null" >
         #{delFlg,jdbcType=CHAR},
       </if>
@@ -238,6 +269,18 @@
       <if test="pUserLv != null" >
         p_user_lv = #{pUserLv,jdbcType=VARCHAR},
       </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
+      </if>
       <if test="delFlg != null" >
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
@@ -273,6 +316,10 @@
       shiji_price = #{shijiPrice,jdbcType=DECIMAL},
       p_open_id = #{pOpenId,jdbcType=VARCHAR},
       p_user_lv = #{pUserLv,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -302,10 +349,10 @@
         t1.order_id,t1.order_zhifu_id,t1.`status`,date_format(t1.order_date,'%Y-%m-%d %H:%I:%S') as order_date,
         t1.shiji_price,
                 CASE
-                        when t1.`status`='1' then '待支付'
-                        when t1.`status`='2' then '待发货'
-                        when t1.`status`='3' then '已发货'
-                        when t1.`status`='4' then '已收货'
+                        when t1.`status`='1' then '待支�?
+                        when t1.`status`='2' then '待发�?
+                        when t1.`status`='3' then '已发�?
+                        when t1.`status`='4' then '已收�?
                         when t1.`status`='9' then '完了'
                         else '' 
                 end as status_text

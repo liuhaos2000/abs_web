@@ -1,7 +1,5 @@
 package com.abs.util.commom;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,5 +82,17 @@ public class AbsTool {
 			return param1.get(0);
 		}
 
+	}
+	
+	/**
+	 * 如果为NULL返回“0”
+	 * @return
+	 */
+	public static String ifNullRetuenKongchuan(String str){
+		if(StringUtils.isNotEmpty(str)){
+			return str;
+		}else{
+			return "0";
+		}
 	}
 }

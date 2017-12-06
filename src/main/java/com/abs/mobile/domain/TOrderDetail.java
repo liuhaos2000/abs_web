@@ -24,6 +24,14 @@ public class TOrderDetail extends TOrderDetailKey {
 
     private String wuliuCode;
 
+    private BigDecimal cost;
+
+    private BigDecimal lv00Lirun;
+
+    private BigDecimal lv01Lirun;
+
+    private BigDecimal lv02Lirun;
+
     private String delFlg;
 
     private Date cDate;
@@ -112,6 +120,38 @@ public class TOrderDetail extends TOrderDetailKey {
 
     public void setWuliuCode(String wuliuCode) {
         this.wuliuCode = wuliuCode == null ? null : wuliuCode.trim();
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getLv00Lirun() {
+        return lv00Lirun;
+    }
+
+    public void setLv00Lirun(BigDecimal lv00Lirun) {
+        this.lv00Lirun = lv00Lirun;
+    }
+
+    public BigDecimal getLv01Lirun() {
+        return lv01Lirun;
+    }
+
+    public void setLv01Lirun(BigDecimal lv01Lirun) {
+        this.lv01Lirun = lv01Lirun;
+    }
+
+    public BigDecimal getLv02Lirun() {
+        return lv02Lirun;
+    }
+
+    public void setLv02Lirun(BigDecimal lv02Lirun) {
+        this.lv02Lirun = lv02Lirun;
     }
 
     public String getDelFlg() {

@@ -1,5 +1,6 @@
 package com.abs.mobile.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +17,7 @@ public class UserInfoAuthorizeServiceImplTest {
  * @param args
  */
 	public static void main(String[] args) {
-		
-		String strURL="/a?a=a&b=b&parent=aaa";
-		
-		String result=	AbsTool.getJiexiCanshu(strURL, "parent");
-		
-		System.out.println(result);
+		String aa="1";
+		BigDecimal a =new BigDecimal(aa);
 	}
 	}
