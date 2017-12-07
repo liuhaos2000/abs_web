@@ -88,7 +88,7 @@ public class AbsTool {
 	 * 如果为NULL返回“0”
 	 * @return
 	 */
-	public static String ifNullRetuenKongchuan(String str){
+	public static String ifNullRetuenZeor(String str){
 		if(StringUtils.isNotEmpty(str)){
 			return str;
 		}else{

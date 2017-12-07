@@ -221,11 +221,19 @@ public class OrderServiceImpl implements OrderService {
             // status
             tOrderDetail.setStatus(AbsConst.ORDER_WAIT_PAY);
             
+            //
+            
+            BigDecimal shuliang=new BigDecimal(tOrderDetail.getShuliang().intValue());
+            
             tOrderDetail.setTuihuoFlg("0");
-            tOrderDetail.setCost(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("cost"))));
-            tOrderDetail.setLv00Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv00_lirun"))));
-            tOrderDetail.setLv01Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv01_lirun"))));
-            tOrderDetail.setLv02Lirun(new BigDecimal(AbsTool.ifNullRetuenKongchuan(detail.get("lv02_lirun"))));
+            tOrderDetail.setCost(
+            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("cost"))).multiply(shuliang));
+            tOrderDetail.setLv00Lirun(
+            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv00_lirun"))).multiply(shuliang));
+            tOrderDetail.setLv01Lirun(
+            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv01_lirun"))).multiply(shuliang));
+            tOrderDetail.setLv02Lirun(
+            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv02_lirun"))).multiply(shuliang));
             
             cost.add(tOrderDetail.getCost());
             lv00Lirun.add(tOrderDetail.getLv00Lirun());
