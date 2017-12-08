@@ -9,6 +9,9 @@
     <result column="open_id" property="openId" jdbcType="VARCHAR" />
     <result column="user_lv" property="userLv" jdbcType="VARCHAR" />
     <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address_full" property="addressFull" jdbcType="VARCHAR" />
     <result column="totle_price" property="totlePrice" jdbcType="DECIMAL" />
     <result column="wuliu_yunfei" property="wuliuYunfei" jdbcType="DECIMAL" />
     <result column="yhq_flg" property="yhqFlg" jdbcType="CHAR" />
@@ -29,10 +32,10 @@
     <result column="u_user" property="uUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, order_zhifu_id, order_date, status, open_id, user_lv, address_id, totle_price, 
-    wuliu_yunfei, yhq_flg, yhq_code, jifen_flg, jifen_dixiao, shiji_price, p_open_id, 
-    p_user_lv, cost, lv00_lirun, lv01_lirun, lv02_lirun, del_flg, c_date, c_user, u_date, 
-    u_user
+    order_id, order_zhifu_id, order_date, status, open_id, user_lv, address_id, name, 
+    tel, address_full, totle_price, wuliu_yunfei, yhq_flg, yhq_code, jifen_flg, jifen_dixiao, 
+    shiji_price, p_open_id, p_user_lv, cost, lv00_lirun, lv01_lirun, lv02_lirun, del_flg, 
+    c_date, c_user, u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -47,7 +50,8 @@
   <insert id="insert" parameterType="com.abs.mobile.domain.TOrder" >
     insert into t_order (order_id, order_zhifu_id, order_date, 
       status, open_id, user_lv, 
-      address_id, totle_price, wuliu_yunfei, 
+      address_id, name, tel, 
+      address_full, totle_price, wuliu_yunfei, 
       yhq_flg, yhq_code, jifen_flg, 
       jifen_dixiao, shiji_price, p_open_id, 
       p_user_lv, cost, lv00_lirun, 
@@ -56,7 +60,8 @@
       u_user)
     values (#{orderId,jdbcType=VARCHAR}, #{orderZhifuId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{userLv,jdbcType=VARCHAR}, 
-      #{addressId,jdbcType=INTEGER}, #{totlePrice,jdbcType=DECIMAL}, #{wuliuYunfei,jdbcType=DECIMAL}, 
+      #{addressId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{addressFull,jdbcType=VARCHAR}, #{totlePrice,jdbcType=DECIMAL}, #{wuliuYunfei,jdbcType=DECIMAL}, 
       #{yhqFlg,jdbcType=CHAR}, #{yhqCode,jdbcType=INTEGER}, #{jifenFlg,jdbcType=CHAR}, 
       #{jifenDixiao,jdbcType=DECIMAL}, #{shijiPrice,jdbcType=DECIMAL}, #{pOpenId,jdbcType=VARCHAR}, 
       #{pUserLv,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, #{lv00Lirun,jdbcType=DECIMAL}, 
@@ -87,6 +92,15 @@
       </if>
       <if test="addressId != null" >
         address_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="addressFull != null" >
+        address_full,
       </if>
       <if test="totlePrice != null" >
         totle_price,
@@ -165,6 +179,15 @@
       <if test="addressId != null" >
         #{addressId,jdbcType=INTEGER},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="addressFull != null" >
+        #{addressFull,jdbcType=VARCHAR},
+      </if>
       <if test="totlePrice != null" >
         #{totlePrice,jdbcType=DECIMAL},
       </if>
@@ -242,6 +265,15 @@
       <if test="addressId != null" >
         address_id = #{addressId,jdbcType=INTEGER},
       </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="addressFull != null" >
+        address_full = #{addressFull,jdbcType=VARCHAR},
+      </if>
       <if test="totlePrice != null" >
         totle_price = #{totlePrice,jdbcType=DECIMAL},
       </if>
@@ -307,6 +339,9 @@
       open_id = #{openId,jdbcType=VARCHAR},
       user_lv = #{userLv,jdbcType=VARCHAR},
       address_id = #{addressId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      address_full = #{addressFull,jdbcType=VARCHAR},
       totle_price = #{totlePrice,jdbcType=DECIMAL},
       wuliu_yunfei = #{wuliuYunfei,jdbcType=DECIMAL},
       yhq_flg = #{yhqFlg,jdbcType=CHAR},

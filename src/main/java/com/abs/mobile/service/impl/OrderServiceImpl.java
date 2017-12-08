@@ -32,6 +32,7 @@ import com.abs.mobile.domain.TUser;
 import com.abs.mobile.domain.TUserAddress;
 import com.abs.mobile.domain.TUserAddressKey;
 import com.abs.mobile.service.OrderService;
+import com.abs.mobile.service.SendMessageService;
 import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsConst;
 import com.abs.util.commom.AbsTool;
@@ -61,6 +62,9 @@ public class OrderServiceImpl implements OrderService {
     private TItemDetailMapper tItemDetailMapper;
     @Resource
     private TItemMapper tItemMapper;
+    @Resource
+    private SendMessageService sendMessageService;
+    
     /**
      * 订单初始化
      */
@@ -227,18 +231,40 @@ public class OrderServiceImpl implements OrderService {
             
             tOrderDetail.setTuihuoFlg("0");
             tOrderDetail.setCost(
-            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("cost"))).multiply(shuliang));
-            tOrderDetail.setLv00Lirun(
-            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv00_lirun"))).multiply(shuliang));
-            tOrderDetail.setLv01Lirun(
-            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv01_lirun"))).multiply(shuliang));
-            tOrderDetail.setLv02Lirun(
-            		new BigDecimal(AbsTool.ifNullRetuenZeor(detail.get("lv02_lirun"))).multiply(shuliang));
+            		AbsTool.objToBigDecimal(detail.get("cost")).multiply(shuliang));
             
-            cost.add(tOrderDetail.getCost());
-            lv00Lirun.add(tOrderDetail.getLv00Lirun());
-            lv01Lirun.add(tOrderDetail.getLv01Lirun());
-            lv02Lirun.add(tOrderDetail.getLv02Lirun());
+            if("02".equals(shopUser.getLever())){
+                tOrderDetail.setLv00Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv00_lirun")).multiply(shuliang));
+                tOrderDetail.setLv01Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv01_lirun")).multiply(shuliang));
+                tOrderDetail.setLv02Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv02_lirun")).multiply(shuliang));
+            } else if("01".equals(shopUser.getLever())){
+                tOrderDetail.setLv00Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv00_lirun")).multiply(shuliang));
+                tOrderDetail.setLv01Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv01_lirun")).multiply(shuliang).add(
+                				AbsTool.objToBigDecimal(detail.get("lv02_lirun")).multiply(shuliang)));
+            }else {
+                tOrderDetail.setLv00Lirun(
+                		AbsTool.objToBigDecimal(detail.get("lv00_lirun")).multiply(shuliang).add(	
+                				AbsTool.objToBigDecimal(detail.get("lv01_lirun")).multiply(shuliang)).add(
+                						AbsTool.objToBigDecimal(detail.get("lv02_lirun")).multiply(shuliang)));
+            }
+            
+            tOrderDetail.setLv00Lirun(
+            		AbsTool.objToBigDecimal(detail.get("lv00_lirun")).multiply(shuliang));
+            tOrderDetail.setLv01Lirun(
+            		AbsTool.objToBigDecimal(detail.get("lv01_lirun")).multiply(shuliang));
+            tOrderDetail.setLv02Lirun(
+            		AbsTool.objToBigDecimal(detail.get("lv02_lirun")).multiply(shuliang));
+            
+            
+            cost = cost.add(tOrderDetail.getCost());
+            lv00Lirun = lv00Lirun.add(tOrderDetail.getLv00Lirun());
+            lv01Lirun = lv01Lirun.add(tOrderDetail.getLv01Lirun());
+            lv02Lirun = lv02Lirun.add(tOrderDetail.getLv02Lirun());
 
             // 公共
             tOrderDetail.setcDate(date);
@@ -431,13 +457,12 @@ public class OrderServiceImpl implements OrderService {
         List<TOrderDetail> orderDetailList = tOrderDetailMapper.getOrderDetailListObj(orderId);
         for(TOrderDetail od:orderDetailList){
         	od.setStatus(AbsConst.ORDER_PAYED);
+        	od.setMsgStatus(AbsConst.ORDER_PAYED);// 和下面的送信关联
         	od.setuDate(date);
         	od.setuUser("UPD_ORDER_PAYED");
         }
         // 送信
-        
-        
-        
+        sendMessageService.sendPaySuccessMsg(record,orderDetailList);
         
         Map<String, Object> resultMap =  new HashMap<String, Object>();
         return resultMap;

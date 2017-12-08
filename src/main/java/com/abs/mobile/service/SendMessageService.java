@@ -13,7 +13,7 @@ public interface SendMessageService {
 	 * @return
 	 * @throws BusinessException 
 	 */
-	public void sendPaySuccessMsg(TOrder record,List<TOrderDetail> orderDetailList);
+	public void sendPaySuccessMsg(TOrder order,List<TOrderDetail> orderDetailList);
 	/**
 	 * 订单发货后MSG to 供货商，SHOP USER，总部
 	 * 

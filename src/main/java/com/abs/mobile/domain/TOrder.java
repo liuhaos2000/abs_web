@@ -18,6 +18,12 @@ public class TOrder {
 
     private Integer addressId;
 
+    private String name;
+
+    private String tel;
+
+    private String addressFull;
+
     private BigDecimal totlePrice;
 
     private BigDecimal wuliuYunfei;
@@ -108,6 +114,30 @@ public class TOrder {
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
+    public String getAddressFull() {
+        return addressFull;
+    }
+
+    public void setAddressFull(String addressFull) {
+        this.addressFull = addressFull == null ? null : addressFull.trim();
     }
 
     public BigDecimal getTotlePrice() {

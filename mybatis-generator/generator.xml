@@ -28,8 +28,6 @@
 		</javaClientGenerator>
 		<!-- table name,  change tableName and domainObjectName  -->
 		<table tableName="t_order" domainObjectName="TOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
-		<table tableName="t_order_detail" domainObjectName="TOrderDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
-		<table tableName="t_item_detail" domainObjectName="TItemDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 		
 		
 	</context>

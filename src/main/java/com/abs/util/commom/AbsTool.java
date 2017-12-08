@@ -1,5 +1,6 @@
 package com.abs.util.commom;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,11 +89,22 @@ public class AbsTool {
 	 * 如果为NULL返回“0”
 	 * @return
 	 */
-	public static String ifNullRetuenZeor(String str){
+	public static BigDecimal objToBigDecimal(Object o){
+		if(o==null){
+			return new BigDecimal(0);
+		}else{
+			return (BigDecimal)o;
+		}
+	}
+	/**
+	 * 如果为NULL返回“”
+	 * @return
+	 */
+	public static String ifNullRetuenKong(String str){
 		if(StringUtils.isNotEmpty(str)){
 			return str;
 		}else{
-			return "0";
+			return "";
 		}
 	}
 }

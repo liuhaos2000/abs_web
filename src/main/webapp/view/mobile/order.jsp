@@ -643,6 +643,9 @@ function dosubmit(){
         	   jifenDixiao:$("#jifen").val(),
         	   jifenFlg:jifenFlg,
         	   addressId:$("#head-adid").val(),
+        	   name:$("#head-name").text(),
+        	   addressFull:$("#head-ad").text(),
+        	   tel:$("#head-tel").text(),
         	   orderItems:orderItems
             },
         type:'post',    
