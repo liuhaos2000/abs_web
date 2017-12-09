@@ -22,4 +22,9 @@ public interface TOrderDetailMapper {
     List<Map<String, Object>> getOrderDetailList(String orderId);
     
     List<TOrderDetail> getOrderDetailListObj(String orderId);
+    
+    /**
+     * 发货时MSG订单查询用
+     */
+    List<Map<String, String>> getOrderSendFahuoMSG();
 }

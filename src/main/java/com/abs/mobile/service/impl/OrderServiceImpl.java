@@ -306,7 +306,7 @@ public class OrderServiceImpl implements OrderService {
         payParm.setSign(sign);
         
         // TODO 商品描述，商户订单号,金额  暂定TEST
-        payParm.setBody("西域果品优选");
+        payParm.setBody(WeixinConst.KEFU_GZH_NAME);
         payParm.setOut_trade_no(order.getOrderId());
         payParm.setTotal_fee(String.valueOf(order.getShijiPrice().multiply(
                 new BigDecimal(100)).intValue()));

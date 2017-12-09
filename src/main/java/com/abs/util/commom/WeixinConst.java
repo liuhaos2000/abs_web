@@ -45,6 +45,7 @@ public class WeixinConst {
 	//测试--------- END
 	
 	
+	public static final String HOME_PAGE="abs_web/app/mobile/page/index";
 
 	public static String AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 	// 统一下单
@@ -57,12 +58,19 @@ public class WeixinConst {
 	// 异步回调地址
 	public static String NOTIFY_URL = SEVERPATH+"abs_web/paynotify";
 	
-	
-	
 	// 重定向地址
 	public static String REDIRECT_URL = "http://XXXXXXXXXXXXXXXXXXX/callWeiXinPay";
 
 	// web回调地址
 	public static String WEB_NOTIFY_URL = "http://XXXXXXXXXXXXXXXXXXXXXXXXX/weixinPay_notify";
+	
+	// 客服电话
+	public static String KEFU_TEL = "18623076530";
+
+	// 客服Name
+	public static String KEFU_NAME = "悦东";
+	
+	// 公众号Name，微信订单中显示
+	public static String KEFU_GZH_NAME = "西域果品优选";
 	
 }
