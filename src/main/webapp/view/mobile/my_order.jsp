@@ -143,7 +143,7 @@ function doPay(orderId){
                                             //alert("微信支付成功!");  
                                             myalert("支付成功！",'main_div');
                                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
-                                        	myalert("您的订单已经生成！",'main_div');  
+                                        	myalert("再考虑考虑！",'main_div');  
                                         }else{  
                                             alert("支付失败!");  
                                         }

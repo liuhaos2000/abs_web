@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
     private SendMessageService sendMessageService;
     
     /**
-     * 订单初始化
+     * 订单页面初始化
      */
     @Override
     @Transactional(rollbackFor=Exception.class) 
@@ -88,11 +88,17 @@ public class OrderServiceImpl implements OrderService {
             key.setItemYanse(tcart.getItemYanse());
             key.setOpenId(user.getOpenId());
             TCart dbCart = tCartMapper.selectByPrimaryKey(key);
-            dbCart.setShuliang(tcart.getShuliang());
-            dbCart.setDelFlg(tcart.getDelFlg());
-            dbCart.setuDate(date);
-            dbCart.setuUser("TOORDER");
-            tCartMapper.updateByPrimaryKey(dbCart);
+            if(dbCart==null){
+//                resultMap.put("message", "重复购买，请刷新购物车后继续购买！");
+//                return resultMap;
+            }else{
+                dbCart.setShuliang(tcart.getShuliang());
+                dbCart.setDelFlg(tcart.getDelFlg());
+                dbCart.setuDate(date);
+                dbCart.setuUser("TOORDER");
+                tCartMapper.updateByPrimaryKey(dbCart);
+            }
+
         }
         
         //2取得用户地址
@@ -166,7 +172,7 @@ public class OrderServiceImpl implements OrderService {
         Date date = new Date();
         // 一.生成订单
         //1.CHECK TODO 订单的生成有问题，从前台获取金额。。。。
-        //checkOrder(order,orderDetailList,user);
+        checkOrder(order,orderDetailList,user);
         //2.采集订单号
         String orderId = getNewOrderId();
         //3.订单插入
@@ -381,14 +387,14 @@ public class OrderServiceImpl implements OrderService {
     private void checkOrder(TOrder order, 
             List<TOrderDetail> orderDetailList,TUser user) throws BusinessException {
         // 1.库存 check 
-        List<Map<String, Object>> list = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),"5");
-        for(Map map:list){
-            Integer kucun = (Integer)map.get("kucun");
-            Integer shuliang = (Integer)map.get("shuliang");
-            if(kucun<shuliang){
-                throw new BusinessException("ordersubmit.kucun.error");
-            }
-        }
+//        List<Map<String, Object>> list = tCartMapper.getItemFromCartWhitYoufei(user.getOpenId(),"5");
+//        for(Map map:list){
+//            Integer kucun = (Integer)map.get("kucun");
+//            Integer shuliang = (Integer)map.get("shuliang");
+//            if(kucun<shuliang){
+//                throw new BusinessException("ordersubmit.kucun.error");
+//            }
+//        }
         // 1.1 cart check
         if(orderDetailList!=null){
             for(TOrderDetail itemDetail : orderDetailList){
@@ -405,28 +411,28 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         // 2.商品价格计算 check
-        Map priceMap = tCartMapper.getItemFromCartTotalPrice(user.getOpenId(),"5");
-        BigDecimal p = (BigDecimal)priceMap.get("item_total_price");
-        if(p.compareTo(order.getTotlePrice())!=0){
-            throw new BusinessException("ordersubmit.itemprice.error");
-        }
+//        Map priceMap = tCartMapper.getItemFromCartTotalPrice(user.getOpenId(),"5");
+//        BigDecimal p = (BigDecimal)priceMap.get("item_total_price");
+//        if(p.compareTo(order.getTotlePrice())!=0){
+//            throw new BusinessException("ordersubmit.itemprice.error");
+//        }
         // 3.邮费计算 check
-        Map youfeiMap = tCartMapper.getItemFromCartTotalYoufei(user.getOpenId(),"5");
-        BigDecimal y = (BigDecimal)youfeiMap.get("youfei_total");
-        if(y.compareTo(order.getWuliuYunfei())!=0){
-            throw new BusinessException("ordersubmit.yunfei.error");
-        }
+//        Map youfeiMap = tCartMapper.getItemFromCartTotalYoufei(user.getOpenId(),"5");
+//        BigDecimal y = (BigDecimal)youfeiMap.get("youfei_total");
+//        if(y.compareTo(order.getWuliuYunfei())!=0){
+//            throw new BusinessException("ordersubmit.yunfei.error");
+//        }
         // 4.积分 check
-        if("1".equals(order.getJifenFlg())){
-            if(order.getJifenDixiao().compareTo(new BigDecimal(user.getJifen()))>1){
-                throw new BusinessException("ordersubmit.jifen.error");
-            }
-        }
-        // 5.总价 check
-        BigDecimal t= p.add(y);
-        if(t.compareTo(order.getShijiPrice())!=0){
-            throw new BusinessException("ordersubmit.zongjia.error");
-        }
+//        if("1".equals(order.getJifenFlg())){
+//            if(order.getJifenDixiao().compareTo(new BigDecimal(user.getJifen()))>1){
+//                throw new BusinessException("ordersubmit.jifen.error");
+//            }
+//        }
+        // 5.总价 check TODO
+//        BigDecimal t= p.add(y);
+//        if(t.compareTo(order.getShijiPrice())!=0){
+//            throw new BusinessException("ordersubmit.zongjia.error");
+//        }
     }
     /**
      * 采番订单ID
@@ -460,6 +466,7 @@ public class OrderServiceImpl implements OrderService {
         	od.setMsgStatus(AbsConst.ORDER_PAYED);// 和下面的送信关联
         	od.setuDate(date);
         	od.setuUser("UPD_ORDER_PAYED");
+        	tOrderDetailMapper.updateByPrimaryKey(od);
         }
         // 送信
         sendMessageService.sendPaySuccessMsg(record,orderDetailList);

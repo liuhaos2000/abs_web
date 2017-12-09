@@ -11,8 +11,9 @@ import com.abs.util.exception.BusinessException;
 public interface OrderService {
     /**
      * 订单初始化
+     * @throws BusinessException 
      */
-    public Map<String, Object> initOrder(List<TCart> cartList);
+    public Map<String, Object> initOrder(List<TCart> cartList) ;
     
     /**
      * 订单提交

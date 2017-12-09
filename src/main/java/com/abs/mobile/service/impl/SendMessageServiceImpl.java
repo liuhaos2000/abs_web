@@ -136,10 +136,9 @@ public class SendMessageServiceImpl implements SendMessageService {
 					item.getItemName() + AbsTool.ifNullRetuenKong(itemDetail.getGuigeText())
 							+ AbsTool.ifNullRetuenKong(itemDetail.getYanseText()) 
 							+ "  数量："
-							+ itemDetail.getShuliang().toString()
+							+ orderDetail.getShuliang().toString()
 							+ "  价格："
-							+ itemDetail.getCost().multiply(
-									new BigDecimal(itemDetail.getShuliang().intValue())),
+							+ orderDetail.getCost().toString(),
 					"#0044BB"));
 			tem.setTemplateParamList(paras);
 			tem.setToUser(item.getOwnerOpenId());
