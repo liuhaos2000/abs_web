@@ -26,7 +26,7 @@
 		</div>
 		<div class="row clearfix">
 			<div class="col-md-12 column no-padding">
-				<div class="carousel slide pic_show" id="carousel-7342">
+				<div class="carousel slide pic_show2" id="carousel-7342">
 					<ol class="carousel-indicators">
 					    <c:forEach items="${lblist}" var="tlunbo" varStatus="status">
 					    	<li data-slide-to="${status.index}" data-target="#carousel-7342"></li>

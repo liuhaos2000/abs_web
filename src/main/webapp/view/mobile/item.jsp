@@ -45,7 +45,7 @@
         </div>
 	</header>
     
-    <div id="main_div" class="">
+    <div id="main_div" class="main_div">
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column no-padding">
