@@ -145,7 +145,8 @@ function doPay(orderId){
                                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
                                         	myalert("再考虑考虑！",'main_div');  
                                         }else{  
-                                            alert("支付失败!");  
+                                        	alert(res.err_msg);
+                                            //alert("支付失败!");  
                                         }
                                         // 刷新
                                    	 window.location.href='<%=request.getContextPath() %>'+

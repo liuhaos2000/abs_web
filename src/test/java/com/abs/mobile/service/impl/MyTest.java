@@ -1,13 +1,14 @@
 package com.abs.mobile.service.impl;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.abs.util.commom.AbsTool;
 
 
-public class UserInfoAuthorizeServiceImplTest {
+public class MyTest {
 
 /**
  * 您好，您已购买成功。
@@ -17,7 +18,10 @@ public class UserInfoAuthorizeServiceImplTest {
  * @param args
  */
 	public static void main(String[] args) {
-		String aa="1";
-		BigDecimal a =new BigDecimal(aa);
+		
+		System.out.println(Long.toString(System.currentTimeMillis() / 1000));
+		Date d=new Date();
+		System.out.println(Long.toString(d.getTime()/1000));
+		
 	}
 	}

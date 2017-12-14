@@ -89,8 +89,8 @@ public class OrderServiceImpl implements OrderService {
             key.setOpenId(user.getOpenId());
             TCart dbCart = tCartMapper.selectByPrimaryKey(key);
             if(dbCart==null){
-//                resultMap.put("message", "重复购买，请刷新购物车后继续购买！");
-//                return resultMap;
+                resultMap.put("message", "重复购买，请刷新购物车后继续购买！");
+                return resultMap;
             }else{
                 dbCart.setShuliang(tcart.getShuliang());
                 dbCart.setDelFlg(tcart.getDelFlg());
@@ -673,7 +673,10 @@ public class OrderServiceImpl implements OrderService {
         String packageid = "prepay_id="+tOrder.getOrderZhifuId();
         SortedMap<String, String> parm = new TreeMap<String, String>();
         parm.put("appId", WeixinConst.APPID);
-        parm.put("timeStamp", Sign.create_timestamp());
+        // 20171214 start
+        //parm.put("timeStamp", Sign.create_timestamp());
+        parm.put("timeStamp", Long.toString(tOrder.getcDate().getTime()/1000+10));
+        // 20171214 end
         parm.put("nonceStr", nonce_str);
         parm.put("package", packageid);
         parm.put("signType", "MD5");

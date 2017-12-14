@@ -227,7 +227,16 @@ public class PageController {
         List<TCart> cartList = (List<TCart>)JSONArray.toList(json, TCart.class);
         Map<String, Object> result = orderService.initOrder(cartList);
         map.put("result", result);
-        return "mobile/order";
+        if(result.get("message")!=null){
+        	// 出错了  去购物车，刷新购物车
+            Map<String, Object> resultMap =  cartService.getCartItem();
+            map.put("resultFlg", true);
+            map.put("result", resultMap);  
+            
+            return "mobile/cart";
+        }else{
+            return "mobile/order";
+        }
     }
 
     // 系统外
