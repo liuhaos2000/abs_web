@@ -673,10 +673,7 @@ public class OrderServiceImpl implements OrderService {
         String packageid = "prepay_id="+tOrder.getOrderZhifuId();
         SortedMap<String, String> parm = new TreeMap<String, String>();
         parm.put("appId", WeixinConst.APPID);
-        // 20171214 start
-        //parm.put("timeStamp", Sign.create_timestamp());
-        parm.put("timeStamp", Long.toString(tOrder.getcDate().getTime()/1000+10));
-        // 20171214 end
+        parm.put("timeStamp", Sign.create_timestamp());
         parm.put("nonceStr", nonce_str);
         parm.put("package", packageid);
         parm.put("signType", "MD5");
