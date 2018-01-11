@@ -11,37 +11,37 @@ public class WeixinConst {
 	public static final String TOKEN= "abs_web_yuedongkeji";
 
 	//运行
-	public static final String APPID = "wxe6f7ad732dcc0e34";
-
-	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
-
-	public static final String SEVERPATH = "http://ruihegouwu.cn/";
-	
-	public static final String SHOPMAST_USER_OPENID = "oWQDLwyAbu_D2mu05eCLf7Ec4Ctc";
-	//发货提醒 TO ITEM MASTER
-	public static final String MSG_FAHUO = "4HrSZjN458t202bDIKDz7tBoK42TLdw2gNkb15sH2xE";
-	//商品购买成功通知  TO PARENT
-	public static final String MSG_GOUMAI_OK = "uGPGaOrTTyXhxbwY7cVucaAXBJgVKCDSZKjxLG9qDR8";
-	//订单发货提醒 TO USER AND PARENT
-	public static final String MSG_ORDER_SEND = "vs3c6IVS2ERLZUkUQJSndPzUm4e-QVrooTKiUs9UPj0";
+//	public static final String APPID = "wxe6f7ad732dcc0e34";
+//
+//	public static final String APPSECRET = "2fdaa37b09503a756f31ca93fc355d6e";
+//
+//	public static final String SEVERPATH = "http://ruihegouwu.cn/";
+//	
+//	public static final String SHOPMAST_USER_OPENID = "oWQDLwyAbu_D2mu05eCLf7Ec4Ctc";
+//	//发货提醒 TO ITEM MASTER
+//	public static final String MSG_FAHUO = "4HrSZjN458t202bDIKDz7tBoK42TLdw2gNkb15sH2xE";
+//	//商品购买成功通知  TO PARENT
+//	public static final String MSG_GOUMAI_OK = "uGPGaOrTTyXhxbwY7cVucaAXBJgVKCDSZKjxLG9qDR8";
+//	//订单发货提醒 TO USER AND PARENT
+//	public static final String MSG_ORDER_SEND = "vs3c6IVS2ERLZUkUQJSndPzUm4e-QVrooTKiUs9UPj0";
 	
 	//运行
 	
 	//测试 ---------START
-//	public static final String APPID = "wx5d3a57699afdcf6d";
-//
-//	public static final String APPSECRET = "f82a5314bdcdb704e588cfb8ff1ac497";
-//
-//	public static final String SEVERPATH = "http://abstest.51vip.biz/";
-//	
-//	public static final String SHOPMAST_USER_OPENID = "o__evuKaM6-MCC3tKvxdWs64SZkI";
-//	//发货提醒 TO ITEM MASTER
-//	public static final String MSG_FAHUO = "IJKgukN8FiYXhYwPR09ZxuHg0xsP97EfFnFU59FJmMc";
-//	//商品购买成功通知  TO PARENT
-//	public static final String MSG_GOUMAI_OK = "-tPQSjXXoJfGgkNZM-qB0t96Uyo2sRpRQ3P4fUP_7LQ";
-//	//订单发货提醒 TO USER AND PARENT
-//	public static final String MSG_ORDER_SEND = "lMe6yVT40Dq72htGm_EUDDN2u9Ec_mPCG9Z6BRZ4NIo";
-//	
+	public static final String APPID = "wx5d3a57699afdcf6d";
+
+	public static final String APPSECRET = "f82a5314bdcdb704e588cfb8ff1ac497";
+
+	public static final String SEVERPATH = "http://abstest.51vip.biz/";
+	
+	public static final String SHOPMAST_USER_OPENID = "o__evuKaM6-MCC3tKvxdWs64SZkI";
+	//发货提醒 TO ITEM MASTER
+	public static final String MSG_FAHUO = "IJKgukN8FiYXhYwPR09ZxuHg0xsP97EfFnFU59FJmMc";
+	//商品购买成功通知  TO PARENT
+	public static final String MSG_GOUMAI_OK = "-tPQSjXXoJfGgkNZM-qB0t96Uyo2sRpRQ3P4fUP_7LQ";
+	//订单发货提醒 TO USER AND PARENT
+	public static final String MSG_ORDER_SEND = "lMe6yVT40Dq72htGm_EUDDN2u9Ec_mPCG9Z6BRZ4NIo";
+	
 	//测试--------- END
 	
 	

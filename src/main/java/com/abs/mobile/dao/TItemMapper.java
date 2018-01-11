@@ -37,9 +37,9 @@ public interface TItemMapper {
     /**
      * Home用 团购
      */
-	List<Map<String, String>> getItemTungou();
-    /**
-     * Home用 一元购
-     */
-	List<Map<String, String>> getItemYiyuangou();
+//	List<Map<String, String>> getItemTungou();
+//    /**
+//     * Home用 一元购
+//     */
+//	List<Map<String, String>> getItemYiyuangou();
 }

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.abs.mobile.dao.TUserMapper;
 import com.abs.mobile.domain.TUser;
 import com.abs.util.commom.AbsConst;
 import com.abs.util.commom.WeixinConst;
@@ -21,6 +23,8 @@ import com.abs.util.commom.WeixinConst;
 public class SessionInterceptor implements HandlerInterceptor { 
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	@Resource
+	private TUserMapper tUserMapper;
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler) throws Exception {
@@ -61,11 +65,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 //		if (request.getSession().getAttribute(AbsConst.LOGIN_USER) == null) {
 //			// 未登录
 //		    HttpSession session = request.getSession(); 
+//		    TUser user = tUserMapper.selectByPrimaryKey("oWQDLwyAbu_D2mu05eCLf7Ec4Ctc");
 //		    
-//		    TUser user = new TUser();
-//		    user.setOpenId("oWQDLwyAbu_D2mu05eCLf7Ec4Ctc");
-//		    user.setNickname("胖子牛");
-//		    user.setJifen(23); 
 //		    session.setAttribute(AbsConst.LOGIN_USER, user);
 //		} 
 

@@ -90,7 +90,7 @@
    
    
 
-    <div id="main_div" class="maindiv">
+    <div id="main_div" class="maindiv main_div">
         <div class="container-fluid order-container">
             <div class="row-fluid">
                 <div class="span12">
@@ -343,13 +343,13 @@
     </div>
 
     <footer class="tool_foot">
-        <div class="container footer itme_detail_top">
+        <div class="container">
             <div class="row footer-row">
-                <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-                    <p class="foot-text">总价：￥<span id="total">0</span>元</p>
+                <div class="col-md-6 col-sm-6 col-xs-6 footer-col no-padding">
+                    <p class="foot-text">总价：￥<span id="total"></span>元</p>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-                    <button id="zhifu_bt" class="btn btn-success a-btn" type="button">支付</button>
+                <div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+                    <button id="zhifu_bt" class="btn  a-btn" type="button" style="height: 43px">支付</button>
                 </div>
             </div>
         </div>
@@ -383,7 +383,7 @@ $(document).ready(function() {
     });         
     //      
     $(function(){
-        $("#main_div").height($(window).height()-52);
+        $("#main_div").height($(window).height()-43);
         $("#main_div").css({"overflow":"auto"});
         // 合计
         $("#itemTotal").html("${result.priceTotal.itemTotalPrice}");

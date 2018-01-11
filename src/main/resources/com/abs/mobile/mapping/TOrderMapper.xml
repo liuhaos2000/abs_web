@@ -388,7 +388,7 @@
                         when t1.`status`='2' then '待发货'
                         when t1.`status`='3' then '已发货'
                         when t1.`status`='4' then '已收货'
-                        when t1.`status`='9' then '完了'
+                        when t1.`status`='5' then '完了'
                         else '' 
                 end as status_text
     from t_order t1

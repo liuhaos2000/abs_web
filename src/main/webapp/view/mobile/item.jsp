@@ -16,36 +16,35 @@
     <link rel="stylesheet" href="${path}/resources/css/owl.theme.default.min.css">
 </head>
 <body>
-    <div class="share">
-    	<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/shouzhi.png">
-    	    <p>帮助好友<Strong>${SHOP_USER.nickname}</Strong>分享他的商品</p>
-    </div>
-	<header>
-		<div class="container">
+
+    <div id="main_div" class="main_div">
+    
+    
+    	<div class="container">
 			<div class="row index-row-head">
 				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
 				    <a href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}">
-						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/tang_logo.jpg">
+						<img  src="${SHOP_USER.weixinImageUrl}">
 					</a>
 				</div>
-				<div class="col-md-10 col-sm-10 col-xs-10 no-padding-left">
-					<div class="input-group index-col-head">
-						<h4 class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的商品&nbsp;&nbsp;&nbsp;
-							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
-								<a style="margin-bottom: 2px;" class="btn btn-warning btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店铺</a>
-							</c:if>
-						</h4>
+				<div class="col-md-4 col-sm-4 col-xs-4 no-padding">
+					<div class="input-group">
+						<p class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的商品&nbsp;&nbsp;&nbsp;
+						</p>
 					</div>
 					<div></div>
 				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 no-padding"  style="padding:2px 6px;text-align: right;">
+							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
+								<a style="" class="btn btn-my btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店</a>
+							</c:if>
+							<div style="" class="btn btn-my btn-xs" role="button">帮好友分享☝</div>
+				</div>
 			</div>
 		</div>
-		<!-- 探出窗口 -->
-        <div class="popupshadow">
-        </div>
-	</header>
-    
-    <div id="main_div" class="main_div">
+		
+		
+		
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column no-padding">
@@ -97,7 +96,7 @@
             <c:choose>
             	<c:when test="${result.itemDetail.size()> 1}">
             	    <c:choose>
-            			<c:when test="${result.xinghao.size()> 0}">
+            			<c:when test="${result.xinghao.size()> 1}">
                                 <div class="row">
             	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
                                     	<p class="">型号：</p>
@@ -105,7 +104,7 @@
                                     <div class="col-md-10 col-sm-10 col-xs-10 ">
                                       <div class="btn-group" data-toggle="buttons">
                                       	<c:forEach items="${result.xinghao}" var="xh">
-                                      		<label class="btn btn-info btn-xs detail-xinghao-bt">
+                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
     			                    			<input type="radio" 
     			                    					name="xinghao" 
     			                    					xianghaoId="${xh.item_guige}" 
@@ -118,7 +117,7 @@
             			</c:when>
             		</c:choose>
             		<c:choose>
-            			<c:when test="${result.yanse.size()> 0}">
+            			<c:when test="${result.yanse.size()> 1}">
                                 <div class="row">
             	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
                                     	<p class="">颜色：</p>
@@ -126,7 +125,7 @@
                                     <div class="col-md-10 col-sm-10 col-xs-10 ">
                                       <div class="btn-group" data-toggle="buttons">
                                       	<c:forEach items="${result.yanse}" var="xh">
-                                      		<label class="btn btn-info btn-xs detail-xinghao-bt">
+                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
     			                    			<input type="radio" 
     			                    					name="yanse" 
     			                    					yanseId="${xh.item_yanse}" 
@@ -201,7 +200,7 @@
                        		 		${result.item.fu_text}
                              </div>
                     	</div>
-                    	<div class="tab-pane" id="panel-3">
+                    	<div class="tab-pane" id="panel-3" style="padding-bottom: 15px">
                        		 <div class="container">
                        		 	<div class="row">
                        		 		<table>
@@ -227,15 +226,14 @@
              </div>
     </div>
     <footer class="tool_foot">
-        <div class="container footer itme_detail_top">
-            <div class="row">
-                <div class="col-md-8 col-sm-8 col-xs-8">
-                    <button id="addCart_bt" class="btn btn-success a-btn" type="button">加入购物车</button>
-                </div>
-
-                <div class="col-md-4 col-sm-4 col-xs-4">
-                    <button id="cart_bt" class="btn btn-info b-btn" type="button"><span class="glyphicon glyphicon-shopping-cart my-cart" aria-hidden="true"></span></button>
+        <div class="container">
+            <div class="row" style="height: 43px">
+                <div class="col-md-6 col-sm-6 col-xs-6 no-padding " style="height: 43px">
+                    <button id="cart_bt" class="  b-btn " type="button"><span class="glyphicon glyphicon-shopping-cart"  style="font-size:18px;" aria-hidden="true"></span></button>
                     <span class="item-cartcount">3</span>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 no-padding" style="height: 43px">
+                    <button id="addCart_bt" class=" a-btn" type="button">加入购物车</button>
                 </div>
             </div>
         </div>
@@ -267,7 +265,7 @@ $(document).ready(function() {
 	
     //设置高度
     $(function(){
-        $("#main_div").height($(window).height()-$("header").height()-52);
+        $("#main_div").height($(window).height()-$("header").height()-43);
         $("#main_div").css({"overflow":"auto"});
         
   	    $('.carousel').carousel({
@@ -283,8 +281,8 @@ $(document).ready(function() {
     // 加入购物车
     $("#addCart_bt").click(function(){
     	var itemId = '${result.item.item_id}';
-		var xinghao=0;
-		var yanse=0;
+        var xinghao="${result.xinghao[0].item_guige}";
+        var yanse="${result.yanse[0].item_yanse}";
     	var shuliang= $("#shuliang").text();
     	if("${result.itemDetail.size()}" > 1){
     		if("${result.xinghao.size()}" > 1){
@@ -307,7 +305,7 @@ $(document).ready(function() {
     		}
     		addItemToCart(itemId,xinghao,yanse,shuliang);
     	}else{
-    		addItemToCart(itemId,0,0,shuliang);
+    		addItemToCart(itemId,"${result.xinghao[0].item_guige}","${result.yanse[0].item_yanse}",shuliang);
     	}
     }); 
     // 购物车
@@ -334,8 +332,8 @@ $(document).ready(function() {
     
     $(":radio").change(function(){
         var itemId = '${result.item.item_id}';
-        var xinghao=0;
-        var yanse=0;
+        var xinghao="${result.xinghao[0].item_guige}";
+        var yanse="${result.yanse[0].item_yanse}";
         if("${result.itemDetail.size()}" > 1){
             if("${result.xinghao.size()}" > 1&&"${result.yanse.size()}" > 1){
             	var xinghao=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');

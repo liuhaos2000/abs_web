@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/skins/square/red.css" >
 </head>
 <body id="aa">
-
+	<!--  
     <header class="" role="navigation">
         <div class="container">
             <div class="row row-head">
@@ -31,8 +31,20 @@
             </div>
         </div>
     </header>
-
+-->
 	<div id="main_div" class="maindiv">
+	
+		<div class="container">
+			<div class="row index-row-head">
+				<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+					<div class="input-group">
+						&nbsp;&nbsp;&nbsp;<a style="" class="btn btn-my btn-xs" href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}" role="button">返回首页</a>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	
 	    <c:forEach items="${result.orderList}" var="item" varStatus="status">
           <div class="container order-group">
             <div class="row order-num">

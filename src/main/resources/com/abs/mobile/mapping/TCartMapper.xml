@@ -166,20 +166,8 @@
                                 on t1.item_id=t2.item_id 
                             INNER JOIN (
                                 SELECT 
-                                    CASE 
-                                        WHEN t31.huodong_flg = '0' THEN t31.price 
-                                        WHEN t31.huodong_flg = '1' THEN t31.price_huiyuan 
-                                        WHEN t31.huodong_flg = '7' THEN t31.price_huodong 
-                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.price_huodong 
-                                        ELSE t31.price_huiyuan 
-                                    END AS sale_price,
-                                    CASE 
-                                        WHEN t31.huodong_flg = '0' THEN  t31.huodong_flg 
-                                        WHEN t31.huodong_flg = '1' THEN  t31.huodong_flg 
-                                        WHEN t31.huodong_flg = '7' THEN  t31.huodong_flg 
-                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.huodong_flg 
-                                        ELSE '1'
-                                    END AS end_price_type
+                                    t31.price AS sale_price,
+                                    '' AS end_price_type
                                       ,item_id, item_guige, item_yanse, guige_text
                                         , yanse_text, shuliang, price, price_huiyuan, price_huodong
                                         , huodong_date, huodong_flg, zhongliang, del_flg, c_date
@@ -196,6 +184,7 @@
                          and t1.open_id=#{openId}
                          and t2.del_flg='0'
                          and t2.shangjia_flg='1'
+                         and t3.del_flg='1'
                 order by 
                        t1.c_date desc
 
@@ -215,20 +204,8 @@
                                 on t1.item_id=t2.item_id 
                             INNER JOIN (
                                 SELECT 
-                                    CASE 
-                                        WHEN t31.huodong_flg = '0' THEN t31.price 
-                                        WHEN t31.huodong_flg = '1' THEN t31.price_huiyuan 
-                                        WHEN t31.huodong_flg = '7' THEN t31.price_huodong 
-                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.price_huodong 
-                                        ELSE t31.price_huiyuan 
-                                    END AS sale_price,
-                                    CASE 
-                                        WHEN t31.huodong_flg = '0' THEN  t31.huodong_flg 
-                                        WHEN t31.huodong_flg = '1' THEN  t31.huodong_flg 
-                                        WHEN t31.huodong_flg = '7' THEN  t31.huodong_flg 
-                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.huodong_flg 
-                                        ELSE '1'
-                                    END AS end_price_type
+                                    t31.price AS sale_price,
+                                    '' AS end_price_type
                                       ,item_id, item_guige, item_yanse, guige_text
                                         , yanse_text, shuliang, price, price_huiyuan, price_huodong
                                         , huodong_date, huodong_flg, zhongliang, del_flg, c_date

@@ -67,16 +67,19 @@ public class PageController {
 	@RequestMapping("/index")
 	public String toIndex(String parent,String change,ModelMap map) {
 		
-	// map.put("loadId", loadId);
+		// map.put("loadId", loadId);
 		if("1".equals(change) && !StringUtils.isEmpty(parent)){
 			TUser shopUser = tUserMapper.selectByPrimaryKey(parent);
 			sessionService.setShopUser(shopUser);
 		}
-		
 
 		// 获取分享信息
 		Map<String, Object> resultMap =  indexService.getShearInfo();
 		map.put("result", resultMap); 
+		
+		// 调一下HOME
+		toHome(map);
+		
 		return "mobile/index";
 	}
     // home
@@ -250,4 +253,22 @@ public class PageController {
     	}
 		return null;
     }
+    
+    //
+    // my about
+    @RequestMapping("/yaoqing")
+    public String yaoqing(ModelMap map,String parent) {
+    	
+    	TUser parentUser = tUserMapper.selectByPrimaryKey(parent);
+    	
+    	Map<String, String> result = sessionService.getSignInfo("/mobile/page/yaoqing");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		// JSAPI 签名信息
+		resultMap.put("signInfo", result);
+    	map.put("result", resultMap);
+    	map.put("parentUser", parentUser);
+        return "mobile/yaoqing";
+    }
+    
+    
 }

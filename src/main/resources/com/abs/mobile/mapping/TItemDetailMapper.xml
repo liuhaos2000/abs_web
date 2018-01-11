@@ -285,7 +285,7 @@
     <include refid="Base_Column_List" />
     from t_item_detail
     where item_id = #{itemId}
-    	 and del_flg='0'
+    	 and del_flg='1'
   </select>
   <select id="getItemXinghao" resultType="map" parameterType="java.lang.String" >
   	select  DISTINCT
@@ -293,7 +293,7 @@
  		t1.guige_text
     from t_item_detail t1
     where t1.item_id = #{itemId}
-    	and t1.item_guige!='0'
+    	and t1.del_flg='1'
   </select>
   <select id="getItemYanse" resultType="map" parameterType="java.lang.String" >
 	select  DISTINCT
@@ -301,24 +301,12 @@
  		t1.yanse_text
     from t_item_detail t1
     where t1.item_id = #{itemId}
-    	and t1.item_yanse!='0'
+    	and t1.del_flg='1'
   </select>
   <select id="getItemSalePrice" resultType="map">
     SELECT 
-        CASE 
-            WHEN t1.huodong_flg = '0' THEN t1.price 
-            WHEN t1.huodong_flg = '1' THEN t1.price_huiyuan 
-            WHEN t1.huodong_flg = '7' THEN t1.price_huodong 
-            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.price_huodong 
-            ELSE t1.price_huiyuan 
-        END AS sale_price,
-        CASE 
-            WHEN t1.huodong_flg = '0' THEN  t1.huodong_flg 
-            WHEN t1.huodong_flg = '1' THEN  t1.huodong_flg 
-            WHEN t1.huodong_flg = '7' THEN  t1.huodong_flg 
-            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.huodong_flg 
-            ELSE '1'
-        END AS end_price_type
+        t1.price AS sale_price,
+        '' AS end_price_type
           ,item_id, item_guige, item_yanse, guige_text
             , yanse_text, shuliang, price, price_huiyuan, price_huodong
             , huodong_date, huodong_flg, zhongliang,cost,lv00_lirun,lv01_lirun,lv02_lirun, del_flg, c_date
@@ -341,26 +329,15 @@
         from
             (
                 SELECT 
-                CASE 
-                    WHEN t111.huodong_flg = '0' THEN t111.price 
-                    WHEN t111.huodong_flg = '1' THEN t111.price_huiyuan 
-                    WHEN t111.huodong_flg = '7' THEN t111.price_huodong 
-                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.price_huodong 
-                    ELSE t111.price_huiyuan 
-                END AS sale_price,
-                CASE 
-                    WHEN t111.huodong_flg = '0' THEN  t111.huodong_flg 
-                    WHEN t111.huodong_flg = '1' THEN  t111.huodong_flg 
-                    WHEN t111.huodong_flg = '7' THEN  t111.huodong_flg 
-                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.huodong_flg 
-                    ELSE '1'
-                END AS end_price_type
+                t111.price AS sale_price,
+                '' AS end_price_type
                   ,item_id, item_guige, item_yanse, guige_text
                     , yanse_text, shuliang, price, price_huiyuan, price_huodong
                     , huodong_date, huodong_flg, zhongliang,cost,lv00_lirun,lv01_lirun,lv02_lirun, del_flg, c_date
                     , c_user, u_date, u_user
                 FROM t_item_detail t111
                 WHERE t111.item_id = #{itemId}
+                and t111.del_flg='1'
             ) t11
         group by
         t11.item_id

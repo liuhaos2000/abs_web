@@ -82,6 +82,13 @@
         </div>
         <div class="panel p2">
             <div class="panel-heading">
+                <a href='<%=request.getContextPath() %>/app/mobile/page/yaoqing?parent=${LOGIN_USER.openId}'>
+                    <p>邀请朋友加入会员</p>
+                </a>
+            </div>
+        </div>
+        <div class="panel p2">
+            <div class="panel-heading">
                 <a href='<%=request.getContextPath() %>/app/mobile/page/myorder'>
                     <p>我的订单</p>
                 </a>

@@ -22,19 +22,11 @@ img{
 	padding-right:30px  !important;
 }
 .share{
-	background:rgba(240,173,78,0.75);
     position:absolute;
-    top:6px;
+    top:9px;
     right:1%;
     z-index:10;
-	padding:10px 2px 0 2px;
-    
-    border-radius:5px;
-    width:24px;
-    font-size: 15px; 
-    word-wrap: break-word;
-    line-height: 20px;    
-    text-align: center;
+    font-size: 12px; 
 }
 .vt{
 	width: 33%;
@@ -54,8 +46,9 @@ img{
 }
 .myh4-2{
 	font-family:'SimHei',sans-serif;
-	margin:8px 0 8px;
-	color:#ffffff;
+	padding-top:4px;
+	font-size:12px;
+	color:#777;
 }
 .myh4{
 	font-family:'SimHei',sans-serif;
@@ -75,7 +68,7 @@ img{
 .home_item_div .home_item_body{
 	border-right:1px solid #ebebef;
 	border-top:1px solid #ebebef;
-	padding:8px 0 8px;
+	padding:7px 0 7px;
 	min-height:150px;
 }
 .home_item_div .home_item_name{
@@ -107,8 +100,8 @@ img{
 	text-align:left;
 }
 .home_item_div img{
-    width: 100px;
-    height:100px;
+    width: 172px;
+    height:172px;
 }
 .home_progress{
 	margin:0 10px 0 10px;
@@ -120,17 +113,19 @@ img{
 }
 /* 头部部分 比较多页面会使用到 */
 .index-row-head {
-	background-color: #00bdec;
+	background-color: #212020;
 	text-align: center;
-	padding:5px 0 5px 0;
+	padding:7px 0 7px 0;
+	height: 40px !important;
 }
 .index-row-head img{
-    width: 42px;
-    height:42px;
+    width: 26px;
+    height:26px;
+    border-radius:13px;
 }
-.index-col-head{
-	padding-top:3px;
-	
+.btn-my{
+	color:#777;
+	border:1px solid #777;
 }
 .popupshadow{
 	position:fixed;
@@ -148,13 +143,13 @@ img{
 	background:rgba(255,255,255,1);
 	/*box-shadow: #e5e5e5 -1px -1px 3px 0px;*/
 	border-top:1px solid #e5e5e5;
-	
 	position: absolute;
     left: 0px;
     right: 0px;
     bottom: 0px;
     display: block;
     clear: none;
+    height: 42px;
 }
 .footer a{
 	text-decoration:none;
@@ -163,7 +158,8 @@ img{
 .footer a p{
     color:#999999;
     margin-bottom:0;
-    padding-top:32px;
+    padding-top:25px;
+    font-size:12px;
     font-family:'SimHei',sans-serif;
 }
 .footer a i{
@@ -177,15 +173,15 @@ img{
 }
 .footer a p.footer_index{
     background:url(../images/home.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a.active p.footer_index{
     background:url(../images/home_a.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a p.footer_huodong{
     background:url(../images/type.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a.active p.footer_huodong{
     background:url(../images/type_a.png) no-repeat center 4px;
@@ -193,27 +189,25 @@ img{
 }
 .footer a p.footer_pinpai{
     background:url(../images/cart.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a.active p.footer_pinpai{
     background:url(../images/cart_a.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a p.footer_huiyuan{
     background:url(../images/account.png) no-repeat center 4px;
-    background-size:27px 27px;
+    background-size:22px 22px;
 }
 .footer a.active p.footer_huiyuan{
     background:url(../images/account_a.png) no-repeat center 4px;
-    background-size:27px 27px;
-}
-.footer-block{
+    background-size:22px 22px;
 }
 .cartcount{
     background-color:#ff4444;
     position:absolute;
     top:4px;
-    right:30%;
+    right:35%;
     width:15px;
     height:15px;
     z-index:10;
@@ -237,6 +231,7 @@ img{
 	margin:0 auto;
 	width:100%;
 	height:100%;
+	max-height: 380px;
 }
 
 /* 品牌 按分类的*/
@@ -939,22 +934,30 @@ img{
 	box-shadow: #999 1px 1px 3px 0px;
 }
 .tool_foot{
-    background-color: #DDDDDD;
-	box-shadow: #999 -1px -1px 3px 0px;
 	position: absolute;
     left: 0px;
     right: 0px;
     bottom: 0px;
     display: block;
     clear: none;
+    height: 43px;
 }
 .a-btn{
-	margin: 10px 0px 10px 10px ;
-	width:90%;
+	width:100%;
+	height:100%;
+	background:#f33535;
+	color:#fff;
+	font-size: 15px;
+	border-radius:0px;
+	border:0px;
 }
 .b-btn{
-	margin: 10px 10px 10px 0px ;
-	width:90%;
+	width:100%;
+	height:100%;
+	background:#ff8000;
+	font-size: 15px;
+	border-radius:0px;
+	border:0px;
 }
 /* 商品详情*/
 .detail-name{
@@ -1006,6 +1009,7 @@ img{
 .detail-xinghao-bt{
 	margin-left:6px !important;
 	margin-top:5px !important;
+	border-radius:0px !important;
 }
 
 .img-pinglun{
@@ -1074,7 +1078,10 @@ img{
     color: #FFCC00;
 }
 .text-edit{
-	padding-top:10px;
+		padding:10px 8px 10px 8px;
+}
+.text-edit p{
+	margin-bottom: 0px;
 }
 .text-edit img{
 	width: 100%;
@@ -1138,10 +1145,11 @@ img{
 	padding-bottom:9999px;
 }
 .footer-row .footer-col .foot-text{
+	background-color:#DDDDDD;
 	color:#ff4444;
 	margin-bottom:0;
 	font-family:'SimHei',sans-serif;
-	line-height:52px;
+	line-height:43px;
 	font-weight:bold;
 	text-align:center;
 }
@@ -1167,7 +1175,7 @@ img{
 /* 订单确认 */
 .accordion{margin-bottom:20px;}
 .accordion-group{
-	margin-top:5px;
+	margin-top:1px;
 	border:1px solid #e5e5e5;
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
@@ -1185,7 +1193,7 @@ img{
 	
 }
 .o-ad{
-	border: 6px dashed #B59DF7;
+	border: 3px dashed #B59DF7;
 }
 .od-ad-row{
 	border-bottom: 1px solid #B7B7B7;
@@ -1233,23 +1241,22 @@ img{
 	float: left;
 }
 .order-item-box{
-	padding:10px 20px 10px 20px;
 }
 .order-item-head{
 	padding:5px 0 5px 0;
-	border-top: 1px solid #B7B7B7;
-	border-left: 1px solid #B7B7B7;
-	border-right: 1px solid #B7B7B7;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
 }
 .order-item-food{
 	padding:5px 0 5px 0;
-	border: 1px solid #B7B7B7;
+	border: 1px solid #DDDDDD;
 	margin-bottom: 15px;
 }
 .order-item-row{
 	overflow:hidden;
 	padding:10px 0 10px 0;
-	border-top: 1px solid #B7B7B7;
+	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #B7B7B7;
 	border-right: 1px solid #B7B7B7;
 }
@@ -1337,7 +1344,12 @@ img{
 .maindiv{
 	background-color:#EEEEEE;
 }
-
+.yaoqing{
+	background:url(../images/yaoqing.jpg); 
+	background-repeat:no-repeat; 
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+}
 .icon-center{
     color:#999999;
     position:absolute;
@@ -1435,8 +1447,8 @@ img{
 .item-cartcount{
     background-color:#ff4444;
     position:absolute;
-    top:13px;
-    right:35%;
+    top:6px;
+    right:40%;
     width:15px;
     height:15px;
     z-index:10;
@@ -1444,6 +1456,7 @@ img{
     border-radius:50px;
     padding-top:2px;
     font-size:8px;
+    text-align: center;
 }
 .img-lunbo{
 	max-height: 200px !important;

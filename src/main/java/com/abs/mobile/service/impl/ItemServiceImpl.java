@@ -55,8 +55,8 @@ public class ItemServiceImpl implements ItemService {
 		// 取得商品图片
 		List<TItemPicture> tupianList = tItemPictureMapper.getItemPictures(itemId,"2");
 		resultMap.put("tupianList", tupianList);
-		List<TItemPicture> tupianList3 = tItemPictureMapper.getItemPictures(itemId,"3");
-		resultMap.put("tupianList3", tupianList3);
+//		List<TItemPicture> tupianList3 = tItemPictureMapper.getItemPictures(itemId,"3");
+//		resultMap.put("tupianList3", tupianList3);
 
 		// 取得详细信息
 		List<TItemDetail> itemDetail = tItemDetailMapper.getItemDetail(itemId);

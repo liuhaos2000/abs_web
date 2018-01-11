@@ -19,6 +19,29 @@
 	href="<%=request.getContextPath()%>/resources/showloading/showLoading.css">
 </head>
 <body>
+		<div class="container">
+			<div class="row index-row-head">
+				<div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+				    <a href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}">
+						<img  src="${SHOP_USER.weixinImageUrl}">
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-4 no-padding">
+					<div class="input-group">
+						<p class="myh4-2"><Strong>${SHOP_USER.nickname}</Strong>的小店&nbsp;&nbsp;&nbsp;
+						</p>
+					</div>
+					<div></div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 no-padding"  style="padding:2px 6px;text-align: right;">
+							<c:if test="${(LOGIN_USER.lever eq '00' ||LOGIN_USER.lever eq '01'||LOGIN_USER.lever eq '02') && LOGIN_USER.openId ne SHOP_USER.openId}">
+								<a style="" class="btn btn-my btn-xs" href="/abs_web/app/mobile/page/index?parent=${LOGIN_USER.openId}&change=1" role="button">我的店</a>
+							</c:if>
+							<div style="" class="btn btn-my btn-xs" role="button">帮好友分享☝</div>
+				</div>
+			</div>
+		</div>
+
 	<div class="container">
 		<div class="icon-center">
 			<img class="icon-spin"

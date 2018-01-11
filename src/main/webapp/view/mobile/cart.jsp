@@ -15,23 +15,20 @@
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/skins/square/red.css" >
 </head>
 <body>
-    <header class="" role="navigation">
-        <div class="container">
-            <div class="row row-head">
-                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="javascript:history.back();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 col-head">
-                    <p class="row-head-text">购物车</p>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 col-head">
-                    <a class="head-back" href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
-                </div>
-            </div>
-        </div>
-    </header>
     
-	<div id="main_div">
+	<div id="main_div" class="main_div">
+	
+		<div class="container">
+			<div class="row index-row-head">
+				<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+					<div class="input-group">
+						&nbsp;&nbsp;&nbsp;<a style="" class="btn btn-my btn-xs" href="/abs_web/app/mobile/page/index?parent=${SHOP_USER.openId}" role="button">返回首页</a>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	
 	    <div class="container ">
          <c:choose>
    		  <c:when test="${result.itemList.size()>0}">
@@ -87,13 +84,13 @@
 	</div>
 
 	<footer class="tool_foot">
-		<div class="container footer itme_detail_top">
+		<div class="container">
 			<div class="row footer-row">
-				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-					<p class="foot-text">总价：￥<span id="total">210</span>元</p>
+				<div class="col-md-6 col-sm-6 col-xs-6 footer-col no-padding">
+					<p class="foot-text">总价：￥<span id="total">210</span>元</p>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-6 footer-col">
-					<button id="jiesuan_bt" class="btn btn-success a-btn" type="button">结算</button>
+				<div class="col-md-6 col-sm-6 col-xs-6  no-padding" style="height: 43px">
+					<button id="jiesuan_bt" class="btn a-btn" type="button">结算</button>
 				</div>
 			</div>
 		</div>
@@ -116,7 +113,7 @@ $(document).ready(function() {
     });         
     //      
     $(function(){
-        $("#main_div").height($(window).height()-$("header").height()-52);
+        $("#main_div").height($(window).height()-$("header").height()-43);
         $("#main_div").css({"overflow":"auto"});
         // 自动全选
         autoCheck();
