@@ -34,6 +34,8 @@ import com.abs.mobile.service.TypeService;
 import com.abs.mobile.service.UserAdderssService;
 import com.abs.util.commom.AbsConst;
 import com.abs.util.commom.AbsTool;
+import com.abs.util.commom.WeixinConst;
+import com.vdurmont.emoji.EmojiParser;
 
 @Controller
 @RequestMapping("/mobile/page")
@@ -89,21 +91,17 @@ public class PageController {
     	//====性能提高 Start====
     	Map<String, Object> resultmap=null;
     	List<TIndexLunbo> LunboList=null;
-    	if(AbsConst.HOME_ITEM_LIST==null){
+    	if(AbsConst.HOME_ITEM_LIST==null || "01".equals(WeixinConst.DBG_FLG)){
         	resultmap = homeService.getItem();
         	AbsConst.HOME_ITEM_LIST=resultmap;
-        	System.out.println("1111");
     	}else{
     		resultmap=(Map<String, Object>)AbsConst.HOME_ITEM_LIST;
-    		System.out.println("2222");
     	}
-    	if(AbsConst.LUNBO_LIST==null){
+    	if(AbsConst.LUNBO_LIST==null || "01".equals(WeixinConst.DBG_FLG)){
         	LunboList= homeService.getLunBoList();
         	AbsConst.LUNBO_LIST=LunboList;
-        	System.out.println("3333");
     	}else{
     		LunboList=(List<TIndexLunbo>)AbsConst.LUNBO_LIST;
-    		System.out.println("4444");
     	}
     	//====性能提高 End====
         map.put("data", resultmap);
@@ -260,6 +258,9 @@ public class PageController {
     public String yaoqing(ModelMap map,String parent) {
     	
     	TUser parentUser = tUserMapper.selectByPrimaryKey(parent);
+		if(!StringUtils.isEmpty(parentUser.getNickname())){
+			parentUser.setNickname(EmojiParser.parseToUnicode(parentUser.getNickname()));
+		}
     	
     	Map<String, String> result = sessionService.getSignInfo("/mobile/page/yaoqing");
 		Map<String, Object> resultMap = new HashMap<String, Object>();

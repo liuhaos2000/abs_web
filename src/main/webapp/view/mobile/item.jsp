@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>西域果品优选</title>
+	<title>悦东优选</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -15,10 +15,11 @@
 	<link rel="stylesheet" href="${path}/resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="${path}/resources/css/owl.theme.default.min.css">
 </head>
-<body>
+<body id="mybody">
 
     <div id="main_div" class="main_div">
-    
+        <div class="popupshadow">
+    	</div>
     
     	<div class="container">
 			<div class="row index-row-head">
@@ -88,73 +89,13 @@
             </div>
             <div class="row detail-price">
             	<div class="col-md-8 col-sm-8 col-xs-8 detail-price-col">
-            	    <p class="detail-price-p">价格：￥<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
+            	    <p class="detail-price-p">价格：￥<span id="">${result.mmPrice.price_from_to}</span></p>
             	</div>
-            	<div class="col-md-4 col-sm-4 col-xs-4 detail-kucun">
+            	<div class="col-md-4 col-sm-4 col-xs-4 detail-xiaoliang">
+            		<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
             	</div>
             </div>
-            <c:choose>
-            	<c:when test="${result.itemDetail.size()> 1}">
-            	    <c:choose>
-            			<c:when test="${result.xinghao.size()> 1}">
-                                <div class="row">
-            	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
-                                    	<p class="">型号：</p>
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-10 ">
-                                      <div class="btn-group" data-toggle="buttons">
-                                      	<c:forEach items="${result.xinghao}" var="xh">
-                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
-    			                    			<input type="radio" 
-    			                    					name="xinghao" 
-    			                    					xianghaoId="${xh.item_guige}" 
-    			                    					autocomplete="off"> ${xh.guige_text}
- 				                    		</label>
-                                      	</c:forEach>
-                                      </div>
-                                    </div>
-                                </div>    
-            			</c:when>
-            		</c:choose>
-            		<c:choose>
-            			<c:when test="${result.yanse.size()> 1}">
-                                <div class="row">
-            	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
-                                    	<p class="">颜色：</p>
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-10 ">
-                                      <div class="btn-group" data-toggle="buttons">
-                                      	<c:forEach items="${result.yanse}" var="xh">
-                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
-    			                    			<input type="radio" 
-    			                    					name="yanse" 
-    			                    					yanseId="${xh.item_yanse}" 
-    			                    					autocomplete="off"> ${xh.yanse_text}
- 				                    		</label>
-                                      	</c:forEach>
-                                      </div>
-                                    </div>
-                                </div>  
-            			</c:when>
-            		</c:choose>
-                </c:when>
-            </c:choose>
-            <div class="row">
-            	<div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
-            		<p class="">数量：</p>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 ">
-                		<div class="btn-group detail-xinghao-bt" role="group">
-                            <button id="jian_bt" type="button" class="btn btn-default btn-xs">-</button>
-                            <button id="shuliang" type="button" class="btn btn-default btn-xs" >1</button>
-                            <button id="add_bt" type="button" class="btn btn-default btn-xs">+</button>
-                        </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 detail-xinghao">
-                	<p class="pl-date">销量:${result.xiaoliang.xiaoliang}</p>
-                </div>                
 
-            </div>
 <div class="row">
             <div class="tabbable tab-all" id="tabs-792036">
                 <ul class="nav nav-tabs " role="tablist">
@@ -227,7 +168,7 @@
     </div>
     <footer class="tool_foot">
         <div class="container">
-            <div class="row" style="height: 43px">
+            <div class="row" style="height: 43px;background:#f33535;">
                 <div class="col-md-6 col-sm-6 col-xs-6 no-padding " style="height: 43px">
                     <button id="cart_bt" class="  b-btn " type="button"><span class="glyphicon glyphicon-shopping-cart"  style="font-size:18px;" aria-hidden="true"></span></button>
                     <span class="item-cartcount">3</span>
@@ -238,7 +179,89 @@
             </div>
         </div>
     </footer>
-    
+    <div class="popupfoot">
+        <div class="container">
+            <div class="row" style="background:#fff;">
+                <div class="col-md-2 col-sm-2 col-xs-2 no-padding" >
+                	<img class="popupimg" src="${result.tupianList.get(0).path}" alt="">
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-8 no-padding " >
+                	<p class="popuptext">${result.item.item_name}</p>
+                	<p class="popuptext-price" >价格：￥<span id="itemPrice">${result.mmPrice.price_from_to}</span></p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2 shanchu" >
+                	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
+            </div>
+            <c:choose>
+            	<c:when test="${result.itemDetail.size()> 1}">
+            	    <c:choose>
+            			<c:when test="${result.xinghao.size()> 1}">
+                                <div class="row">
+            	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
+                                    	<p class="">型号：</p>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10 ">
+                                      <div class="btn-group" data-toggle="buttons">
+                                      	<c:forEach items="${result.xinghao}" var="xh">
+                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
+    			                    			<input type="radio" 
+    			                    					name="xinghao" 
+    			                    					xianghaoId="${xh.item_guige}" 
+    			                    					autocomplete="off"> ${xh.guige_text}
+ 				                    		</label>
+                                      	</c:forEach>
+                                      </div>
+                                    </div>
+                                </div>    
+            			</c:when>
+            		</c:choose>
+            		<c:choose>
+            			<c:when test="${result.yanse.size()> 1}">
+                                <div class="row">
+            	                    <div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
+                                    	<p class="">颜色：</p>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10 ">
+                                      <div class="btn-group" data-toggle="buttons">
+                                      	<c:forEach items="${result.yanse}" var="xh">
+                                      		<label class="btn btn-default btn-xs detail-xinghao-bt">
+    			                    			<input type="radio" 
+    			                    					name="yanse" 
+    			                    					yanseId="${xh.item_yanse}" 
+    			                    					autocomplete="off"> ${xh.yanse_text}
+ 				                    		</label>
+                                      	</c:forEach>
+                                      </div>
+                                    </div>
+                                </div>  
+            			</c:when>
+            		</c:choose>
+                </c:when>
+            </c:choose>
+            <div class="row">
+            	<div class="col-md-2 col-sm-2 col-xs-2 detail-xinghao">
+            		<p class="">数量：</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 ">
+                		<div class="btn-group detail-xinghao-bt" role="group">
+                            <button id="jian_bt" type="button" class="btn btn-default btn-xs">-</button>
+                            <button id="shuliang" type="button" class="btn btn-default btn-xs" >1</button>
+                            <button id="add_bt" type="button" class="btn btn-default btn-xs">+</button>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 detail-shuliang">
+                	<p class="pl-date">库存:${result.xiaoliang.xiaoliang}</p>
+                </div>                
+
+            </div>
+            <div class="row" style="height: 43px;background:#f33535;">
+                <div class="col-md-12 col-sm-12 col-xs-12 no-padding" style="height: 43px">
+                    <button id="addCart_bt2" class=" a-btn" type="button">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 <script src="<%=request.getContextPath() %>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
@@ -280,6 +303,24 @@ $(document).ready(function() {
     });
     // 加入购物车
     $("#addCart_bt").click(function(){
+    	// 展开层
+    	$(".popupshadow").fadeIn("fast");
+    	$(".popupfoot").slideDown("fast");
+    	// 展开后的初始化
+		$("#itemPrice").text("${result.mmPrice.price_from_to}");
+    	
+    }); 
+    // 购物车
+    $("#cart_bt").click(function(){
+    	// 关闭层
+    	$(".popupfoot").slideUp("fast");
+    	$(".popupshadow").fadeOut("fast");
+        window.location.href='<%=request.getContextPath() %>'+
+        '/app/mobile/page/cart'; 
+    }); 
+    // 确定
+    $("#addCart_bt2").click(function(){
+    	
     	var itemId = '${result.item.item_id}';
         var xinghao="${result.xinghao[0].item_guige}";
         var yanse="${result.yanse[0].item_yanse}";
@@ -288,31 +329,38 @@ $(document).ready(function() {
     		if("${result.xinghao.size()}" > 1){
     	    	var val=$('input:radio[name="xinghao"]:checked').attr('xianghaoId');
     	    	if(val==null){
-    	    		myalert("请选择型号","main_div");
+    	    		myalert("请选择型号","mybody");
     	    		return false;
     			}else{
     				xinghao=val;
+    				// 关闭层
+    		    	$(".popupfoot").slideUp("fast");
+    		    	$(".popupshadow").fadeOut("fast");
     	    	}
     		}
     		if("${result.yanse.size()}" > 1){
     	    	var val=$('input:radio[name="yanse"]:checked').attr('yanseId');
     	    	if(val==null){
-    	    		myalert("请选择颜色","main_div");
+    	    		myalert("请选择颜色","mybody");
     	    		return false;
     			}else{
     				yanse=val;
+    				// 关闭层
+    				$(".popupfoot").slideUp("fast");
+    		    	$(".popupshadow").fadeOut("fast");
     	    	}
     		}
     		addItemToCart(itemId,xinghao,yanse,shuliang);
     	}else{
+    		// 只有一个型号
+    		$(".popupfoot").slideUp("fast");
+        	$(".popupshadow").fadeOut("fast");
     		addItemToCart(itemId,"${result.xinghao[0].item_guige}","${result.yanse[0].item_yanse}",shuliang);
+
     	}
     }); 
-    // 购物车
-    $("#cart_bt").click(function(){
-        window.location.href='<%=request.getContextPath() %>'+
-        '/app/mobile/page/cart'; 
-    }); 
+    
+    
     // 数量加
     $("#add_bt").click(function(){
     	var s = $("#shuliang").text();
@@ -354,6 +402,7 @@ $(document).ready(function() {
 });
 
 function addItemToCart(itemId,xinghao,yanse,shuliang) {
+	
     $.ajax({    
         url:UrlConfig.addItemToCart,  
         data:{itemId:itemId,
@@ -368,7 +417,7 @@ function addItemToCart(itemId,xinghao,yanse,shuliang) {
                 if (result.data > 0) {
                 }
             }else{
-            	myalert("产品数量不足","main_div");
+            	myalert("产品数量不足","mybody");
             }
             getCartCount();
          }
@@ -384,8 +433,13 @@ function getCartCount() {
          success:function(result) {
              if(result.successful == true ){
                  if (result.data > 0) {
-                     $('.item-cartcount').css("display","block");
+                     //$('.item-cartcount').css("display","block");
                      $('.item-cartcount').html(result.data);
+                     $('.item-cartcount').fadeIn("fast");
+                     $('.item-cartcount').fadeOut("fast");
+                     $('.item-cartcount').fadeIn("fast");
+                     $('.item-cartcount').fadeOut("fast");
+                     $('.item-cartcount').fadeIn("fast");
                  } else {
                      $('.item-cartcount').css("display","none");
                  }

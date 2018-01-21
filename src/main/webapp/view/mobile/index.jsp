@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>西域果品优选</title>
+	<title>悦东优选</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Bootstrap -->
@@ -295,7 +295,7 @@ var UrlConfig = {
             });
             wx.ready(function(){
                 wx.onMenuShareAppMessage({
-                    title: "西域果品优选", // 分享标题
+                    title: "悦东优选", // 分享标题
                     desc: '来自新疆的特色水果，新鲜快捷送到家。赶快收藏吧。', // 分享描述
                     link: '${result.signInfo.url}', // 分享链接
                     imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
@@ -308,7 +308,7 @@ var UrlConfig = {
                   });
                 
                 wx.onMenuShareTimeline({
-              	    title: "西域果品优选", // 分享标题
+              	    title: "悦东优选", // 分享标题
               	    link: '${result.signInfo.url}', // 分享链接
               	    imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
               	    success: function () { 

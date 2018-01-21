@@ -7,12 +7,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.SessionService;
 import com.abs.util.commom.AbsConst;
+import com.abs.util.commom.AbsTool;
 import com.abs.weixin.utils.Sign;
 import com.abs.weixin.utils.SignUtil;
+import com.vdurmont.emoji.EmojiParser;
 
 @Service
 public class SessionServiceImpl implements SessionService {
@@ -64,11 +67,10 @@ public class SessionServiceImpl implements SessionService {
 
 	@Override
 	public void setShopUser(TUser user) {
+		if(!StringUtils.isEmpty(user.getNickname())){
+			user.setNickname(EmojiParser.parseToUnicode(user.getNickname()));
+		}
 		HttpSession session =request.getSession();
 		session.setAttribute(AbsConst.SHOP_USER, user);
 	}
-	
-	
-	
-	
 }

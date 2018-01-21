@@ -377,6 +377,7 @@
   <select id="getItemTejia" resultType="map">
         select 
             t2.item_name
+            ,t2.shouhou_miaoshu
             ,t1.item_id
             ,t1.item_guige
             ,t1.item_yanse
@@ -428,9 +429,9 @@
         					WHERE
         						t1.item_id = t12.item_id
         						and t12.del_flg='1'
-        						and (t12.item_yanse <![CDATA[<]]> t1.item_yanse
-        							 or t12.item_guige <![CDATA[<]]> t1.item_guige)	
+        						and (t12.price <![CDATA[>]]> t1.price)	
         				)
+        order by t2.shouhou_miaoshu
   </select>
   <!--   列表查询  u.group_id = #{param1.groupId}-->
   <select id="getItemList" resultType="map">

@@ -1,5 +1,6 @@
 package com.abs.util.commom;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.plexus.util.Base64;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -107,4 +109,32 @@ public class AbsTool {
 			return "";
 		}
 	}
+	
+	/**  
+	    * 编码  
+	    * @param bstr  
+	    * @return String  
+	    */    
+	   @SuppressWarnings("restriction")
+	public static String encodeBase64(byte[] bstr){    
+	   return new sun.misc.BASE64Encoder().encode(bstr);    
+	   }    
+	   
+	   /**  
+	    * 解码  
+	    * @param str  
+	    * @return string  
+	    */    
+	   @SuppressWarnings("restriction")
+	public static byte[] decodeBase64(String str){    
+	   byte[] bt = null;    
+	   try {    
+	       sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();    
+	       bt = decoder.decodeBuffer( str );    
+	   } catch (IOException e) {    
+	       e.printStackTrace();    
+	   }    
+	   
+	       return bt;    
+	   }  
 }

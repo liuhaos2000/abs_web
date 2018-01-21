@@ -31,7 +31,7 @@
     		text-align:center;
     		height:80px;
     		
-    		"><p id="parent_name">${SHOP_USER.nickname}</p><p>邀请你成为西域果品优选会员</p>
+    		"><p id="parent_name">${parentUser.nickname}</p><p>邀请你成为悦东优选会员</p>
 		</div>
 		
     	<div id="bt_shenqing"
@@ -62,15 +62,32 @@
 <script src="<%=request.getContextPath() %>/resources/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
 var UrlConfig = {
-	huiyuanShenqing:'<%=request.getContextPath() %>/app/mobile/huiyuan/huiyuanShenqing'
+	shenqingVip:'<%=request.getContextPath() %>/app/mobile/shengqing/shengqingvip'
 }
 $(document).ready(function() {
 	$("#main_div").height($(window).height());
-    
+	
+    $("#bt_shenqing").bind("click",function(){
+        doShengqingVip();
+    });
 });
 
-
-
+function doShengqingVip(){
+    $.ajax({    
+        url:UrlConfig.shenqingVip,  
+        data:{parent:"${parentUser.openId}"},    
+        type:'post',    
+        //cache:false,    
+        dataType:'json',    
+        success:function(result) {
+            if(result.successful == true ){
+            	myalert("申请成功,请等待审批！","main_div");
+            }else{
+            	myalert(result.msg,"main_div");
+            }
+         }
+    });
+}
 
 //微信分享JDK--------------------<
 wx.config({
@@ -83,7 +100,7 @@ wx.config({
 });
 wx.ready(function(){
     wx.onMenuShareAppMessage({
-        title: "${SHOP_USER.nickname}邀请您成为西域果品优选会员", // 分享标题
+        title: "${SHOP_USER.nickname}邀请您成为悦东优选会员", // 分享标题
         desc: '来自新疆的特色水果，成为会员，吃水果更便宜。', // 分享描述
         link: '${result.signInfo.url}', // 分享链接
         //imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
@@ -95,7 +112,7 @@ wx.ready(function(){
       });
     
     wx.onMenuShareTimeline({
-  	    title: "${SHOP_USER.nickname}邀请您成为西域果品优选会员", // 分享标题
+  	    title: "${SHOP_USER.nickname}邀请您成为悦东优选会员", // 分享标题
   	    link: '${result.signInfo.url}', // 分享链接
   	    //imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
   	    imgUrl:'${SHOP_USER.weixinImageUrl}',

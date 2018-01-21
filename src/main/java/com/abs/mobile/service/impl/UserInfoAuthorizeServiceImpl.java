@@ -19,6 +19,7 @@ import com.abs.util.commom.WeixinConst;
 import com.abs.weixin.pojo.OpenId;
 import com.abs.weixin.pojo.WeixinUserInfo;
 import com.abs.weixin.utils.WeiXinIFUtil;
+import com.vdurmont.emoji.EmojiParser;
 
 @Service
 public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
@@ -85,7 +86,9 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			WeixinUserInfo wxUserInfo = WeiXinIFUtil.getUserinfo(AbsConst.access_token, openId.getOpenid());
 			// 每次登录时，更新用户信息
 			if (wxUserInfo != null) {
-				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
+				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -130,7 +133,9 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUser = new TUser();
 			tUser.setOpenId(openId);
 			if (wxUserInfo != null) {
-				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
+				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -150,7 +155,9 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			tUserMapper.insert(tUser);
 		} else {
 			if (wxUserInfo != null) {
-				tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
+				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
+				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());

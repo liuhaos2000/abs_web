@@ -150,8 +150,12 @@
             <artifactId>plexus-compiler-javac</artifactId>
             <version>1.8.1</version>
         </dependency>
-
-
+		<!-- Emoji -->
+        <dependency>
+             <groupId>com.vdurmont</groupId>
+             <artifactId>emoji-java</artifactId>
+            <version>3.2.0</version>
+        </dependency>
 
 
 	</dependencies>
