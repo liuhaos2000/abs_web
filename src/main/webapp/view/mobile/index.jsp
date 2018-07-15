@@ -272,7 +272,6 @@ var UrlConfig = {
             	                
             	            }
             	         }
-
             	    }); 
             }
             
@@ -295,10 +294,11 @@ var UrlConfig = {
             });
             wx.ready(function(){
                 wx.onMenuShareAppMessage({
-                    title: "悦东优选", // 分享标题
+                	title: "${SHOP_USER.nickname}的小店，快来看看都有啥。", // 分享标题
                     desc: '来自新疆的特色水果，新鲜快捷送到家。赶快收藏吧。', // 分享描述
                     link: '${result.signInfo.url}', // 分享链接
-                    imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
+                    //imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', //
+                    imgUrl:'${SHOP_USER.weixinImageUrl}',//分享图标
                     success: function () { 
                     	 //alert('success');
                     },
@@ -308,9 +308,11 @@ var UrlConfig = {
                   });
                 
                 wx.onMenuShareTimeline({
-              	    title: "悦东优选", // 分享标题
+                	title: "${SHOP_USER.nickname}的小店，快来看看都有啥。", // 分享标题
+              	    //title: "悦东优选", // 分享标题
               	    link: '${result.signInfo.url}', // 分享链接
-              	    imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
+              	    //imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', //
+              	    imgUrl:'${SHOP_USER.weixinImageUrl}',//分享图标
               	    success: function () { 
               	        // 用户确认分享后执行的回调函数
               	    },

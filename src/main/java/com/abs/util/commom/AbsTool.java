@@ -110,31 +110,26 @@ public class AbsTool {
 		}
 	}
 	
-	/**  
-	    * 编码  
-	    * @param bstr  
-	    * @return String  
-	    */    
-	   @SuppressWarnings("restriction")
-	public static String encodeBase64(byte[] bstr){    
-	   return new sun.misc.BASE64Encoder().encode(bstr);    
-	   }    
-	   
-	   /**  
-	    * 解码  
-	    * @param str  
-	    * @return string  
-	    */    
-	   @SuppressWarnings("restriction")
-	public static byte[] decodeBase64(String str){    
-	   byte[] bt = null;    
-	   try {    
-	       sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();    
-	       bt = decoder.decodeBuffer( str );    
-	   } catch (IOException e) {    
-	       e.printStackTrace();    
-	   }    
-	   
-	       return bt;    
-	   }  
+	// 替换埋字 LOGIN_USER ，SHOP_USER ，GHONGSI_NAME
+	public static String repleaseKeyWord(String str,String loginUserName,String shopUserName){
+		
+		if(StringUtils.isEmpty(str)){
+			return "";
+		}
+		
+		String result=str;
+		
+		if(str.indexOf(AbsConst.LOGIN_USER)!=-1){
+			result=result.replace(AbsConst.LOGIN_USER, loginUserName);
+		}
+		if(str.indexOf(AbsConst.SHOP_USER)!=-1){
+			result=result.replace(AbsConst.SHOP_USER, shopUserName);
+		}
+		if(str.indexOf(AbsConst.GHONGSI_NAME)!=-1){
+			result=result.replace(AbsConst.GHONGSI_NAME, WeixinConst.KEFU_NAME);
+		}
+		
+		return result;
+	}
+
 }

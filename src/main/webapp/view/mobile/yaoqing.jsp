@@ -31,7 +31,7 @@
     		text-align:center;
     		height:80px;
     		
-    		"><p id="parent_name">${parentUser.nickname}</p><p>邀请你成为悦东优选会员</p>
+    		"><p id="parent_name">${SHOP_USER.nickname}</p><p>邀请你成为悦东优选会员</p>
 		</div>
 		
     	<div id="bt_shenqing"
@@ -75,7 +75,7 @@ $(document).ready(function() {
 function doShengqingVip(){
     $.ajax({    
         url:UrlConfig.shenqingVip,  
-        data:{parent:"${parentUser.openId}"},    
+        data:{parent:"${SHOP_USER.openId}"},    
         type:'post',    
         //cache:false,    
         dataType:'json',    
@@ -101,7 +101,7 @@ wx.config({
 wx.ready(function(){
     wx.onMenuShareAppMessage({
         title: "${SHOP_USER.nickname}邀请您成为悦东优选会员", // 分享标题
-        desc: '来自新疆的特色水果，成为会员，吃水果更便宜。', // 分享描述
+        desc: '优选特色水果，成为会员，吃水果更便宜。', // 分享描述
         link: '${result.signInfo.url}', // 分享链接
         //imgUrl: 'http://ruihegouwu.cn/abs_web/resources/images/tang_logo.jpg', // 分享图标
         imgUrl:'${SHOP_USER.weixinImageUrl}',

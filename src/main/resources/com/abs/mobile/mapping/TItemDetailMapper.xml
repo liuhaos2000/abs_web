@@ -290,7 +290,8 @@
   <select id="getItemXinghao" resultType="map" parameterType="java.lang.String" >
   	select  DISTINCT
  		t1.item_guige,
- 		t1.guige_text
+ 		t1.guige_text,
+ 		t1.shuliang
     from t_item_detail t1
     where t1.item_id = #{itemId}
     	and t1.del_flg='1'

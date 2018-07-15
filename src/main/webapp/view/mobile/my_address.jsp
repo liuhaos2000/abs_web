@@ -127,7 +127,7 @@
                      <c:if test="${item.del_flg=='1'}">
                      	<span class="label label-info">默认</span>
                      </c:if>
-                    <span class="btn-clipboard" addressid="${item.address_id}">x</span>
+                    <span class="btn-clipboard" addressid="${item.address_id}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></span>
                 </div>
             </div>
           </c:forEach>

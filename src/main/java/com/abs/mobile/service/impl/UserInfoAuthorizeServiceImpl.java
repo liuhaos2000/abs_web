@@ -88,7 +88,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			if (wxUserInfo != null) {
 				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
-				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
+				tUser.setNickname(EmojiParser.parseToAliases(AbsTool.ifNullRetuenKong(wxUserInfo.getNickname())));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -108,7 +108,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 
 		// 写入Session
 		sessionService.setLoginUser(tUser);
-		sessionService.setShopUser(getShopUser3(tUser,AbsTool.getJiexiCanshu(state, "parent")));
+		sessionService.setShopUser(getShopUser3(AbsTool.getJiexiCanshu(state, "parent")));
 		return;
 
 	}
@@ -135,7 +135,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			if (wxUserInfo != null) {
 				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
-				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
+				tUser.setNickname(EmojiParser.parseToAliases(AbsTool.ifNullRetuenKong(wxUserInfo.getNickname())));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -157,7 +157,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 			if (wxUserInfo != null) {
 				//tUser.setNickname(EmojiFilter.removeNonBmpUnicode(wxUserInfo.getNickname()));
 				//tUser.setNickname(AbsTool.encodeBase64(wxUserInfo.getNickname().getBytes()));
-				tUser.setNickname(EmojiParser.parseToAliases(wxUserInfo.getNickname()));
+				tUser.setNickname(EmojiParser.parseToAliases(AbsTool.ifNullRetuenKong(wxUserInfo.getNickname())));
 				tUser.setWeixinSex(wxUserInfo.getSex());
 				tUser.setCity(wxUserInfo.getCity());
 				tUser.setProvince(wxUserInfo.getProvince());
@@ -245,7 +245,7 @@ public class UserInfoAuthorizeServiceImpl implements UserInfoAuthorizeService {
 	 * @param state
 	 * @return
 	 */
-	private TUser getShopUser3(TUser tUser, String parentCanShuOpenId) {
+	private TUser getShopUser3(String parentCanShuOpenId) {
 		TUser shopUser = null;
 		if(StringUtils.isNotEmpty(parentCanShuOpenId)){
 			shopUser = tUserMapper.selectByPrimaryKey(parentCanShuOpenId);

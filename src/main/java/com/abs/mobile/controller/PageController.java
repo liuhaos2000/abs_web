@@ -70,7 +70,7 @@ public class PageController {
 	public String toIndex(String parent,String change,ModelMap map) {
 		
 		// map.put("loadId", loadId);
-		if("1".equals(change) && !StringUtils.isEmpty(parent)){
+		if(!StringUtils.isEmpty(parent)){
 			TUser shopUser = tUserMapper.selectByPrimaryKey(parent);
 			sessionService.setShopUser(shopUser);
 		}
@@ -193,8 +193,13 @@ public class PageController {
     
     // item
     @RequestMapping("/item")
-    public String toItem(String itemId,String phaseNum,ModelMap map) {
+    public String toItem(String parent,String itemId,String phaseNum,ModelMap map) {
         
+		if(!StringUtils.isEmpty(parent)){
+			TUser shopUser = tUserMapper.selectByPrimaryKey(parent);
+			sessionService.setShopUser(shopUser);
+		}
+    	
         Map<String, Object> resultMap =  itemService.getItem(itemId);
         
         if(resultMap==null){
@@ -257,9 +262,10 @@ public class PageController {
     @RequestMapping("/yaoqing")
     public String yaoqing(ModelMap map,String parent) {
     	
-    	TUser parentUser = tUserMapper.selectByPrimaryKey(parent);
-		if(!StringUtils.isEmpty(parentUser.getNickname())){
-			parentUser.setNickname(EmojiParser.parseToUnicode(parentUser.getNickname()));
+		// map.put("loadId", loadId);
+		if(!StringUtils.isEmpty(parent)){
+			TUser shopUser = tUserMapper.selectByPrimaryKey(parent);
+			sessionService.setShopUser(shopUser);
 		}
     	
     	Map<String, String> result = sessionService.getSignInfo("/mobile/page/yaoqing");
@@ -267,7 +273,6 @@ public class PageController {
 		// JSAPI 签名信息
 		resultMap.put("signInfo", result);
     	map.put("result", resultMap);
-    	map.put("parentUser", parentUser);
         return "mobile/yaoqing";
     }
     

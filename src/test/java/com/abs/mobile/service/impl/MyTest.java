@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.abs.util.commom.AbsTool;
 import com.thoughtworks.xstream.converters.basic.BigDecimalConverter;
+import com.vdurmont.emoji.EmojiParser;
 
 import net.sf.json.JSONArray;
 
@@ -25,24 +26,9 @@ public class MyTest {
 		
 	    public static void main(String[] args) {
 	    	
-	    	String aaa="abc";
-	    	Integer bbb=123;
-	    	BigDecimal ccc= new BigDecimal("1.12");
-	    	Object obj=bbb;
-	    	if(obj instanceof String){
-	    		System.out.println(obj);
-	    	}else if(obj instanceof Integer){
-	    		System.out.println(obj.toString());
-	    	}else if(obj instanceof BigDecimal){
-	    		System.out.println(obj.toString());
-	    	}
-	    	
-	    	
-	    	
+	    	String a = EmojiParser.parseToAliases(null);
+	    	System.out.println(a);
 	    	
 	    }
-	    		
-	    	
-	 
 		
 	}

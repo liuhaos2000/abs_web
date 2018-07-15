@@ -48,6 +48,19 @@ public class ItemServiceImpl implements ItemService {
 			return null;
 		}
 		Map<String, String> itemMap = mapList.get(0); 
+		
+		// 替换埋字start
+		//替换埋字 LOGIN_USER ，SHOP_USER ，GHONGSI_NAME
+		String frendTitle = AbsTool.repleaseKeyWord(itemMap.get("frend_title"), 
+				sessionService.getLoginUser().getNickname(), 
+				sessionService.getShopUser().getNickname());
+		String frendText =AbsTool.repleaseKeyWord(itemMap.get("frend_text"), 
+				sessionService.getLoginUser().getNickname(), 
+				sessionService.getShopUser().getNickname());
+		itemMap.put("frend_title", frendTitle);
+		itemMap.put("frend_text", frendText);
+		// 替换埋字end
+		
 		resultMap.put("item", itemMap);
 		// 产品参数转换
 		String itemParm = itemMap.get("parm");

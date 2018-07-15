@@ -2,26 +2,16 @@ package com.abs.mobile.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.abs.mobile.service.UserInfoAuthorizeService;
 import com.abs.mobile.service.WXCoreService;
-import com.abs.weixin.service.CoreService;
 import com.abs.weixin.utils.SignUtil;
 
 @Controller

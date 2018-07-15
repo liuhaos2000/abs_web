@@ -58,7 +58,7 @@
                                    itemid="${item.item_id}" 
                                    guige="${item.item_guige}" 
                                    yanse="${item.item_yanse}"
-                                   recordkey="cartitem${status.index}">x</span>
+                                   recordkey="cartitem${status.index}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></span>
                     </div>
                 </div>
             </c:forEach>

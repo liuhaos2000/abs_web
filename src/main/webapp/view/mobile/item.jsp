@@ -251,7 +251,7 @@
                         </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 detail-shuliang">
-                	<p class="pl-date">库存:${result.xiaoliang.xiaoliang}</p>
+                	<p class="pl-date">库存:<span id="kucun">${result.xinghao[0].shuliang}</span></p>
                 </div>                
 
             </div>
@@ -301,6 +301,12 @@ $(document).ready(function() {
         
         getCartCount();
     });
+    
+    $(".glyphicon-remove").click(function(){
+    	$(".popupfoot").slideUp("fast");
+    	$(".popupshadow").fadeOut("fast");
+    });
+    
     // 加入购物车
     $("#addCart_bt").click(function(){
     	// 展开层
